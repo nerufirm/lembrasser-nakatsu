@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>lembrasser_nakatsu｜アーユルヴェーダの彩テーマ — 大分・中津 アーユルヴェーダ</title>
+<meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。宇宙とつながり、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper:      '#180806',
+          'paper-2':  '#260D08',
+          sand:       '#180806',
+          tan:        '#6B1E10',
+          ink:        '#F5DCC8',
+          'ink-soft': '#C8906A',
+          rust:       '#E84818',
+          'rust-d':   '#C83010',
+          ochre:      '#F0A030',
+          olive:      '#8A2E18',
+          cream:      '#180806',
+        },
+        fontFamily: {
+          serif:  ['"DM Serif Display"', 'serif'],
+          mincho: ['"Shippori Mincho"', '"Zen Old Mincho"', 'serif'],
+          maru:   ['"Zen Maru Gothic"', 'sans-serif'],
+        },
+        letterSpacing: { luxe: '0.26em', wide2: '0.45em' },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(60vw 60vw at 50% -8%, rgba(200,60,10,.22), transparent 70%),
+      radial-gradient(52vw 52vw at 85% 108%, rgba(140,30,5,.18), transparent 70%),
+      #180806;
+    color:#F5DCC8;
+  }
+
+  /* 宇宙の塵（グレイン） */
+  .grain::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.05; mix-blend-mode:screen;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .v-rl{ writing-mode:vertical-rl; text-orientation:upright; }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity 1.2s cubic-bezier(.16,.84,.34,1), transform 1.2s cubic-bezier(.16,.84,.34,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  @keyframes riseIn{ from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:none;} }
+  .rise{ opacity:0; animation:riseIn 1.4s cubic-bezier(.16,.84,.34,1) forwards; }
+
+  /* レトロな星のきらめき */
+  @keyframes twinkle{ 0%,100%{ opacity:.4; transform:scale(.85);} 50%{ opacity:1; transform:scale(1.1);} }
+  .twinkle{ animation:twinkle 4s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+  .twinkle.t2{animation-delay:.7s;} .twinkle.t3{animation-delay:1.5s;} .twinkle.t4{animation-delay:2.3s;} .twinkle.t5{animation-delay:3s;}
+
+  /* 太陽スターバーストの緩やかな回転 */
+  @keyframes spin{ to{ transform:rotate(360deg);} }
+  .spin-slow{ animation:spin 80s linear infinite; transform-origin:center; }
+
+  /* 星座ディバイダー */
+  .constel circle{ opacity:0; transition:opacity 1s ease; }
+  .constel polyline{ stroke-dasharray:1; stroke-dashoffset:1; }
+  .constel.in circle{ opacity:1; }
+  .constel.in circle.c2{ transition-delay:.3s;} .constel.in circle.c3{ transition-delay:.55s;}
+  .constel.in circle.c4{ transition-delay:.8s;} .constel.in circle.c5{ transition-delay:1.05s;}
+  @keyframes drawStroke{ to{ stroke-dashoffset:0; } }
+  .constel.in polyline{ animation:drawStroke 2.2s ease forwards .35s; }
+
+  @keyframes drawLine{ from{ transform:scaleY(0);} to{ transform:scaleY(1);} }
+  .thread.in .thread-line{ animation:drawLine 2.2s cubic-bezier(.16,.84,.34,1) forwards; transform-origin:top; }
+  .thread-line{ transform:scaleY(0); }
+
+  /* レトロなアーチ額装 */
+  .arch{ border-radius:48% 48% 8px 8px / 34% 34% 8px 8px; }
+
+  .rule-double{ border-top:1px solid rgba(236,230,214,.18); box-shadow:0 3px 0 -2px rgba(236,230,214,.18); }
+</style>
+</head>
+
+<body class="grain font-maru antialiased overflow-x-hidden selection:bg-rust selection:text-cream">
+
+  <!-- 散らばるレトロな星（装飾・全面固定） -->
+  <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-8-4-8-10c2 0 5 1 8 5 3-4 6-5 8-5 0 6-8 10-8 10z"/><path d="M12 22V12"/></svg>
+    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-8-4-8-10c2 0 5 1 8 5 3-4 6-5 8-5 0 6-8 10-8 10z"/><path d="M12 22V12"/></svg>
+    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-8-4-8-10c2 0 5 1 8 5 3-4 6-5 8-5 0 6-8 10-8 10z"/><path d="M12 22V12"/></svg>
+    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-8-4-8-10c2 0 5 1 8 5 3-4 6-5 8-5 0 6-8 10-8 10z"/><path d="M12 22V12"/></svg>
+    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22s-8-4-8-10c2 0 5 1 8 5 3-4 6-5 8-5 0 6-8 10-8 10z"/><path d="M12 22V12"/></svg>
+  </div>
+
+  <div class="relative z-10">
+
+  <!-- ============ ヘッダー ============ -->
+  <header id="top" class="fixed top-0 inset-x-0 z-50 transition-all duration-500" data-header>
+    <div class="mx-auto max-w-5xl px-6 sm:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <a href="#top" class="font-serif text-2xl sm:text-[1.7rem] tracking-wide text-ink leading-none">lembrasser</a>
+
+        <nav class="hidden md:flex items-center gap-9 font-mincho text-[13px] tracking-[0.2em] text-ink/80">
+          <a href="#concept" class="hover:text-rust transition-colors duration-400">Concept</a>
+          <a href="#menu" class="hover:text-rust transition-colors duration-400">Menu</a>
+          <a href="#access" class="hover:text-rust transition-colors duration-400">Access</a>
+          <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+             class="ml-1 inline-flex items-center gap-2 rounded-full border border-rust/60 px-5 py-2 text-xs tracking-luxe text-rust hover:bg-rust hover:text-cream transition-all duration-500">予約・相談</a>
+        </nav>
+
+        <button id="navToggle" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="メニュー">
+          <span class="block h-px w-6 bg-ink"></span>
+          <span class="block h-px w-6 bg-ink"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="md:hidden overflow-hidden max-h-0 transition-all duration-500 bg-paper-2/97 backdrop-blur">
+      <nav class="flex flex-col px-8 py-6 gap-5 font-mincho tracking-[0.2em] text-ink border-t border-ink/15">
+        <a href="#concept" data-mlink>Concept</a>
+        <a href="#menu" data-mlink>Menu</a>
+        <a href="#access" data-mlink>Access</a>
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener" class="text-rust" data-mlink>Instagram DMで予約</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ============ ヒーロー ============ -->
+  <section class="relative min-h-[100svh] flex items-center overflow-hidden">
+
+    <!-- 植物の背景 -->
+    <div class="absolute inset-0 z-0" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1920&q=80&auto=format&fit=crop"
+        alt=""
+        class="w-full h-full object-cover"
+        style="filter:brightness(.38) saturate(1.0) hue-rotate(-15deg);"
+      />
+      <!-- テキスト側グラデーション -->
+      <div class="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/70 to-paper/10"></div>
+      <!-- 上下フェード -->
+      <div class="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-paper to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-paper to-transparent"></div>
+    </div>
+
+    <!-- スターバースト（左寄り・薄め） -->
+    <div class="absolute top-1/2 left-[28%] -translate-x-1/2 -translate-y-1/2 w-[60vw] sm:w-[480px] pointer-events-none z-0" aria-hidden="true">
+      <svg class="w-full opacity-[0.08] text-ochre spin-slow" viewBox="0 0 200 200" fill="none">
+        <g stroke="currentColor" stroke-width="1"><circle cx="100" cy="100" r="46"/><circle cx="100" cy="100" r="62"/></g>
+        <g stroke="currentColor" stroke-width="1.2">
+          <line x1="100" y1="8"  x2="100" y2="34"/><line x1="100" y1="166" x2="100" y2="192"/>
+          <line x1="8"  y1="100" x2="34" y2="100"/><line x1="166" y1="100" x2="192" y2="100"/>
+          <line x1="35" y1="35" x2="54" y2="54"/><line x1="146" y1="146" x2="165" y2="165"/>
+          <line x1="165" y1="35" x2="146" y2="54"/><line x1="54" y1="146" x2="35" y2="165"/>
+          <line x1="68" y1="16" x2="76" y2="40"/><line x1="132" y1="16" x2="124" y2="40"/>
+          <line x1="16" y1="68" x2="40" y2="76"/><line x1="184" y1="68" x2="160" y2="76"/>
+          <line x1="184" y1="132" x2="160" y2="124"/><line x1="16" y1="132" x2="40" y2="124"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-5xl w-full px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-10 py-36 sm:py-44">
+
+      <!-- テキスト（左） -->
+      <div class="flex-1 max-w-lg text-center md:text-left">
+        <p class="rise font-serif italic text-rust text-xl sm:text-2xl mb-7" style="animation-delay:.2s">Ayurveda &amp; the Inner Cosmos</p>
+        <p class="rise font-mincho text-ink/70 text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s">＼ 肩や首がガチガチで辛い方へ ／</p>
+        <h1 class="rise font-mincho text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" style="animation-delay:.6s">
+          内なる宇宙へ、還る。
+        </h1>
+        <p class="rise font-maru font-light text-ink-soft leading-loose text-sm sm:text-base mb-12" style="animation-delay:.8s">
+          奥深くのコリまで届く、アーユルヴェーダのディープケア。<br />
+          大分初の「ヘッドマルマケア ＋ 深部ケア」で、内側のしずけさへ。
+        </p>
+        <div class="rise flex flex-col items-center md:items-start gap-5" style="animation-delay:1s">
+          <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+             class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-mincho text-sm tracking-[0.16em] shadow-[0_8px_30px_rgba(227,190,131,.22)] hover:bg-rust-d transition-all duration-500">
+            Instagram DMで予約・相談
+            <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+          </a>
+          <span class="font-maru text-[11px] tracking-luxe text-ink-soft">完全予約制 ・ 大分県中津市</span>
+        </div>
+      </div>
+
+      <!-- 施術写真（右・デスクトップのみ） -->
+      <div class="rise hidden md:block w-64 lg:w-72 shrink-0" style="animation-delay:.5s">
+        <div class="arch overflow-hidden border border-rust/35 shadow-[0_24px_64px_rgba(0,0,0,.75)]">
+          <img
+            src="lembrasser_session.png"
+            alt="ヘッドマルマケアの施術風景"
+            class="w-full aspect-[3/4] object-cover"
+            style="object-position:center 20%; filter:brightness(1.07) contrast(1.10) saturate(0.78) sepia(0.08);"
+          />
+        </div>
+        <div class="flex items-center justify-center gap-3 mt-5">
+          <span class="block h-px w-10 bg-rust/30"></span>
+          <svg class="w-2.5 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+          <span class="block h-px w-10 bg-rust/30"></span>
+        </div>
+      </div>
+
+      <!-- 施術写真（モバイル：テキスト下に小さく） -->
+      <div class="rise md:hidden w-44 mx-auto" style="animation-delay:.9s">
+        <div class="arch overflow-hidden border border-rust/35 shadow-[0_16px_40px_rgba(0,0,0,.65)]">
+          <img
+            src="lembrasser_session.png"
+            alt="ヘッドマルマケアの施術風景"
+            class="w-full aspect-[3/4] object-cover"
+            style="object-position:center 20%; filter:brightness(1.07) contrast(1.10) saturate(0.78) sepia(0.08);"
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============ コンセプト ============ -->
+  <section id="concept" class="relative py-28 sm:py-40 scroll-mt-20">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+
+      <!-- アーチ額装の宇宙写真（セピア） -->
+      <div class="reveal mx-auto w-52 sm:w-64 mb-14">
+        <div class="arch overflow-hidden border border-rust/40 shadow-[0_14px_44px_rgba(0,0,0,.55)]">
+          <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=900&q=80&auto=format&fit=crop"
+               alt="熱帯ボタニカルの葉" class="w-full aspect-[3/4] object-cover" style="filter:saturate(1.0) brightness(.80) contrast(1.1) hue-rotate(-10deg);" />
+        </div>
+      </div>
+
+      <p class="reveal font-serif italic text-rust text-xl mb-8">Concept</p>
+
+      <h2 class="reveal font-mincho text-xl sm:text-2xl leading-[2] text-ink mb-14">
+        頭痛、不眠、慢性肩こり……<br />
+        休んでも疲れが取れない、<br class="sm:hidden" />あなたへ。
+      </h2>
+
+      <!-- 宇宙とあなたをつなぐ一本の線 -->
+      <div class="thread reveal flex flex-col items-center mb-14">
+        <svg class="w-5 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+        <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">cosmos</span>
+        <span class="thread-line block w-px h-20 sm:h-24 bg-gradient-to-b from-rust/70 to-tan"></span>
+        <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">you</span>
+        <span class="block h-2 w-2 rounded-full border border-rust"></span>
+      </div>
+
+      <p class="reveal font-mincho text-base sm:text-lg leading-loose text-ink mb-8">
+        わたしたちの体には、<br class="sm:hidden" />ひとつの小さな宇宙が宿っています。
+      </p>
+
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
+        日々の緊張で、肩・首・頭はいつの間にかこわばり、巡りが滞っていきます。
+        表面をなでるだけでは届かない奥のこりは、頭痛や不眠、抜けない疲労感となって積み重なります。
+      </p>
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
+        当サロンの<span class="text-rust font-normal">「ヘッドマルマケア ＋ 深部ケア」</span>は、
+        アーユルヴェーダで体の要所とされる頭部のマルマを、星をたどるようにひとつずつ整えながら、
+        深部のこりまで静かにアプローチ。呼吸が深まり、内なる静けさへと還っていきます。
+      </p>
+
+      <div class="reveal mt-14 flex flex-wrap justify-center items-center gap-x-5 gap-y-3 font-mincho text-sm text-ink">
+        <span>めぐりをひらく</span>
+        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+        <span>深部に届く</span>
+        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+        <span>内側へ還る</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 星座ディバイダー ============ -->
+  <div class="relative flex justify-center py-4">
+    <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
+      <polyline points="14,40 66,18 124,34 168,14 226,32 266,20" stroke="rgba(227,190,131,.55)" stroke-width="1" pathLength="1"/>
+      <circle class="c1" cx="14" cy="40" r="2.2" fill="#E3BE83"/>
+      <circle class="c2" cx="66" cy="18" r="2.8" fill="#EAD9AE"/>
+      <circle class="c3" cx="124" cy="34" r="2.2" fill="#E3BE83"/>
+      <circle class="c4" cx="168" cy="14" r="3.2" fill="#EAD9AE"/>
+      <circle class="c5" cx="226" cy="32" r="2.2" fill="#E3BE83"/>
+      <circle class="c5" cx="266" cy="20" r="2.6" fill="#EAD9AE"/>
+    </svg>
+  </div>
+
+
+  <!-- ============ メニュー / 料金 ============ -->
+  <section id="menu" class="relative py-24 sm:py-36 scroll-mt-20">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+      <div class="reveal text-center mb-16">
+        <p class="font-serif italic text-rust text-xl mb-3">Menu &amp; Price</p>
+        <p class="font-maru font-light text-ink-soft text-xs tracking-luxe">税込価格 ・ 完全予約制</p>
+      </div>
+
+      <div class="bg-paper-2/70 border border-tan rounded-[6px] px-6 sm:px-10 py-4 shadow-[0_14px_44px_rgba(0,0,0,.5)]">
+
+        <!-- モニター様プラン -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8">
+          <div>
+            <div class="flex items-center gap-3 mb-1.5">
+              <h3 class="font-mincho text-lg text-ink">モニター様プラン</h3>
+              <span class="font-maru text-[10px] tracking-luxe text-cream bg-rust rounded-full px-3 py-0.5">限定</span>
+            </div>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">ヘッドマルマケア＋深部ケア体験 ・ カウンセリング込み</p>
+          </div>
+          <span class="font-serif text-3xl sm:text-4xl text-rust leading-none shrink-0">¥5,000</span>
+        </div>
+
+        <!-- 通常プラン①（ダミー金額・差し替え可） -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
+          <div>
+            <h3 class="font-mincho text-lg text-ink mb-1.5">ヘッドマルマケア＋深部コリケアコース</h3>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">90 min ・ 頭部マルマ＋肩・首・背中の深部ケア</p>
+          </div>
+          <!-- ↓ 差し替え箇所：実際の金額に -->
+          <span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥12,000</span>
+        </div>
+
+        <!-- 通常プラン②（ダミー金額・差し替え可） -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
+          <div>
+            <h3 class="font-mincho text-lg text-ink mb-1.5">全身ほぐし ディープリセットコース</h3>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">120 min ・ ヘッド＋全身の深部をじっくりと</p>
+          </div>
+          <!-- ↓ 差し替え箇所：実際の金額に -->
+          <span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥16,000</span>
+        </div>
+      </div>
+
+      <!-- オプションメニュー（一例・差し替え可） -->
+      <div class="reveal mt-8 grid sm:grid-cols-2 gap-px bg-tan border border-tan rounded-[6px] overflow-hidden">
+        <div class="bg-paper-2/70 px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
+          <div>
+            <h4 class="font-mincho text-base text-ink mb-1">ヘッドケア延長</h4>
+            <p class="font-maru font-light text-ink-soft text-xs">＋30 min</p>
+          </div>
+          <!-- ↓ 差し替え可 -->
+          <span class="font-serif text-2xl text-ink shrink-0">＋¥3,000</span>
+        </div>
+        <div class="bg-paper-2/70 px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
+          <div>
+            <h4 class="font-mincho text-base text-ink mb-1">ドライヘッドスパ単品</h4>
+            <p class="font-maru font-light text-ink-soft text-xs">45 min</p>
+          </div>
+          <!-- ↓ 差し替え可 -->
+          <span class="font-serif text-2xl text-ink shrink-0">¥6,000</span>
+        </div>
+      </div>
+      <p class="reveal font-maru font-light text-center text-ink-soft/70 text-[11px] tracking-wide mt-3">＊ オプションは一例です。実際のメニューに合わせて変更してください。</p>
+
+      <!-- ご利用にあたって（記載例・差し替え可） -->
+      <div class="reveal mt-10 bg-paper-2/50 border border-tan rounded-[6px] px-6 sm:px-10 py-8">
+        <div class="flex items-center gap-3 mb-5">
+          <svg class="w-4 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+          <h3 class="font-mincho text-base text-ink tracking-wide">ご利用にあたって</h3>
+        </div>
+        <ul class="font-maru font-light text-ink-soft text-sm space-y-2.5">
+          <li class="flex gap-2"><span class="text-rust">・</span>完全予約制です。空き状況の確認・ご予約は Instagram の DM から承ります。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>はじめに丁寧なカウンセリングを行い、お悩みに合わせて施術を進めます。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>動きやすい服装でお越しください（お着替えのご用意もあります）。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>キャンセル・日時の変更は、前日までにご連絡をお願いします。</li>
+        </ul>
+        <p class="font-maru font-light text-ink-soft/60 text-[11px] mt-4">＊ 上記は一般的な記載例です。実際の運用に合わせて編集してください。</p>
+      </div>
+
+      <div class="reveal text-center mt-14">
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+           class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-mincho text-sm tracking-[0.16em] shadow-[0_8px_30px_rgba(227,190,131,.22)] hover:bg-rust-d transition-all duration-500">
+          Instagram DMで予約する
+          <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+        </a>
+        <p class="font-maru font-light text-ink-soft/70 text-xs mt-6 tracking-wide">※ 通常プランの料金は仮置きです。実際の内容・価格に合わせて変更してください。</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 星座ディバイダー ============ -->
+  <div class="relative flex justify-center py-4">
+    <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
+      <polyline points="18,22 70,40 120,20 176,38 222,18 264,34" stroke="rgba(227,190,131,.55)" stroke-width="1" pathLength="1"/>
+      <circle class="c1" cx="18" cy="22" r="2.6" fill="#EAD9AE"/>
+      <circle class="c2" cx="70" cy="40" r="2.2" fill="#E3BE83"/>
+      <circle class="c3" cx="120" cy="20" r="3.2" fill="#EAD9AE"/>
+      <circle class="c4" cx="176" cy="38" r="2.2" fill="#E3BE83"/>
+      <circle class="c5" cx="222" cy="18" r="2.8" fill="#EAD9AE"/>
+      <circle class="c5" cx="264" cy="34" r="2.2" fill="#E3BE83"/>
+    </svg>
+  </div>
+
+
+  <!-- ============ セラピスト ============ -->
+  <section class="relative py-24 sm:py-36 scroll-mt-20">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+      <svg class="reveal w-6 mx-auto mb-8 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+      <p class="reveal font-serif italic text-rust text-xl mb-4">Therapist</p>
+      <h2 class="reveal font-serif text-3xl sm:text-4xl text-ink tracking-wide mb-2">MANAMI KINOSHITA</h2>
+      <p class="reveal font-maru text-[11px] tracking-luxe text-rust mb-10">木下 まなみ ・ セラピスト</p>
+
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-5">
+        「休んでも、なんだか疲れが取れない」——そんな声に寄り添いたくて、このサロンをはじめました。
+        頭から体の深部までゆっくりとほぐし、外の喧噪から離れて、自分の内側へと還っていく時間をお届けします。
+      </p>
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
+        完全予約制・お一人おひとりに向き合う、静かなプライベート空間です。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============ 星座ディバイダー ============ -->
+  <div class="relative flex justify-center py-4">
+    <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
+      <polyline points="14,30 60,14 110,38 158,20 210,36 266,16" stroke="rgba(227,190,131,.55)" stroke-width="1" pathLength="1"/>
+      <circle class="c1" cx="14" cy="30" r="2.4" fill="#EAD9AE"/>
+      <circle class="c2" cx="60" cy="14" r="2.8" fill="#E3BE83"/>
+      <circle class="c3" cx="110" cy="38" r="2.2" fill="#EAD9AE"/>
+      <circle class="c4" cx="158" cy="20" r="3.0" fill="#E3BE83"/>
+      <circle class="c5" cx="210" cy="36" r="2.4" fill="#EAD9AE"/>
+      <circle class="c5" cx="266" cy="16" r="2.6" fill="#E3BE83"/>
+    </svg>
+  </div>
+
+
+  <!-- ============ お客様の声 ============ -->
+  <section class="relative py-24 sm:py-36 scroll-mt-20">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+      <div class="reveal text-center mb-16">
+        <p class="font-serif italic text-rust text-xl mb-3">Voice</p>
+        <h2 class="font-mincho text-xl sm:text-2xl text-ink leading-[2] mb-3">お客様の声</h2>
+        <p class="font-maru font-light text-ink-soft text-xs tracking-luxe">ご来店いただいた方からの言葉</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+
+        <!-- 01 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            施術中、気づいたら涙が出ていました。何かが溶けていくような感覚で、終わった後は頭がふわっと軽くなって。「癒される」ってこういうことなんだと、初めて実感しました。
+          </p>
+        </div>
+
+        <!-- 02 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            長年の肩こりで何軒もサロンをまわりましたが、ここほど深部まで届いた感覚は初めてです。翌朝、首が全然違う。ずっと通い続けたいと思います。
+          </p>
+        </div>
+
+        <!-- 03 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            不眠が続いていたのですが、施術の翌晩から眠れるようになりました。夢を見るほど深く眠れたのは久しぶりで、本当に驚きました。
+          </p>
+        </div>
+
+        <!-- 04 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">50代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            まなみさんの手が温かくて、触れるたびに体がほどけていく感じがしました。施術後は体が羽のように軽くなって、帰り道がとても清々しかったです。
+          </p>
+        </div>
+
+        <!-- 05 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・男性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            デスクワークで毎日頭が重かったのですが、施術後は視界まで明るくなったような感覚がありました。頭のこりってこんなに影響していたんですね。
+          </p>
+        </div>
+
+        <!-- 06 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・男性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            施術中は半分眠っているような、でも何かに包まれているような不思議な感覚でした。終わった瞬間、肩の力がすっと抜けていて、自分でも驚くほど楽になっていました。
+          </p>
+        </div>
+
+        <!-- 07 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            カウンセリングからとても丁寧で、話を聞いてもらえるだけで気持ちが楽になりました。施術は想像以上に深くて、終わった後は頭痛が嘘のように消えていました。
+          </p>
+        </div>
+
+        <!-- 08 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">60代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            静かな空間で、ただただ自分の体に向き合う時間でした。日常のざわめきから離れて、こんなに深く休んだのは久しぶりです。また必ず来ます。
+          </p>
+        </div>
+
+        <!-- 09 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            毎回、施術が終わると体がぽかぽかして、じんわりと血の巡りを感じます。「疲れを溜めない体」に少しずつ近づいている気がして、月一のお楽しみになっています。
+          </p>
+        </div>
+
+        <!-- 10 -->
+        <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            アーユルヴェーダのことを全く知らずに来たのですが、施術を受けてから体と心のつながりを初めて意識しました。自分の内側に静けさがあることを、ここで気づかせてもらいました。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ アクセス + フッター ============ -->
+  <footer id="access" class="relative bg-sand/50 border-t border-tan pt-24 sm:pt-32 scroll-mt-20">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+
+      <p class="reveal font-serif italic text-rust text-xl mb-12">Access &amp; Reservation</p>
+
+      <dl class="reveal font-maru text-sm max-w-md mx-auto mb-12">
+        <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Salon</dt>
+          <dd class="text-ink/85 text-right">lembrasser_nakatsu</dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Area</dt>
+          <dd class="text-ink/85 text-right">大分県中津市<br /><span class="text-ink-soft/70 text-xs">＊ 詳しい所在地はご予約時にお伝えします</span></dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Hours</dt>
+          <!-- ↓ 差し替え可：実際の営業時間・定休日に -->
+          <dd class="text-ink/85 text-right">10:00 – 19:00（最終受付 17:30）<br /><span class="text-ink-soft/70 text-xs">不定休</span></dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Access</dt>
+          <!-- ↓ 差し替え可 -->
+          <dd class="text-ink/85 text-right">JR中津駅より車で約10分</dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Parking</dt>
+          <!-- ↓ 差し替え可 -->
+          <dd class="text-ink/85 text-right">専用駐車場あり（1台）</dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-b border-ink/15">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Reserve</dt>
+          <dd class="text-ink/85 text-right">完全予約制 ・ Instagram の DM より</dd>
+        </div>
+      </dl>
+
+      <!-- 地図（中津市エリア・正確な所在地は予約時に共有） -->
+      <div class="reveal max-w-md mx-auto mb-14">
+        <div class="rounded-[6px] overflow-hidden border border-rust/40 shadow-[0_14px_44px_rgba(0,0,0,.55)]">
+          <iframe
+            title="大分県中津市の地図"
+            src="https://maps.google.com/maps?q=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%B8%AD%E6%B4%A5%E5%B8%82&z=13&output=embed"
+            width="100%" height="240" style="border:0; display:block; filter:invert(.92) hue-rotate(190deg) saturate(.75) brightness(.95) contrast(.92);"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p class="font-maru font-light text-ink-soft/70 text-[11px] tracking-wide mt-3 text-center">＊ エリアの目安です。正確な所在地はご予約時にお知らせします。</p>
+      </div>
+
+      <!-- ご予約の流れ -->
+      <div class="reveal max-w-md mx-auto mb-16 text-left">
+        <div class="flex items-center justify-center gap-3 mb-7">
+          <svg class="w-4 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+          <h3 class="font-mincho text-base text-ink tracking-wide text-center">ご予約の流れ</h3>
+        </div>
+        <ol class="space-y-5">
+          <li class="flex gap-4">
+            <span class="font-serif text-rust text-2xl leading-none shrink-0">01</span>
+            <div>
+              <p class="font-mincho text-ink text-sm mb-0.5">Instagram の DM でご連絡</p>
+              <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">ご希望の日時とお悩みを、お気軽にメッセージください。</p>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <span class="font-serif text-rust text-2xl leading-none shrink-0">02</span>
+            <div>
+              <p class="font-mincho text-ink text-sm mb-0.5">日時の調整・ご案内</p>
+              <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">体の状態をうかがいながら、日時と所在地をご案内します。</p>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <span class="font-serif text-rust text-2xl leading-none shrink-0">03</span>
+            <div>
+              <p class="font-mincho text-ink text-sm mb-0.5">ご来店・施術</p>
+              <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">静かなプライベート空間で、内なる静けさへと還る時間を。</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <p class="reveal font-mincho text-ink leading-loose text-base mb-8">
+        ご予約・ご相談は、<br class="sm:hidden" />Instagram のメッセージから。<br />
+        <span class="text-ink-soft text-sm font-maru font-light">「こんな状態でも大丈夫？」というご相談だけでも歓迎です。</span>
+      </p>
+
+      <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+         class="reveal group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-mincho text-sm tracking-[0.16em] shadow-[0_8px_30px_rgba(227,190,131,.22)] hover:bg-rust-d transition-colors duration-500">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @lembrasser_nakatsu
+      </a>
+
+      <div class="mt-24 py-10 border-t border-ink/15">
+        <p class="font-serif text-2xl tracking-wide text-ink">lembrasser</p>
+        <p class="font-maru text-[10px] tracking-luxe text-rust mt-1 mb-4">NAKATSU ・ AYURVEDA</p>
+        <p class="font-maru text-[11px] tracking-wide text-ink-soft/70">© <span id="year"></span> lembrasser_nakatsu</p>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const header = document.querySelector('[data-header]');
+    function onScroll(){
+      if (window.scrollY > 40){ header.classList.add('bg-paper/90','backdrop-blur','shadow-sm'); }
+      else { header.classList.remove('bg-paper/90','backdrop-blur','shadow-sm'); }
+    }
+    addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    let open = false;
+    toggle.addEventListener('click', () => { open = !open; menu.style.maxHeight = open ? menu.scrollHeight + 'px' : '0px'; });
+    document.querySelectorAll('[data-mlink]').forEach(a => a.addEventListener('click', () => { open=false; menu.style.maxHeight='0px'; }));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal, .thread, .constel').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

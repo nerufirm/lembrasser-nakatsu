@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>lembrasser_nakatsu｜水の森テーマ — 大分・中津 アーユルヴェーダ</title>
+<title>lembrasser_nakatsu｜ジブリの森テーマ — 大分・中津 アーユルヴェーダ</title>
 <meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。宇宙とつながり、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -17,17 +17,17 @@
     theme: {
       extend: {
         colors: {
-          paper:      '#071520',
-          'paper-2':  '#0D2233',
-          sand:       '#071520',
-          tan:        '#1E4D6B',
-          ink:        '#D6EEF2',
-          'ink-soft': '#7DB5C8',
-          rust:       '#4EC4D4',
-          'rust-d':   '#35AAB9',
-          ochre:      '#A8D8E2',
-          olive:      '#2E6E82',
-          cream:      '#071520',
+          paper:   '#0A0E08',
+          'paper-2':'#141C0E',
+          sand:    '#0A0E08',
+          tan:     '#2C4020',
+          ink:     '#E8F0DC',
+          'ink-soft':'#A8C890',
+          rust:    '#88C050',
+          'rust-d':'#68A030',
+          ochre:   '#D0E890',
+          olive:   '#3A5828',
+          cream:   '#0A0E08',
         },
         fontFamily: {
           serif:  ['"DM Serif Display"', 'serif'],
@@ -44,10 +44,10 @@
   html { scroll-behavior: smooth; }
   body {
     background:
-      radial-gradient(60vw 60vw at 50% -8%, rgba(30,100,130,.22), transparent 70%),
-      radial-gradient(52vw 52vw at 85% 108%, rgba(0,70,90,.18), transparent 70%),
-      #071520;
-    color:#D6EEF2;
+      radial-gradient(60vw 60vw at 50% -8%, rgba(60,120,20,.22), transparent 70%),
+      radial-gradient(52vw 52vw at 85% 108%, rgba(180,160,40,.10), transparent 70%),
+      #0A0E08;
+    color:#E8F0DC;
   }
 
   /* 宇宙の塵（グレイン） */
@@ -89,6 +89,10 @@
   .arch{ border-radius:48% 48% 8px 8px / 34% 34% 8px 8px; }
 
   .rule-double{ border-top:1px solid rgba(236,230,214,.18); box-shadow:0 3px 0 -2px rgba(236,230,214,.18); }
+
+  /* ジブリ風やわらかさ */
+  .soft-card { border-radius: 20px !important; }
+  .bg-paper-2\/70 { border-radius: 20px; }
 </style>
 </head>
 
@@ -96,11 +100,31 @@
 
   <!-- 散らばるレトロな星（装飾・全面固定） -->
   <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="20" r="4" opacity=".9"/><circle cx="20" cy="20" r="10" opacity=".5"/><circle cx="20" cy="20" r="18" opacity=".2"/></svg>
-    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="20" r="4" opacity=".9"/><circle cx="20" cy="20" r="10" opacity=".5"/><circle cx="20" cy="20" r="18" opacity=".2"/></svg>
-    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="20" r="4" opacity=".9"/><circle cx="20" cy="20" r="10" opacity=".5"/><circle cx="20" cy="20" r="18" opacity=".2"/></svg>
-    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="20" r="4" opacity=".9"/><circle cx="20" cy="20" r="10" opacity=".5"/><circle cx="20" cy="20" r="18" opacity=".2"/></svg>
-    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="20" r="4" opacity=".9"/><circle cx="20" cy="20" r="10" opacity=".5"/><circle cx="20" cy="20" r="18" opacity=".2"/></svg>
+    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
   </div>
 
   <div class="relative z-10">
@@ -143,10 +167,10 @@
     <!-- 植物の背景 -->
     <div class="absolute inset-0 z-0" aria-hidden="true">
       <img
-        src="https://images.unsplash.com/photo-1443926818181-507851a3e558?w=1920&q=80&auto=format&fit=crop"
+        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80&auto=format&fit=crop"
         alt=""
         class="w-full h-full object-cover"
-        style="filter:brightness(.40) saturate(.70) hue-rotate(160deg);"
+        style="filter:brightness(.42) saturate(.85);"
       />
       <!-- テキスト側グラデーション -->
       <div class="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/70 to-paper/10"></div>
@@ -181,8 +205,8 @@
           内なる宇宙へ、還る。
         </h1>
         <p class="rise font-maru font-light text-ink-soft leading-loose text-sm sm:text-base mb-12" style="animation-delay:.8s">
-          奥深くのコリまで届く、アーユルヴェーダのディープケア。<br />
-          大分初の「ヘッドマルマケア ＋ 深部ケア」で、内側のしずけさへ。
+          表面ではなく、<span class="text-rust font-normal">奥深くのコリまで届く</span>アーユルヴェーダのディープケア。<br />
+          <span class="text-rust font-normal">大分初</span>の「ヘッドマルマケア ＋ 深部ケア」で、<span class="text-ochre">内側のしずけさへ</span>。
         </p>
         <div class="rise flex flex-col items-center md:items-start gap-5" style="animation-delay:1s">
           <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
@@ -206,7 +230,11 @@
         </div>
         <div class="flex items-center justify-center gap-3 mt-5">
           <span class="block h-px w-10 bg-rust/30"></span>
-          <svg class="w-2.5 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+          <svg class="w-2.5 text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
           <span class="block h-px w-10 bg-rust/30"></span>
         </div>
       </div>
@@ -234,21 +262,25 @@
       <!-- アーチ額装の宇宙写真（セピア） -->
       <div class="reveal mx-auto w-52 sm:w-64 mb-14">
         <div class="arch overflow-hidden border border-rust/40 shadow-[0_14px_44px_rgba(0,0,0,.55)]">
-          <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=900&q=80&auto=format&fit=crop"
-               alt="水面と自然" class="w-full aspect-[3/4] object-cover" style="filter:saturate(0.9) brightness(.85) contrast(1.05) hue-rotate(155deg);" />
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop"
+               alt="森の光の中に佇む静かな空間" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.80) brightness(.82) contrast(1.05);" />
         </div>
       </div>
 
       <p class="reveal font-serif italic text-rust text-xl mb-8">Concept</p>
 
       <h2 class="reveal font-mincho text-xl sm:text-2xl leading-[2] text-ink mb-14">
-        頭痛、不眠、慢性肩こり……<br />
-        休んでも疲れが取れない、<br class="sm:hidden" />あなたへ。
+        <span class="text-rust font-normal">頭痛、不眠、慢性肩こり</span>……<br />
+        <span class="text-ochre">休んでも疲れが取れない</span>、あなたへ。
       </h2>
 
       <!-- 宇宙とあなたをつなぐ一本の線 -->
       <div class="thread reveal flex flex-col items-center mb-14">
-        <svg class="w-5 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+        <svg class="w-5 text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
         <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">cosmos</span>
         <span class="thread-line block w-px h-20 sm:h-24 bg-gradient-to-b from-rust/70 to-tan"></span>
         <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">you</span>
@@ -260,21 +292,33 @@
       </p>
 
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
-        日々の緊張で、肩・首・頭はいつの間にかこわばり、巡りが滞っていきます。
-        表面をなでるだけでは届かない奥のこりは、頭痛や不眠、抜けない疲労感となって積み重なります。
+        日々の緊張で、<span class="text-ink font-normal">肩・首・頭</span>はいつの間にかこわばり、巡りが滞っていきます。
+        表面をなでるだけでは届かない<span class="text-rust font-normal">奥のこり</span>は、頭痛や不眠、抜けない疲労感となって積み重なります。
+        マッサージを受けても翌日にはまた元通り——それは、<span class="text-ink font-normal">深部に手が届いていない</span>からかもしれません。
+      </p>
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
+        当サロンの<span class="text-rust font-normal">「ヘッドマルマケア ＋ 深部ケア」</span>は、
+        アーユルヴェーダで体の要所とされる<span class="text-ochre font-normal">頭部のマルマポイント</span>を、星をたどるようにひとつずつ整えながら、
+        深部のこりまで静かにアプローチ。施術を重ねるうちに、<span class="text-rust font-normal">呼吸が深まり、眠りが変わり、頭が軽くなる</span>のを感じていただけます。
       </p>
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
-        当サロンの<span class="text-rust font-normal">「ヘッドマルマケア ＋ 深部ケア」</span>は、
-        アーユルヴェーダで体の要所とされる頭部のマルマを、星をたどるようにひとつずつ整えながら、
-        深部のこりまで静かにアプローチ。呼吸が深まり、内なる静けさへと還っていきます。
+        体の声に耳を傾ける、<span class="text-ochre font-normal">静かなプライベート空間</span>で。内なる静けさへと、還っていきます。
       </p>
 
       <div class="reveal mt-14 flex flex-wrap justify-center items-center gap-x-5 gap-y-3 font-mincho text-sm text-ink">
-        <span>めぐりをひらく</span>
-        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
-        <span>深部に届く</span>
-        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
-        <span>内側へ還る</span>
+        <span class="text-rust">マルマを整える</span>
+        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+        <span class="text-rust">深部まで届く</span>
+        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+        <span class="text-rust">内側へ還る</span>
       </div>
     </div>
   </section>
@@ -283,13 +327,13 @@
   <!-- ============ 星座ディバイダー ============ -->
   <div class="relative flex justify-center py-4">
     <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
-      <polyline points="14,40 66,18 124,34 168,14 226,32 266,20" stroke="rgba(227,190,131,.55)" stroke-width="1" pathLength="1"/>
-      <circle class="c1" cx="14" cy="40" r="2.2" fill="#E3BE83"/>
-      <circle class="c2" cx="66" cy="18" r="2.8" fill="#EAD9AE"/>
-      <circle class="c3" cx="124" cy="34" r="2.2" fill="#E3BE83"/>
-      <circle class="c4" cx="168" cy="14" r="3.2" fill="#EAD9AE"/>
-      <circle class="c5" cx="226" cy="32" r="2.2" fill="#E3BE83"/>
-      <circle class="c5" cx="266" cy="20" r="2.6" fill="#EAD9AE"/>
+      <polyline points="14,40 66,18 124,34 168,14 226,32 266,20" stroke="rgba(136,192,80,.55)" stroke-width="1" pathLength="1"/>
+      <circle class="c1" cx="14" cy="40" r="2.2" fill="#88C050"/>
+      <circle class="c2" cx="66" cy="18" r="2.8" fill="#D0E890"/>
+      <circle class="c3" cx="124" cy="34" r="2.2" fill="#88C050"/>
+      <circle class="c4" cx="168" cy="14" r="3.2" fill="#D0E890"/>
+      <circle class="c5" cx="226" cy="32" r="2.2" fill="#88C050"/>
+      <circle class="c5" cx="266" cy="20" r="2.6" fill="#D0E890"/>
     </svg>
   </div>
 
@@ -311,62 +355,65 @@
               <h3 class="font-mincho text-lg text-ink">モニター様プラン</h3>
               <span class="font-maru text-[10px] tracking-luxe text-cream bg-rust rounded-full px-3 py-0.5">限定</span>
             </div>
-            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">ヘッドマルマケア＋深部ケア体験（約90分）・ 丁寧なカウンセリング込み</p>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">ヘッドマルマケア＋深部ケア体験（約90分）・ 丁寧なカウンセリング込み・お体の状態に合わせてご提案</p>
           </div>
           <span class="font-serif text-3xl sm:text-4xl text-rust leading-none shrink-0">¥5,000</span>
         </div>
 
-        <!-- 通常プラン①（ダミー金額・差し替え可） -->
+        <!-- 通常プラン① -->
         <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
           <div>
             <h3 class="font-mincho text-lg text-ink mb-1.5">ヘッドマルマケア＋深部コリケアコース</h3>
             <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">90 min ・ 頭部マルマポイントを整え、肩・首・背中の深部コリにじっくりアプローチ</p>
           </div>
-<span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥12,000</span>
+          <span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥12,000</span>
         </div>
 
-        <!-- 通常プラン②（ダミー金額・差し替え可） -->
+        <!-- 通常プラン② -->
         <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
           <div>
             <h3 class="font-mincho text-lg text-ink mb-1.5">全身ほぐし ディープリセットコース</h3>
             <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">120 min ・ ヘッドマルマケア＋全身の深部をくまなくほぐすフルケア。疲れが溜まり切った方に</p>
           </div>
-<span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥16,000</span>
+          <span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥16,000</span>
         </div>
       </div>
 
-      <!-- オプションメニュー（一例・差し替え可） -->
+      <!-- オプションメニュー -->
       <div class="reveal mt-8 grid sm:grid-cols-2 gap-px bg-tan border border-tan rounded-[6px] overflow-hidden">
         <div class="bg-paper-2/70 px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
           <div>
             <h4 class="font-mincho text-base text-ink mb-1">ヘッドケア延長</h4>
             <p class="font-maru font-light text-ink-soft text-xs">＋30 min ・ さらに深く、じっくりと</p>
           </div>
-<span class="font-serif text-2xl text-ink shrink-0">＋¥3,000</span>
+          <span class="font-serif text-2xl text-ink shrink-0">＋¥3,000</span>
         </div>
         <div class="bg-paper-2/70 px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
           <div>
             <h4 class="font-mincho text-base text-ink mb-1">ドライヘッドスパ単品</h4>
             <p class="font-maru font-light text-ink-soft text-xs">45 min ・ 頭のコリだけをほぐしたい方に</p>
           </div>
-<span class="font-serif text-2xl text-ink shrink-0">¥6,000</span>
+          <span class="font-serif text-2xl text-ink shrink-0">¥6,000</span>
         </div>
       </div>
 
-
-      <!-- ご利用にあたって（記載例・差し替え可） -->
+      <!-- ご利用にあたって -->
       <div class="reveal mt-10 bg-paper-2/50 border border-tan rounded-[6px] px-6 sm:px-10 py-8">
         <div class="flex items-center gap-3 mb-5">
-          <svg class="w-4 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+          <svg class="w-4 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
           <h3 class="font-mincho text-base text-ink tracking-wide">ご利用にあたって</h3>
         </div>
         <ul class="font-maru font-light text-ink-soft text-sm space-y-2.5">
-          <li class="flex gap-2"><span class="text-rust">・</span>完全予約制です。空き状況の確認・ご予約は Instagram の DM から承ります。</li>
-          <li class="flex gap-2"><span class="text-rust">・</span>はじめに丁寧なカウンセリングを行い、お悩みに合わせて施術を進めます。</li>
-          <li class="flex gap-2"><span class="text-rust">・</span>動きやすい服装でお越しください（お着替えのご用意もあります）。</li>
-          <li class="flex gap-2"><span class="text-rust">・</span>キャンセル・日時の変更は、前日19:00までにご連絡をお願いします。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span><span class="text-rust font-normal">完全予約制</span>です。空き状況の確認・ご予約は Instagram の DM から承ります。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>はじめに<span class="text-ink font-normal">丁寧なカウンセリング</span>を行い、その日のお体の状態とお悩みに合わせて施術を進めます。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>動きやすい服装でお越しください。お着替えのご用意もございます。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>キャンセル・日時の変更は、<span class="text-ink font-normal">前日19:00まで</span>にご連絡をお願いします。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>施術後は<span class="text-ink font-normal">水分をしっかりお取りください</span>。老廃物の排出を促します。</li>
         </ul>
-
       </div>
 
       <div class="reveal text-center mt-14">
@@ -375,7 +422,6 @@
           Instagram DMで予約する
           <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
         </a>
-
       </div>
     </div>
   </section>
@@ -384,13 +430,13 @@
   <!-- ============ 星座ディバイダー ============ -->
   <div class="relative flex justify-center py-4">
     <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
-      <polyline points="18,22 70,40 120,20 176,38 222,18 264,34" stroke="rgba(227,190,131,.55)" stroke-width="1" pathLength="1"/>
-      <circle class="c1" cx="18" cy="22" r="2.6" fill="#EAD9AE"/>
-      <circle class="c2" cx="70" cy="40" r="2.2" fill="#E3BE83"/>
-      <circle class="c3" cx="120" cy="20" r="3.2" fill="#EAD9AE"/>
-      <circle class="c4" cx="176" cy="38" r="2.2" fill="#E3BE83"/>
-      <circle class="c5" cx="222" cy="18" r="2.8" fill="#EAD9AE"/>
-      <circle class="c5" cx="264" cy="34" r="2.2" fill="#E3BE83"/>
+      <polyline points="18,22 70,40 120,20 176,38 222,18 264,34" stroke="rgba(136,192,80,.55)" stroke-width="1" pathLength="1"/>
+      <circle class="c1" cx="18" cy="22" r="2.6" fill="#D0E890"/>
+      <circle class="c2" cx="70" cy="40" r="2.2" fill="#88C050"/>
+      <circle class="c3" cx="120" cy="20" r="3.2" fill="#D0E890"/>
+      <circle class="c4" cx="176" cy="38" r="2.2" fill="#88C050"/>
+      <circle class="c5" cx="222" cy="18" r="2.8" fill="#D0E890"/>
+      <circle class="c5" cx="264" cy="34" r="2.2" fill="#88C050"/>
     </svg>
   </div>
 
@@ -398,17 +444,26 @@
   <!-- ============ セラピスト ============ -->
   <section class="relative py-24 sm:py-36 scroll-mt-20">
     <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
-      <svg class="reveal w-6 mx-auto mb-8 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+      <svg class="reveal w-6 mx-auto mb-8 text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
       <p class="reveal font-serif italic text-rust text-xl mb-4">Therapist</p>
       <h2 class="reveal font-serif text-3xl sm:text-4xl text-ink tracking-wide mb-2">MANAMI KINOSHITA</h2>
       <p class="reveal font-maru text-[11px] tracking-luxe text-rust mb-10">木下 まなみ ・ セラピスト</p>
 
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-5">
-        「休んでも、なんだか疲れが取れない」——そんな声に寄り添いたくて、このサロンをはじめました。
-        アーユルヴェーダを学ぶ中で出会ったマルマポイントへのアプローチが、自分自身の慢性的な肩こりと頭痛を変えた体験から、もっと多くの方にこの感覚を届けたいと思いました。
+        「<span class="text-ink font-normal">休んでも、なんだか疲れが取れない</span>」——そんな声に寄り添いたくて、このサロンをはじめました。
+        アーユルヴェーダを学ぶ中で出会った<span class="text-rust font-normal">マルマポイントへのアプローチ</span>が、自分自身の慢性的な肩こりと頭痛を変えた体験から、
+        もっと多くの方にこの感覚を届けたいと思いました。
+      </p>
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-5">
+        頭から体の深部までゆっくりとほぐし、外の喧噪から離れて、<span class="text-ochre font-normal">自分の内側へと還っていく時間</span>をお届けします。
+        「こんなに深く眠れたのは久しぶり」「頭が軽い」——そんな変化を、ぜひ体で感じてください。
       </p>
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
-        完全予約制・お一人おひとりに丁寧に向き合う、静かなプライベート空間です。
+        <span class="text-rust font-normal">完全予約制</span>・お一人おひとりに丁寧に向き合う、<span class="text-ink font-normal">静かなプライベート空間</span>です。
       </p>
     </div>
   </section>
@@ -417,13 +472,13 @@
   <!-- ============ 星座ディバイダー ============ -->
   <div class="relative flex justify-center py-4">
     <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
-      <polyline points="14,30 60,14 110,38 158,20 210,36 266,16" stroke="rgba(227,190,131,.55)" stroke-width="1" pathLength="1"/>
-      <circle class="c1" cx="14" cy="30" r="2.4" fill="#EAD9AE"/>
-      <circle class="c2" cx="60" cy="14" r="2.8" fill="#E3BE83"/>
-      <circle class="c3" cx="110" cy="38" r="2.2" fill="#EAD9AE"/>
-      <circle class="c4" cx="158" cy="20" r="3.0" fill="#E3BE83"/>
-      <circle class="c5" cx="210" cy="36" r="2.4" fill="#EAD9AE"/>
-      <circle class="c5" cx="266" cy="16" r="2.6" fill="#E3BE83"/>
+      <polyline points="14,30 60,14 110,38 158,20 210,36 266,16" stroke="rgba(136,192,80,.55)" stroke-width="1" pathLength="1"/>
+      <circle class="c1" cx="14" cy="30" r="2.4" fill="#D0E890"/>
+      <circle class="c2" cx="60" cy="14" r="2.8" fill="#88C050"/>
+      <circle class="c3" cx="110" cy="38" r="2.2" fill="#D0E890"/>
+      <circle class="c4" cx="158" cy="20" r="3.0" fill="#88C050"/>
+      <circle class="c5" cx="210" cy="36" r="2.4" fill="#D0E890"/>
+      <circle class="c5" cx="266" cy="16" r="2.6" fill="#88C050"/>
     </svg>
   </div>
 
@@ -442,7 +497,11 @@
         <!-- 01 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -453,7 +512,11 @@
         <!-- 02 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -464,7 +527,11 @@
         <!-- 03 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -475,7 +542,11 @@
         <!-- 04 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">50代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -486,7 +557,11 @@
         <!-- 05 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・男性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -497,7 +572,11 @@
         <!-- 06 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・男性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -508,7 +587,11 @@
         <!-- 07 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -519,7 +602,11 @@
         <!-- 08 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">60代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -530,7 +617,11 @@
         <!-- 09 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -541,7 +632,11 @@
         <!-- 10 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -571,7 +666,7 @@
         </div>
         <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
           <dt class="font-mincho text-rust tracking-wide shrink-0">Hours</dt>
-          <dd class="text-ink/85 text-right">10:00 – 19:00（最終受付 17:30）<br /><span class="text-ink-soft/70 text-xs">不定休</span></dd>
+<dd class="text-ink/85 text-right">10:00 – 19:00（最終受付 17:30）<br /><span class="text-ink-soft/70 text-xs">不定休</span></dd>
         </div>
         <div class="flex justify-between gap-6 py-4 border-t border-ink/15">
           <dt class="font-mincho text-rust tracking-wide shrink-0">Access</dt>
@@ -602,7 +697,11 @@
       <!-- ご予約の流れ -->
       <div class="reveal max-w-md mx-auto mb-16 text-left">
         <div class="flex items-center justify-center gap-3 mb-7">
-          <svg class="w-4 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
+          <svg class="w-4 text-ochre" viewBox="0 0 24 24" fill="currentColor">
+  <ellipse cx="12" cy="15" rx="6" ry="7"/>
+  <rect x="9" y="5" width="6" height="5" rx="3"/>
+  <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="1.5"/>
+</svg>
           <h3 class="font-mincho text-base text-ink tracking-wide text-center">ご予約の流れ</h3>
         </div>
         <ol class="space-y-5">

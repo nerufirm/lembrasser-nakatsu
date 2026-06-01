@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>concept</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; line-height: 1.6; color: #333; }
+  pre { background: #f4f4f4; padding: 1em; overflow-x: auto; border-radius: 4px; }
+  code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #ddd; padding: 0.5em; text-align: left; }
+  th { background: #f4f4f4; }
+  blockquote { border-left: 4px solid #ddd; margin: 0; padding-left: 1em; color: #666; }
+  h1, h2, h3 { border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+</style>
+</head>
+<body>
+<h1 id="lembrasser_nakatsu">lembrasser_nakatsu デザインコンセプト</h1>
+<p>大分・中津のアーユルヴェーダサロン「lembrasser_nakatsu」のホームページ、全16テーマのデザイン実装概要。</p>
+<hr />
+<h2 id="_1">共通構造</h2>
+<p>全テーマ共通で以下のセクション構成を持つ単一HTMLファイル。</p>
+<ul>
+<li><strong>Hero</strong> — フルスクリーン背景画像＋テキスト＋CTAボタン</li>
+<li><strong>Concept</strong> — アーチ型写真＋コンセプト文</li>
+<li><strong>Menu &amp; Price</strong> — メニュー一覧・料金</li>
+<li><strong>Therapist</strong> — セラピスト紹介</li>
+<li><strong>Voice</strong> — お客様の声 10件</li>
+<li><strong>Access &amp; Footer</strong> — アクセス・地図・予約の流れ</li>
+</ul>
+<p>技術スタック：Tailwind CSS（CDN）、Google Fonts、Vanilla JS（IntersectionObserver によるスクロールアニメーション）</p>
+<hr />
+<h2 id="0108">自然テーマ（01〜08）</h2>
+<h3 id="01">01 水の森</h3>
+<p><strong>コンセプト：</strong> 水の音・自然・宇宙とのつながり・人々の共生</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#071520</code>（深海ダーク）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#4EC4D4</code>（ティール）、<code>#A8D8E2</code>（ペールブルー）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 熱帯植物（<code>hue-rotate(160deg)</code> で青緑に転調）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>同心円3層の波紋SVG（水面のさざ波を表現）</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>水をテーマに<code>hue-rotate</code>で既存植物画像を水中色に変換</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="02">02 和の静寂</h3>
+<p><strong>コンセプト：</strong> 和紙・墨・竹。日本の侘び寂びを現代的に表現</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#F4F0E8</code>（和紙ベージュ）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#8B4513</code>（錆朱）、<code>#C8A050</code>（金土）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 竹林（<code>sepia(.15)</code> で和の雰囲気）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>黒い墨点（小さな円）が散らばる</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>唯一の伝統的ライトテーマ。<code>mix-blend-mode:multiply</code> でグレインを自然に合成</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="03">03 黄金の夕暮れ</h3>
+<p><strong>コンセプト：</strong> 夕暮れの黄金光。テラコッタ・バーントオレンジの温かさ</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#180C06</code>（深ブラウン）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#E87030</code>（バーントオレンジ）、<code>#F5B840</code>（ゴールド）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 霧の森（<code>hue-rotate(-10deg)</code> で夕焼け色に）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>太陽光線バースト形のSVGアイコン</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>暖色のグラデーションで「包まれる温もり」を演出</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="04">04 森の息吹</h3>
+<p><strong>コンセプト：</strong> 深い森の静けさ。モスグリーン×アースブラウン</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#050C05</code>（深森ブラック）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#5CB85C</code>（モスグリーン）、<code>#A8D890</code>（薄緑）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 森（<code>brightness(.38) saturate(.90)</code>）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>葉脈を模した2本線のSVG</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>最もアースな配色。呼吸・大地とのつながりを表現</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="05">05 月の静寂</h3>
+<p><strong>コンセプト：</strong> 深夜の月光。ミッドナイトブルー×シルバー</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#07091A</code>（月夜ブラック）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#B0BAF0</code>（シルバーブルー）、<code>#D4DAF8</code>（ペールラベンダー）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>月夜の水面（<code>hue-rotate(200deg)</code> で青銀調に）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>三日月SVGが浮かぶ</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td><code>rgba(60,70,160)</code> の青紫グラデーションで宇宙感を表現</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="06">06 アーユルヴェーダの彩</h3>
+<p><strong>コンセプト：</strong> インド古来の色彩。サフラン×ディープレッド</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#180806</code>（深紅ブラック）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#E84818</code>（サフランレッド）、<code>#F0A030</code>（スパイスゴールド）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 熱帯ボタニカル（<code>hue-rotate(-15deg)</code>）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>蓮（ロータス）をモチーフにしたSVG</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>アーユルヴェーダの原点・インドの色彩を直接的に表現</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="07">07 白磁の光</h3>
+<p><strong>コンセプト：</strong> 白磁器のような清潔感。ウォームグレーミニマル</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#F8F6F2</code>（磁器白）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#8B6040</code>（ウォームブラウン）、<code>#B89060</code>（ゴールド）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>ミニマル白花（<code>saturate(.40)</code>）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>細い二重円のSVG（輪郭のみ）</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td><code>grain opacity:.03</code> で極限まで控えめなテクスチャ。余白と清潔感が主役</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="08">08 暁の霧</h3>
+<p><strong>コンセプト：</strong> 夜明けの霧に包まれた静謐な森。新しい始まり</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#0A110C</code>（夜明け前の深緑）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#90C898</code>（セージグリーン）、<code>#B8D8B8</code>（朝露）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 霧の滝・朝の森（<code>hue-rotate(10deg)</code>）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>水滴（しずく）形のSVG</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>森の息吹より明るい緑、霧のイメージで「浄化・再生」を表現</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="0916">アーティスティックテーマ（09〜16）</h2>
+<h3 id="09">09 桜アニメ</h3>
+<p><strong>コンセプト：</strong> アニメ調パステル。さくらが舞う春の世界観</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#FFF0F5</code>（桜色）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#FF6B9D</code>（ホットピンク）、<code>#FFB3C6</code>（ペールピンク）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 桜（<code>hue-rotate(-10deg)</code>）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>🌸 絵文字が <code>@keyframes petalFall</code> で画面上から落下するアニメーション</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>カード要素に <code>border-radius:16px</code> を強制し、アニメ的な丸みを付与</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="10">10 ジブリの森</h3>
+<p><strong>コンセプト：</strong> スタジオジブリ的な温かい牧歌的世界。どんぐりと森</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#0A0E08</code>（深森）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#88C050</code>（若草）、<code>#D0E890</code>（黄緑）</td>
+</tr>
+<tr>
+<td>背景画像</td>
+<td>Unsplash 森の光（<code>brightness(.42) saturate(.85)</code>）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>どんぐり（クヌギ）をモチーフにしたSVG</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td><code>border-radius:20px</code> でジブリ的なやわらかさを全要素に適用</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="11">11 水彩夢想</h3>
+<p><strong>コンセプト：</strong> 水彩絵具で描いたような夢のラベンダー世界</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#F5F0FF</code>（薄ラベンダー）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#7B5EA7</code>（パープル）、<code>#B09AD8</code>（薄紫）</td>
+</tr>
+<tr>
+<td>背景</td>
+<td>3層のradial-gradient（ラベンダー・水色・ピンク）を重ねて水彩にじみを表現</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>水滴（しずく）形SVG。<code>opacity:.5</code> で透明感</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>CSSグラデーションのみで水彩の滲みを再現。背景画像に <code>hue-rotate(200deg)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="12">12 ボタニカル図鑑</h3>
+<p><strong>コンセプト：</strong> ヴィクトリア朝の植物図鑑。科学イラスト調</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#F8F3E8</code>（クリーム紙）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#4A7A3C</code>（ボタニカルグリーン）、<code>#8AAA5C</code>（オリーブ）</td>
+</tr>
+<tr>
+<td>背景</td>
+<td><code>repeating-linear-gradient</code> で横罫線を生成（方眼紙風）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>葉脈SVG（strokeのみ）で精密図鑑の線画を表現</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>背景に罫線パターンを重ねることで「紙の質感」を演出</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="13">13 アールヌーボー</h3>
+<p><strong>コンセプト：</strong> 1900年代アールヌーボー。深緑×ゴールドの有機的曲線美</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#080E06</code>（深森緑）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#C9A96E</code>（アンティークゴールド）、<code>#E0C880</code>（淡金）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>5弁花形SVG（ムーランルージュ的な装飾花）</td>
+</tr>
+<tr>
+<td>特殊CSS</td>
+<td><code>.nouveau-border::before</code> で二重縁の装飾枠を全カードに付与</td>
+</tr>
+<tr>
+<td><code>.arch</code></td>
+<td><code>border-radius:60% 60% 8px 8px / 50% 50% 8px 8px</code> でより流麗なアーチ型に</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="14">14 ヴィンテージポスター</h3>
+<p><strong>コンセプト：</strong> 1930〜40年代レトロ旅行ポスター。限られた配色と大胆な構図</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#0C1428</code>（深ネイビー）</td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#E84820</code>（レトロレッド）、<code>#F0B820</code>（ゴールドイエロー）</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>八方位コンパスローズSVG（航海・旅をイメージ）</td>
+</tr>
+<tr>
+<td>特殊CSS</td>
+<td><code>.poster-frame</code> で全体に <code>outline</code> の額縁効果</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>カードを <code>border-radius:2px</code> で角張らせ、ポスターの直線的デザインを表現</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="15">15 スケッチ帳</h3>
+<p><strong>コンセプト：</strong> クラフト紙に鉛筆で描いた手書きノート</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#F5E8D0</code>（クラフト紙）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#8B4513</code>（インクブラウン）、<code>#B88530</code>（錆金）</td>
+</tr>
+<tr>
+<td>背景</td>
+<td><code>repeating-linear-gradient</code> で横罫線＋縦線のノート方眼</td>
+</tr>
+<tr>
+<td>フォント</td>
+<td><code>Caveat</code>（手書き風英字）を<code>h1</code>/<code>h2</code>/<code>h3</code>に適用</td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>＋記号（十字）SVGが散らばる。鉛筆の×印イメージ</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td><code>grain opacity:.06</code> を高めに設定し紙のざらつきを強調</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="16">16 水彩手紙</h3>
+<p><strong>コンセプト：</strong> 水彩絵具で描いた温かい手紙。有機的ににじむ色彩</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>実装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ベースカラー</td>
+<td><code>#FAF6F0</code>（手紙の紙）— <strong>ライトテーマ</strong></td>
+</tr>
+<tr>
+<td>アクセント</td>
+<td><code>#C87050</code>（テラコッタ）、<code>#D8A878</code>（ウォームゴールド）</td>
+</tr>
+<tr>
+<td>背景</td>
+<td>3層の淡いradial-gradient（ベージュ・グリーン・ラベンダー）でにじみを表現</td>
+</tr>
+<tr>
+<td>フォント</td>
+<td><code>Caveat</code>（手書き英字）+ <code>Noto Serif JP</code></td>
+</tr>
+<tr>
+<td>装飾</td>
+<td>水彩ブラシの点（中央円＋薄い外輪）SVG</td>
+</tr>
+<tr>
+<td>特殊CSS</td>
+<td><code>.arch</code> に <code>filter:drop-shadow</code> で写真に手描きのにじみ影を付与</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">テーマ一覧表</h2>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>テーマ名</th>
+<th>明暗</th>
+<th>カテゴリ</th>
+<th>メインカラー</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>水の森</td>
+<td>ダーク</td>
+<td>自然</td>
+<td>ティール×ブルー</td>
+</tr>
+<tr>
+<td>02</td>
+<td>和の静寂</td>
+<td><strong>ライト</strong></td>
+<td>自然</td>
+<td>和紙×墨</td>
+</tr>
+<tr>
+<td>03</td>
+<td>黄金の夕暮れ</td>
+<td>ダーク</td>
+<td>自然</td>
+<td>テラコッタ×ゴールド</td>
+</tr>
+<tr>
+<td>04</td>
+<td>森の息吹</td>
+<td>ダーク</td>
+<td>自然</td>
+<td>モスグリーン×アース</td>
+</tr>
+<tr>
+<td>05</td>
+<td>月の静寂</td>
+<td>ダーク</td>
+<td>自然</td>
+<td>ミッドナイト×シルバー</td>
+</tr>
+<tr>
+<td>06</td>
+<td>アーユルヴェーダの彩</td>
+<td>ダーク</td>
+<td>自然</td>
+<td>深紅×サフラン</td>
+</tr>
+<tr>
+<td>07</td>
+<td>白磁の光</td>
+<td><strong>ライト</strong></td>
+<td>自然</td>
+<td>磁器白×ウォームグレー</td>
+</tr>
+<tr>
+<td>08</td>
+<td>暁の霧</td>
+<td>ダーク</td>
+<td>自然</td>
+<td>ディープセージ×グリーン</td>
+</tr>
+<tr>
+<td>09</td>
+<td>桜アニメ</td>
+<td><strong>ライト</strong></td>
+<td>アニメ</td>
+<td>パステルピンク×桜</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ジブリの森</td>
+<td>ダーク</td>
+<td>アニメ</td>
+<td>温かい森×牧歌</td>
+</tr>
+<tr>
+<td>11</td>
+<td>水彩夢想</td>
+<td><strong>ライト</strong></td>
+<td>イラスト</td>
+<td>ラベンダー×水彩</td>
+</tr>
+<tr>
+<td>12</td>
+<td>ボタニカル図鑑</td>
+<td><strong>ライト</strong></td>
+<td>イラスト</td>
+<td>クリーム×植物図</td>
+</tr>
+<tr>
+<td>13</td>
+<td>アールヌーボー</td>
+<td>ダーク</td>
+<td>イラスト</td>
+<td>深緑×ゴールド</td>
+</tr>
+<tr>
+<td>14</td>
+<td>ヴィンテージポスター</td>
+<td>ダーク</td>
+<td>イラスト</td>
+<td>ネイビー×レトロレッド</td>
+</tr>
+<tr>
+<td>15</td>
+<td>スケッチ帳</td>
+<td><strong>ライト</strong></td>
+<td>手書き</td>
+<td>クラフト紙×鉛筆</td>
+</tr>
+<tr>
+<td>16</td>
+<td>水彩手紙</td>
+<td><strong>ライト</strong></td>
+<td>手書き</td>
+<td>和紙×水彩にじみ</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

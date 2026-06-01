@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>lembrasser_nakatsu｜サイバー夜桜テーマ — 大分・中津 アーユルヴェーダ</title>
+<title>lembrasser_nakatsu｜ボタニカル図鑑テーマ — 大分・中津 アーユルヴェーダ</title>
 <meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。宇宙とつながり、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -17,17 +17,17 @@
     theme: {
       extend: {
         colors: {
-          paper:   '#080010',
-          'paper-2':'#100020',
-          sand:    '#080010',
-          tan:     '#3D0060',
-          ink:     '#F0D0FF',
-          'ink-soft':'#C090E8',
-          rust:    '#FF1493',
-          'rust-d':'#CC0070',
-          ochre:   '#FF69B4',
-          olive:   '#6A0080',
-          cream:   '#080010',
+          paper:   '#F8F3E8',
+          'paper-2':'#F0E8D8',
+          sand:    '#F8F3E8',
+          tan:     '#C0A878',
+          ink:     '#1A1208',
+          'ink-soft':'#5A4030',
+          rust:    '#4A7A3C',
+          'rust-d':'#3A6028',
+          ochre:   '#8AAA5C',
+          olive:   '#7A6040',
+          cream:   '#F8F3E8',
         },
         fontFamily: {
           serif:  ['"DM Serif Display"', 'serif'],
@@ -44,15 +44,15 @@
   html { scroll-behavior: smooth; }
   body {
     background:
-      radial-gradient(60vw 60vw at 50% -8%, rgba(180,0,120,.25), transparent 70%),
-      radial-gradient(52vw 52vw at 85% 108%, rgba(100,0,180,.20), transparent 70%),
-      #080010;
-    color:#F0D0FF;
+      radial-gradient(70vw 70vw at 50% 0%, rgba(200,160,80,.10), transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(160,120,60,.04) 40px, rgba(160,120,60,.04) 41px),
+      #F8F3E8;
+    color:#1A1208;
   }
 
-  /* 宇宙の塵（グレイン） */
+  /* グレイン */
   .grain::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.05; mix-blend-mode:screen;
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.04; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -88,23 +88,21 @@
   /* レトロなアーチ額装 */
   .arch{ border-radius:48% 48% 8px 8px / 34% 34% 8px 8px; }
 
-  .rule-double{ border-top:1px solid rgba(236,230,214,.18); box-shadow:0 3px 0 -2px rgba(236,230,214,.18); }
-
-  /* サイバーグロー */
-  .glow-pink { text-shadow: 0 0 10px rgba(255,20,147,.8), 0 0 20px rgba(255,20,147,.4); }
-  .border-glow { box-shadow: 0 0 12px rgba(255,20,147,.3), inset 0 0 12px rgba(255,20,147,.05); }
+  /* 図鑑スタイル */
+  .rule-double { border-top: 1px solid rgba(26,18,8,.15); box-shadow: 0 3px 0 -2px rgba(26,18,8,.15); }
+  .bg-paper-2\/70 { background: rgba(240,232,216,.70) !important; }
 </style>
 </head>
 
 <body class="grain font-maru antialiased overflow-x-hidden selection:bg-rust selection:text-cream">
 
-  <!-- 散らばるレトロな星（装飾・全面固定） -->
+  <!-- 散らばる植物の葉（装飾・全面固定） -->
   <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
-    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
-    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
-    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
-    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
+    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
+    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
+    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
+    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
   </div>
 
   <div class="relative z-10">
@@ -147,13 +145,13 @@
     <!-- 植物の背景 -->
     <div class="absolute inset-0 z-0" aria-hidden="true">
       <img
-        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80&auto=format&fit=crop"
+        src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1920&q=80&auto=format&fit=crop"
         alt=""
         class="w-full h-full object-cover"
-        style="filter:brightness(.30) saturate(.50) hue-rotate(270deg);"
+        style="filter:brightness(.60) saturate(.70) sepia(.15);"
       />
       <!-- テキスト側グラデーション -->
-      <div class="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/65 to-paper/10"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-paper/97 via-paper/82 to-paper/30"></div>
       <!-- 上下フェード -->
       <div class="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-paper to-transparent"></div>
       <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-paper to-transparent"></div>
@@ -181,7 +179,7 @@
       <div class="flex-1 max-w-lg text-center">
         <p class="rise font-serif italic text-rust text-xl sm:text-2xl mb-7" style="animation-delay:.2s">Ayurveda &amp; the Inner Cosmos</p>
         <p class="rise font-mincho text-ink/70 text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s">＼ 肩や首がガチガチで辛い方へ ／</p>
-        <h1 class="rise glow-pink font-mincho text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" style="animation-delay:.6s">
+        <h1 class="rise font-mincho text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" style="animation-delay:.6s">
           アロマとアーユルヴェーダで、本来のわたしへ。
         </h1>
         <p class="rise font-maru font-light text-ink-soft leading-loose text-sm sm:text-base mb-12" style="animation-delay:.8s">
@@ -197,6 +195,9 @@
           <span class="font-maru text-[11px] tracking-luxe text-ink-soft">完全予約制 ・ 大分県中津市</span>
         </div>
       </div>
+
+
+
     </div>
   </section>
 
@@ -208,8 +209,8 @@
       <!-- アーチ額装の宇宙写真（セピア） -->
       <div class="reveal mx-auto w-52 sm:w-64 mb-14">
         <div class="arch overflow-hidden border border-rust/40 shadow-[0_14px_44px_rgba(0,0,0,.55)]">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop"
-               alt="星空のもとに佇む人のシルエット" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.50) brightness(.70) contrast(1.2) hue-rotate(260deg);" />
+          <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=900&q=80&auto=format&fit=crop"
+               alt="ボタニカルイメージ" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.60) brightness(.88) contrast(1.05) sepia(.12);" />
         </div>
       </div>
 
@@ -222,7 +223,7 @@
 
       <!-- 宇宙とあなたをつなぐ一本の線 -->
       <div class="thread reveal flex flex-col items-center mb-14">
-        <svg class="w-5 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+        <svg class="w-5 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
         <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">cosmos</span>
         <span class="thread-line block w-px h-20 sm:h-24 bg-gradient-to-b from-rust/70 to-tan"></span>
         <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">you</span>
@@ -249,9 +250,9 @@
 
       <div class="reveal mt-14 flex flex-wrap justify-center items-center gap-x-5 gap-y-3 font-mincho text-sm text-ink">
         <span class="text-rust">マルマを整える</span>
-        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
         <span class="text-rust">深部まで届く</span>
-        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+        <svg class="w-3 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
         <span class="text-rust">内側へ還る</span>
       </div>
     </div>
@@ -280,7 +281,7 @@
         <p class="font-maru font-light text-ink-soft text-xs tracking-luxe">税込価格 ・ 完全予約制</p>
       </div>
 
-      <div class="bg-paper-2/70 border-glow border border-tan rounded-[6px] px-6 sm:px-10 py-4 shadow-[0_14px_44px_rgba(0,0,0,.5)]">
+      <div class="bg-paper-2/70 border border-tan rounded-[6px] px-6 sm:px-10 py-4 shadow-[0_14px_44px_rgba(0,0,0,.5)]">
 
         <!-- モニター様プラン -->
         <div class="reveal flex items-baseline justify-between gap-6 py-8">
@@ -334,7 +335,7 @@
       <!-- ご利用にあたって -->
       <div class="reveal mt-10 bg-paper-2/50 border border-tan rounded-[6px] px-6 sm:px-10 py-8">
         <div class="flex items-center gap-3 mb-5">
-          <svg class="w-4 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+          <svg class="w-4 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
           <h3 class="font-mincho text-base text-ink tracking-wide">ご利用にあたって</h3>
         </div>
         <ul class="font-maru font-light text-ink-soft text-sm space-y-2.5">
@@ -374,7 +375,7 @@
   <!-- ============ セラピスト ============ -->
   <section class="relative py-24 sm:py-36 scroll-mt-20">
     <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
-      <svg class="reveal w-6 mx-auto mb-8 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+      <svg class="reveal w-6 mx-auto mb-8 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
       <p class="reveal font-serif italic text-rust text-xl mb-4">Therapist</p>
       <h2 class="reveal font-serif text-3xl sm:text-4xl text-ink tracking-wide mb-2">MANAMI KINOSHITA</h2>
       <p class="reveal font-maru text-[11px] tracking-luxe text-rust mb-10">木下 まなみ ・ セラピスト</p>
@@ -423,7 +424,7 @@
         <!-- 01 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -434,7 +435,7 @@
         <!-- 02 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -445,7 +446,7 @@
         <!-- 03 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -456,7 +457,7 @@
         <!-- 04 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">50代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -467,7 +468,7 @@
         <!-- 05 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・男性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -478,7 +479,7 @@
         <!-- 06 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・男性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -489,7 +490,7 @@
         <!-- 07 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -500,7 +501,7 @@
         <!-- 08 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">60代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -511,7 +512,7 @@
         <!-- 09 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -522,7 +523,7 @@
         <!-- 10 -->
         <div class="reveal bg-paper-2/70 border border-tan rounded-[6px] px-7 py-7 shadow-[0_8px_32px_rgba(0,0,0,.4)]">
           <div class="flex items-center gap-2 mb-4">
-            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+            <svg class="w-3 text-ochre shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
             <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
           </div>
           <p class="font-maru font-light text-ink-soft text-sm leading-loose">
@@ -583,7 +584,7 @@
       <!-- ご予約の流れ -->
       <div class="reveal max-w-md mx-auto mb-16 text-left">
         <div class="flex items-center justify-center gap-3 mb-7">
-          <svg class="w-4 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12Z"/></svg>
+          <svg class="w-4 text-ochre" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z"/></svg>
           <h3 class="font-mincho text-base text-ink tracking-wide text-center">ご予約の流れ</h3>
         </div>
         <ol class="space-y-5">
@@ -638,8 +639,8 @@
 
     const header = document.querySelector('[data-header]');
     function onScroll(){
-      if (window.scrollY > 40){ header.classList.add('bg-paper/90','backdrop-blur','shadow-sm'); }
-      else { header.classList.remove('bg-paper/90','backdrop-blur','shadow-sm'); }
+      if (window.scrollY > 40){ header.classList.add('bg-paper/98','backdrop-blur','shadow-sm'); }
+      else { header.classList.remove('bg-paper/98','backdrop-blur','shadow-sm'); }
     }
     addEventListener('scroll', onScroll, { passive:true }); onScroll();
 

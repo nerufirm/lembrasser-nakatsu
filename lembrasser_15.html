@@ -3,31 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>lembrasser_nakatsu｜ボタニカル図鑑テーマ — 大分・中津 アーユルヴェーダ</title>
+<title>lembrasser_nakatsu｜スケッチ帳テーマ — 大分・中津 アーユルヴェーダ</title>
 <meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。宇宙とつながり、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
 
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          paper:   '#F8F3E8',
-          'paper-2':'#F0E8D8',
-          sand:    '#F8F3E8',
-          tan:     '#C0A878',
-          ink:     '#1A1208',
-          'ink-soft':'#5A4030',
-          rust:    '#4A7A3C',
-          'rust-d':'#3A6028',
-          ochre:   '#8AAA5C',
-          olive:   '#7A6040',
-          cream:   '#F8F3E8',
+          paper:   '#F5E8D0',
+          'paper-2':'#EED9BC',
+          sand:    '#F5E8D0',
+          tan:     '#C8A870',
+          ink:     '#1A0E04',
+          'ink-soft':'#5A3A18',
+          rust:    '#8B4513',
+          'rust-d':'#6B3010',
+          ochre:   '#B88530',
+          olive:   '#7A5030',
+          cream:   '#F5E8D0',
         },
         fontFamily: {
           serif:  ['"DM Serif Display"', 'serif'],
@@ -44,17 +44,25 @@
   html { scroll-behavior: smooth; }
   body {
     background:
-      radial-gradient(70vw 70vw at 50% 0%, rgba(200,160,80,.10), transparent 60%),
-      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(160,120,60,.04) 40px, rgba(160,120,60,.04) 41px),
-      #F8F3E8;
-    color:#1A1208;
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(26,14,4,.06) 28px, rgba(26,14,4,.06) 29px),
+      repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(26,14,4,.03) 28px, rgba(26,14,4,.03) 29px),
+      #F5E8D0;
+    color:#1A0E04;
   }
 
-  /* グレイン */
+  /* 紙のざらつき（グレイン） */
   .grain::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.04; mix-blend-mode:multiply;
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:.06; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+
+  /* スケッチ手書き */
+  @font-face{}
+  .sketch-border { border: 2px solid rgba(26,14,4,.25) !important; border-radius: 3px !important;
+    box-shadow: 2px 2px 0 rgba(26,14,4,.08), -1px -1px 0 rgba(26,14,4,.05); }
+  .bg-paper-2\/70 { background: rgba(238,217,188,.75) !important; }
+  h1, h2, h3 { font-family: 'Caveat', cursive !important; letter-spacing: .05em; }
+  .font-serif { font-family: 'Caveat', cursive !important; }
 
   .v-rl{ writing-mode:vertical-rl; text-orientation:upright; }
 
@@ -88,21 +96,19 @@
   /* レトロなアーチ額装 */
   .arch{ border-radius:48% 48% 8px 8px / 34% 34% 8px 8px; }
 
-  /* 図鑑スタイル */
-  .rule-double { border-top: 1px solid rgba(26,18,8,.15); box-shadow: 0 3px 0 -2px rgba(26,18,8,.15); }
-  .bg-paper-2\/70 { background: rgba(240,232,216,.70) !important; }
+  .rule-double{ border-top:1px solid rgba(26,14,4,.12); box-shadow:0 3px 0 -2px rgba(26,14,4,.08); }
 </style>
 </head>
 
 <body class="grain font-maru antialiased overflow-x-hidden selection:bg-rust selection:text-cream">
 
-  <!-- 散らばる植物の葉（装飾・全面固定） -->
+  <!-- 散らばるレトロな星（装飾・全面固定） -->
   <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
-    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
-    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
-    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
-    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 22V12M12 12C12 7 16 4 20 3C20 8 17 12 12 12M12 12C12 7 8 4 4 3C4 8 7 12 12 12"/></svg>
+    <svg class="absolute top-[14%] left-[8%] w-5 twinkle text-ochre" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+    <svg class="absolute top-[30%] right-[12%] w-3.5 twinkle t3 text-rust" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+    <svg class="absolute top-[58%] left-[6%] w-4 twinkle t2 text-rust/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+    <svg class="absolute top-[74%] right-[9%] w-5 twinkle t4 text-ochre/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+    <svg class="absolute top-[88%] left-[16%] w-3 twinkle t5 text-ink/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
   </div>
 
   <div class="relative z-10">
@@ -148,10 +154,10 @@
         src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1920&q=80&auto=format&fit=crop"
         alt=""
         class="w-full h-full object-cover"
-        style="filter:brightness(.60) saturate(.70) sepia(.15);"
+        style="filter:brightness(.65) saturate(.35) sepia(.30);"
       />
       <!-- テキスト側グラデーション -->
-      <div class="absolute inset-0 bg-gradient-to-r from-paper/97 via-paper/82 to-paper/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-paper/97 via-paper/85 to-paper/40"></div>
       <!-- 上下フェード -->
       <div class="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-paper to-transparent"></div>
       <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-paper to-transparent"></div>
@@ -210,7 +216,7 @@
       <div class="reveal mx-auto w-52 sm:w-64 mb-14">
         <div class="arch overflow-hidden border border-rust/40 shadow-[0_14px_44px_rgba(0,0,0,.55)]">
           <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=900&q=80&auto=format&fit=crop"
-               alt="ボタニカルイメージ" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.60) brightness(.88) contrast(1.05) sepia(.12);" />
+               alt="ボタニカルの背景" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.30) brightness(.88) contrast(1.05) sepia(.28);" />
         </div>
       </div>
 
@@ -575,7 +581,7 @@
           <iframe
             title="大分県中津市の地図"
             src="https://maps.google.com/maps?q=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%B8%AD%E6%B4%A5%E5%B8%82&z=13&output=embed"
-            width="100%" height="240" style="border:0; display:block; filter:invert(.92) hue-rotate(190deg) saturate(.75) brightness(.95) contrast(.92);"
+            width="100%" height="240" style="border:0; display:block; filter:saturate(.75) brightness(.97) sepia(.10);"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <p class="font-maru font-light text-ink-soft/70 text-[11px] tracking-wide mt-3 text-center">＊ エリアの目安です。正確な所在地はご予約時にお知らせします。</p>

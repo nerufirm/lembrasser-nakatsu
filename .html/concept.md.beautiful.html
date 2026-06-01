@@ -1,0 +1,1048 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lembrasser_nakatsu デザインコンセプト</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', 'Noto Serif JP', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(10,10,40,0.9), rgba(26,30,60,0.9)), 
+                        radial-gradient(ellipse at 20% 50%, rgba(78,196,212,0.15) 0%, transparent 50%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(156,39,176,0.3), transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(76,175,80,0.2), transparent 70%);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -100px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: slideIn 1s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4ec4d4, #b0baf0, #ff6b9d, #f0a030);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #b0baff;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: #4ec4d4;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4ec4d4, transparent);
+            border-radius: 2px;
+        }
+        
+        /* 共通構造セクション */
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .structure-card {
+            background: linear-gradient(135deg, rgba(78,196,212,0.1), rgba(176,186,240,0.1));
+            border: 1px solid rgba(78,196,212,0.3);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .structure-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(78,196,212,0.3), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .structure-card:hover {
+            border-color: rgba(78,196,212,0.6);
+            background: linear-gradient(135deg, rgba(78,196,212,0.15), rgba(176,186,240,0.15));
+            transform: translateY(-5px);
+        }
+        
+        .structure-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #4ec4d4;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .structure-card p {
+            font-size: 0.95rem;
+            color: #ccc;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* テーマグリッド */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .theme-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(78,196,212,0.2);
+        }
+        
+        .theme-color-block {
+            height: 120px;
+            background-size: 200% 200%;
+            position: relative;
+            animation: gradientShift 6s ease infinite;
+            display: flex;
+            align-items: flex-end;
+            padding: 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        
+        .theme-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.4);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .theme-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .theme-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .theme-concept {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .theme-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: #999;
+        }
+        
+        .theme-spec-item {
+            background: rgba(255,255,255,0.03);
+            padding: 8px;
+            border-radius: 6px;
+            border-left: 2px solid rgba(78,196,212,0.5);
+        }
+        
+        .theme-spec-label {
+            color: #4ec4d4;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .theme-type {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 10px;
+            background: rgba(78,196,212,0.2);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #4ec4d4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* 自然テーマ用グラデーション */
+        .natural-01 { background: linear-gradient(135deg, #071520, #4EC4D4); }
+        .natural-02 { background: linear-gradient(135deg, #8B6040, #F4F0E8); }
+        .natural-03 { background: linear-gradient(135deg, #180C06, #E87030); }
+        .natural-04 { background: linear-gradient(135deg, #050C05, #5CB85C); }
+        .natural-05 { background: linear-gradient(135deg, #07091A, #B0BAF0); }
+        .natural-06 { background: linear-gradient(135deg, #180806, #E84818); }
+        .natural-07 { background: linear-gradient(135deg, #8B6040, #F8F6F2); }
+        .natural-08 { background: linear-gradient(135deg, #0A110C, #90C898); }
+        
+        /* アートテーマ用グラデーション */
+        .art-09 { background: linear-gradient(135deg, #FF6B9D, #FFF0F5); }
+        .art-10 { background: linear-gradient(135deg, #0A0E08, #88C050); }
+        .art-11 { background: linear-gradient(135deg, #7B5EA7, #F5F0FF); }
+        .art-12 { background: linear-gradient(135deg, #4A7A3C, #F8F3E8); }
+        .art-13 { background: linear-gradient(135deg, #080E06, #C9A96E); }
+        .art-14 { background: linear-gradient(135deg, #0C1428, #E84820); }
+        .art-15 { background: linear-gradient(135deg, #8B4513, #F5E8D0); }
+        .art-16 { background: linear-gradient(135deg, #C87050, #FAF6F0); }
+        
+        /* テーマ一覧テーブル */
+        .table-container {
+            background: linear-gradient(135deg, rgba(78,196,212,0.05), rgba(176,186,240,0.05));
+            border: 1px solid rgba(78,196,212,0.2);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: linear-gradient(90deg, rgba(78,196,212,0.2), rgba(176,186,240,0.2));
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid rgba(78,196,212,0.4);
+            font-weight: 700;
+            color: #4ec4d4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(78,196,212,0.1);
+            color: #ccc;
+        }
+        
+        tr:hover {
+            background: rgba(78,196,212,0.05);
+        }
+        
+        .color-sample {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        /* アニメーション */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Section backgrounds */
+        .structure-section {
+            background: linear-gradient(180deg, rgba(10,10,40,0.5), rgba(26,30,60,0.3));
+        }
+        
+        .natural-section {
+            background: linear-gradient(180deg, rgba(10,40,20,0.3), rgba(26,30,60,0.4));
+        }
+        
+        .art-section {
+            background: linear-gradient(180deg, rgba(40,10,30,0.3), rgba(26,30,60,0.4));
+        }
+        
+        .table-section {
+            background: linear-gradient(180deg, rgba(10,20,40,0.4), rgba(26,30,60,0.3));
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(78,196,212,0.2);
+            margin-top: 60px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 50px 20px;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .structure-grid,
+            .themes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            table {
+                font-size: 0.75rem;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>lembrasser_nakatsu</h1>
+            <p>アーユルヴェーダサロンの全16テーマデザイン実装概要</p>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- 共通構造セクション -->
+    <section class="structure-section">
+        <h2>共通構造</h2>
+        <div class="structure-grid">
+            <div class="structure-card fade-in">
+                <h3>Hero</h3>
+                <p>フルスクリーン背景画像＋テキスト＋CTAボタン</p>
+            </div>
+            <div class="structure-card fade-in" style="animation-delay: 0.1s;">
+                <h3>Concept</h3>
+                <p>アーチ型写真＋コンセプト文</p>
+            </div>
+            <div class="structure-card fade-in" style="animation-delay: 0.2s;">
+                <h3>Menu & Price</h3>
+                <p>メニュー一覧・料金</p>
+            </div>
+            <div class="structure-card fade-in" style="animation-delay: 0.3s;">
+                <h3>Therapist</h3>
+                <p>セラピスト紹介</p>
+            </div>
+            <div class="structure-card fade-in" style="animation-delay: 0.4s;">
+                <h3>Voice</h3>
+                <p>お客様の声 10件</p>
+            </div>
+            <div class="structure-card fade-in" style="animation-delay: 0.5s;">
+                <h3>Access & Footer</h3>
+                <p>アクセス・地図・予約の流れ</p>
+            </div>
+        </div>
+        <div class="structure-card fade-in" style="animation-delay: 0.6s;">
+            <h3>技術スタック</h3>
+            <p>Tailwind CSS（CDN）、Google Fonts、Vanilla JS（IntersectionObserver によるスクロールアニメーション）</p>
+        </div>
+    </section>
+    
+    <!-- 自然テーマセクション -->
+    <section class="natural-section">
+        <h2>自然テーマ（01〜08）</h2>
+        <div class="themes-grid">
+            <div class="theme-card fade-in">
+                <div class="theme-color-block natural-01">
+                    <div class="theme-number">01</div>
+                    水の森
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">水の森</div>
+                    <div class="theme-concept">水の音・自然・宇宙とのつながり</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #071520
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #4EC4D4
+                        </div>
+                    </div>
+                    <div class="theme-type">自然</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.05s;">
+                <div class="theme-color-block natural-02">
+                    <div class="theme-number">02</div>
+                    和の静寂
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">和の静寂</div>
+                    <div class="theme-concept">和紙・墨・竹の侘び寂び</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #F4F0E8
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #8B4513
+                        </div>
+                    </div>
+                    <div class="theme-type">自然・ライト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.1s;">
+                <div class="theme-color-block natural-03">
+                    <div class="theme-number">03</div>
+                    黄金の夕暮れ
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">黄金の夕暮れ</div>
+                    <div class="theme-concept">夕暮れの黄金光の温かさ</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #180C06
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #E87030
+                        </div>
+                    </div>
+                    <div class="theme-type">自然</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.15s;">
+                <div class="theme-color-block natural-04">
+                    <div class="theme-number">04</div>
+                    森の息吹
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">森の息吹</div>
+                    <div class="theme-concept">深い森の静けさ</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #050C05
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #5CB85C
+                        </div>
+                    </div>
+                    <div class="theme-type">自然</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.2s;">
+                <div class="theme-color-block natural-05">
+                    <div class="theme-number">05</div>
+                    月の静寂
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">月の静寂</div>
+                    <div class="theme-concept">深夜の月光の神秘性</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #07091A
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #B0BAF0
+                        </div>
+                    </div>
+                    <div class="theme-type">自然</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.25s;">
+                <div class="theme-color-block natural-06">
+                    <div class="theme-number">06</div>
+                    アーユルヴェーダの彩
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">アーユルヴェーダの彩</div>
+                    <div class="theme-concept">インド古来の色彩</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #180806
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #E84818
+                        </div>
+                    </div>
+                    <div class="theme-type">自然</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.3s;">
+                <div class="theme-color-block natural-07">
+                    <div class="theme-number">07</div>
+                    白磁の光
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">白磁の光</div>
+                    <div class="theme-concept">白磁器のような清潔感</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #F8F6F2
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #8B6040
+                        </div>
+                    </div>
+                    <div class="theme-type">自然・ライト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.35s;">
+                <div class="theme-color-block natural-08">
+                    <div class="theme-number">08</div>
+                    暁の霧
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">暁の霧</div>
+                    <div class="theme-concept">夜明けの新しい始まり</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #0A110C
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #90C898
+                        </div>
+                    </div>
+                    <div class="theme-type">自然</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- アーティスティックテーマセクション -->
+    <section class="art-section">
+        <h2>アーティスティックテーマ（09〜16）</h2>
+        <div class="themes-grid">
+            <div class="theme-card fade-in">
+                <div class="theme-color-block art-09">
+                    <div class="theme-number">09</div>
+                    桜アニメ
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">桜アニメ</div>
+                    <div class="theme-concept">アニメ調パステル春</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #FFF0F5
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #FF6B9D
+                        </div>
+                    </div>
+                    <div class="theme-type">アニメ・ライト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.05s;">
+                <div class="theme-color-block art-10">
+                    <div class="theme-number">10</div>
+                    ジブリの森
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">ジブリの森</div>
+                    <div class="theme-concept">温かい牧歌的世界</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #0A0E08
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #88C050
+                        </div>
+                    </div>
+                    <div class="theme-type">アニメ</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.1s;">
+                <div class="theme-color-block art-11">
+                    <div class="theme-number">11</div>
+                    水彩夢想
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">水彩夢想</div>
+                    <div class="theme-concept">水彩絵具の夢</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #F5F0FF
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #7B5EA7
+                        </div>
+                    </div>
+                    <div class="theme-type">イラスト・ライト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.15s;">
+                <div class="theme-color-block art-12">
+                    <div class="theme-number">12</div>
+                    ボタニカル図鑑
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">ボタニカル図鑑</div>
+                    <div class="theme-concept">ヴィクトリア朝の科学</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #F8F3E8
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #4A7A3C
+                        </div>
+                    </div>
+                    <div class="theme-type">イラスト・ライト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.2s;">
+                <div class="theme-color-block art-13">
+                    <div class="theme-number">13</div>
+                    アールヌーボー
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">アールヌーボー</div>
+                    <div class="theme-concept">1900年代の有機的曲線</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #080E06
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #C9A96E
+                        </div>
+                    </div>
+                    <div class="theme-type">イラスト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.25s;">
+                <div class="theme-color-block art-14">
+                    <div class="theme-number">14</div>
+                    ヴィンテージポスター
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">ヴィンテージポスター</div>
+                    <div class="theme-concept">1930〜40年代レトロ</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #0C1428
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #E84820
+                        </div>
+                    </div>
+                    <div class="theme-type">イラスト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.3s;">
+                <div class="theme-color-block art-15">
+                    <div class="theme-number">15</div>
+                    スケッチ帳
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">スケッチ帳</div>
+                    <div class="theme-concept">クラフト紙の手書き</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #F5E8D0
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #8B4513
+                        </div>
+                    </div>
+                    <div class="theme-type">手書き・ライト</div>
+                </div>
+            </div>
+            
+            <div class="theme-card fade-in" style="animation-delay: 0.35s;">
+                <div class="theme-color-block art-16">
+                    <div class="theme-number">16</div>
+                    水彩手紙
+                </div>
+                <div class="theme-content">
+                    <div class="theme-name">水彩手紙</div>
+                    <div class="theme-concept">温かい手紙のにじみ</div>
+                    <div class="theme-specs">
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">ベース</span>
+                            #FAF6F0
+                        </div>
+                        <div class="theme-spec-item">
+                            <span class="theme-spec-label">アクセント</span>
+                            #C87050
+                        </div>
+                    </div>
+                    <div class="theme-type">手書き・ライト</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- テーマ一覧表セクション -->
+    <section class="table-section">
+        <h2>テーマ一覧表</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>テーマ名</th>
+                        <th>明暗</th>
+                        <th>カテゴリ</th>
+                        <th>メインカラー</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td>水の森</td>
+                        <td>ダーク</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #4EC4D4;"></span>ティール×ブルー</td>
+                    </tr>
+                    <tr>
+                        <td>02</td>
+                        <td>和の静寂</td>
+                        <td>ライト</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #F4F0E8;"></span>和紙×墨</td>
+                    </tr>
+                    <tr>
+                        <td>03</td>
+                        <td>黄金の夕暮れ</td>
+                        <td>ダーク</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #E87030;"></span>テラコッタ×ゴールド</td>
+                    </tr>
+                    <tr>
+                        <td>04</td>
+                        <td>森の息吹</td>
+                        <td>ダーク</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #5CB85C;"></span>モスグリーン×アース</td>
+                    </tr>
+                    <tr>
+                        <td>05</td>
+                        <td>月の静寂</td>
+                        <td>ダーク</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #B0BAF0;"></span>ミッドナイト×シルバー</td>
+                    </tr>
+                    <tr>
+                        <td>06</td>
+                        <td>アーユルヴェーダの彩</td>
+                        <td>ダーク</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #E84818;"></span>深紅×サフラン</td>
+                    </tr>
+                    <tr>
+                        <td>07</td>
+                        <td>白磁の光</td>
+                        <td>ライト</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #F8F6F2;"></span>磁器白×ウォームグレー</td>
+                    </tr>
+                    <tr>
+                        <td>08</td>
+                        <td>暁の霧</td>
+                        <td>ダーク</td>
+                        <td>自然</td>
+                        <td><span class="color-sample" style="background: #90C898;"></span>ディープセージ×グリーン</td>
+                    </tr>
+                    <tr>
+                        <td>09</td>
+                        <td>桜アニメ</td>
+                        <td>ライト</td>
+                        <td>アニメ</td>
+                        <td><span class="color-sample" style="background: #FF6B9D;"></span>パステルピンク×桜</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>ジブリの森</td>
+                        <td>ダーク</td>
+                        <td>アニメ</td>
+                        <td><span class="color-sample" style="background: #88C050;"></span>温かい森×牧歌</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>水彩夢想</td>
+                        <td>ライト</td>
+                        <td>イラスト</td>
+                        <td><span class="color-sample" style="background: #7B5EA7;"></span>ラベンダー×水彩</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>ボタニカル図鑑</td>
+                        <td>ライト</td>
+                        <td>イラスト</td>
+                        <td><span class="color-sample" style="background: #4A7A3C;"></span>クリーム×植物図</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>アールヌーボー</td>
+                        <td>ダーク</td>
+                        <td>イラスト</td>
+                        <td><span class="color-sample" style="background: #C9A96E;"></span>深緑×ゴールド</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>ヴィンテージポスター</td>
+                        <td>ダーク</td>
+                        <td>イラスト</td>
+                        <td><span class="color-sample" style="background: #E84820;"></span>ネイビー×レトロレッド</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>スケッチ帳</td>
+                        <td>ライト</td>
+                        <td>手書き</td>
+                        <td><span class="color-sample" style="background: #F5E8D0;"></span>クラフト紙×鉛筆</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>水彩手紙</td>
+                        <td>ライト</td>
+                        <td>手書き</td>
+                        <td><span class="color-sample" style="background: #FAF6F0;"></span>和紙×水彩にじみ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>lembrasser_nakatsu Design Concept — 全16テーマデザイン実装概要 2024</p>
+        <p>大分・中津のアーユルヴェーダサロン</p>
+    </footer>
+    
+    <script>
+        // IntersectionObserver for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('fade-in-done')) {
+                    entry.target.classList.add('fade-in-done');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.theme-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Smooth scroll for scroll indicator
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.structure-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
+```

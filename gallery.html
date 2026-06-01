@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembrasser Nakatsu - デザインギャラリー</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .design-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .design-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .card-preview {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .card-preview iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            transform: scale(0.5);
+            transform-origin: 0 0;
+            pointer-events: none;
+        }
+
+        .card-footer {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .view-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .view-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Lembrasser Nakatsu デザインギャラリー</h1>
+
+        <div class="gallery">
+            <div class="design-card" onclick="window.open('index.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 01</h2>
+                    <p>index.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="index.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="index.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_02.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 02</h2>
+                    <p>lembrasser_02.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_02.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_02.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_03.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 03</h2>
+                    <p>lembrasser_03.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_03.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_03.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_04.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 04</h2>
+                    <p>lembrasser_04.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_04.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_04.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_05.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 05</h2>
+                    <p>lembrasser_05.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_05.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_05.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_06.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 06</h2>
+                    <p>lembrasser_06.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_06.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_06.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_07.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 07</h2>
+                    <p>lembrasser_07.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_07.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_07.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_08.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 08</h2>
+                    <p>lembrasser_08.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_08.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_08.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_09.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 09</h2>
+                    <p>lembrasser_09.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_09.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_09.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+
+            <div class="design-card" onclick="window.open('lembrasser_10.html', '_blank')">
+                <div class="card-header">
+                    <h2>デザイン 10</h2>
+                    <p>lembrasser_10.html</p>
+                </div>
+                <div class="card-preview">
+                    <iframe src="lembrasser_10.html"></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href="lembrasser_10.html" target="_blank" class="view-button">詳しく見る →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

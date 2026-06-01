@@ -1,0 +1,168 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "lembrasser" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+    - paragraph [ref=e4]: NAKATSU ・ AYURVEDA
+    - paragraph [ref=e5]: デザインギャラリー — 全20テーマ
+  - main [ref=e6]:
+    - generic [ref=e7]:
+      - paragraph [ref=e8]: Natural & Cosmic
+      - heading "自然・宇宙テーマ" [level=2] [ref=e9]
+      - paragraph [ref=e10]: 深宇宙から大地の緑まで、自然の深みを表現する10テーマ
+    - generic [ref=e11]:
+      - link "推奨 深宇宙 ダーク ・ パープル×ゴールド" [ref=e12] [cursor=pointer]:
+        - /url: index.html
+        - generic [ref=e13]:
+          - img [ref=e15]
+          - generic [ref=e18]: 推奨
+        - generic [ref=e19]:
+          - paragraph [ref=e20]: 深宇宙
+          - paragraph [ref=e21]: ダーク ・ パープル×ゴールド
+      - link "水の森 ダーク ・ ティール×ブルー" [ref=e22] [cursor=pointer]:
+        - /url: lembrasser_02.html
+        - img [ref=e25]
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 水の森
+          - paragraph [ref=e31]: ダーク ・ ティール×ブルー
+      - link "ライト 和の静寂 ライト ・ 和紙×墨" [ref=e32] [cursor=pointer]:
+        - /url: lembrasser_03.html
+        - generic [ref=e33]:
+          - img [ref=e35]
+          - generic [ref=e38]: ライト
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: 和の静寂
+          - paragraph [ref=e41]: ライト ・ 和紙×墨
+      - link "黄金の夕暮れ ダーク ・ テラコッタ×ゴールド" [ref=e42] [cursor=pointer]:
+        - /url: lembrasser_04.html
+        - img [ref=e45]
+        - generic [ref=e47]:
+          - paragraph [ref=e48]: 黄金の夕暮れ
+          - paragraph [ref=e49]: ダーク ・ テラコッタ×ゴールド
+      - link "森の息吹 ダーク ・ モスグリーン×アース" [ref=e50] [cursor=pointer]:
+        - /url: lembrasser_05.html
+        - img [ref=e53]
+        - generic [ref=e56]:
+          - paragraph [ref=e57]: 森の息吹
+          - paragraph [ref=e58]: ダーク ・ モスグリーン×アース
+      - link "月の静寂 ダーク ・ ミッドナイト×シルバー" [ref=e59] [cursor=pointer]:
+        - /url: lembrasser_06.html
+        - img [ref=e62]
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: 月の静寂
+          - paragraph [ref=e66]: ダーク ・ ミッドナイト×シルバー
+      - link "アーユルヴェーダの彩 ダーク ・ 深紅×サフラン" [ref=e67] [cursor=pointer]:
+        - /url: lembrasser_07.html
+        - img [ref=e70]
+        - generic [ref=e72]:
+          - paragraph [ref=e73]: アーユルヴェーダの彩
+          - paragraph [ref=e74]: ダーク ・ 深紅×サフラン
+      - link "ライト 白磁の光 ライト ・ 磁器白×ウォームグレー" [ref=e75] [cursor=pointer]:
+        - /url: lembrasser_08.html
+        - generic [ref=e76]:
+          - img [ref=e78]
+          - generic [ref=e82]: ライト
+        - generic [ref=e83]:
+          - paragraph [ref=e84]: 白磁の光
+          - paragraph [ref=e85]: ライト ・ 磁器白×ウォームグレー
+      - link "夜の植物園 ダーク ・ バイオレット×セージ" [ref=e86] [cursor=pointer]:
+        - /url: lembrasser_09.html
+        - img [ref=e89]
+        - generic [ref=e95]:
+          - paragraph [ref=e96]: 夜の植物園
+          - paragraph [ref=e97]: ダーク ・ バイオレット×セージ
+      - link "暁の霧 ダーク ・ ディープセージ×グリーン" [ref=e98] [cursor=pointer]:
+        - /url: lembrasser_10.html
+        - img [ref=e101]
+        - generic [ref=e103]:
+          - paragraph [ref=e104]: 暁の霧
+          - paragraph [ref=e105]: ダーク ・ ディープセージ×グリーン
+    - generic [ref=e106]:
+      - paragraph [ref=e107]: Artistic
+      - heading "アニメ・イラスト・手書きテーマ" [level=2] [ref=e108]
+      - paragraph [ref=e109]: アニメ調・ヴィンテージイラスト・手書き水彩など、表現豊かな10テーマ
+    - generic [ref=e110]:
+      - link "🌸 アニメ 桜アニメ ライト ・ パステルピンク×桜" [ref=e111] [cursor=pointer]:
+        - /url: lembrasser_11.html
+        - generic [ref=e112]:
+          - generic [ref=e113]: 🌸
+          - generic [ref=e115]: アニメ
+        - generic [ref=e116]:
+          - paragraph [ref=e117]: 桜アニメ
+          - paragraph [ref=e118]: ライト ・ パステルピンク×桜
+      - link "◆ アニメ サイバー夜桜 ダーク ・ ネオンピンク×パープル" [ref=e119] [cursor=pointer]:
+        - /url: lembrasser_12.html
+        - generic [ref=e120]:
+          - generic [ref=e122]: ◆
+          - generic [ref=e124]: アニメ
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: サイバー夜桜
+          - paragraph [ref=e127]: ダーク ・ ネオンピンク×パープル
+      - link "アニメ ジブリの森 ダーク ・ 温かい森×牧歌" [ref=e128] [cursor=pointer]:
+        - /url: lembrasser_13.html
+        - generic [ref=e129]:
+          - img [ref=e131]
+          - generic [ref=e135]: アニメ
+        - generic [ref=e136]:
+          - paragraph [ref=e137]: ジブリの森
+          - paragraph [ref=e138]: ダーク ・ 温かい森×牧歌
+      - link "イラスト 水彩夢想 ライト ・ ラベンダー×水彩" [ref=e139] [cursor=pointer]:
+        - /url: lembrasser_14.html
+        - generic [ref=e140]:
+          - img [ref=e142]
+          - generic [ref=e145]: イラスト
+        - generic [ref=e146]:
+          - paragraph [ref=e147]: 水彩夢想
+          - paragraph [ref=e148]: ライト ・ ラベンダー×水彩
+      - link "イラスト ボタニカル図鑑 ライト ・ クリーム×植物図" [ref=e149] [cursor=pointer]:
+        - /url: lembrasser_15.html
+        - generic [ref=e150]:
+          - img [ref=e152]
+          - generic [ref=e155]: イラスト
+        - generic [ref=e156]:
+          - paragraph [ref=e157]: ボタニカル図鑑
+          - paragraph [ref=e158]: ライト ・ クリーム×植物図
+      - link "イラスト アールヌーボー ダーク ・ 深緑×ゴールド" [ref=e159] [cursor=pointer]:
+        - /url: lembrasser_16.html
+        - generic [ref=e160]:
+          - img [ref=e162]
+          - generic [ref=e165]: イラスト
+        - generic [ref=e166]:
+          - paragraph [ref=e167]: アールヌーボー
+          - paragraph [ref=e168]: ダーク ・ 深緑×ゴールド
+      - link "イラスト ヴィンテージポスター ダーク ・ ネイビー×レトロレッド" [ref=e169] [cursor=pointer]:
+        - /url: lembrasser_17.html
+        - generic [ref=e170]:
+          - img [ref=e172]
+          - generic [ref=e176]: イラスト
+        - generic [ref=e177]:
+          - paragraph [ref=e178]: ヴィンテージポスター
+          - paragraph [ref=e179]: ダーク ・ ネイビー×レトロレッド
+      - link "イラスト フラットモダン ダーク ・ ティール×コーラル" [ref=e180] [cursor=pointer]:
+        - /url: lembrasser_18.html
+        - generic [ref=e181]:
+          - img [ref=e183]
+          - generic [ref=e186]: イラスト
+        - generic [ref=e187]:
+          - paragraph [ref=e188]: フラットモダン
+          - paragraph [ref=e189]: ダーク ・ ティール×コーラル
+      - link "手書き スケッチ帳 ライト ・ クラフト紙×鉛筆" [ref=e190] [cursor=pointer]:
+        - /url: lembrasser_19.html
+        - generic [ref=e191]:
+          - img [ref=e193]
+          - generic [ref=e195]: 手書き
+        - generic [ref=e196]:
+          - paragraph [ref=e197]: スケッチ帳
+          - paragraph [ref=e198]: ライト ・ クラフト紙×鉛筆
+      - link "手書き 水彩手紙 ライト ・ 和紙×水彩にじみ" [ref=e199] [cursor=pointer]:
+        - /url: lembrasser_20.html
+        - generic [ref=e200]:
+          - img [ref=e202]
+          - generic [ref=e206]: 手書き
+        - generic [ref=e207]:
+          - paragraph [ref=e208]: 水彩手紙
+          - paragraph [ref=e209]: ライト ・ 和紙×水彩にじみ
+    - generic [ref=e210]:
+      - paragraph [ref=e211]: lembrasser
+      - paragraph [ref=e212]: NAKATSU ・ AYURVEDA
+      - link "← メインサイトへ" [ref=e213] [cursor=pointer]:
+        - /url: index.html

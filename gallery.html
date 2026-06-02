@@ -126,6 +126,66 @@
     border: 1px solid rgba(227,190,131,.25);
   }
   .card-tag.light { background: rgba(173,166,190,.10); color: #ADA6BE; border-color: rgba(173,166,190,.20); }
+
+  /* SVG装飾グリッド */
+  .svg-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 900px) { .svg-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .svg-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .svg-card {
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+    padding: 22px 12px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .svg-card:hover, .svg-card.selected {
+    background: rgba(227,190,131,.07);
+    border-color: rgba(227,190,131,.35);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,.4);
+  }
+  .svg-card.selected { border-color: rgba(227,190,131,.7); background: rgba(227,190,131,.12); }
+  .svg-card svg { width: 88px; height: 88px; color: #E3BE83; opacity: .7; display: block; margin: 0 auto; }
+  .svg-card:hover svg, .svg-card.selected svg { opacity: 1; }
+  .svg-name { font-family: 'Shippori Mincho', serif; font-size: 11px; color: #ADA6BE; margin-top: 10px; letter-spacing: .04em; }
+  .svg-card.selected .svg-name { color: #E3BE83; }
+
+  /* アニメーション */
+  @keyframes svgSpin    { to { transform: rotate(360deg); } }
+  @keyframes svgSpinRev { to { transform: rotate(-360deg); } }
+  @keyframes svgRipple  { 0%,100%{opacity:.15;transform:scale(1.1)} 50%{opacity:.85;transform:scale(1)} }
+  @keyframes svgMoon    { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(-1)} }
+  @keyframes svgSway    { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
+  @keyframes svgTwinkle { 0%,100%{opacity:.25} 50%{opacity:1} }
+  @keyframes svgDraw    { from{stroke-dashoffset:650} to{stroke-dashoffset:0} }
+  @keyframes svgFloat   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+  @keyframes svgPulse   { 0%,100%{transform:scale(1) rotate(45deg);opacity:.6} 50%{transform:scale(1.2) rotate(45deg);opacity:1} }
+
+  .anim-spin-slow { animation: svgSpin    18s linear infinite; }
+  .anim-spin-rev  { animation: svgSpinRev 14s linear infinite; }
+  .anim-ripple    { animation: svgRipple  3s  ease-in-out infinite; transform-origin: 100px 100px; }
+  .anim-ripple.r2 { animation-delay: .5s; }
+  .anim-ripple.r3 { animation-delay: 1s; }
+  .anim-ripple.r4 { animation-delay: 1.5s; }
+  .anim-moon-arc  { animation: svgMoon   7s  ease-in-out infinite; }
+  .anim-sway      { animation: svgSway   5s  ease-in-out infinite; }
+  .anim-twinkle   { animation: svgTwinkle 2s ease-in-out infinite; }
+  .anim-twinkle.t2{ animation-delay: .45s; }
+  .anim-twinkle.t3{ animation-delay: .9s;  }
+  .anim-twinkle.t4{ animation-delay: 1.35s;}
+  .anim-twinkle.t5{ animation-delay: 1.8s; }
+  .anim-draw      { stroke-dasharray: 650; animation: svgDraw 4s ease-in-out infinite alternate; }
+  .anim-float     { animation: svgFloat 4s ease-in-out infinite; }
+  .anim-pulse     { animation: svgPulse 3s ease-in-out infinite; }
+  .anim-pulse.p2  { animation-delay: .6s; animation-direction: reverse; }
 </style>
 </head>
 <body>
@@ -330,7 +390,141 @@
 
   </div>
 
-  <footer style="text-align:center; padding-top:24px; border-top:1px solid rgba(255,255,255,.07)">
+  <!-- SVG装飾 -->
+  <div style="border-top:1px solid rgba(255,255,255,.07); padding-top:52px; margin-top:8px;">
+    <p class="section-label">Decoration</p>
+    <p class="section-title">SVG 装飾 — 10案（クリックで全テーマに適用）</p>
+    <div class="svg-grid" id="svg-grid">
+
+      <div class="svg-card" data-svg="lotus">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+          <g class="anim-spin-slow" style="transform-origin:100px 115px">
+            <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(-40 100 115)"/>
+            <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(-20 100 115)"/>
+            <ellipse cx="100" cy="115" rx="14" ry="30"/>
+            <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(20 100 115)"/>
+            <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(40 100 115)"/>
+            <circle cx="100" cy="115" r="10"/>
+          </g>
+        </svg>
+        <div class="svg-name">① 蓮（ロータス）</div>
+      </div>
+
+      <div class="svg-card" data-svg="mandala">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.9">
+          <g class="anim-spin-slow" style="transform-origin:100px 100px">
+            <circle cx="100" cy="100" r="75"/>
+            <circle cx="100" cy="25" r="7"/><circle cx="100" cy="175" r="7"/>
+            <circle cx="25" cy="100" r="7"/><circle cx="175" cy="100" r="7"/>
+            <circle cx="47" cy="47" r="7"/><circle cx="153" cy="47" r="7"/>
+            <circle cx="47" cy="153" r="7"/><circle cx="153" cy="153" r="7"/>
+          </g>
+          <g class="anim-spin-rev" style="transform-origin:100px 100px">
+            <circle cx="100" cy="100" r="55"/>
+            <circle cx="100" cy="100" r="35"/>
+            <circle cx="100" cy="100" r="12"/>
+          </g>
+        </svg>
+        <div class="svg-name">② 曼荼羅リング</div>
+      </div>
+
+      <div class="svg-card" data-svg="ripple">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
+          <ellipse class="anim-ripple r1" cx="100" cy="100" rx="18" ry="7"/>
+          <ellipse class="anim-ripple r2" cx="100" cy="100" rx="42" ry="17"/>
+          <ellipse class="anim-ripple r3" cx="100" cy="100" rx="66" ry="27"/>
+          <ellipse class="anim-ripple r4" cx="100" cy="100" rx="90" ry="37"/>
+        </svg>
+        <div class="svg-name">③ 波紋（水面）</div>
+      </div>
+
+      <div class="svg-card" data-svg="moon">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
+          <circle cx="100" cy="100" r="65"/>
+          <g class="anim-moon-arc" style="transform-origin:100px 100px">
+            <path d="M100,35 A65,65 0 0,1 100,165"/>
+            <path d="M100,52 A48,48 0 0,1 100,148"/>
+          </g>
+          <circle cx="100" cy="100" r="10" fill="currentColor" opacity=".25"/>
+        </svg>
+        <div class="svg-name">④ 月の満ち欠け</div>
+      </div>
+
+      <div class="svg-card" data-svg="leaf">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.1">
+          <g class="anim-sway" style="transform-origin:100px 175px">
+            <path d="M100,175 Q58,105 100,28 Q142,105 100,175Z"/>
+            <line x1="100" y1="28" x2="100" y2="175"/>
+            <line x1="100" y1="72" x2="74" y2="98"/><line x1="100" y1="72" x2="126" y2="98"/>
+            <line x1="100" y1="105" x2="70" y2="122"/><line x1="100" y1="105" x2="130" y2="122"/>
+            <line x1="100" y1="138" x2="80" y2="152"/><line x1="100" y1="138" x2="120" y2="152"/>
+          </g>
+        </svg>
+        <div class="svg-name">⑤ 葉脈</div>
+      </div>
+
+      <div class="svg-card" data-svg="constellation">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.8">
+          <line x1="58" y1="48" x2="100" y2="78"/><line x1="100" y1="78" x2="152" y2="58"/>
+          <line x1="152" y1="58" x2="142" y2="118"/><line x1="142" y1="118" x2="78" y2="142"/>
+          <line x1="78" y1="142" x2="58" y2="48"/><line x1="100" y1="78" x2="78" y2="142"/>
+          <circle class="anim-twinkle"    cx="58"  cy="48"  r="3.5" fill="currentColor"/>
+          <circle class="anim-twinkle t2" cx="100" cy="78"  r="5"   fill="currentColor"/>
+          <circle class="anim-twinkle t3" cx="152" cy="58"  r="3.5" fill="currentColor"/>
+          <circle class="anim-twinkle t4" cx="142" cy="118" r="4"   fill="currentColor"/>
+          <circle class="anim-twinkle t5" cx="78"  cy="142" r="5"   fill="currentColor"/>
+        </svg>
+        <div class="svg-name">⑥ 星座</div>
+      </div>
+
+      <div class="svg-card" data-svg="infinity">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path class="anim-draw" d="M55,100 C55,65 90,65 100,100 C110,135 145,135 145,100 C145,65 110,65 100,100 C90,135 55,135 55,100Z"/>
+          <g class="anim-spin-slow" style="transform-origin:100px 100px">
+            <circle cx="130" cy="85" r="4" fill="currentColor" opacity=".6"/>
+          </g>
+        </svg>
+        <div class="svg-name">⑦ インフィニティ ∞</div>
+      </div>
+
+      <div class="svg-card" data-svg="grid">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.8">
+          <rect class="anim-spin-slow" x="55" y="55" width="90" height="90" style="transform-origin:100px 100px"/>
+          <rect class="anim-spin-rev"  x="45" y="45" width="110" height="110" style="transform-origin:100px 100px"/>
+          <rect class="anim-spin-slow" x="35" y="35" width="130" height="130" style="transform-origin:100px 100px;animation-duration:9s"/>
+          <circle cx="100" cy="100" r="6" fill="currentColor" opacity=".25"/>
+        </svg>
+        <div class="svg-name">⑧ 格子（正方形）</div>
+      </div>
+
+      <div class="svg-card" data-svg="trishul">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+          <g class="anim-float">
+            <line x1="100" y1="165" x2="100" y2="45"/>
+            <path d="M100,80 Q78,63 76,45 Q91,55 100,80"/><path d="M100,80 Q122,63 124,45 Q109,55 100,80"/>
+            <path d="M100,92 Q73,80 62,62 Q78,72 100,92"/><path d="M100,92 Q127,80 138,62 Q122,72 100,92"/>
+            <circle cx="100" cy="170" r="6" fill="currentColor" opacity=".3"/>
+          </g>
+        </svg>
+        <div class="svg-name">⑨ トリシュール</div>
+      </div>
+
+      <div class="svg-card" data-svg="cross">
+        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
+          <line x1="100" y1="36" x2="100" y2="164"/>
+          <line x1="36" y1="100" x2="164" y2="100"/>
+          <rect class="anim-pulse"   x="76" y="76" width="48" height="48" transform="rotate(45 100 100)" style="transform-origin:100px 100px"/>
+          <rect class="anim-pulse p2" x="88" y="88" width="24" height="24" transform="rotate(45 100 100)" style="transform-origin:100px 100px"/>
+          <circle cx="100" cy="100" r="7" fill="currentColor" opacity=".2"/>
+        </svg>
+        <div class="svg-name">⑩ 十字＋ひし形</div>
+      </div>
+
+    </div>
+    <p id="svg-apply-msg" style="text-align:center;font-size:12px;color:#7A7090;margin-top:16px;min-height:20px;"></p>
+  </div>
+
+  <footer style="text-align:center; padding-top:32px; border-top:1px solid rgba(255,255,255,.07); margin-top:52px;">
     <p style="font-family:'DM Serif Display',serif; font-size:1.5rem; color:#ECE6D6;">lembrasser</p>
     <p style="font-size:10px; letter-spacing:.22em; color:#E3BE83; margin-top:4px;">NAKATSU ・ AYURVEDA</p>
   </footer>
@@ -376,6 +570,21 @@
 
   scaleThumbs();
   window.addEventListener('resize', scaleThumbs);
+
+  // SVGカードの選択
+  const svgNames = {
+    lotus:'① 蓮（ロータス）', mandala:'② 曼荼羅リング', ripple:'③ 波紋（水面）',
+    moon:'④ 月の満ち欠け', leaf:'⑤ 葉脈', constellation:'⑥ 星座',
+    infinity:'⑦ インフィニティ ∞', grid:'⑧ 格子（正方形）', trishul:'⑨ トリシュール', cross:'⑩ 十字＋ひし形'
+  };
+  document.querySelectorAll('.svg-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.svg-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const name = svgNames[card.dataset.svg] || card.dataset.svg;
+      document.getElementById('svg-apply-msg').textContent = `「${name}」を選択中 — 適用する場合はお知らせください`;
+    });
+  });
 </script>
 </body>
 </html>

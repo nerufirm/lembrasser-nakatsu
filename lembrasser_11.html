@@ -109,6 +109,21 @@
   </div>
 
   <div class="relative z-10">
+  <!-- ギャラリーへ戻るボタン -->
+  <a href="/gallery" style="
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 22px; border-radius:50px;
+    background:rgba(12,11,24,.82); backdrop-filter:blur(12px);
+    border:1px solid rgba(227,190,131,.35); color:#E3BE83;
+    font-family:'Shippori Mincho',serif; font-size:12px; letter-spacing:.14em;
+    text-decoration:none; white-space:nowrap;
+    box-shadow:0 4px 20px rgba(0,0,0,.4);
+    transition:all .3s;
+  " onmouseover="this.style.background='rgba(30,24,50,.92)';this.style.borderColor='rgba(227,190,131,.7)'"
+     onmouseout="this.style.background='rgba(12,11,24,.82)';this.style.borderColor='rgba(227,190,131,.35)'">
+    ← ギャラリーへ戻る
+  </a>
 
   <!-- ============ ヘッダー ============ -->
   <header id="top" class="fixed top-0 inset-x-0 z-50 transition-all duration-500" data-header>

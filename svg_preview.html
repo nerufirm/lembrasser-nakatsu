@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SVG装飾 10案</title>
+<style>
+  body { background:#0C0B18; color:#ECE6D6; font-family:'Hiragino Sans',sans-serif; margin:0; padding:40px 20px; }
+  h1 { text-align:center; font-size:18px; letter-spacing:.2em; color:#E3BE83; margin-bottom:40px; font-weight:300; }
+  .grid { display:grid; grid-template-columns:repeat(5,1fr); gap:24px; max-width:1100px; margin:0 auto; }
+  .card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:24px 16px 16px; text-align:center; cursor:pointer; transition:all .3s; }
+  .card:hover { background:rgba(227,190,131,.08); border-color:rgba(227,190,131,.3); transform:translateY(-4px); }
+  .card svg { width:110px; height:110px; color:#E3BE83; opacity:.7; }
+  .card .num { font-size:11px; letter-spacing:.18em; color:#E3BE83; margin-top:12px; }
+  .card .name { font-size:13px; color:#ADA6BE; margin-top:4px; }
+</style>
+</head>
+<body>
+<h1>SVG 装飾 — 10案</h1>
+<div class="grid">
+
+  <!-- 01 蓮 -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+      <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(-40 100 115)"/>
+      <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(-20 100 115)"/>
+      <ellipse cx="100" cy="115" rx="14" ry="30"/>
+      <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(20 100 115)"/>
+      <ellipse cx="100" cy="115" rx="14" ry="30" transform="rotate(40 100 115)"/>
+      <circle cx="100" cy="115" r="10"/>
+    </svg>
+    <div class="num">① 蓮（ロータス）</div>
+    <div class="name">花びら5枚＋中心円</div>
+  </div>
+
+  <!-- 02 曼荼羅リング -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.9">
+      <circle cx="100" cy="100" r="75"/><circle cx="100" cy="100" r="55"/>
+      <circle cx="100" cy="100" r="35"/><circle cx="100" cy="100" r="12"/>
+      <circle cx="100" cy="25" r="7"/><circle cx="100" cy="175" r="7"/>
+      <circle cx="25" cy="100" r="7"/><circle cx="175" cy="100" r="7"/>
+      <circle cx="47" cy="47" r="7"/><circle cx="153" cy="47" r="7"/>
+      <circle cx="47" cy="153" r="7"/><circle cx="153" cy="153" r="7"/>
+    </svg>
+    <div class="num">② 曼荼羅リング</div>
+    <div class="name">同心円＋8点の円</div>
+  </div>
+
+  <!-- 03 波紋 -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
+      <ellipse cx="100" cy="100" rx="18" ry="7"/>
+      <ellipse cx="100" cy="100" rx="42" ry="17"/>
+      <ellipse cx="100" cy="100" rx="66" ry="27"/>
+      <ellipse cx="100" cy="100" rx="90" ry="37"/>
+    </svg>
+    <div class="num">③ 波紋（水面）</div>
+    <div class="name">楕円4重の同心波</div>
+  </div>
+
+  <!-- 04 月の満ち欠け -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="100" cy="100" r="65"/>
+      <path d="M100,35 A65,65 0 0,1 100,165"/>
+      <path d="M100,52 A48,48 0 0,1 100,148"/>
+      <circle cx="100" cy="100" r="10" fill="currentColor" opacity=".25"/>
+    </svg>
+    <div class="num">④ 月の満ち欠け</div>
+    <div class="name">円＋半月の弧</div>
+  </div>
+
+  <!-- 05 葉脈 -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.1">
+      <path d="M100,175 Q58,105 100,28 Q142,105 100,175Z"/>
+      <line x1="100" y1="28" x2="100" y2="175"/>
+      <line x1="100" y1="72" x2="74" y2="98"/><line x1="100" y1="72" x2="126" y2="98"/>
+      <line x1="100" y1="105" x2="70" y2="122"/><line x1="100" y1="105" x2="130" y2="122"/>
+      <line x1="100" y1="138" x2="80" y2="152"/><line x1="100" y1="138" x2="120" y2="152"/>
+    </svg>
+    <div class="num">⑤ 葉脈</div>
+    <div class="name">一枚の葉＋葉脈</div>
+  </div>
+
+  <!-- 06 星座 -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.8">
+      <line x1="58" y1="48" x2="100" y2="78"/>
+      <line x1="100" y1="78" x2="152" y2="58"/>
+      <line x1="152" y1="58" x2="142" y2="118"/>
+      <line x1="142" y1="118" x2="78" y2="142"/>
+      <line x1="78" y1="142" x2="58" y2="48"/>
+      <line x1="100" y1="78" x2="78" y2="142"/>
+      <circle cx="58" cy="48" r="3.5" fill="currentColor"/>
+      <circle cx="100" cy="78" r="5" fill="currentColor"/>
+      <circle cx="152" cy="58" r="3.5" fill="currentColor"/>
+      <circle cx="142" cy="118" r="4" fill="currentColor"/>
+      <circle cx="78" cy="142" r="5" fill="currentColor"/>
+    </svg>
+    <div class="num">⑥ 星座</div>
+    <div class="name">点と線の星座図</div>
+  </div>
+
+  <!-- 07 インフィニティ -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M55,100 C55,65 90,65 100,100 C110,135 145,135 145,100 C145,65 110,65 100,100 C90,135 55,135 55,100Z"/>
+      <circle cx="100" cy="100" r="5" fill="currentColor" opacity=".4"/>
+    </svg>
+    <div class="num">⑦ インフィニティ</div>
+    <div class="name">∞ の曲線</div>
+  </div>
+
+  <!-- 08 格子 -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.8">
+      <rect x="55" y="55" width="90" height="90"/>
+      <rect x="45" y="45" width="110" height="110" transform="rotate(15 100 100)"/>
+      <rect x="45" y="45" width="110" height="110" transform="rotate(30 100 100)"/>
+      <circle cx="100" cy="100" r="6" fill="currentColor" opacity=".25"/>
+    </svg>
+    <div class="num">⑧ 格子（正方形）</div>
+    <div class="name">ズレた3つの正方形</div>
+  </div>
+
+  <!-- 09 トリシュール -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+      <line x1="100" y1="165" x2="100" y2="45"/>
+      <path d="M100,80 Q78,63 76,45 Q91,55 100,80"/>
+      <path d="M100,80 Q122,63 124,45 Q109,55 100,80"/>
+      <path d="M100,92 Q73,80 62,62 Q78,72 100,92"/>
+      <path d="M100,92 Q127,80 138,62 Q122,72 100,92"/>
+      <circle cx="100" cy="170" r="6" fill="currentColor" opacity=".3"/>
+    </svg>
+    <div class="num">⑨ トリシュール</div>
+    <div class="name">アーユルヴェーダ・三叉</div>
+  </div>
+
+  <!-- 10 十字＋ひし形 -->
+  <div class="card">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
+      <line x1="100" y1="36" x2="100" y2="164"/>
+      <line x1="36" y1="100" x2="164" y2="100"/>
+      <rect x="76" y="76" width="48" height="48" transform="rotate(45 100 100)"/>
+      <rect x="88" y="88" width="24" height="24" transform="rotate(45 100 100)"/>
+      <circle cx="100" cy="100" r="7" fill="currentColor" opacity=".2"/>
+    </svg>
+    <div class="num">⑩ 十字＋ひし形</div>
+    <div class="name">シンプルな幾何学</div>
+  </div>
+
+</div>
+</body>
+</html>

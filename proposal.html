@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>lembrasser｜ホームページ ご提案書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #0C0B18;
+    --bg-soft: #14121F;
+    --card:    rgba(255,255,255,.025);
+    --line:    rgba(255,255,255,.08);
+    --line-2:  rgba(255,255,255,.06);
+    --cream:   #ECE6D6;
+    --gold:    #E3BE83;
+    --muted:   #ADA6BE;
+    --good:    #9FD0A8;
+    --bad:     #D89A8E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 300;
+    line-height: 1.85;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .serif { font-family: 'Shippori Mincho', serif; }
+  .display { font-family: 'DM Serif Display', serif; }
+
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    padding: 96px 24px 72px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(227,190,131,.07), transparent 60%),
+      var(--bg);
+    overflow: hidden;
+  }
+  .hero .brand { font-family: 'DM Serif Display', serif; font-size: 2.4rem; letter-spacing: .06em; }
+  .hero .brand-sub { font-size: 11px; letter-spacing: .28em; color: var(--gold); margin-top: 6px; }
+  .hero .kicker {
+    display: inline-block;
+    margin: 40px 0 18px;
+    font-size: 11px;
+    letter-spacing: .24em;
+    color: var(--gold);
+    padding: 5px 16px;
+    border: 1px solid rgba(227,190,131,.3);
+    border-radius: 30px;
+  }
+  .hero h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    line-height: 1.5;
+    letter-spacing: .03em;
+  }
+  .hero .lead {
+    max-width: 640px;
+    margin: 22px auto 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 2;
+  }
+  .hero .to {
+    margin-top: 28px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    color: var(--cream);
+  }
+
+  /* ===== Layout ===== */
+  main { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; border-bottom: 1px solid var(--line-2); }
+  section:last-of-type { border-bottom: none; }
+
+  .part-label {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: .18em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .part-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+    letter-spacing: .04em;
+    margin-bottom: 10px;
+  }
+  .part-intro { font-size: 14px; color: var(--muted); max-width: 720px; line-height: 2; }
+
+  .section-head { margin-bottom: 40px; }
+
+  /* ===== 強み（信頼はコピーできない）===== */
+  .copy-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin: 36px 0;
+  }
+  @media (min-width: 760px){ .copy-row { grid-template-columns: 1fr auto 1fr; align-items: center; } }
+  .copy-box { border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; background: var(--card); }
+  .copy-box h3 { font-family:'Shippori Mincho',serif; font-size: 14px; letter-spacing:.05em; margin-bottom: 12px; }
+  .copy-box.no h3 { color: var(--gold); }
+  .copy-box ul { list-style: none; font-size: 13px; color: var(--muted); }
+  .copy-box li { padding-left: 18px; position: relative; margin-bottom: 7px; }
+  .copy-box li::before { content:''; position:absolute; left:2px; top:11px; width:5px; height:5px; border-radius:50%; background: var(--muted); }
+  .copy-box.no li::before { background: var(--gold); }
+  .neq { font-family:'DM Serif Display',serif; font-size: 1.8rem; color: var(--muted); text-align:center; }
+
+  .strength-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 14px; }
+  @media (min-width: 760px){ .strength-grid { grid-template-columns: repeat(3,1fr); } }
+  .strength {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 26px 22px;
+    background: linear-gradient(180deg, rgba(227,190,131,.05), transparent);
+  }
+  .strength .ico {
+    width: 42px; height: 42px; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid rgba(227,190,131,.35);
+    color: var(--gold); font-family:'Shippori Mincho',serif; font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .strength h4 { font-family:'Shippori Mincho',serif; font-weight:600; font-size: 15px; margin-bottom: 10px; letter-spacing:.03em; }
+  .strength p { font-size: 13px; color: var(--muted); line-height: 1.95; }
+  .strength p b { color: var(--cream); font-weight: 500; }
+
+  /* ===== Flow ===== */
+  .flow { display:flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin-top: 8px; }
+  .flow .step {
+    flex: 1 1 160px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 16px;
+    background: var(--card);
+    position: relative;
+  }
+  .flow .step .n { font-family:'DM Serif Display',serif; font-size: 12px; color: var(--gold); letter-spacing:.1em; }
+  .flow .step h4 { font-family:'Shippori Mincho',serif; font-size: 15px; margin: 6px 0 4px; }
+  .flow .step p { font-size: 12px; color: var(--muted); }
+
+  /* ===== 8項目カード ===== */
+  .items { display: grid; grid-template-columns: 1fr; gap: 22px; }
+  .item {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    overflow: hidden;
+  }
+  .item-head {
+    display:flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px;
+    padding: 22px 24px 16px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .item-no {
+    font-family:'DM Serif Display',serif;
+    font-size: 13px; color: var(--gold);
+    border:1px solid rgba(227,190,131,.3); border-radius: 30px;
+    padding: 2px 11px; letter-spacing:.08em;
+  }
+  .item-cat { font-size: 11px; letter-spacing:.16em; color: var(--muted); }
+  .item-title { font-family:'Shippori Mincho',serif; font-weight:600; font-size: clamp(1.05rem,2.6vw,1.3rem); width:100%; letter-spacing:.03em; }
+  .stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; }
+  .item-desc { padding: 16px 24px 0; font-size: 13px; color: var(--muted); }
+
+  .meta { display:flex; flex-wrap: wrap; gap: 8px; padding: 14px 24px 4px; }
+  .chip { font-size: 11px; color: var(--muted); border:1px solid var(--line); border-radius: 20px; padding: 3px 12px; }
+  .chip b { color: var(--cream); font-weight: 500; }
+
+  .ynn { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 16px 24px; }
+  @media (min-width: 680px){ .ynn { grid-template-columns: 1fr 1fr; } }
+  .yn { border-radius: 10px; padding: 16px 18px; font-size: 13px; line-height: 1.95; }
+  .yn.do  { background: rgba(159,208,168,.06); border: 1px solid rgba(159,208,168,.22); }
+  .yn.dont{ background: rgba(216,154,142,.06); border: 1px solid rgba(216,154,142,.22); }
+  .yn .h { font-family:'Shippori Mincho',serif; font-size: 13px; font-weight:600; margin-bottom: 7px; letter-spacing:.03em; }
+  .yn.do   .h { color: var(--good); }
+  .yn.dont .h { color: var(--bad); }
+  .yn p { color: var(--muted); }
+
+  .pm { display:grid; grid-template-columns: 1fr; gap: 12px; padding: 4px 24px 18px; }
+  @media (min-width: 680px){ .pm { grid-template-columns: 1fr 1fr; } }
+  .pm .col h5 { font-size: 12px; letter-spacing:.08em; margin-bottom: 8px; }
+  .pm .col.plus h5 { color: var(--good); }
+  .pm .col.minus h5 { color: var(--bad); }
+  .pm ul { list-style:none; }
+  .pm li { font-size: 12.5px; color: var(--muted); padding-left: 16px; position: relative; margin-bottom: 5px; line-height: 1.7; }
+  .pm .plus li::before  { content:'＋'; position:absolute; left:0; color: var(--good); font-size: 11px; }
+  .pm .minus li::before { content:'−'; position:absolute; left:0; color: var(--bad); font-size: 11px; }
+
+  .verdict {
+    margin: 4px 24px 22px;
+    border-radius: 10px;
+    padding: 14px 18px;
+    background: rgba(227,190,131,.07);
+    border: 1px solid rgba(227,190,131,.22);
+    display:flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+    font-size: 13px;
+  }
+  .verdict .lab { font-family:'Shippori Mincho',serif; font-size: 11px; letter-spacing:.14em; color: var(--gold); }
+  .verdict .txt { color: var(--cream); flex: 1 1 240px; }
+  .badge {
+    font-family:'Shippori Mincho',serif; font-weight:600;
+    font-size: 12px; letter-spacing:.06em;
+    padding: 4px 14px; border-radius: 30px;
+    background: var(--gold); color: #1a1410;
+    white-space: nowrap;
+  }
+
+  /* ===== おすすめのまとめ ===== */
+  .reco {
+    border: 1px solid rgba(227,190,131,.3);
+    border-radius: 16px;
+    padding: 30px 28px;
+    background: linear-gradient(180deg, rgba(227,190,131,.06), transparent);
+    margin-top: 8px;
+  }
+  .reco h3 { font-family:'Shippori Mincho',serif; font-weight:600; font-size: 1.15rem; margin-bottom: 18px; }
+  .reco-cols { display:grid; grid-template-columns: 1fr; gap: 22px; }
+  @media (min-width: 720px){ .reco-cols { grid-template-columns: 1.2fr 1fr; } }
+  .reco h4 { font-family:'Shippori Mincho',serif; font-size: 13px; color: var(--gold); margin-bottom: 10px; letter-spacing:.04em; }
+  .reco ul { list-style:none; }
+  .reco li { font-size: 13px; color: var(--muted); padding-left: 20px; position: relative; margin-bottom: 8px; line-height: 1.8; }
+  .reco li::before { content:'●'; position:absolute; left:0; font-size: 8px; top: 6px; color: var(--gold); }
+  .reco li b { color: var(--cream); font-weight: 500; }
+  .reco .closing { margin-top: 22px; font-size: 13px; color: var(--cream); line-height: 2; border-top: 1px solid var(--line-2); padding-top: 18px; }
+
+  /* ===== NG ===== */
+  .ng-grid { display:grid; grid-template-columns:1fr; gap: 14px; margin-top: 10px; }
+  @media (min-width: 680px){ .ng-grid { grid-template-columns: 1fr 1fr; } }
+  .ng { border:1px solid rgba(216,154,142,.22); border-radius: 12px; padding: 20px 22px; background: rgba(216,154,142,.04); }
+  .ng h4 { font-family:'Shippori Mincho',serif; font-size: 14px; color: var(--bad); margin-bottom: 8px; }
+  .ng h4 span { font-style: normal; }
+  .ng p { font-size: 12.5px; color: var(--muted); line-height: 1.9; }
+
+  /* ===== Part2 ギャラリー ===== */
+  .gal-note { font-size: 13px; color: var(--muted); margin: 4px 0 28px; max-width: 720px; line-height: 2; }
+  .gal-cat { font-family:'DM Serif Display',serif; font-style: italic; font-size: 12px; letter-spacing:.16em; color: var(--gold); margin: 28px 0 4px; }
+  .gal-cat-sub { font-family:'Shippori Mincho',serif; font-size: 14px; margin-bottom: 18px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (min-width: 900px)  { .grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+  @media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .card {
+    display:block; text-decoration:none;
+    border-radius: 10px; overflow:hidden;
+    border:1px solid var(--line); background: rgba(255,255,255,.02);
+    transition: transform .35s cubic-bezier(.16,.84,.34,1), box-shadow .35s, border-color .35s;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.55); border-color: rgba(227,190,131,.25); }
+  .thumb { position: relative; width:100%; overflow:hidden; background:#111; }
+  .thumb iframe { display:block; border:none; transform-origin: top left; pointer-events:none; }
+  .thumb::before { content:''; position:absolute; inset:0; background: linear-gradient(90deg, rgba(255,255,255,.03) 25%, rgba(255,255,255,.07) 50%, rgba(255,255,255,.03) 75%); background-size:200% 100%; animation: shimmer 1.4s ease infinite; z-index:1; transition: opacity .4s; }
+  .thumb.loaded::before { opacity:0; pointer-events:none; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  .card-info { padding: 11px 13px; border-top: 1px solid var(--line-2); }
+  .card-name { font-family:'Shippori Mincho',serif; font-size: 13px; margin-bottom: 3px; }
+  .card-desc { font-size: 10px; color: var(--muted); letter-spacing:.05em; }
+  .card-tag { display:inline-block; font-size: 9px; letter-spacing:.12em; padding:1px 8px; border-radius:20px; margin-left:6px; vertical-align: middle; background: rgba(227,190,131,.12); color: var(--gold); border:1px solid rgba(227,190,131,.25); }
+  .card-tag.light { background: rgba(173,166,190,.10); color: var(--muted); border-color: rgba(173,166,190,.20); }
+
+  .gal-cta {
+    margin-top: 40px; text-align:center;
+    border:1px solid rgba(227,190,131,.3); border-radius: 16px;
+    padding: 36px 28px;
+    background: linear-gradient(180deg, rgba(227,190,131,.06), transparent);
+  }
+  .gal-cta h3 { font-family:'Shippori Mincho',serif; font-weight:600; font-size: 1.2rem; margin-bottom: 12px; }
+  .gal-cta p { font-size: 13px; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 2; }
+  .gal-cta a {
+    display:inline-block; margin-top: 22px;
+    font-family:'Shippori Mincho',serif; font-size: 13px; letter-spacing:.08em;
+    color: #1a1410; background: var(--gold);
+    padding: 11px 28px; border-radius: 30px; text-decoration:none;
+    transition: opacity .25s;
+  }
+  .gal-cta a:hover { opacity: .85; }
+
+  /* ===== TOC ===== */
+  .toc { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; justify-content:center; }
+  .toc a { font-size: 11px; letter-spacing:.06em; color: var(--muted); text-decoration:none; border:1px solid var(--line); border-radius: 30px; padding: 5px 14px; transition: color .25s, border-color .25s; }
+  .toc a:hover { color: var(--gold); border-color: rgba(227,190,131,.3); }
+
+  /* ===== Footer ===== */
+  footer { text-align:center; padding: 56px 24px 64px; border-top: 1px solid var(--line); }
+  footer .brand { font-family:'DM Serif Display',serif; font-size: 1.6rem; }
+  footer .brand-sub { font-size: 10px; letter-spacing:.24em; color: var(--gold); margin-top: 5px; }
+  footer .note { font-size: 11px; color: var(--muted); margin-top: 20px; line-height: 1.9; }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="brand">lembrasser</div>
+  <div class="brand-sub">NAKATSU ・ AYURVEDA</div>
+
+  <span class="kicker">ご提案書</span>
+  <h1>何をやると、どうなる？<br>やらないと、どうなる？</h1>
+  <p class="lead">
+    開業されるオールハンド（オイル）マッサージ／アーユルヴェーダのサロンに向けて、
+    参考サロンの集客手法を分析し、決める項目を1つずつ整理しました。
+    各項目は「やると こうなる／やらないと こうなる」をセットで掲載。
+    読んだうえで「はい／いいえ」を選ぶだけで方針が固まります。
+  </p>
+  <p class="to">— まなちゃんのサロンへ</p>
+
+  <nav class="toc">
+    <a href="#trust">大前提：信頼</a>
+    <a href="#flow">全体の流れ</a>
+    <a href="#items">決める8項目</a>
+    <a href="#reco">おすすめの形</a>
+    <a href="#avoid">避けたいこと</a>
+    <a href="#design">デザイン16案</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== PART 1 ===================== -->
+
+  <!-- 信頼はコピーできない -->
+  <section id="trust">
+    <div class="section-head">
+      <p class="part-label">The Most Important Thing</p>
+      <h2 class="part-title">大前提：信頼はコピーできない</h2>
+      <p class="part-intro">「見た目」は真似できます。でも「信頼」は真似できません。まなちゃんにしかない“見た目だけでは真似できない財産”を主役にするのがおすすめです。</p>
+    </div>
+
+    <div class="copy-row">
+      <div class="copy-box">
+        <h3>✓ 真似できる（コピーOK）</h3>
+        <ul>
+          <li>サイトの色・写真・レイアウト</li>
+          <li>文章の「型」「並べ方」</li>
+          <li>予約やLINEの仕組み</li>
+        </ul>
+      </div>
+      <div class="neq">≠</div>
+      <div class="copy-box no">
+        <h3>真似できない＝まなちゃんの財産</h3>
+        <ul>
+          <li>介護で培ったケアと安心感</li>
+          <li>抜群の傾聴力（話を聞く力）</li>
+          <li>妹さん（形成外科医）との連携</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="strength-grid">
+      <div class="strength">
+        <div class="ico">介</div>
+        <h4>介護のキャリア</h4>
+        <p>有料老人ホーム・看護小規模多機能で、障害のある方を含め長年ケアに従事。<b>体への細やかな配慮と安心感</b>。高齢の方・障害のある方・そのご家族も安心して通える、他店にない入口になります。</p>
+      </div>
+      <div class="strength">
+        <div class="ico">傾</div>
+        <h4>抜群の傾聴力</h4>
+        <p>人の話を聞くのが本当に上手。「ただ揉むだけでなく、悩みを聞いて寄り添ってくれる」<b>カウンセリング重視のサロン</b>に直結。指名・常連につながるいちばんの武器です。</p>
+      </div>
+      <div class="strength">
+        <div class="ico">医</div>
+        <h4>妹さんが形成外科医</h4>
+        <p>医療の専門家が身近に。医療的な裏付け・監修、むくみ・術後・傷あとケアの相談、将来の連携メニューも。<b>「医療とつながっている安心感」</b>が信頼の核になります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 全体の流れ -->
+  <section id="flow">
+    <div class="section-head">
+      <p class="part-label">How To Read &amp; The Big Picture</p>
+      <h2 class="part-title">集客から再来店までの流れ</h2>
+      <p class="part-intro">このあとの8項目は、すべてこの「知ってもらう → 来てもらう → 満足する → また来てもらう」の流れのどこかに効きます。</p>
+    </div>
+    <div class="flow">
+      <div class="step"><span class="n">STEP 1</span><h4>知ってもらう</h4><p>Googleマップ・ホットペッパー・Instagram</p></div>
+      <div class="step"><span class="n">STEP 2</span><h4>来てもらう</h4><p>料金掲載・初回お試し・ネット予約</p></div>
+      <div class="step"><span class="n">STEP 3</span><h4>満足する</h4><p>傾聴・ケア・スムーズな決済</p></div>
+      <div class="step"><span class="n">STEP 4</span><h4>また来てもらう</h4><p>LINE公式・回数券・継続プラン</p></div>
+    </div>
+  </section>
+
+  <!-- 8項目 -->
+  <section id="items">
+    <div class="section-head">
+      <p class="part-label">Decisions</p>
+      <h2 class="part-title">これから決める8項目</h2>
+      <p class="part-intro">★★★＝まず必ず入れたいもの。各カードを読んで「はい／いいえ」を選ぶだけで方針が固まります。</p>
+    </div>
+
+    <div class="items">
+
+      <!-- 1 Googleマップ -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">01</span><span class="item-cat">集客 / 知ってもらう</span><span class="stars">★★★</span>
+          <h3 class="item-title">Googleマップに無料登録する</h3>
+        </div>
+        <p class="item-desc">スマホで「中津市 マッサージ」などと地図検索したとき、お店が表示されるようにする無料の設定。</p>
+        <div class="meta"><span class="chip">費用 <b>無料</b></span><span class="chip">手間 <b>小</b></span><span class="chip">効果まで <b>数週間</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>近所の人が「中津市 オイルマッサージ」と検索 → 地図の上の方に表示 → 写真・口コミを見て「ここ良さそう」と予約。広告費0円で“今すぐ来たい近所の客”が来店します。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>検索しても地図に出てこない。上に表示された別の店へ予約が流れます。良いお店なのに「存在を知られないまま」、ご近所客を取りこぼします。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li>完全無料で今日から始められる</li><li>「近くで今すぐ」の来店意欲が高い客に強い</li><li>口コミが信頼の資産として貯まる</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>写真・営業時間の登録／更新に少し手間</li><li>悪い口コミもそのまま表示される</li><li>上位表示まで数週間かかることも</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">無料で効果が高く、デメリットがほぼない。最優先で実施。</span><span class="badge">はい</span></div>
+      </article>
+
+      <!-- 2 ホットペッパー -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">02</span><span class="item-cat">集客 / 知ってもらう</span><span class="stars">★★★</span>
+          <h3 class="item-title">ホットペッパービューティーに掲載する</h3>
+        </div>
+        <p class="item-desc">日本で一番使われている美容予約サイトに有料で掲載し、新規のお客様に見つけてもらう。</p>
+        <div class="meta"><span class="chip">費用 <b>月額＋手数料</b></span><span class="chip">手間 <b>中</b></span><span class="chip">即効性 <b>高い</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>「中津 オイルマッサージ」で探す新規客が一覧で発見 → 初回クーポンを見て予約・来店。知名度ゼロの開業直後でも“新規客の流れ”が早くできます。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>一番人が集まる予約サイトに載らず、新規客の最大の入口を逃す。知名度がない開業期は、なかなか予約が埋まらず静かなスタートに。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li>新規集客力が圧倒的（最大の入口）</li><li>予約・顧客台帳の管理が楽になる</li><li>口コミが集まり信頼づくりになる</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>月額＋送客手数料のコスト</li><li>クーポン値引き競争に巻き込まれやすい</li><li>サイト内で他店と価格を比較される</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">開業期はコストを払ってでも使う価値あり。慣れたらLINEへ移行。</span><span class="badge">はい寄り</span></div>
+      </article>
+
+      <!-- 3 LINE -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">03</span><span class="item-cat">集客 / また来てもらう</span><span class="stars">★★★</span>
+          <h3 class="item-title">LINE公式アカウントで予約をまとめる</h3>
+        </div>
+        <p class="item-desc">来店客に友だち追加してもらい、次回予約やお知らせを直接届ける“常連づくり”の仕組み。</p>
+        <div class="meta"><span class="chip">費用 <b>基本無料〜</b></span><span class="chip">手間 <b>小〜中</b></span><span class="chip">リピート <b>高い</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>来店客が友だち追加 → 後日「そろそろ疲れ取りに来ませんか？」で再来店。手数料ゼロのまま常連に。予約も問い合わせもLINEに一本化できます。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>一度来たお客様と連絡手段がなく、そのまま忘れられて再来なし。毎回ゼロから新規集客が必要になり、ずっと集客に追われる経営に。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li>手数料ゼロでお客様と直接つながれる</li><li>リピート・常連化にもっとも強い</li><li>予約・問い合わせを1か所に集約</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>友だちを増やす工夫（店内告知等）が必要</li><li>配信しすぎるとブロックされる</li><li>最初の設定・メニュー作りがやや手間</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">集客の“受け皿”として必須。最初に用意したい仕組み。</span><span class="badge">はい</span></div>
+      </article>
+
+      <!-- 4 Instagram -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">04</span><span class="item-cat">集客 / 雰囲気を伝える</span><span class="stars">★★★</span>
+          <h3 class="item-title">Instagramを「1つ」に絞って続ける</h3>
+        </div>
+        <p class="item-desc">個室や施術の雰囲気・お客様の感想を写真で発信し、来店前に“安心して選んでもらう”。</p>
+        <div class="meta"><span class="chip">費用 <b>無料</b></span><span class="chip">手間 <b>中（継続が鍵）</b></span><span class="chip">即効性 <b>ゆっくり</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>落ち着いた個室・施術の様子・お客様の感想を投稿 → 「気持ちよさそう」と雰囲気で選ばれ、プロフィールのリンクから予約。世界観でファンになってもらえます。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>来店前に雰囲気が分からず不安で選ばれにくい。「どんな所か分からないから他の店に」と比較で負けやすくなります。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li>無料でお店の世界観・安心感を伝えられる</li><li>写真映えする業種と相性が抜群</li><li>ファン・指名・紹介につながる</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>毎日投稿は不要（疲れて世界観がぶれる）</li><li>2つ以上のSNS同時運用は続かない</li><li>すぐには成果が出ない（じわじわ型）</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">やる価値は高いが「1アカウントに集中」が鉄則。</span><span class="badge">はい</span></div>
+      </article>
+
+      <!-- 5 料金掲載 -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">05</span><span class="item-cat">お金 / 来てもらう</span><span class="stars">★★★</span>
+          <h3 class="item-title">料金をサイトにはっきり載せる</h3>
+        </div>
+        <p class="item-desc">初回・通常メニューの値段をサイト上で明記し、初めての人が安心して予約できるようにする。</p>
+        <div class="meta"><span class="chip">費用 <b>0円</b></span><span class="chip">手間 <b>小</b></span><span class="chip">予約率効果 <b>高い</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>「初回◯◯円・通常◯◯円」と一目で分かり、安心して予約ボタンを押せます。「いくらか聞く」手間がなく、問い合わせ対応の負担も減ります。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>「いくらか分からない」と不安で離脱。わざわざ問い合わせる人は少なく、見込み客が静かに去る。新店ほどこの取りこぼしが痛い。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li>初めての人の不安を消し、予約率が上がる</li><li>価格に納得した人だけが来てミスマッチが減る</li><li>問い合わせ・電話対応の手間が減る</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>他店と価格を比較されやすくなる</li><li>安売りに見せない見せ方の工夫が要る</li><li>価格変更のたびに更新が必要</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">隠すより載せる。新店の予約率に直結する。<br><span style="color:var(--muted);font-size:12px">※中津市の相場目安：初回3,500〜4,500円／通常60分5,000円前後・90分8,000〜9,000円</span></span><span class="badge">はい</span></div>
+      </article>
+
+      <!-- 6 初回お試し＋回数券 -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">06</span><span class="item-cat">お金 / 来店〜継続</span><span class="stars">★★★</span>
+          <h3 class="item-title">初回お試し価格 ＋ 回数券・継続プラン</h3>
+        </div>
+        <p class="item-desc">「お試しで来てもらう入口」と「お得に通い続けてもらう継続」をセットで設計し、売上を安定させる。</p>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>手頃な初回お試しで体験 →「良かった」→ 回数券でお得に継続 → 月1〜2回の常連に。売上が読めるようになり経営が安定します。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>通常価格だけだと初回ハードルが高く来店が少ない。来ても1回きりで、毎回ゼロから集客。売上が月ごとに乱高下します。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li><b>A 初回お試し</b>：来店ハードルが下がり最初の1人を呼べる</li><li>体験してもらえば良さが伝わる／口コミのきっかけに</li><li><b>B 回数券</b>：前払いで売上・資金繰りが安定／常連化しやすい</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>安すぎると原価割れ。下げ過ぎ注意</li><li>「お試しだけ」の客も一定数いる→継続導線が必須</li><li>押し売り感はNG／有効期限・残回数の管理が必要</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">入口（お試し）と継続（回数券）はセットで用意する。“安さ”でなく“ケアの価値”で選ばれることを大切に。</span><span class="badge">両方はい</span></div>
+      </article>
+
+      <!-- 7 ネット予約 -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">07</span><span class="item-cat">仕組み / 予約</span><span class="stars">★★★</span>
+          <h3 class="item-title">スマホで完結するネット予約を入れる</h3>
+        </div>
+        <p class="item-desc">お客様がスマホから24時間予約でき、できれば事前決済もできる予約システムを導入する。</p>
+        <div class="meta"><span class="chip">費用 <b>無料〜月数千円</b></span><span class="chip">手間 <b>中（初期設定）</b></span><span class="chip">取りこぼし防止 <b>高い</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>深夜でもスマホで空き時間を見て予約完了。事前決済つきなら無断キャンセルも激減。施術中で電話に出られなくても予約は自動で入り続けます。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>電話やDMで予約調整 → 営業中は出られず取りこぼし。ダブルブッキングや無断キャンセルも起きやすく、一人営業ほど負担と損失が増えます。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>メリット</h5><ul><li>24時間、自動で予約が入る</li><li>取りこぼし・二重予約を防げる</li><li>事前決済でキャンセル損失を減らせる</li></ul></div>
+          <div class="col minus"><h5>デメリット・注意</h5><ul><li>最初の設定に少し手間</li><li>月額がかかるサービスもある</li><li>PCが苦手でも“簡単なもの”を選ぶこと</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">簡単に扱えるものを選んで導入。電話だけは避ける。LINE連携できるタイプが便利。</span><span class="badge">はい</span></div>
+      </article>
+
+      <!-- 8 支払い -->
+      <article class="item">
+        <div class="item-head">
+          <span class="item-no">08</span><span class="item-cat">仕組み / 決済</span><span class="stars">★★★</span>
+          <h3 class="item-title">支払い方法をそろえる（現金＋キャッシュレス）</h3>
+        </div>
+        <p class="item-desc">現金でもカードでもスマホ決済でも払えるように。Airペイ等の「1台でまとめて」端末や、予約時のオンライン事前決済も検討。</p>
+        <div class="meta"><span class="chip">手数料 <b>売上の数%</b></span><span class="chip">手間 <b>中（申込・設定）</b></span><span class="chip">便利さ <b>高い</b></span></div>
+        <div class="ynn">
+          <div class="yn do"><div class="h">✓ やると、こうなる</div><p>カード・PayPay・交通系でサッと支払い。会計がスムーズで、高めのコースやオプションも選ばれやすく。事前決済を使えば無断キャンセルも減ります。</p></div>
+          <div class="yn dont"><div class="h">! やらないと、こうなる</div><p>現金のみだと「カード使えないの？」とがっかりされ、ATMに行く手間で取りこぼし。現金を持ち歩かない人も増え、高めメニューをためらわれがちに。</p></div>
+        </div>
+        <div class="pm">
+          <div class="col plus"><h5>選択肢</h5><ul><li><b>現金</b>：手数料ゼロ／その場で手元に（0円）</li><li><b>Airペイ等</b>：クレカ・電子マネー・QRを1台で（端末実質0円〜＋手数料約3%）</li><li><b>オンライン事前決済</b>：無断キャンセル激減・当日会計不要</li></ul></div>
+          <div class="col minus"><h5>注意点</h5><ul><li>現金：釣銭・記帳の手間／持ち合わせ無い客を逃す</li><li>キャッシュレス：決済手数料・入金サイクルの確認</li><li>事前決済：返金・変更ルールと予約連携が必要</li></ul></div>
+        </div>
+        <div class="verdict"><span class="lab">結論</span><span class="txt">現金＋キャッシュレス端末は両方用意。事前決済も予約と合わせて導入。タブレット1台で完結する端末を選べばOK。</span><span class="badge">両方はい</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- おすすめのまとめ -->
+  <section id="reco">
+    <div class="section-head">
+      <p class="part-label">Recommended Setup</p>
+      <h2 class="part-title">この形で作るのがおすすめ</h2>
+      <p class="part-intro">迷ったらおすすめ度の高いものから。★★★＝まず必ず入れる／余裕が出たら追加、の順番です。</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-cols">
+        <div>
+          <h4>★★★ まず必ず入れる（無料〜低コストで効果大）</h4>
+          <ul>
+            <li><b>Googleマップ登録</b> — 地図で見つけてもらう</li>
+            <li><b>LINE公式</b> — 常連・再来の受け皿</li>
+            <li><b>料金＋初回お試し</b>を載せた1枚サイト</li>
+            <li><b>回数券・継続プラン</b> — 売上の安定</li>
+            <li><b>ネット予約</b>（24時間・取りこぼし防止）</li>
+            <li><b>キャッシュレス決済</b>（Airペイ等・事前決済）</li>
+          </ul>
+        </div>
+        <div>
+          <h4>できれば追加（余力が出たら）</h4>
+          <ul>
+            <li><b>Instagram</b> — 1つに集中</li>
+            <li><b>ホットペッパー</b> — 開業期だけのブースター</li>
+          </ul>
+          <h4 style="margin-top:18px">サイトの主役にすること</h4>
+          <ul>
+            <li>介護のケア・<b>傾聴力</b>・妹さん（形成外科医）連携</li>
+            <li>料金 ＋ 初回お試し ＋ お客様の声</li>
+          </ul>
+        </div>
+      </div>
+      <p class="closing">
+        まずはこの形で作るのがおすすめです。とくにまなちゃんの<b style="color:var(--gold)">「聞く力（傾聴）」</b>と<b style="color:var(--gold)">「介護で培った安心感」</b>がいちばんの武器。
+        これがしっかり伝わるサイトにすれば、見た目以上に信頼される強いお店になります。
+      </p>
+    </div>
+  </section>
+
+  <!-- 避けたいこと -->
+  <section id="avoid">
+    <div class="section-head">
+      <p class="part-label">Things To Avoid</p>
+      <h2 class="part-title">これだけは避けたい</h2>
+    </div>
+    <div class="ng-grid">
+      <div class="ng"><h4><span>×</span> 人のドーパミンを煽る集客</h4><p>「今だけ・限定」で不安や射幸心を煽る集客は、ケアの世界観と合わず、その場限りの客しか来ません。</p></div>
+      <div class="ng"><h4><span>×</span> 「安さ」を売りにする</h4><p>安さを看板にすると価格で選ばれ、価格でしか続きません。傾聴とケアの価値で選ばれるお店に。</p></div>
+      <div class="ng"><h4><span>×</span> 数を追う継続投稿</h4><p>フォロワー稼ぎの量産・毎日投稿に追われると疲れ、世界観もぶれます。質を優先し続けられる範囲で。</p></div>
+      <div class="ng"><h4><span>×</span> 見た目だけ真似る</h4><p>強み（介護・傾聴・医療連携）を出さず高級風にすると、かえって安っぽく見えます。</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== PART 2 ===================== -->
+  <section id="design">
+    <div class="section-head">
+      <p class="part-label">Part 2 ・ Choose Your Design</p>
+      <h2 class="part-title">どんな見た目で作りますか？</h2>
+      <p class="gal-note">
+        ここからは「見た目」の話です。lembrasser のためにご用意した<b style="color:var(--cream)">全16テーマ</b>。
+        どれも中身（メニュー・料金・セラピスト紹介・お客様の声・アクセス）は同じ構成で、配色と雰囲気だけが違います。
+        カードをタップすると実際のページが開きます。<b style="color:var(--gold)">気に入った番号</b>を教えてください。そのデザインで本制作に進みます。
+      </p>
+    </div>
+
+    <p class="gal-cat">Natural</p>
+    <p class="gal-cat-sub serif">自然テーマ（01〜08）</p>
+    <div class="grid" id="grid-natural">
+      <a href="lembrasser_01.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_01.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">01 水の森</p><p class="card-desc">ダーク ・ ティール×ブルー</p></div></a>
+      <a href="lembrasser_02.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_02.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">02 和の静寂 <span class="card-tag light">ライト</span></p><p class="card-desc">ライト ・ 和紙×墨</p></div></a>
+      <a href="lembrasser_03.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_03.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">03 黄金の夕暮れ</p><p class="card-desc">ダーク ・ テラコッタ×ゴールド</p></div></a>
+      <a href="lembrasser_04.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_04.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">04 森の息吹</p><p class="card-desc">ダーク ・ モスグリーン×アース</p></div></a>
+      <a href="lembrasser_05.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_05.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">05 月の静寂</p><p class="card-desc">ダーク ・ ミッドナイト×シルバー</p></div></a>
+      <a href="lembrasser_06.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_06.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">06 アーユルヴェーダの彩</p><p class="card-desc">ダーク ・ 深紅×サフラン</p></div></a>
+      <a href="lembrasser_07.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_07.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">07 白磁の光 <span class="card-tag light">ライト</span></p><p class="card-desc">ライト ・ 磁器白×ウォームグレー</p></div></a>
+      <a href="lembrasser_08.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_08.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">08 暁の霧</p><p class="card-desc">ダーク ・ ディープセージ×グリーン</p></div></a>
+    </div>
+
+    <p class="gal-cat">Artistic</p>
+    <p class="gal-cat-sub serif">アニメ・イラスト・手書きテーマ（09〜16）</p>
+    <div class="grid" id="grid-artistic">
+      <a href="lembrasser_09.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_09.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">09 桜アニメ <span class="card-tag light">ライト</span></p><p class="card-desc">アニメ ・ パステルピンク×桜</p></div></a>
+      <a href="lembrasser_10.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_10.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">10 ジブリの森</p><p class="card-desc">アニメ ・ 温かい森×牧歌</p></div></a>
+      <a href="lembrasser_11.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_11.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">11 水彩夢想 <span class="card-tag light">ライト</span></p><p class="card-desc">イラスト ・ ラベンダー×水彩</p></div></a>
+      <a href="lembrasser_12.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_12.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">12 ボタニカル図鑑 <span class="card-tag light">ライト</span></p><p class="card-desc">イラスト ・ クリーム×植物図</p></div></a>
+      <a href="lembrasser_13.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_13.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">13 アールヌーボー</p><p class="card-desc">イラスト ・ 深緑×ゴールド</p></div></a>
+      <a href="lembrasser_14.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_14.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">14 ヴィンテージポスター</p><p class="card-desc">イラスト ・ ネイビー×レトロレッド</p></div></a>
+      <a href="lembrasser_15.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_15.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">15 スケッチ帳 <span class="card-tag light">ライト</span></p><p class="card-desc">手書き ・ クラフト紙×鉛筆</p></div></a>
+      <a href="lembrasser_16.html" target="_blank" class="card"><div class="thumb" data-src="lembrasser_16.html"><iframe loading="lazy"></iframe></div><div class="card-info"><p class="card-name">16 水彩手紙 <span class="card-tag light">ライト</span></p><p class="card-desc">手書き ・ 和紙×水彩にじみ</p></div></a>
+    </div>
+
+    <div class="gal-cta">
+      <h3>気に入ったデザインは見つかりましたか？</h3>
+      <p>番号（例：「02 和の静寂」）を教えていただければ、そのテーマでお客様の声・写真・料金などを実際の内容に差し替え、本制作に進みます。複数気になる場合は2〜3案に絞っていただいてもOKです。</p>
+      <a href="/gallery">▶ ギャラリーを大きく見る</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="brand">lembrasser</div>
+  <div class="brand-sub">NAKATSU ・ AYURVEDA</div>
+  <p class="note">
+    ホームページ ご提案書 ／ 参考：睡眠サロンくものうえ 分析<br>
+    ※おすすめ度・金額は2026年時点の中津市エリアの目安です
+  </p>
+</footer>
+
+<script>
+  const IFRAME_W = 1440;
+  const IFRAME_H = 900;
+
+  function scaleThumbs() {
+    document.querySelectorAll('.thumb').forEach(wrap => {
+      const scale = wrap.offsetWidth / IFRAME_W;
+      const iframe = wrap.querySelector('iframe');
+      if (iframe) {
+        iframe.style.width  = IFRAME_W + 'px';
+        iframe.style.height = IFRAME_H + 'px';
+        iframe.style.transform = `scale(${scale})`;
+        iframe.style.transformOrigin = 'top left';
+        wrap.style.height = Math.round(IFRAME_H * scale) + 'px';
+      }
+    });
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const wrap = e.target;
+      const iframe = wrap.querySelector('iframe');
+      if (iframe && !iframe.src && wrap.dataset.src) {
+        iframe.src = wrap.dataset.src;
+        iframe.addEventListener('load', () => wrap.classList.add('loaded'), { once: true });
+      }
+      io.unobserve(wrap);
+    });
+  }, { rootMargin: '300px' });
+
+  document.querySelectorAll('.thumb[data-src]').forEach(el => io.observe(el));
+  scaleThumbs();
+  window.addEventListener('resize', scaleThumbs);
+</script>
+</body>
+</html>

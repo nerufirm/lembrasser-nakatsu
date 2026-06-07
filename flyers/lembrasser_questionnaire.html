@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lembrasser Nakatsu — チラシ制作ヒアリング</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: linear-gradient(135deg, #fdf6f0 0%, #fef9f5 50%, #fdf0f5 100%);
+    min-height: 100vh;
+    padding: 40px 16px 80px;
+    color: #3a2a22;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ヘッダー */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e8a4b8, #c97da0);
+    color: white;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(24px, 5vw, 34px);
+    color: #7a3a5a;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .header p {
+    font-size: 13px;
+    color: #9a7a8a;
+    line-height: 1.8;
+  }
+
+  /* 区切り */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 32px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e8c4d0);
+  }
+  .divider::after { background: linear-gradient(to left, transparent, #e8c4d0); }
+  .divider-icon { color: #d4899e; font-size: 14px; }
+
+  /* カード */
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 24px rgba(180, 100, 130, 0.08);
+    border: 1px solid rgba(232, 196, 208, 0.4);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 8px 32px rgba(180, 100, 130, 0.13); }
+
+  .q-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8a4b8, #c97da0);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .q-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .q-title label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 17px;
+    color: #5a3040;
+    line-height: 1.5;
+    cursor: default;
+  }
+  .q-note {
+    font-size: 11px;
+    color: #b08090;
+    margin-left: 42px;
+    margin-top: -12px;
+    margin-bottom: 16px;
+  }
+
+  /* ラジオ・チェックボックス */
+  .options { display: flex; flex-direction: column; gap: 10px; padding-left: 42px; }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+  .option input[type="radio"],
+  .option input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0c0cc;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+    background: white;
+  }
+  .option input[type="checkbox"] { border-radius: 6px; }
+
+  .option input[type="radio"]:checked,
+  .option input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #e8a4b8, #c97da0);
+    border-color: #c97da0;
+  }
+  .option input[type="radio"]:checked::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .option input[type="checkbox"]:checked::after {
+    content: '✓';
+    display: block;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .option-label {
+    font-size: 15px;
+    color: #4a3038;
+    line-height: 1.5;
+    padding-top: 1px;
+  }
+
+  /* その他テキスト入力 */
+  .other-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #e8c4d0;
+    padding: 4px 2px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    color: #4a3038;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-top: 4px;
+  }
+  .other-input:focus { border-bottom-color: #c97da0; }
+  .other-input::placeholder { color: #c4a0b0; font-size: 13px; }
+
+  .other-wrap { display: flex; align-items: flex-start; gap: 12px; padding-left: 42px; margin-top: 10px; }
+  .other-wrap .option-label { white-space: nowrap; padding-top: 6px; font-size: 15px; color: #4a3038; }
+
+  /* 追記欄 */
+  .memo-area {
+    width: 100%;
+    border: 2px solid #e8c4d0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    color: #4a3038;
+    background: #fffbfc;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s;
+    margin-left: 42px;
+    width: calc(100% - 42px);
+  }
+  .memo-area:focus { border-color: #c97da0; }
+  .memo-area::placeholder { color: #c4a0b0; }
+
+  /* 送信ボタン */
+  .submit-area { text-align: center; margin-top: 48px; }
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #e8a4b8, #c97da0);
+    color: white;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 17px;
+    letter-spacing: 0.15em;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 52px;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(201, 125, 160, 0.35);
+    transition: all 0.25s;
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(201, 125, 160, 0.45);
+  }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* 送信完了 */
+  .success {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(180, 100, 130, 0.08);
+  }
+  .success-icon { font-size: 48px; margin-bottom: 16px; }
+  .success h2 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    color: #7a3a5a;
+    margin-bottom: 10px;
+  }
+  .success p { font-size: 14px; color: #9a7a8a; line-height: 1.8; }
+
+  /* 画像選択グリッド */
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding-left: 42px;
+  }
+  @media (min-width: 480px) { .img-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .img-option { position: relative; cursor: pointer; }
+  .img-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+  }
+  .img-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    transition: all 0.2s;
+    background: #f0e8ec;
+  }
+  .img-option input:checked + .img-thumb {
+    border-color: #c97da0;
+    box-shadow: 0 0 0 3px rgba(201,125,160,0.25);
+  }
+  .img-check {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #c97da0;
+    color: white;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+  }
+  .img-option input:checked ~ .img-check { opacity: 1; }
+  .img-caption {
+    font-size: 11px;
+    color: #9a7a8a;
+    text-align: center;
+    margin-top: 5px;
+    line-height: 1.3;
+  }
+  .img-caption .site-badge {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 50px;
+    margin-bottom: 2px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .badge-unsplash { background: #111; color: #fff; }
+  .badge-pexels   { background: #05A081; color: #fff; }
+
+  .site-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-left: 42px;
+    margin-top: 16px;
+  }
+  .site-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+  .site-link:hover { opacity: 0.8; }
+  .site-link-unsplash { background: #111; color: #fff; }
+  .site-link-pexels   { background: #05A081; color: #fff; }
+
+  .url-input-wrap {
+    padding-left: 42px;
+    margin-top: 16px;
+  }
+  .url-input-label {
+    font-size: 13px;
+    color: #7a5a6a;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .url-input {
+    width: 100%;
+    border: 2px solid #e8c4d0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 13px;
+    color: #4a3038;
+    background: #fffbfc;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .url-input:focus { border-color: #c97da0; }
+  .url-input::placeholder { color: #c4a0b0; }
+
+  /* エラー */
+  .error-msg {
+    display: none;
+    color: #c0392b;
+    font-size: 12px;
+    margin-left: 42px;
+    margin-top: 6px;
+  }
+  .card.has-error .error-msg { display: block; }
+  .card.has-error { border-color: rgba(192, 57, 43, 0.3); }
+
+  @media (max-width: 480px) {
+    .card { padding: 24px 18px; }
+    .options { padding-left: 0; }
+    .other-wrap { padding-left: 0; }
+    .memo-area { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="header-badge">チラシ制作ヒアリング</div>
+    <h1>Lembrasser Nakatsu ✿</h1>
+    <p>
+      有料老人ホームでのフェイシャルチラシを<br />
+      一緒につくるための質問です。<br />
+      あてはまるものを選んで、最後に送信してください。
+    </p>
+  </div>
+
+  <form id="hearingForm" novalidate>
+
+    <!-- 資格・キャリア -->
+    <div class="card" id="card-shikaku">
+      <div class="q-title">
+        <span class="q-number" style="background:linear-gradient(135deg,#c8b4e8,#9a7acc);font-size:14px;">資</span>
+        <label>保有している資格を教えてください（複数選択OK）</label>
+      </div>
+      <div class="q-note">プロフィール・チラシへの掲載に使います。なければスキップしてOK！</div>
+
+      <p style="padding-left:42px;font-size:12px;color:#7a5a8a;margin:16px 0 8px;font-weight:700;">✦ エステ・フェイシャル系</p>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="shikaku" value="認定エステティシャン（AJESTHE）" /><span class="option-label">認定エステティシャン（AJESTHE）</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="上級エステティシャン" /><span class="option-label">上級エステティシャン</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="インターナショナルエステティシャン" /><span class="option-label">インターナショナルエステティシャン</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="フェイシャルエステティシャン認定" /><span class="option-label">フェイシャルエステティシャン認定</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="スキンケアアドバイザー" /><span class="option-label">スキンケアアドバイザー</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="コスメティック検定1級（日本化粧品検定）" /><span class="option-label">コスメティック検定1級（日本化粧品検定）</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="コスメティック検定2級" /><span class="option-label">コスメティック検定2級</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="ビューティーアドバイザー認定" /><span class="option-label">ビューティーアドバイザー認定</span></label>
+      </div>
+
+      <p style="padding-left:42px;font-size:12px;color:#7a5a8a;margin:16px 0 8px;font-weight:700;">✦ アロマ・リラクゼーション系</p>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="shikaku" value="アロマテラピー検定1級（AEAJ）" /><span class="option-label">アロマテラピー検定1級（AEAJ）</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="アロマテラピーアドバイザー（AEAJ）" /><span class="option-label">アロマテラピーアドバイザー（AEAJ）</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="アロマセラピスト（AEAJ）" /><span class="option-label">アロマセラピスト（AEAJ）</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="リフレクソロジスト" /><span class="option-label">リフレクソロジスト</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="リンパドレナージュ関連資格" /><span class="option-label">リンパドレナージュ関連資格</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="ヘッドスパニスト認定" /><span class="option-label">ヘッドスパニスト認定</span></label>
+      </div>
+
+      <p style="padding-left:42px;font-size:12px;color:#7a5a8a;margin:16px 0 8px;font-weight:700;">✦ 美容・医療・ヘルスケア系</p>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="shikaku" value="美容師免許" /><span class="option-label">美容師免許</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="理容師免許" /><span class="option-label">理容師免許</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="看護師免許" /><span class="option-label">看護師免許</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="介護福祉士" /><span class="option-label">介護福祉士</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="漢方・美容漢方アドバイザー" /><span class="option-label">漢方・美容漢方アドバイザー</span></label>
+        <label class="option"><input type="checkbox" name="shikaku" value="メディカルエステ関連資格" /><span class="option-label">メディカルエステ関連資格</span></label>
+      </div>
+
+      <div class="other-wrap">
+        <span class="option-label">その他（自由記入）</span>
+        <input class="other-input" type="text" name="shikaku_other" placeholder="資格名を記入してください" />
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="card" id="card-q1">
+      <div class="q-title">
+        <span class="q-number">1</span>
+        <label>今回のメニュー名は何にする？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q1" value="お顔のお手入れ" /><span class="option-label">① お顔のお手入れ</span></label>
+        <label class="option"><input type="radio" name="q1" value="フェイシャルケア" /><span class="option-label">② フェイシャルケア</span></label>
+        <label class="option"><input type="radio" name="q1" value="お顔のリラクゼーション" /><span class="option-label">③ お顔のリラクゼーション</span></label>
+        <label class="option"><input type="radio" name="q1" value="顔のマッサージ" /><span class="option-label">④ 顔のマッサージ</span></label>
+        <label class="option"><input type="radio" name="q1" value="お肌のやすらぎケア" /><span class="option-label">⑤ お肌のやすらぎケア</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q1_other" placeholder="自由に記入してください" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card" id="card-q2">
+      <div class="q-title">
+        <span class="q-number">2</span>
+        <label>施術の流れを教えて（複数選択OK）</label>
+      </div>
+      <div class="q-note">あてはまるものすべてに✓</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q2" value="クレンジング → マッサージ → 保湿" /><span class="option-label">① クレンジング → マッサージ → 保湿</span></label>
+        <label class="option"><input type="checkbox" name="q2" value="蒸しタオル → マッサージ → 美容液" /><span class="option-label">② 蒸しタオル → マッサージ → 美容液</span></label>
+        <label class="option"><input type="checkbox" name="q2" value="マッサージ → パック → 保湿" /><span class="option-label">③ マッサージ → パック → 保湿</span></label>
+        <label class="option"><input type="checkbox" name="q2" value="カウンセリング → マッサージ → 保湿" /><span class="option-label">④ カウンセリング → マッサージ → 保湿</span></label>
+        <label class="option"><input type="checkbox" name="q2" value="クレンジング → パック → 保湿 → 仕上げ" /><span class="option-label">⑤ クレンジング → パック → 保湿 → 仕上げ</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q2_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="card" id="card-q3">
+      <div class="q-title">
+        <span class="q-number">3</span>
+        <label>高齢者への配慮として伝えたいことは？（複数選択OK）</label>
+      </div>
+      <div class="q-note">チラシに「安心感」として載せます</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q3" value="低刺激・無香料の製品のみ使用" /><span class="option-label">① 低刺激・無香料の製品のみ使用します</span></label>
+        <label class="option"><input type="checkbox" name="q3" value="肌の状態を見ながら圧を調整" /><span class="option-label">② お肌の状態を見ながら圧を調整します</span></label>
+        <label class="option"><input type="checkbox" name="q3" value="施術前にカウンセリング実施" /><span class="option-label">③ 施術前にかんたんなカウンセリングをします</span></label>
+        <label class="option"><input type="checkbox" name="q3" value="横になったまま受けられる" /><span class="option-label">④ 横になったままリラックスして受けられます</span></label>
+        <label class="option"><input type="checkbox" name="q3" value="敏感肌・乾燥肌も安心" /><span class="option-label">⑤ 敏感肌・乾燥肌の方も安心してお受けいただけます</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q3_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="card" id="card-q4">
+      <div class="q-title">
+        <span class="q-number">4</span>
+        <label>1回あたりの施術時間はどのくらい？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="約15分" /><span class="option-label">① 約15分</span></label>
+        <label class="option"><input type="radio" name="q4" value="約20分" /><span class="option-label">② 約20分</span></label>
+        <label class="option"><input type="radio" name="q4" value="約30分" /><span class="option-label">③ 約30分</span></label>
+        <label class="option"><input type="radio" name="q4" value="約45分" /><span class="option-label">④ 約45分</span></label>
+        <label class="option"><input type="radio" name="q4" value="約60分" /><span class="option-label">⑤ 約60分</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q4_other" placeholder="例：約40分" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q5 -->
+    <div class="card" id="card-q5">
+      <div class="q-title">
+        <span class="q-number">5</span>
+        <label>料金はいくら？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q5" value="無料（施設負担）" /><span class="option-label">① 無料（施設負担）</span></label>
+        <label class="option"><input type="radio" name="q5" value="500円" /><span class="option-label">② 500円</span></label>
+        <label class="option"><input type="radio" name="q5" value="1,000円" /><span class="option-label">③ 1,000円</span></label>
+        <label class="option"><input type="radio" name="q5" value="1,500円" /><span class="option-label">④ 1,500円</span></label>
+        <label class="option"><input type="radio" name="q5" value="2,000円" /><span class="option-label">⑤ 2,000円</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q5_other" placeholder="例：3,000円 / 要相談" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q6 -->
+    <div class="card" id="card-q6">
+      <div class="q-title">
+        <span class="q-number">6</span>
+        <label>開催の頻度と曜日は？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q6" value="毎週" /><span class="option-label">① 毎週</span></label>
+        <label class="option"><input type="radio" name="q6" value="隔週" /><span class="option-label">② 隔週</span></label>
+        <label class="option"><input type="radio" name="q6" value="月1回" /><span class="option-label">③ 月1回</span></label>
+        <label class="option"><input type="radio" name="q6" value="月2回" /><span class="option-label">④ 月2回</span></label>
+        <label class="option"><input type="radio" name="q6" value="不定期（都度ご案内）" /><span class="option-label">⑤ 不定期（都度ご案内）</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q6_other" placeholder="曜日・時間帯なども記入してください" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q7 -->
+    <div class="card" id="card-q7">
+      <div class="q-title">
+        <span class="q-number">7</span>
+        <label>施術はどこで行う？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q7" value="入居者のお部屋（居室訪問）" /><span class="option-label">① 入居者のお部屋（居室訪問）</span></label>
+        <label class="option"><input type="radio" name="q7" value="施設内の個室" /><span class="option-label">② 施設内の個室</span></label>
+        <label class="option"><input type="radio" name="q7" value="共用スペース（ラウンジ等）" /><span class="option-label">③ 共用スペース（ラウンジ等）</span></label>
+        <label class="option"><input type="radio" name="q7" value="場所は都度ご案内" /><span class="option-label">④ 場所は都度ご案内</span></label>
+        <label class="option"><input type="radio" name="q7" value="居室・個室どちらでも対応" /><span class="option-label">⑤ 居室・個室どちらでも対応</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q7_other" placeholder="自由に記入してください" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q8 -->
+    <div class="card" id="card-q8">
+      <div class="q-title">
+        <span class="q-number">8</span>
+        <label>予約方法はどうする？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q8" value="フロントスタッフに口頭でお申し込み" /><span class="option-label">① フロントスタッフに口頭でお申し込み</span></label>
+        <label class="option"><input type="radio" name="q8" value="申込用紙に記入してフロントへ提出" /><span class="option-label">② 申込用紙に記入してフロントへ提出</span></label>
+        <label class="option"><input type="radio" name="q8" value="施設の担当者を通じてお申し込み" /><span class="option-label">③ 施設の担当者を通じてお申し込み</span></label>
+        <label class="option"><input type="radio" name="q8" value="施術日に直接参加（予約不要）" /><span class="option-label">④ 施術日に直接参加（予約不要）</span></label>
+        <label class="option"><input type="radio" name="q8" value="専用の連絡先へ直接" /><span class="option-label">⑤ 専用の連絡先（電話・LINE等）へ直接</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q8_other" placeholder="自由に記入してください" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q9 -->
+    <div class="card" id="card-q9">
+      <div class="q-title">
+        <span class="q-number">9</span>
+        <label>入居者への一言メッセージを選んで ✿</label>
+      </div>
+      <div class="q-note">チラシの一番大きな見出しに使います</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q9" value="触れるたびに、お肌も心もほぐれていきます" /><span class="option-label">① 触れるたびに、お肌も心もほぐれていきます</span></label>
+        <label class="option"><input type="radio" name="q9" value="お顔のケアで、毎日がちょっと楽しくなりますように" /><span class="option-label">② お顔のケアで、毎日がちょっと楽しくなりますように</span></label>
+        <label class="option"><input type="radio" name="q9" value="ご自分へのご褒美の時間を、ぜひ" /><span class="option-label">③ ご自分へのご褒美の時間を、ぜひ</span></label>
+        <label class="option"><input type="radio" name="q9" value="温かい手で、やさしくお手入れします" /><span class="option-label">④ 温かい手で、やさしくお手入れします</span></label>
+        <label class="option"><input type="radio" name="q9" value="小さな贅沢が、明日の元気になりますように" /><span class="option-label">⑤ 小さな贅沢が、明日の元気になりますように</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他・Lembrasser Nakatsuの言葉で</span>
+        <input class="other-input" type="text" name="q9_other" placeholder="自由に書いてください" />
+      </div>
+      <p class="error-msg">どれかひとつ選んでください</p>
+    </div>
+
+    <!-- Q10 -->
+    <div class="card" id="card-q10">
+      <div class="q-title">
+        <span class="q-number">10</span>
+        <label>使用する化粧品・製品のこだわりは？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q10" value="低刺激・敏感肌向け専門ブランドを使用" /><span class="option-label">① 低刺激・敏感肌向け専門ブランドを使用</span></label>
+        <label class="option"><input type="radio" name="q10" value="オーガニック・自然由来成分にこだわっている" /><span class="option-label">② オーガニック・自然由来成分にこだわっている</span></label>
+        <label class="option"><input type="radio" name="q10" value="医療機関でも使われるプロ用コスメを使用" /><span class="option-label">③ 医療機関でも使われるプロ用コスメを使用</span></label>
+        <label class="option"><input type="radio" name="q10" value="保湿・エイジングケアに特化した製品を使用" /><span class="option-label">④ 保湿・エイジングケアに特化した製品を使用</span></label>
+        <label class="option"><input type="radio" name="q10" value="お客様の肌に合わせて製品を使い分けている" /><span class="option-label">⑤ お客様の肌に合わせて製品を使い分けている</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ ブランド名・詳細を記入</span>
+        <input class="other-input" type="text" name="q10_other" placeholder="例：〇〇ブランドのラインを使用" />
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="card" id="card-q11">
+      <div class="q-title">
+        <span class="q-number">11</span>
+        <label>施術後のアフターケアとして伝えていることは？（複数選択OK）</label>
+      </div>
+      <div class="q-note">チラシの「安心サポート」として掲載します</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q11" value="施術後の保湿ケアのアドバイス" /><span class="option-label">① 施術後の保湿ケアのアドバイス</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="日焼け止めの使用を勧めている" /><span class="option-label">② 日焼け止めの使用を勧めている</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="施術後の注意事項をお伝えしている" /><span class="option-label">③ 施術後の注意事項をお伝えしている</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="次回のケアについてアドバイスしている" /><span class="option-label">④ 次回のケアについてアドバイスしている</span></label>
+        <label class="option"><input type="checkbox" name="q11" value="施術後もLINE等で質問を受け付けている" /><span class="option-label">⑤ 施術後もLINE等で質問を受け付けている</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q11_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="card" id="card-q12">
+      <div class="q-title">
+        <span class="q-number">12</span>
+        <label>どんな肌悩みに対応できますか？（複数選択OK）</label>
+      </div>
+      <div class="q-note">チラシの「こんな方におすすめ」の内容に使います</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q12" value="乾燥肌・かさつき" /><span class="option-label">① 乾燥肌・かさつき</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="くすみ・透明感が欲しい" /><span class="option-label">② くすみ・透明感が欲しい</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="たるみ・ハリ不足" /><span class="option-label">③ たるみ・ハリ不足</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="むくみ・顔のコリ" /><span class="option-label">④ むくみ・顔のコリ</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="敏感肌・赤み" /><span class="option-label">⑤ 敏感肌・赤み</span></label>
+        <label class="option"><input type="checkbox" name="q12" value="毛穴の開き・黒ずみ" /><span class="option-label">⑥ 毛穴の開き・黒ずみ</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑦ その他</span>
+        <input class="other-input" type="text" name="q12_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="card" id="card-q13">
+      <div class="q-title">
+        <span class="q-number">13</span>
+        <label>施術のこだわり・スタイルを選んでください（複数選択OK）</label>
+      </div>
+      <div class="q-note">チラシの「選ばれる理由」として掲載します</div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q13" value="ゆっくり丁寧な施術を心がけている" /><span class="option-label">① ゆっくり丁寧な施術を心がけている</span></label>
+        <label class="option"><input type="checkbox" name="q13" value="毎回カウンセリングでお肌の状態を確認する" /><span class="option-label">② 毎回カウンセリングでお肌の状態を確認する</span></label>
+        <label class="option"><input type="checkbox" name="q13" value="入居者に合わせた施術内容に柔軟に対応する" /><span class="option-label">③ 入居者に合わせた施術内容に柔軟に対応する</span></label>
+        <label class="option"><input type="checkbox" name="q13" value="リラクゼーション重視（会話もゆっくり楽しめる）" /><span class="option-label">④ リラクゼーション重視（会話もゆっくり楽しめる）</span></label>
+        <label class="option"><input type="checkbox" name="q13" value="身体的負担が少ない安全な施術" /><span class="option-label">⑤ 身体的負担が少ない安全な施術</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q13_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="card" id="card-q14">
+      <div class="q-title">
+        <span class="q-number">14</span>
+        <label>初回体験・お試しコースはありますか？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q14" value="あり（初回特別価格）" /><span class="option-label">① あり（初回特別価格）</span></label>
+        <label class="option"><input type="radio" name="q14" value="あり（初回無料）" /><span class="option-label">② あり（初回無料）</span></label>
+        <label class="option"><input type="radio" name="q14" value="あり（体験コースあり）" /><span class="option-label">③ あり（体験コースあり）</span></label>
+        <label class="option"><input type="radio" name="q14" value="なし（通常料金のみ）" /><span class="option-label">④ なし（通常料金のみ）</span></label>
+        <label class="option"><input type="radio" name="q14" value="検討中" /><span class="option-label">⑤ 検討中</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他・詳細</span>
+        <input class="other-input" type="text" name="q14_other" placeholder="例：初回2,000円 → 1,000円" />
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="card" id="card-q15">
+      <div class="q-title">
+        <span class="q-number">15</span>
+        <label>キャンセル・変更のルールは？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q15" value="前日までに連絡すればキャンセル無料" /><span class="option-label">① 前日までに連絡すればキャンセル無料</span></label>
+        <label class="option"><input type="radio" name="q15" value="当日でもキャンセル・変更OK（無料）" /><span class="option-label">② 当日でもキャンセル・変更OK（無料）</span></label>
+        <label class="option"><input type="radio" name="q15" value="施設スタッフ経由で変更・キャンセルを受付" /><span class="option-label">③ 施設スタッフ経由で変更・キャンセルを受付</span></label>
+        <label class="option"><input type="radio" name="q15" value="特にルールなし・柔軟に対応" /><span class="option-label">④ 特にルールなし・柔軟に対応</span></label>
+        <label class="option"><input type="radio" name="q15" value="まだ決めていない" /><span class="option-label">⑤ まだ決めていない</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他・詳細</span>
+        <input class="other-input" type="text" name="q15_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="card" id="card-q16">
+      <div class="q-title">
+        <span class="q-number">16</span>
+        <label>お支払い方法は？（複数選択OK）</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="q16" value="現金のみ" /><span class="option-label">① 現金のみ</span></label>
+        <label class="option"><input type="checkbox" name="q16" value="施設への月次まとめ請求" /><span class="option-label">② 施設への月次まとめ請求</span></label>
+        <label class="option"><input type="checkbox" name="q16" value="PayPay等キャッシュレス対応" /><span class="option-label">③ PayPay等キャッシュレス対応</span></label>
+        <label class="option"><input type="checkbox" name="q16" value="クレジットカード対応" /><span class="option-label">④ クレジットカード対応</span></label>
+        <label class="option"><input type="checkbox" name="q16" value="施設が全額負担（無料）" /><span class="option-label">⑤ 施設が全額負担（無料）</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q16_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="card" id="card-q17">
+      <div class="q-title">
+        <span class="q-number">17</span>
+        <label>チラシ全体の雰囲気はどんな感じにしたい？</label>
+      </div>
+      <div class="q-note">デザインの方向性を決めます</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q17" value="やさしく温かみのある（ほっこり系）" /><span class="option-label">① やさしく温かみのある（ほっこり系）</span></label>
+        <label class="option"><input type="radio" name="q17" value="上品で落ち着いた（大人エレガント系）" /><span class="option-label">② 上品で落ち着いた（大人エレガント系）</span></label>
+        <label class="option"><input type="radio" name="q17" value="明るくポップな（親しみやすい系）" /><span class="option-label">③ 明るくポップな（親しみやすい系）</span></label>
+        <label class="option"><input type="radio" name="q17" value="清潔感・信頼感重視（シンプル系）" /><span class="option-label">④ 清潔感・信頼感重視（シンプル系）</span></label>
+        <label class="option"><input type="radio" name="q17" value="自然・オーガニック感（ナチュラル系）" /><span class="option-label">⑤ 自然・オーガニック感（ナチュラル系）</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他・イメージを記入</span>
+        <input class="other-input" type="text" name="q17_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="card" id="card-q18">
+      <div class="q-title">
+        <span class="q-number">18</span>
+        <label>施術前に問診票・同意書はありますか？</label>
+      </div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q18" value="あり（問診票・同意書の両方）" /><span class="option-label">① あり（問診票・同意書の両方）</span></label>
+        <label class="option"><input type="radio" name="q18" value="あり（問診票のみ）" /><span class="option-label">② あり（問診票のみ）</span></label>
+        <label class="option"><input type="radio" name="q18" value="あり（口頭での確認のみ）" /><span class="option-label">③ あり（口頭での確認のみ）</span></label>
+        <label class="option"><input type="radio" name="q18" value="なし（特に行っていない）" /><span class="option-label">④ なし（特に行っていない）</span></label>
+        <label class="option"><input type="radio" name="q18" value="検討中・今後作る予定" /><span class="option-label">⑤ 検討中・今後作る予定</span></label>
+      </div>
+      <div class="other-wrap">
+        <span class="option-label">⑥ その他</span>
+        <input class="other-input" type="text" name="q18_other" placeholder="自由に記入してください" />
+      </div>
+    </div>
+
+    <!-- 画像選択 -->
+    <div class="card" id="card-images">
+      <div class="q-title">
+        <span class="q-number" style="background:linear-gradient(135deg,#b8d4e8,#7aaac0)">画</span>
+        <label>チラシに使いたい画像があったら選んでね</label>
+      </div>
+      <div class="q-note">複数OKです。気になるものに✓をつけてください。なければスキップしてOK！</div>
+
+      <!-- Unsplash 画像 -->
+      <p style="padding-left:42px;font-size:12px;color:#9a7a8a;margin-bottom:10px;font-weight:700;">
+        📷 Unsplash より
+      </p>
+      <div class="img-grid">
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.unsplash.com/photo-1706795033728-9232ef548a16?w=800&h=600&fit=crop&q=80&auto=format" data-site="Unsplash" />
+          <img class="img-thumb" src="https://images.unsplash.com/photo-1706795033728-9232ef548a16?w=400&h=300&fit=crop&q=80&auto=format" alt="フェイシャルマッサージ" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-unsplash">Unsplash</span><br />フェイシャルマッサージ</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=600&fit=crop&q=80&auto=format" data-site="Unsplash" />
+          <img class="img-thumb" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=300&fit=crop&q=80&auto=format" alt="フェイスパック" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-unsplash">Unsplash</span><br />フェイスパック</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.unsplash.com/photo-1741934023052-26baf5535088?w=800&h=600&fit=crop&q=80&auto=format" data-site="Unsplash" />
+          <img class="img-thumb" src="https://images.unsplash.com/photo-1741934023052-26baf5535088?w=400&h=300&fit=crop&q=80&auto=format" alt="顔のマッサージ" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-unsplash">Unsplash</span><br />顔のマッサージ</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?w=800&h=600&fit=crop&q=80&auto=format" data-site="Unsplash" />
+          <img class="img-thumb" src="https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?w=400&h=300&fit=crop&q=80&auto=format" alt="癒しの手" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-unsplash">Unsplash</span><br />癒しの手</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.unsplash.com/photo-1643684391140-c5056cfd3436?w=800&h=600&fit=crop&q=80&auto=format" data-site="Unsplash" />
+          <img class="img-thumb" src="https://images.unsplash.com/photo-1643684391140-c5056cfd3436?w=400&h=300&fit=crop&q=80&auto=format" alt="スパ・癒し" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-unsplash">Unsplash</span><br />スパ・癒し</p>
+        </label>
+
+      </div>
+
+      <!-- Pexels 画像 -->
+      <p style="padding-left:42px;font-size:12px;color:#9a7a8a;margin:20px 0 10px;font-weight:700;">
+        📷 Pexels より
+      </p>
+      <div class="img-grid">
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.pexels.com/photos/11898946/pexels-photo-11898946.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" data-site="Pexels" />
+          <img class="img-thumb" src="https://images.pexels.com/photos/11898946/pexels-photo-11898946.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="スパ施術" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-pexels">Pexels</span><br />スパ施術</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.pexels.com/photos/27574799/pexels-photo-27574799.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" data-site="Pexels" />
+          <img class="img-thumb" src="https://images.pexels.com/photos/27574799/pexels-photo-27574799.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="フェイスパック2" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-pexels">Pexels</span><br />フェイスパック</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.pexels.com/photos/3854483/pexels-photo-3854483.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" data-site="Pexels" />
+          <img class="img-thumb" src="https://images.pexels.com/photos/3854483/pexels-photo-3854483.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="花と手" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-pexels">Pexels</span><br />花と手</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.pexels.com/photos/6621152/pexels-photo-6621152.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" data-site="Pexels" />
+          <img class="img-thumb" src="https://images.pexels.com/photos/6621152/pexels-photo-6621152.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="花と水" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-pexels">Pexels</span><br />花と水</p>
+        </label>
+
+        <label class="img-option">
+          <input type="checkbox" name="images" value="https://images.pexels.com/photos/8789646/pexels-photo-8789646.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" data-site="Pexels" />
+          <img class="img-thumb" src="https://images.pexels.com/photos/8789646/pexels-photo-8789646.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="石と花" loading="lazy" />
+          <span class="img-check">✓</span>
+          <p class="img-caption"><span class="site-badge badge-pexels">Pexels</span><br />石と花</p>
+        </label>
+
+      </div>
+
+      <!-- もっと見るリンク -->
+      <p style="padding-left:42px;font-size:12px;color:#9a7a8a;margin:20px 0 8px;">
+        もっと見たい場合はこちらのサイトで探せます（どちらも無料・商用OK）
+      </p>
+      <div class="site-links">
+        <a class="site-link site-link-unsplash" href="https://unsplash.com/s/photos/facial-spa" target="_blank" rel="noopener">
+          🔍 Unsplash でもっと探す
+        </a>
+        <a class="site-link site-link-pexels" href="https://www.pexels.com/search/spa%20facial/" target="_blank" rel="noopener">
+          🔍 Pexels でもっと探す
+        </a>
+      </div>
+
+      <!-- URLで直接指定 -->
+      <div class="url-input-wrap">
+        <span class="url-input-label">⑥ 自分で見つけた画像のURLを貼る（その他）</span>
+        <input class="url-input" type="url" name="image_url_other" placeholder="https://..." />
+      </div>
+    </div>
+
+    <!-- 追記欄 -->
+    <div class="card">
+      <div class="q-title">
+        <span class="q-number" style="background:linear-gradient(135deg,#b8c9e8,#8aa8d0)">+</span>
+        <label>なんでも追記欄</label>
+      </div>
+      <textarea class="memo-area" name="memo" rows="4" placeholder="上の質問に書ききれなかったこと、チラシに入れたい情報、なんでもどうぞ"></textarea>
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="submit-area">
+      <button type="submit" class="submit-btn">
+        ✿ 送信する ✿
+      </button>
+      <p style="font-size:12px;color:#b08090;margin-top:16px;">送信するとスプレッドシートとSlackに自動で届きます</p>
+    </div>
+
+  </form>
+
+  <!-- 送信完了メッセージ -->
+  <div class="success" id="successMsg">
+    <div class="success-icon">✿</div>
+    <h2>ありがとん吉🐽</h2>
+    <p>回答が届きました。<br />スプレッドシートに保存されています。</p>
+  </div>
+
+</div>
+
+<script>
+  // ── n8n Webhook URL ──────────────────────────────────
+  // n8nのWebhookノードのURLをここに貼り付けてください
+  const N8N_WEBHOOK_URL = 'https://n8n.srv1059966.hstgr.cloud/webhook/manami-hearing';
+  // ────────────────────────────────────────────────────
+
+  const form = document.getElementById('hearingForm');
+  const successMsg = document.getElementById('successMsg');
+
+  // 必須チェック対象（ラジオボタン）
+  const requiredRadios = ['q1', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9'];
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // バリデーション
+    let valid = true;
+    requiredRadios.forEach(name => {
+      const card = document.getElementById('card-' + name);
+      const checked = form.querySelector(`input[name="${name}"]:checked`);
+      const other = form.querySelector(`input[name="${name}_other"]`).value.trim();
+      if (!checked && !other) {
+        card.classList.add('has-error');
+        valid = false;
+      } else {
+        card.classList.remove('has-error');
+      }
+    });
+    if (!valid) {
+      document.querySelector('.card.has-error').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // データ収集
+    const data = {
+      送信日時: new Date().toLocaleString('ja-JP'),
+      保有資格: getCheckboxValues('shikaku'),
+      Q1_メニュー名: getValue('q1'),
+      Q2_施術の流れ: getCheckboxValues('q2'),
+      Q3_高齢者への配慮: getCheckboxValues('q3'),
+      Q4_施術時間: getValue('q4'),
+      Q5_料金: getValue('q5'),
+      Q6_開催頻度: getValue('q6'),
+      Q7_施術場所: getValue('q7'),
+      Q8_予約方法: getValue('q8'),
+      Q9_メッセージ: getValue('q9'),
+      Q10_使用製品: getValue('q10'),
+      Q11_アフターケア: getCheckboxValues('q11'),
+      Q12_対応肌悩み: getCheckboxValues('q12'),
+      Q13_こだわり: getCheckboxValues('q13'),
+      Q14_体験コース: getValue('q14'),
+      Q15_キャンセルポリシー: getValue('q15'),
+      Q16_支払い方法: getCheckboxValues('q16'),
+      Q17_チラシ雰囲気: getValue('q17'),
+      Q18_問診票: getValue('q18'),
+      選択画像: [...form.querySelectorAll('input[name="images"]:checked')].map(el => el.value).join('\n') || form.querySelector('[name="image_url_other"]').value.trim() || '（選択なし）',
+      追記: form.querySelector('[name="memo"]').value.trim(),
+    };
+
+    // 送信ボタンを無効化
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = '送信中...';
+    btn.disabled = true;
+
+    try {
+      await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+      successMsg.scrollIntoView({ behavior: 'smooth' });
+    } catch (err) {
+      btn.textContent = '✿ 送信する ✿';
+      btn.disabled = false;
+      alert('送信に失敗しました。もう一度お試しください。\n' + err.message);
+    }
+  });
+
+  function getValue(name) {
+    const radio = form.querySelector(`input[name="${name}"]:checked`);
+    const other = form.querySelector(`input[name="${name}_other"]`).value.trim();
+    if (other) return '（その他）' + other;
+    return radio ? radio.value : '';
+  }
+
+  function getCheckboxValues(name) {
+    const checked = [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+    const other = form.querySelector(`input[name="${name}_other"]`).value.trim();
+    if (other) checked.push('（その他）' + other);
+    return checked.join(' / ');
+  }
+
+  // ラジオ選択時にエラー解除
+  requiredRadios.forEach(name => {
+    form.querySelectorAll(`input[name="${name}"]`).forEach(el => {
+      el.addEventListener('change', () => {
+        document.getElementById('card-' + name).classList.remove('has-error');
+      });
+    });
+    form.querySelector(`input[name="${name}_other"]`).addEventListener('input', () => {
+      document.getElementById('card-' + name).classList.remove('has-error');
+    });
+  });
+</script>
+</body>
+</html>

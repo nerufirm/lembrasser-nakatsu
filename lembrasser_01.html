@@ -738,8 +738,9 @@
         for(int i=0;i<${MAX_RIPPLES};i++){
           vec4 rp = uRipples[i];
           if(rp.z < -0.5) continue;
-          float age = uTime - rp.z;
-          if(age < 0.0 || age > 4.5) continue;
+          float rage = uTime - rp.z;
+          if(rage < 0.0 || rage > 6.43) continue;
+          float age = rage * 0.7;   // 波紋の速度を0.7倍（伝播・振動・減衰をスロー化）
           vec2 cc = vec2(rp.x*aspect, rp.y);
           vec2 d  = vec2(uv.x*aspect, uv.y) - cc;
           float dist = length(d);

@@ -10,7 +10,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Noto+Serif+JP:wght@300;400&family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Klee+One:wght@400;600&family=Noto+Serif+JP:wght@300;400&family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
 
 <script>
   tailwind.config = {
@@ -94,8 +94,13 @@
   /* 水彩手紙 */
   .watercolor-wash { background: linear-gradient(135deg, rgba(200,160,120,.10), rgba(160,200,180,.08)) !important; }
   .bg-paper-2\/70 { background: rgba(242,234,224,.72) !important; border-radius: 12px !important; border-color: rgba(200,170,130,.50) !important; }
-  h1 { font-family: 'Caveat', cursive !important; font-size: 1.1em; letter-spacing: .08em; }
-  .font-serif { font-family: 'Caveat', cursive !important; }
+  h1 { font-family: 'Caveat','Klee One', cursive !important; font-size: 1.1em; letter-spacing: .08em; }
+  .font-serif { font-family: 'Caveat','Klee One', cursive !important; }
+  /* 店名フォント(Caveat)を全文字に適用。日本語はKlee One(手書き)でフォールバック */
+  body, .font-maru, .font-mincho,
+  h2, h3, h4, nav, p, span, a, li, dt, dd, button, figcaption, small {
+    font-family: 'Caveat','Klee One', cursive !important;
+  }
   /* にじみ効果 */
   .arch { filter: drop-shadow(0 4px 12px rgba(200,130,80,.20)); }
 </style>

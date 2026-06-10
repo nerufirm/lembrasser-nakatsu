@@ -10,7 +10,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
 
 <script>
   tailwind.config = {
@@ -33,6 +33,7 @@
           serif:  ['"DM Serif Display"', 'serif'],
           mincho: ['"Shippori Mincho"', '"Zen Old Mincho"', 'serif'],
           maru:   ['"Zen Maru Gothic"', 'sans-serif'],
+          pen:    ['"Klee One"', '"Shippori Mincho"', 'cursive'],
         },
         letterSpacing: { luxe: '0.26em', wide2: '0.45em' },
       }
@@ -62,6 +63,24 @@
   .reveal.in{ opacity:1; transform:none; }
   @keyframes riseIn{ from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:none;} }
   .rise{ opacity:0; animation:riseIn 1.4s cubic-bezier(.16,.84,.34,1) forwards; }
+
+  /* 万年筆で一文字ずつ書いていく演出 */
+  .handwrite{ white-space:pre; }
+  .ink-char{
+    display:inline-block;
+    opacity:0;
+    clip-path:inset(0 100% 0 0);     /* 左→右にインクを引く */
+    filter:blur(3px);                 /* インクのにじみ → 定着 */
+    animation:penWrite .52s cubic-bezier(.5,.15,.25,1) forwards;
+  }
+  @keyframes penWrite{
+    0%   { opacity:0; clip-path:inset(0 100% 0 0); filter:blur(3px); }
+    55%  { opacity:1; }
+    100% { opacity:1; clip-path:inset(0 0 0 0);   filter:blur(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ink-char{ animation:none; opacity:1; clip-path:none; filter:none; }
+  }
 
   /* レトロな星のきらめき */
   @keyframes twinkle{ 0%,100%{ opacity:.4; transform:scale(.85);} 50%{ opacity:1; transform:scale(1.1);} }
@@ -179,9 +198,7 @@
       <div class="flex-1 max-w-lg text-center">
         <p class="rise font-serif italic text-rust text-xl sm:text-2xl mb-7" style="animation-delay:.2s">Ayurveda &amp; the Inner Cosmos</p>
         <p class="rise font-mincho text-ink/70 text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s">呼吸ひとつ。かたくなな結び目が、夜に溶けてゆく</p>
-        <h1 class="rise font-mincho text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" style="animation-delay:.6s">
-          本来の私へ。
-        </h1>
+        <h1 class="handwrite font-pen text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" aria-label="ほんらいの私へ"><span class="ink-char" style="animation-delay:.55s">ほ</span><span class="ink-char" style="animation-delay:.78s">ん</span><span class="ink-char" style="animation-delay:1.01s">ら</span><span class="ink-char" style="animation-delay:1.24s">い</span><span class="ink-char" style="animation-delay:1.47s">の</span><span class="ink-char" style="animation-delay:1.70s">私</span><span class="ink-char" style="animation-delay:1.93s">へ</span></h1>
         <p class="rise font-maru font-light text-ink-soft leading-loose text-sm sm:text-base mb-12" style="animation-delay:.8s">
           奥深くのコリまで届く、アーユルヴェーダのディープケア。<br />
           大分初の「ヘッドマルマケア ＋ 深部ケア」で、内側のしずけさへ。

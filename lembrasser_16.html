@@ -116,13 +116,9 @@
     border-bottom: 1px solid rgba(255,255,255,.6);
     box-shadow: 0 6px 26px rgba(120,90,50,.12);
   }
+  /* 手書きは見出し・装飾のみ（本文・料金・規約は丸ゴシック/明朝のまま） */
   h1 { font-family: 'Caveat','Klee One', cursive !important; font-size: 1.1em; letter-spacing: .08em; }
   .font-serif { font-family: 'Caveat','Klee One', cursive !important; }
-  /* 店名フォント(Caveat)を全文字に適用。日本語はKlee One(手書き)でフォールバック */
-  body, .font-maru, .font-mincho,
-  h2, h3, h4, nav, p, span, a, li, dt, dd, button, figcaption, small {
-    font-family: 'Caveat','Klee One', cursive !important;
-  }
   /* にじみ効果 */
   .arch { filter: drop-shadow(0 4px 12px rgba(200,130,80,.20)); }
 </style>

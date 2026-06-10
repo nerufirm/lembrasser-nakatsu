@@ -89,10 +89,19 @@
   .arch{ border-radius:48% 48% 8px 8px / 34% 34% 8px 8px; }
 
   .rule-double{ border-top:1px solid rgba(236,230,214,.18); box-shadow:0 3px 0 -2px rgba(236,230,214,.18); }
+
+  /* 水面の波紋（純WebGL・ページ全面の背景） */
+  #ripple-bg{
+    position:fixed; inset:0; width:100%; height:100%;
+    z-index:0; pointer-events:none; display:block;
+  }
 </style>
 </head>
 
 <body class="grain font-maru antialiased overflow-x-hidden selection:bg-rust selection:text-cream">
+
+  <!-- 水面の波紋（純WebGL・ページ全面の背景） -->
+  <canvas id="ripple-bg" aria-hidden="true"></canvas>
 
   <!-- 散らばるレトロな星（装飾・全面固定） -->
   <div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
@@ -155,16 +164,10 @@
   <!-- ============ ヒーロー ============ -->
   <section class="relative min-h-[100svh] flex items-center overflow-hidden">
 
-    <!-- 植物の背景 -->
+    <!-- 背景は固定の水面波紋キャンバス（#ripple-bg）を透かして見せる -->
     <div class="absolute inset-0 z-0" aria-hidden="true">
-      <img
-        src="https://images.unsplash.com/photo-1443926818181-507851a3e558?w=1920&q=80&auto=format&fit=crop"
-        alt=""
-        class="w-full h-full object-cover"
-        style="filter:brightness(.40) saturate(.70) hue-rotate(160deg);"
-      />
-      <!-- テキスト側グラデーション -->
-      <div class="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/70 to-paper/10"></div>
+      <!-- テキスト側グラデーション（左を暗くして可読性を確保・右は水面を透かす） -->
+      <div class="absolute inset-0 bg-gradient-to-r from-paper/95 via-paper/65 to-paper/10"></div>
       <!-- 上下フェード -->
       <div class="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-paper to-transparent"></div>
       <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-paper to-transparent"></div>
@@ -660,6 +663,240 @@
       entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.14 });
     document.querySelectorAll('.reveal, .thread, .constel').forEach(el => io.observe(el));
+  </script>
+
+  <!-- ============ 水面の波紋（純WebGL／外部依存なし） ============ -->
+  <script>
+  (function(){
+    const canvas = document.getElementById('ripple-bg');
+    if (!canvas) return;
+
+    let gl;
+    try {
+      gl = canvas.getContext('webgl', { alpha:true, antialias:false, premultipliedAlpha:false })
+         || canvas.getContext('experimental-webgl');
+    } catch(e) { gl = null; }
+    if (!gl) return;  // WebGL不可ならbody背景のまま（グレースフル）
+
+    const reduceMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const MAX_RIPPLES = 12;
+
+    const VERT = `
+      attribute vec2 aPos;
+      void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }
+    `;
+
+    const FRAG = `
+      #ifdef GL_FRAGMENT_PRECISION_HIGH
+      precision highp float;
+      #else
+      precision mediump float;
+      #endif
+      uniform vec2  uRes;
+      uniform float uTime;
+      uniform vec4  uRipples[${MAX_RIPPLES}]; // xy=中心(uv), z=開始時刻, w=強さ
+
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
+      float noise(vec2 p){
+        vec2 i=floor(p), f=fract(p);
+        float a=hash(i), b=hash(i+vec2(1.0,0.0)), c=hash(i+vec2(0.0,1.0)), d=hash(i+vec2(1.0,1.0));
+        vec2 u=f*f*(3.0-2.0*f);
+        return mix(mix(a,b,u.x), mix(c,d,u.x), u.y);
+      }
+      float fbm(vec2 p){
+        float v=0.0, a=0.5;
+        for(int i=0;i<4;i++){ v+=a*noise(p); p*=2.0; a*=0.5; }
+        return v;
+      }
+
+      // 睡蓮の葉（ダーク・ティールの水面に浮かぶ）
+      void addPad(inout vec3 col, vec2 p, float aspect, vec2 c, float rad, float rot, float tint){
+        vec2 q = vec2((p.x-c.x)*aspect, p.y-c.y);
+        float s=sin(rot), cs=cos(rot);
+        q = mat2(cs,-s,s,cs)*q;
+        float r = length(q)/rad;
+        float pad = smoothstep(1.0, 0.86, r);
+        float ang = atan(q.y, q.x);
+        pad *= smoothstep(0.14, 0.30, abs(ang));            // 切れ込み（ノッチ）
+        vec3 padCol = mix(vec3(0.025,0.13,0.12), vec3(0.06,0.21,0.19), tint);
+        padCol += vec3(0.05,0.12,0.10) * smoothstep(0.95,0.45,r); // 内側を少し明るく
+        col = mix(col, padCol, pad*0.92);
+      }
+
+      void main(){
+        vec2 uv = gl_FragCoord.xy / uRes;
+        float aspect = uRes.x / uRes.y;
+
+        // --- 波紋：変位と反射ハイライトを合算 ---
+        vec2 disp = vec2(0.0);
+        float hi = 0.0;
+        for(int i=0;i<${MAX_RIPPLES};i++){
+          vec4 rp = uRipples[i];
+          if(rp.z < -0.5) continue;
+          float age = uTime - rp.z;
+          if(age < 0.0 || age > 4.0) continue;
+          vec2 cc = vec2(rp.x*aspect, rp.y);
+          vec2 d  = vec2(uv.x*aspect, uv.y) - cc;
+          float dist = length(d);
+          float radius = age * 0.42;
+          float ring = dist - radius;
+          float env   = exp(-ring*ring*150.0);
+          float decay = exp(-age*1.35) * rp.w;
+          float wave  = sin(ring*52.0) * env * decay;
+          vec2 dir = dist > 1e-4 ? d/dist : vec2(0.0);
+          disp += dir * wave;
+          hi   += wave;
+        }
+        vec2 suv = uv + disp * 0.045;
+
+        // --- 水面の色＋コースティクス（ゆらめく光） ---
+        vec2 cuv = vec2(suv.x*aspect, suv.y);
+        float ca = fbm(cuv*3.0 + vec2(uTime*0.028, uTime*0.018));
+        ca += 0.5 * fbm(cuv*6.0 - vec2(uTime*0.02, 0.0));
+        ca = pow(max(ca*0.6, 0.0), 2.0);
+        vec3 deep    = vec3(0.013,0.072,0.103);   // 深部 #04131a 付近
+        vec3 shallow = vec3(0.04,0.165,0.215);    // ティール
+        vec3 water = mix(deep, shallow, clamp(suv.y*0.55 + ca*0.5, 0.0, 1.0));
+        water += vec3(0.10,0.33,0.38) * ca * 0.32;
+
+        // --- 睡蓮の葉（中央〜右下に点在） ---
+        addPad(water, suv, aspect, vec2(0.62,0.30), 0.10, 0.30, 0.20);
+        addPad(water, suv, aspect, vec2(0.74,0.22), 0.07, 1.10, 0.60);
+        addPad(water, suv, aspect, vec2(0.55,0.17), 0.06, 2.00, 0.40);
+        addPad(water, suv, aspect, vec2(0.83,0.34), 0.085,0.70, 0.85);
+        addPad(water, suv, aspect, vec2(0.68,0.43), 0.05, 2.60, 0.30);
+        addPad(water, suv, aspect, vec2(0.90,0.20), 0.06, 1.60, 0.50);
+
+        // --- 波紋の反射ハイライト ---
+        water += vec3(0.16,0.40,0.44) * max(hi, 0.0) * 1.2;
+
+        gl_FragColor = vec4(water, 1.0);
+      }
+    `;
+
+    function compile(type, src){
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src); gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)){
+        console.warn('ripple shader:', gl.getShaderInfoLog(sh));
+        gl.deleteShader(sh); return null;
+      }
+      return sh;
+    }
+    const vs = compile(gl.VERTEX_SHADER, VERT);
+    const fs = compile(gl.FRAGMENT_SHADER, FRAG);
+    if (!vs || !fs) return;
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)){
+      console.warn('ripple link:', gl.getProgramInfoLog(prog)); return;
+    }
+    gl.useProgram(prog);
+
+    // フルスクリーン三角形
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes     = gl.getUniformLocation(prog, 'uRes');
+    const uTime    = gl.getUniformLocation(prog, 'uTime');
+    const uRipples = gl.getUniformLocation(prog, 'uRipples[0]');
+
+    // 波紋データ（リングバッファ）
+    const ripples = new Float32Array(MAX_RIPPLES * 4);
+    for (let i=0;i<MAX_RIPPLES;i++) ripples[i*4+2] = -1.0; // z=未使用
+    let rIndex = 0;
+    function spawn(x, y, strength, t){
+      const o = rIndex * 4;
+      ripples[o]   = x;
+      ripples[o+1] = y;
+      ripples[o+2] = t;
+      ripples[o+3] = strength;
+      rIndex = (rIndex + 1) % MAX_RIPPLES;
+    }
+
+    // リサイズ（大画面では内部解像度を抑えてCSSで引き伸ばす）
+    function resize(){
+      const w = window.innerWidth, h = window.innerHeight;
+      const scale = Math.min(1, 1280 / Math.max(w, 1));
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const pw = Math.max(1, Math.round(w * scale * dpr));
+      const ph = Math.max(1, Math.round(h * scale * dpr));
+      if (canvas.width !== pw || canvas.height !== ph){
+        canvas.width = pw; canvas.height = ph;
+      }
+      gl.viewport(0, 0, pw, ph);
+      gl.uniform2f(uRes, pw, ph);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive:true });
+
+    const start = performance.now();
+    const nowSec = () => (performance.now() - start) / 1000;
+
+    // ポインタ入力 → 波紋を発生
+    let lastX = 0, lastY = 0, lastT = 0, primed = false;
+    function onMove(e){
+      const t = nowSec();
+      const x = e.clientX / window.innerWidth;
+      const y = 1.0 - e.clientY / window.innerHeight;
+      if (!primed){ lastX=x; lastY=y; lastT=t; primed=true; return; }
+      const dt = Math.max(t - lastT, 1e-3);
+      if (dt < 0.028) return;                       // スロットリング
+      const dx = x - lastX, dy = y - lastY;
+      const speed = Math.sqrt(dx*dx + dy*dy) / dt;
+      const strength = Math.min(0.35 + speed * 0.9, 1.0);
+      spawn(x, y, strength, t);
+      lastX=x; lastY=y; lastT=t;
+    }
+    if (!reduceMotion){
+      window.addEventListener('pointermove', onMove, { passive:true });
+      window.addEventListener('pointerdown', (e)=>{
+        spawn(e.clientX/window.innerWidth, 1.0 - e.clientY/window.innerHeight, 1.0, nowSec());
+      }, { passive:true });
+    }
+
+    // 描画ループ
+    let running = true, idleAccum = 0, prevFrame = 0;
+    function frame(){
+      if (!running) return;
+      const t = nowSec();
+      const dt = Math.min(t - prevFrame, 0.05); prevFrame = t;
+
+      // Idle Ripples：無操作でも水面が呼吸する（Figma原作と同機能）
+      if (!reduceMotion){
+        idleAccum += dt;
+        if (idleAccum > 1.4){
+          idleAccum = 0;
+          spawn(0.15 + Math.random()*0.7, 0.12 + Math.random()*0.6, 0.45, t);
+        }
+      }
+
+      gl.uniform1f(uTime, t);
+      gl.uniform4fv(uRipples, ripples);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      requestAnimationFrame(frame);
+    }
+
+    if (reduceMotion){
+      // 動きを抑える設定では1フレームだけ静止描画
+      gl.uniform1f(uTime, 0.0);
+      gl.uniform4fv(uRipples, ripples);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    } else {
+      prevFrame = nowSec();
+      requestAnimationFrame(frame);
+      document.addEventListener('visibilitychange', ()=>{
+        if (document.hidden){ running = false; }
+        else if (!running){ running = true; prevFrame = nowSec(); requestAnimationFrame(frame); }
+      });
+    }
+  })();
   </script>
 </body>
 </html>

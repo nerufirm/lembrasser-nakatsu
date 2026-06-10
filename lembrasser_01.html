@@ -198,7 +198,7 @@
       <div class="flex-1 max-w-lg text-center">
         <p class="rise font-serif italic text-rust text-xl sm:text-2xl mb-7" style="animation-delay:.2s">Ayurveda &amp; the Inner Cosmos</p>
         <p class="rise font-mincho text-ink/70 text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s">呼吸ひとつ。かたくなな結び目が、夜に溶けてゆく</p>
-        <h1 class="handwrite font-pen text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" aria-label="ほんらいの私へ"><span class="ink-char" style="animation-delay:.55s">ほ</span><span class="ink-char" style="animation-delay:.78s">ん</span><span class="ink-char" style="animation-delay:1.01s">ら</span><span class="ink-char" style="animation-delay:1.24s">い</span><span class="ink-char" style="animation-delay:1.47s">の</span><span class="ink-char" style="animation-delay:1.70s">私</span><span class="ink-char" style="animation-delay:1.93s">へ</span></h1>
+        <h1 class="handwrite font-pen text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" aria-label="本来の私へ"><span class="ink-char" style="animation-delay:.55s">本</span><span class="ink-char" style="animation-delay:.83s">来</span><span class="ink-char" style="animation-delay:1.11s">の</span><span class="ink-char" style="animation-delay:1.39s">私</span><span class="ink-char" style="animation-delay:1.67s">へ</span></h1>
         <p class="rise font-maru font-light text-ink-soft leading-loose text-sm sm:text-base mb-12" style="animation-delay:.8s">
           奥深くのコリまで届く、アーユルヴェーダのディープケア。<br />
           大分初の「ヘッドマルマケア ＋ 深部ケア」で、内側のしずけさへ。
@@ -730,27 +730,37 @@
         vec2 uv = gl_FragCoord.xy / uRes;
         float aspect = uRes.x / uRes.y;
 
-        // --- 波紋：変位と反射ハイライトを合算 ---
+        // --- 波紋：水滴の着水 → 同心円がリアルに伝播 ---
         vec2 disp = vec2(0.0);
-        float hi = 0.0;
+        float hi  = 0.0;   // 波の稜線の白いきらめき
+        float act = 0.0;   // 波紋が広がった範囲（明るくする活性度）
+        float splash = 0.0;// 着水点の一瞬のきらめき
         for(int i=0;i<${MAX_RIPPLES};i++){
           vec4 rp = uRipples[i];
           if(rp.z < -0.5) continue;
           float age = uTime - rp.z;
-          if(age < 0.0 || age > 4.0) continue;
+          if(age < 0.0 || age > 4.5) continue;
           vec2 cc = vec2(rp.x*aspect, rp.y);
           vec2 d  = vec2(uv.x*aspect, uv.y) - cc;
           float dist = length(d);
-          float radius = age * 0.42;
-          float ring = dist - radius;
-          float env   = exp(-ring*ring*150.0);
-          float decay = exp(-age*1.35) * rp.w;
-          float wave  = sin(ring*52.0) * env * decay;
+
+          float front  = age * 0.40;                  // 因果的な波面（ここまで波が到達）
+          float behind = front - dist;                // >0 なら波が到達済み
+          float reach  = smoothstep(0.0, 0.04, behind);
+          float fb     = exp(-behind*behind*38.0);     // 波面付近を少し強調
+
+          // 進行する同心波＋毛細波（先端ほど細かい）
+          float wave = sin(dist*46.0 - age*22.0) + 0.4*sin(dist*92.0 - age*40.0);
+          float amp  = exp(-dist*2.1) * exp(-age*1.1) * rp.w;   // 距離と時間で自然減衰
+          float w    = wave * amp * reach * (0.65 + 0.6*fb);
+
           vec2 dir = dist > 1e-4 ? d/dist : vec2(0.0);
-          disp += dir * wave;
-          hi   += wave;
+          disp += dir * w;
+          hi   += max(w, 0.0);
+          act  += abs(w) + 0.22 * amp * reach;
+          splash += exp(-dist*dist*950.0) * exp(-age*9.0) * rp.w;
         }
-        vec2 suv = uv + disp * 0.045;
+        vec2 suv = uv + disp * 0.05;
 
         // --- 水面の色＋コースティクス（ゆらめく光） ---
         vec2 cuv = vec2(suv.x*aspect, suv.y);
@@ -770,8 +780,12 @@
         addPad(water, suv, aspect, vec2(0.68,0.43), 0.05, 2.60, 0.30);
         addPad(water, suv, aspect, vec2(0.90,0.20), 0.06, 1.60, 0.50);
 
-        // --- 波紋の反射ハイライト ---
-        water += vec3(0.16,0.40,0.44) * max(hi, 0.0) * 1.2;
+        // --- 波紋が広がった範囲を「キラキラ明るい水色」へ ---
+        vec3 sparkleAqua = vec3(0.32, 0.80, 0.88);
+        water = mix(water, sparkleAqua, clamp(act*0.55, 0.0, 0.52));
+        water += vec3(0.45,0.90,0.98) * ca * act * 0.7;             // 活性域のコースティクスを増幅
+        water += vec3(0.90,1.00,1.00) * pow(max(hi,0.0), 2.2) * 0.9; // 波の稜線の白いきらめき
+        water += vec3(0.85,1.00,1.00) * splash * 1.1;               // 着水点のきらめき
 
         gl_FragColor = vec4(water, 1.0);
       }
@@ -869,12 +883,12 @@
       const t = nowSec();
       const dt = Math.min(t - prevFrame, 0.05); prevFrame = t;
 
-      // Idle Ripples：無操作でも水面が呼吸する（Figma原作と同機能）
+      // 水滴が落ちて波紋が広がる（無操作でも一定間隔で着水）
       if (!reduceMotion){
         idleAccum += dt;
-        if (idleAccum > 1.4){
+        if (idleAccum > 1.0 + Math.random()*0.8){
           idleAccum = 0;
-          spawn(0.15 + Math.random()*0.7, 0.12 + Math.random()*0.6, 0.45, t);
+          spawn(0.12 + Math.random()*0.76, 0.10 + Math.random()*0.64, 0.7 + Math.random()*0.3, t);
         }
       }
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>lembrasser_nakatsu｜水彩手紙テーマ — 大分・中津 アーユルヴェーダ</title>
-<meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。宇宙とつながり、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
+<meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。一通の手紙のように、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -73,14 +73,10 @@
   @keyframes spin{ to{ transform:rotate(360deg);} }
   .spin-slow{ animation:spin 80s linear infinite; transform-origin:center; }
 
-  /* 星座ディバイダー */
-  .constel circle{ opacity:0; transition:opacity 1s ease; }
-  .constel polyline{ stroke-dasharray:1; stroke-dashoffset:1; }
-  .constel.in circle{ opacity:1; }
-  .constel.in circle.c2{ transition-delay:.3s;} .constel.in circle.c3{ transition-delay:.55s;}
-  .constel.in circle.c4{ transition-delay:.8s;} .constel.in circle.c5{ transition-delay:1.05s;}
+  /* 手書き波線ディバイダー（便箋の罫線風） */
+  .squiggle path{ stroke-dasharray:1; stroke-dashoffset:1; }
   @keyframes drawStroke{ to{ stroke-dashoffset:0; } }
-  .constel.in polyline{ animation:drawStroke 2.2s ease forwards .35s; }
+  .squiggle.in path{ animation:drawStroke 2.4s ease forwards; }
 
   @keyframes drawLine{ from{ transform:scaleY(0);} to{ transform:scaleY(1);} }
   .thread.in .thread-line{ animation:drawLine 2.2s cubic-bezier(.16,.84,.34,1) forwards; transform-origin:top; }
@@ -221,11 +217,11 @@
   <section id="concept" class="relative py-28 sm:py-40 scroll-mt-20">
     <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
 
-      <!-- アーチ額装の宇宙写真（セピア） -->
+      <!-- アーチ額装の写真（古い手紙の挿絵風セピア） -->
       <div class="reveal mx-auto w-52 sm:w-64 mb-14">
         <div class="arch overflow-hidden border border-rust/40 shadow-[0_14px_44px_rgba(0,0,0,.55)]">
-          <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=900&q=80&auto=format&fit=crop"
-               alt="ボタニカルな植物のイメージ" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.40) brightness(.90) contrast(1.0) sepia(.12);" />
+          <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=900&q=80&auto=format&fit=crop"
+               alt="水辺の自然の挿絵風写真" class="w-full aspect-[3/4] object-cover" style="filter:saturate(.35) brightness(.95) contrast(.98) sepia(.30);" />
         </div>
       </div>
 
@@ -236,17 +232,17 @@
         <span class="text-ochre">休んでも疲れが取れない</span>、あなたへ。
       </h2>
 
-      <!-- 宇宙とあなたをつなぐ一本の線 -->
+      <!-- 手紙とあなたをつなぐ一本の線 -->
       <div class="thread reveal flex flex-col items-center mb-14">
         <svg class="w-5 text-ochre" viewBox="0 0 24 24" fill="currentColor" opacity=".6"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9" opacity=".3" fill="none" stroke="currentColor" stroke-width="1"/></svg>
-        <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">cosmos</span>
+        <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">letter</span>
         <span class="thread-line block w-px h-20 sm:h-24 bg-gradient-to-b from-rust/70 to-tan"></span>
         <span class="font-serif italic text-rust/80 text-sm mt-2 mb-2">you</span>
         <span class="block h-2 w-2 rounded-full border border-rust"></span>
       </div>
 
       <p class="reveal font-mincho text-base sm:text-lg leading-loose text-ink mb-8">
-        わたしたちの体には、<br class="sm:hidden" />ひとつの小さな宇宙が宿っています。
+        わたしたちの体には、<br class="sm:hidden" />一通の長い手紙が綴られています。
       </p>
 
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
@@ -256,7 +252,7 @@
       </p>
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
         当サロンの<span class="text-rust font-normal">「ヘッドマルマケア ＋ 深部ケア」</span>は、
-        アーユルヴェーダで体の要所とされる<span class="text-ochre font-normal">頭部のマルマポイント</span>を、星をたどるようにひとつずつ整えながら、
+        アーユルヴェーダで体の要所とされる<span class="text-ochre font-normal">頭部のマルマポイント</span>を、インクが紙に染みこむようにひとつずつ整えながら、
         深部のこりまで静かにアプローチ。施術を重ねるうちに、<span class="text-rust font-normal">呼吸が深まり、眠りが変わり、頭が軽くなる</span>のを感じていただけます。
       </p>
       <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
@@ -274,16 +270,10 @@
   </section>
 
 
-  <!-- ============ 星座ディバイダー ============ -->
+  <!-- ============ 手書き波線ディバイダー ============ -->
   <div class="relative flex justify-center py-4">
-    <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
-      <polyline points="14,40 66,18 124,34 168,14 226,32 266,20" stroke="rgba(200,130,80,.45)" stroke-width="1" pathLength="1"/>
-      <circle class="c1" cx="14" cy="40" r="2.2" fill="#C87050"/>
-      <circle class="c2" cx="66" cy="18" r="2.8" fill="#D8A878"/>
-      <circle class="c3" cx="124" cy="34" r="2.2" fill="#C87050"/>
-      <circle class="c4" cx="168" cy="14" r="3.2" fill="#D8A878"/>
-      <circle class="c5" cx="226" cy="32" r="2.2" fill="#C87050"/>
-      <circle class="c5" cx="266" cy="20" r="2.6" fill="#D8A878"/>
+    <svg class="squiggle w-56 sm:w-72" viewBox="0 0 280 30" fill="none" stroke="rgba(200,130,80,.55)" stroke-width="1.6" stroke-linecap="round">
+      <path d="M8,15 C30,4 44,26 66,15 C88,4 102,26 124,15 C146,4 160,26 182,15 C204,4 218,26 240,15 C254,8 264,12 272,15" pathLength="1"/>
     </svg>
   </div>
 
@@ -373,16 +363,10 @@
   </section>
 
 
-  <!-- ============ 星座ディバイダー ============ -->
+  <!-- ============ 手書き波線ディバイダー ============ -->
   <div class="relative flex justify-center py-4">
-    <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
-      <polyline points="18,22 70,40 120,20 176,38 222,18 264,34" stroke="rgba(200,130,80,.45)" stroke-width="1" pathLength="1"/>
-      <circle class="c1" cx="18" cy="22" r="2.6" fill="#D8A878"/>
-      <circle class="c2" cx="70" cy="40" r="2.2" fill="#C87050"/>
-      <circle class="c3" cx="120" cy="20" r="3.2" fill="#D8A878"/>
-      <circle class="c4" cx="176" cy="38" r="2.2" fill="#C87050"/>
-      <circle class="c5" cx="222" cy="18" r="2.8" fill="#D8A878"/>
-      <circle class="c5" cx="264" cy="34" r="2.2" fill="#C87050"/>
+    <svg class="squiggle w-56 sm:w-72" viewBox="0 0 280 30" fill="none" stroke="rgba(200,130,80,.55)" stroke-width="1.6" stroke-linecap="round">
+      <path d="M8,15 C30,26 44,4 66,15 C88,26 102,4 124,15 C146,26 160,4 182,15 C204,26 218,4 240,15 C254,22 264,18 272,15" pathLength="1"/>
     </svg>
   </div>
 
@@ -411,16 +395,10 @@
   </section>
 
 
-  <!-- ============ 星座ディバイダー ============ -->
+  <!-- ============ 手書き波線ディバイダー ============ -->
   <div class="relative flex justify-center py-4">
-    <svg class="constel w-56 sm:w-72" viewBox="0 0 280 60" fill="none">
-      <polyline points="14,30 60,14 110,38 158,20 210,36 266,16" stroke="rgba(200,130,80,.45)" stroke-width="1" pathLength="1"/>
-      <circle class="c1" cx="14" cy="30" r="2.4" fill="#D8A878"/>
-      <circle class="c2" cx="60" cy="14" r="2.8" fill="#C87050"/>
-      <circle class="c3" cx="110" cy="38" r="2.2" fill="#D8A878"/>
-      <circle class="c4" cx="158" cy="20" r="3.0" fill="#C87050"/>
-      <circle class="c5" cx="210" cy="36" r="2.4" fill="#D8A878"/>
-      <circle class="c5" cx="266" cy="16" r="2.6" fill="#C87050"/>
+    <svg class="squiggle w-56 sm:w-72" viewBox="0 0 280 30" fill="none" stroke="rgba(200,130,80,.55)" stroke-width="1.6" stroke-linecap="round">
+      <path d="M8,15 C30,4 44,26 66,15 C88,4 102,26 124,15 C146,4 160,26 182,15 C204,4 218,26 240,15 C254,8 264,12 272,15" pathLength="1"/>
     </svg>
   </div>
 
@@ -668,7 +646,7 @@
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.14 });
-    document.querySelectorAll('.reveal, .thread, .constel').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal, .thread, .squiggle').forEach(el => io.observe(el));
   </script>
 </body>
 </html>

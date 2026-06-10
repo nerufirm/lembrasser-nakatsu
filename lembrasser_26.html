@@ -79,7 +79,7 @@
   /* 本文カード：読みやすさのため少し白を増やす（でもガラス感は維持） */
   .lg-card{
     position:relative; overflow:hidden;
-    background:linear-gradient(135deg, rgba(255,255,255,.52), rgba(247,253,251,.34));
+    background:linear-gradient(135deg, rgba(255,255,255,.72), rgba(247,253,251,.55));
     backdrop-filter:blur(18px) saturate(165%);
     -webkit-backdrop-filter:blur(18px) saturate(165%);
     border:1px solid rgba(255,255,255,.6);
@@ -102,6 +102,24 @@
 
   .arch{ border-radius:48% 48% 10px 10px / 34% 34% 10px 10px; }
   .rule-double{ border-top:1px dashed rgba(46,139,130,.40); }
+
+  /* 万年筆で一文字ずつ書いていく演出 */
+  .handwrite{ white-space:pre; }
+  .ink-char{
+    display:inline-block;
+    opacity:0;
+    clip-path:inset(0 100% 0 0);     /* 左→右にインクを引く */
+    filter:blur(3px);                 /* インクのにじみ → 定着 */
+    animation:penWrite .52s cubic-bezier(.5,.15,.25,1) forwards;
+  }
+  @keyframes penWrite{
+    0%   { opacity:0; clip-path:inset(0 100% 0 0); filter:blur(3px); }
+    55%  { opacity:1; }
+    100% { opacity:1; clip-path:inset(0 0 0 0);   filter:blur(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ink-char{ animation:none; opacity:1; clip-path:none; filter:none; }
+  }
 </style>
 </head>
 
@@ -160,9 +178,7 @@
     <div class="rise lg-card rounded-[28px] max-w-xl w-full px-8 sm:px-14 py-14 sm:py-16 text-center mt-10">
       <p class="font-script text-rust text-3xl sm:text-4xl mb-4">Ayurveda &amp; Still Water</p>
       <p class="font-hand text-ink-soft text-xs sm:text-sm tracking-[0.18em] mb-7">澄んだ水面のように、こころをほどいて</p>
-      <h1 class="font-hand font-semibold text-ink leading-[1.7] text-[2.1rem] sm:text-5xl mb-8">
-        本来の私へ。
-      </h1>
+      <h1 class="handwrite font-hand font-semibold text-ink leading-[1.7] text-[2.1rem] sm:text-5xl mb-8" aria-label="本来の私へ"><span class="ink-char" style="animation-delay:.55s">本</span><span class="ink-char" style="animation-delay:.83s">来</span><span class="ink-char" style="animation-delay:1.11s">の</span><span class="ink-char" style="animation-delay:1.39s">私</span><span class="ink-char" style="animation-delay:1.67s">へ</span></h1>
       <div class="flex flex-col items-center gap-5">
         <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
            class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-hand text-base tracking-wide shadow-[0_8px_30px_rgba(213,111,149,.35)] hover:bg-rust-d transition-all duration-500">
@@ -644,25 +660,32 @@
         vec2 uv = gl_FragCoord.xy / uRes;
         float aspect = uRes.x / uRes.y;
 
-        // --- 波紋：変位とハイライト ---
+        // --- 波紋：着水 → 因果的な波面で同心円がリアルに伝播（0.7倍速） ---
         vec2 disp = vec2(0.0);
-        float hi = 0.0;
+        float hi  = 0.0;
+        float act = 0.0;
+        float splash = 0.0;
         for(int i=0;i<${MAX_RIPPLES};i++){
           vec4 rp = uRipples[i];
           if(rp.z < -0.5) continue;
-          float age = uTime - rp.z;
-          if(age < 0.0 || age > 4.0) continue;
+          float rage = uTime - rp.z;
+          if(rage < 0.0 || rage > 6.43) continue;
+          float age = rage * 0.7;
           vec2 cc = vec2(rp.x*aspect, rp.y);
           vec2 d  = vec2(uv.x*aspect, uv.y) - cc;
           float dist = length(d);
-          float radius = age * 0.42;
-          float ring = dist - radius;
-          float env   = exp(-ring*ring*150.0);
-          float decay = exp(-age*1.35) * rp.w;
-          float wave  = sin(ring*52.0) * env * decay;
+          float front  = age * 0.40;
+          float behind = front - dist;
+          float reach  = smoothstep(0.0, 0.04, behind);
+          float fb     = exp(-behind*behind*38.0);
+          float wave = sin(dist*46.0 - age*22.0) + 0.4*sin(dist*92.0 - age*40.0);
+          float amp  = exp(-dist*2.1) * exp(-age*1.1) * rp.w;
+          float w    = wave * amp * reach * (0.65 + 0.6*fb);
           vec2 dir = dist > 1e-4 ? d/dist : vec2(0.0);
-          disp += dir * wave;
-          hi   += wave;
+          disp += dir * w;
+          hi   += max(w, 0.0);
+          act  += abs(w) + 0.22 * amp * reach;
+          splash += exp(-dist*dist*950.0) * exp(-age*9.0) * rp.w;
         }
         vec2 duv = uv + disp * 0.04;
 
@@ -673,8 +696,10 @@
         vec2 cuv = (duv - 0.5) * scale + 0.5;
 
         vec3 col = texture2D(uTex, cuv).rgb;
-        // 波紋の稜線に陽光のようなハイライト
-        col += vec3(0.85,1.0,0.96) * max(hi, 0.0) * 0.55;
+        // 波紋の稜線に陽光のようなハイライト＋活性域をほのかに明るく
+        col += vec3(0.85,1.0,0.96) * pow(max(hi, 0.0), 1.6) * 0.7;
+        col = mix(col, col*1.16 + vec3(0.05,0.07,0.07), clamp(act*0.4, 0.0, 0.30));
+        col += vec3(1.0) * splash * 0.7;
 
         gl_FragColor = vec4(col, 1.0);
       }

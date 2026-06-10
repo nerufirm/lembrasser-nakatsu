@@ -94,6 +94,14 @@
   /* 水彩手紙 */
   .watercolor-wash { background: linear-gradient(135deg, rgba(200,160,120,.10), rgba(160,200,180,.08)) !important; }
   .bg-paper-2\/70 { background: rgba(242,234,224,.72) !important; border-radius: 12px !important; border-color: rgba(200,170,130,.50) !important; }
+  /* Liquid Glass（上部メニュー） */
+  .lg-bar{
+    background: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.20)) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,.6);
+    box-shadow: 0 6px 26px rgba(120,90,50,.12);
+  }
   h1 { font-family: 'Caveat','Klee One', cursive !important; font-size: 1.1em; letter-spacing: .08em; }
   .font-serif { font-family: 'Caveat','Klee One', cursive !important; }
   /* 店名フォント(Caveat)を全文字に適用。日本語はKlee One(手書き)でフォールバック */
@@ -135,10 +143,10 @@
   </a>
 
   <!-- ============ ヘッダー ============ -->
-  <header id="top" class="fixed top-0 inset-x-0 z-50 transition-all duration-500" data-header>
+  <header id="top" class="lg-bar fixed top-0 inset-x-0 z-50 transition-all duration-500" data-header>
     <div class="mx-auto max-w-5xl px-6 sm:px-8">
       <div class="flex items-center justify-between h-20 sm:h-24">
-        <a href="#top" class="font-serif text-[4.5rem] sm:text-[5.1rem] tracking-wide text-ink leading-none">lembrasser</a>
+        <a href="#top" class="font-serif text-[clamp(2.4rem,5.5vw,3.8rem)] tracking-wide text-ink leading-none">lembrasser</a>
 
         <nav class="hidden md:flex items-center gap-9 font-mincho text-[13px] tracking-[0.2em] text-ink/80">
           <a href="#concept" class="hover:text-rust transition-colors duration-400">Concept</a>
@@ -188,9 +196,9 @@
 
       <!-- テキスト（左） -->
       <div class="flex-1 max-w-lg text-center">
-        <p class="rise font-serif italic text-rust text-xl sm:text-2xl mb-7" style="animation-delay:.2s">Ayurveda &amp; the Inner Cosmos</p>
-        <p class="rise font-mincho text-ink/70 text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s">呼吸ひとつ。かたくなな結び目が、夜に溶けてゆく</p>
-        <h1 class="rise font-mincho text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" style="animation-delay:.6s">
+        <p class="rise font-serif italic text-cream text-xl sm:text-2xl mb-7" style="animation-delay:.2s; text-shadow:0 2px 14px rgba(20,14,6,.55);">Ayurveda &amp; the Inner Letter</p>
+        <p class="rise font-mincho text-white/90 text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s; text-shadow:0 2px 12px rgba(20,14,6,.6);">呼吸ひとつ。かたくなな結び目が、夜に溶けてゆく</p>
+        <h1 class="rise font-mincho text-white leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.4rem] mb-9" style="animation-delay:.6s; text-shadow:0 2px 16px rgba(20,14,6,.6);">
           本来の私へ
         </h1>
         <div class="rise flex flex-col items-center gap-5" style="animation-delay:1s">
@@ -646,8 +654,8 @@
 
     const header = document.querySelector('[data-header]');
     function onScroll(){
-      if (window.scrollY > 40){ header.classList.add('bg-paper/98','backdrop-blur','shadow-sm'); }
-      else { header.classList.remove('bg-paper/98','backdrop-blur','shadow-sm'); }
+      if (window.scrollY > 40){ header.classList.add('shadow-sm'); }
+      else { header.classList.remove('shadow-sm'); }
     }
     addEventListener('scroll', onScroll, { passive:true }); onScroll();
 

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>lembrasser_nakatsu｜水面テーマ — 大分・中津 アーユルヴェーダ</title>
+<meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。澄んだ水面のように、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Klee+One:wght@400;600&family=Zen+Kurenaido&display=swap" rel="stylesheet" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper:      '#CFEAE3',   /* 浅瀬のターコイズ */
+          'paper-2':  '#EAF7F3',   /* 淡い水色 */
+          sand:       '#DFF1EC',
+          tan:        '#A9D5CC',   /* 水際のグリーン罫線 */
+          ink:        '#14524A',   /* 深いティールグリーン（本文） */
+          'ink-soft': '#3F7E72',   /* 水草のグリーン */
+          rust:       '#D56F95',   /* 睡蓮のピンク（主アクセント） */
+          'rust-d':   '#BE587F',   /* 濃いピンク */
+          ochre:      '#E59BB7',   /* 淡いピンク */
+          olive:      '#2E8B82',   /* ティール（副アクセント） */
+          cream:      '#FBFEFC',   /* ほぼ白 */
+        },
+        fontFamily: {
+          hand:   ['"Klee One"', '"Zen Kurenaido"', 'cursive'],
+          script: ['"Caveat"', 'cursive'],
+          kure:   ['"Zen Kurenaido"', 'cursive'],
+        },
+        letterSpacing: { luxe: '0.22em', wide2: '0.4em' },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background:linear-gradient(180deg, #BFE6DD 0%, #9FD6CB 100%);
+    color:#14524A;
+    font-family:'Klee One', cursive;
+  }
+
+  /* 水面の波紋（実写を WebGL で波打たせる・ページ全面背景） */
+  #ripple-bg{
+    position:fixed; inset:0; width:100%; height:100%;
+    z-index:0; pointer-events:none; display:block;
+  }
+  /* 上に薄い水色のヴェールを重ね、文字の可読性を底上げ */
+  #water-veil{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(220,244,238,.16) 0%, rgba(150,210,198,.20) 100%);
+  }
+
+  /* ── Liquid Glass（透明度・ぼかし強め） ── */
+  .lg{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(255,255,255,.30), rgba(255,255,255,.10));
+    backdrop-filter:blur(22px) saturate(180%);
+    -webkit-backdrop-filter:blur(22px) saturate(180%);
+    border:1px solid rgba(255,255,255,.55);
+    box-shadow:
+      0 10px 38px rgba(16,70,62,.20),
+      inset 0 1px 0 rgba(255,255,255,.85),
+      inset 0 -1px 0 rgba(255,255,255,.18);
+  }
+  .lg::after{   /* 液体のような光沢 */
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:linear-gradient(120deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 36%, rgba(255,255,255,0) 64%, rgba(255,255,255,.30) 100%);
+    mix-blend-mode:screen;
+  }
+  /* 本文カード：読みやすさのため少し白を増やす（でもガラス感は維持） */
+  .lg-card{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(255,255,255,.52), rgba(247,253,251,.34));
+    backdrop-filter:blur(18px) saturate(165%);
+    -webkit-backdrop-filter:blur(18px) saturate(165%);
+    border:1px solid rgba(255,255,255,.6);
+    box-shadow:0 12px 40px rgba(16,70,62,.16), inset 0 1px 0 rgba(255,255,255,.8);
+  }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity 1.2s cubic-bezier(.16,.84,.34,1), transform 1.2s cubic-bezier(.16,.84,.34,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  @keyframes riseIn{ from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:none;} }
+  .rise{ opacity:0; animation:riseIn 1.4s cubic-bezier(.16,.84,.34,1) forwards; }
+
+  /* 手書きの波線ディバイダー */
+  .squiggle path{ stroke-dasharray:1; stroke-dashoffset:1; }
+  .squiggle.in path{ animation:drawStroke 2.4s ease forwards; }
+  @keyframes drawStroke{ to{ stroke-dashoffset:0; } }
+
+  @keyframes drawLine{ from{ transform:scaleY(0);} to{ transform:scaleY(1);} }
+  .thread.in .thread-line{ animation:drawLine 2.2s cubic-bezier(.16,.84,.34,1) forwards; transform-origin:top; }
+  .thread-line{ transform:scaleY(0); }
+
+  .arch{ border-radius:48% 48% 10px 10px / 34% 34% 10px 10px; }
+  .rule-double{ border-top:1px dashed rgba(46,139,130,.40); }
+</style>
+</head>
+
+<body class="antialiased overflow-x-hidden selection:bg-rust selection:text-cream">
+
+  <!-- 水面の波紋（純WebGL・実写テクスチャ） -->
+  <canvas id="ripple-bg" aria-hidden="true"></canvas>
+  <div id="water-veil" aria-hidden="true"></div>
+
+  <div class="relative z-10">
+
+  <!-- ギャラリーへ戻る（Liquid Glass） -->
+  <a href="/gallery" class="lg" style="
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 24px; border-radius:50px;
+    color:#14524A; font-family:'Klee One',cursive; font-size:13px; letter-spacing:.1em;
+    text-decoration:none; white-space:nowrap;">
+    ← ギャラリーへ戻る
+  </a>
+
+  <!-- ============ ヘッダー（Liquid Glass フローティング） ============ -->
+  <header class="fixed top-3 sm:top-4 inset-x-0 z-50 px-4" data-header>
+    <div class="lg mx-auto max-w-4xl rounded-full transition-all duration-500" data-bar>
+      <div class="flex items-center justify-between h-13 sm:h-14 pl-6 pr-3 sm:pl-8 sm:pr-3">
+        <a href="#top" class="font-script font-bold text-2xl sm:text-[1.9rem] tracking-wide text-ink leading-none">lembrasser</a>
+
+        <nav class="hidden md:flex items-center gap-8 font-hand text-[14px] tracking-[0.08em] text-ink/85">
+          <a href="#concept" class="hover:text-rust transition-colors duration-300">Concept</a>
+          <a href="#menu" class="hover:text-rust transition-colors duration-300">Menu</a>
+          <a href="#access" class="hover:text-rust transition-colors duration-300">Access</a>
+          <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 rounded-full bg-rust/90 px-5 py-2 text-[13px] tracking-wide text-cream hover:bg-rust-d transition-all duration-400">予約・相談</a>
+        </nav>
+
+        <button id="navToggle" class="md:hidden flex flex-col gap-1.5 p-2.5" aria-label="メニュー">
+          <span class="block h-px w-6 bg-ink"></span>
+          <span class="block h-px w-6 bg-ink"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="md:hidden overflow-hidden max-h-0 transition-all duration-500">
+      <nav class="lg-card mx-auto max-w-4xl mt-2 rounded-2xl flex flex-col px-8 py-6 gap-5 font-hand text-[15px] tracking-wide text-ink">
+        <a href="#concept" data-mlink>Concept</a>
+        <a href="#menu" data-mlink>Menu</a>
+        <a href="#access" data-mlink>Access</a>
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener" class="text-rust" data-mlink>Instagram DMで予約</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ============ ヒーロー ============ -->
+  <section id="top" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-6">
+    <div class="rise lg-card rounded-[28px] max-w-xl w-full px-8 sm:px-14 py-14 sm:py-16 text-center mt-10">
+      <p class="font-script text-rust text-3xl sm:text-4xl mb-4">Ayurveda &amp; Still Water</p>
+      <p class="font-hand text-ink-soft text-xs sm:text-sm tracking-[0.18em] mb-7">澄んだ水面のように、こころをほどいて</p>
+      <h1 class="font-hand font-semibold text-ink leading-[1.7] text-[2.1rem] sm:text-5xl mb-8">
+        本来の私へ。
+      </h1>
+      <p class="font-hand font-light text-ink-soft leading-loose text-sm sm:text-base mb-10">
+        奥深くのコリまで届く、アーユルヴェーダのディープケア。<br />
+        大分初の「ヘッドマルマケア ＋ 深部ケア」で、内側のしずけさへ。
+      </p>
+      <div class="flex flex-col items-center gap-5">
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+           class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-hand text-base tracking-wide shadow-[0_8px_30px_rgba(213,111,149,.35)] hover:bg-rust-d transition-all duration-500">
+          Instagram DMで予約・相談
+          <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+        </a>
+        <span class="font-hand text-[12px] tracking-luxe text-ink-soft">完全予約制 ・ 大分県中津市</span>
+      </div>
+    </div>
+
+    <!-- 下スクロール誘導 -->
+    <div class="absolute bottom-24 left-1/2 -translate-x-1/2 text-cream/90 animate-bounce" aria-hidden="true">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ============ コンセプト ============ -->
+  <section id="concept" class="relative py-24 sm:py-36 scroll-mt-24">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8">
+      <div class="reveal lg-card rounded-[24px] px-7 sm:px-12 py-12 sm:py-16 text-center">
+
+        <p class="font-script text-rust text-3xl mb-6">Concept</p>
+
+        <h2 class="font-hand font-semibold text-xl sm:text-2xl leading-[2] text-ink mb-12">
+          頭痛、不眠、慢性肩こり……<br />
+          休んでも疲れが取れない、<br class="sm:hidden" />あなたへ。
+        </h2>
+
+        <!-- 水とあなたをつなぐ一滴 -->
+        <div class="thread flex flex-col items-center mb-12">
+          <svg class="w-6 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 C8 9 8 13 12 16 C16 13 16 9 12 3Z" opacity=".7"/></svg>
+          <span class="font-script text-rust/80 text-xl mt-1 mb-2">water</span>
+          <span class="thread-line block w-px h-20 sm:h-24 bg-gradient-to-b from-olive/70 to-tan"></span>
+          <span class="font-script text-rust/80 text-xl mt-2 mb-2">you</span>
+          <span class="block h-2 w-2 rounded-full border border-rust"></span>
+        </div>
+
+        <p class="font-hand text-base sm:text-lg leading-loose text-ink mb-8">
+          わたしたちの体には、<br class="sm:hidden" />ひとつの静かな水面が宿っています。
+        </p>
+
+        <p class="font-hand font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
+          日々の緊張で、肩・首・頭はいつの間にかこわばり、巡りが滞っていきます。
+          表面をなでるだけでは届かない奥のこりは、頭痛や不眠、抜けない疲労感となって積み重なります。
+        </p>
+        <p class="font-hand font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
+          当サロンの<span class="text-rust">「ヘッドマルマケア ＋ 深部ケア」</span>は、
+          アーユルヴェーダで体の要所とされる頭部のマルマを、水面の波紋がひろがるようにひとつずつ整えながら、
+          深部のこりまで静かにアプローチ。呼吸が深まり、内なる静けさへと還っていきます。
+        </p>
+
+        <div class="mt-12 flex flex-wrap justify-center items-center gap-x-5 gap-y-3 font-hand text-sm text-ink">
+          <span>めぐりをひらく</span>
+          <svg class="w-3 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+          <span>深部に届く</span>
+          <svg class="w-3 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+          <span>内側へ還る</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 手書きディバイダー ============ -->
+  <div class="relative flex justify-center py-2">
+    <svg class="squiggle w-56 sm:w-72 text-cream/80" viewBox="0 0 280 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M8,15 C30,4 44,26 66,15 C88,4 102,26 124,15 C146,4 160,26 182,15 C204,4 218,26 240,15 C254,8 264,12 272,15" />
+    </svg>
+  </div>
+
+
+  <!-- ============ メニュー / 料金 ============ -->
+  <section id="menu" class="relative py-20 sm:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+      <div class="reveal text-center mb-14">
+        <p class="font-script text-rust text-3xl mb-2">Menu &amp; Price</p>
+        <p class="font-hand font-light text-cream text-sm tracking-luxe drop-shadow">税込価格 ・ 完全予約制</p>
+      </div>
+
+      <div class="lg-card rounded-[20px] px-6 sm:px-10 py-4">
+
+        <!-- モニター様プラン -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8">
+          <div>
+            <div class="flex items-center gap-3 mb-1.5">
+              <h3 class="font-hand font-semibold text-lg text-ink">モニター様プラン</h3>
+              <span class="font-hand text-[11px] tracking-wide text-cream bg-rust rounded-full px-3 py-0.5">限定</span>
+            </div>
+            <p class="font-hand font-light text-ink-soft text-xs leading-relaxed">ヘッドマルマケア＋深部ケア体験（約90分）・ 丁寧なカウンセリング込み</p>
+          </div>
+          <span class="font-script font-bold text-4xl sm:text-5xl text-rust leading-none shrink-0">¥5,000</span>
+        </div>
+
+        <!-- 通常プラン① -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
+          <div>
+            <h3 class="font-hand font-semibold text-lg text-ink mb-1.5">ヘッドマルマケア＋深部コリケアコース</h3>
+            <p class="font-hand font-light text-ink-soft text-xs leading-relaxed">90 min ・ 頭部マルマポイントを整え、肩・首・背中の深部コリにじっくりアプローチ</p>
+          </div>
+          <span class="font-script font-bold text-4xl sm:text-5xl text-ink leading-none shrink-0">¥12,000</span>
+        </div>
+
+        <!-- 通常プラン② -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
+          <div>
+            <h3 class="font-hand font-semibold text-lg text-ink mb-1.5">全身ほぐし ディープリセットコース</h3>
+            <p class="font-hand font-light text-ink-soft text-xs leading-relaxed">120 min ・ ヘッドマルマケア＋全身の深部をくまなくほぐすフルケア。疲れが溜まり切った方に</p>
+          </div>
+          <span class="font-script font-bold text-4xl sm:text-5xl text-ink leading-none shrink-0">¥16,000</span>
+        </div>
+      </div>
+
+      <!-- オプションメニュー -->
+      <div class="reveal mt-8 grid sm:grid-cols-2 gap-4">
+        <div class="lg-card rounded-[20px] px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
+          <div>
+            <h4 class="font-hand font-semibold text-base text-ink mb-1">ヘッドケア延長</h4>
+            <p class="font-hand font-light text-ink-soft text-xs">＋30 min ・ さらに深く、じっくりと</p>
+          </div>
+          <span class="font-script font-bold text-3xl text-ink shrink-0">＋¥3,000</span>
+        </div>
+        <div class="lg-card rounded-[20px] px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
+          <div>
+            <h4 class="font-hand font-semibold text-base text-ink mb-1">ドライヘッドスパ単品</h4>
+            <p class="font-hand font-light text-ink-soft text-xs">45 min ・ 頭のコリだけをほぐしたい方に</p>
+          </div>
+          <span class="font-script font-bold text-3xl text-ink shrink-0">¥6,000</span>
+        </div>
+      </div>
+
+      <!-- ご利用にあたって -->
+      <div class="reveal mt-8 lg-card rounded-[20px] px-6 sm:px-10 py-8">
+        <div class="flex items-center gap-3 mb-5">
+          <svg class="w-4 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+          <h3 class="font-hand font-semibold text-base text-ink tracking-wide">ご利用にあたって</h3>
+        </div>
+        <ul class="font-hand font-light text-ink-soft text-sm space-y-2.5">
+          <li class="flex gap-2"><span class="text-rust">・</span>完全予約制です。空き状況の確認・ご予約は Instagram の DM から承ります。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>はじめに丁寧なカウンセリングを行い、お悩みに合わせて施術を進めます。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>動きやすい服装でお越しください（お着替えのご用意もあります）。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>キャンセル・日時の変更は、前日19:00までにご連絡をお願いします。</li>
+        </ul>
+      </div>
+
+      <div class="reveal text-center mt-12">
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+           class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-hand text-base tracking-wide shadow-[0_8px_30px_rgba(213,111,149,.35)] hover:bg-rust-d transition-all duration-500">
+          Instagram DMで予約する
+          <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 手書きディバイダー ============ -->
+  <div class="relative flex justify-center py-2">
+    <svg class="squiggle w-56 sm:w-72 text-cream/80" viewBox="0 0 280 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M8,15 C30,26 44,4 66,15 C88,26 102,4 124,15 C146,26 160,4 182,15 C204,26 218,4 240,15 C254,22 264,18 272,15" />
+    </svg>
+  </div>
+
+
+  <!-- ============ セラピスト ============ -->
+  <section class="relative py-20 sm:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8">
+      <div class="reveal lg-card rounded-[24px] px-7 sm:px-12 py-12 sm:py-14 text-center">
+        <svg class="w-7 mx-auto mb-6 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+        <p class="font-script text-rust text-3xl mb-3">Therapist</p>
+        <h2 class="font-script font-bold text-4xl sm:text-5xl text-ink tracking-wide mb-2">Manami Kinoshita</h2>
+        <p class="font-hand text-[13px] tracking-luxe text-rust mb-9">木下 まなみ ・ セラピスト</p>
+
+        <p class="font-hand font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-5">
+          「休んでも、なんだか疲れが取れない」——そんな声に寄り添いたくて、このサロンをはじめました。
+          アーユルヴェーダを学ぶ中で出会ったマルマポイントへのアプローチが、自分自身の慢性的な肩こりと頭痛を変えた体験から、もっと多くの方にこの感覚を届けたいと思いました。
+        </p>
+        <p class="font-hand font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
+          完全予約制・お一人おひとりに丁寧に向き合う、静かなプライベート空間です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 手書きディバイダー ============ -->
+  <div class="relative flex justify-center py-2">
+    <svg class="squiggle w-56 sm:w-72 text-cream/80" viewBox="0 0 280 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M8,15 C30,4 44,26 66,15 C88,4 102,26 124,15 C146,4 160,26 182,15 C204,4 218,26 240,15 C254,8 264,12 272,15" />
+    </svg>
+  </div>
+
+
+  <!-- ============ お客様の声 ============ -->
+  <section class="relative py-20 sm:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+      <div class="reveal text-center mb-14">
+        <p class="font-script text-rust text-3xl mb-2">Voice</p>
+        <h2 class="font-hand font-semibold text-xl sm:text-2xl text-cream leading-[2] mb-2 drop-shadow">お客様の声</h2>
+        <p class="font-hand font-light text-cream text-sm tracking-luxe drop-shadow">ご来店いただいた方からの言葉</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+
+        <!-- 01 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">30代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            施術中、気づいたら涙が出ていました。何かが溶けていくような感覚で、終わった後は頭がふわっと軽くなって。「癒される」ってこういうことなんだと、初めて実感しました。
+          </p>
+        </div>
+
+        <!-- 02 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">40代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            長年の肩こりで何軒もサロンをまわりましたが、ここほど深部まで届いた感覚は初めてです。翌朝、首が全然違う。ずっと通い続けたいと思います。
+          </p>
+        </div>
+
+        <!-- 03 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">20代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            不眠が続いていたのですが、施術の翌晩から眠れるようになりました。夢を見るほど深く眠れたのは久しぶりで、本当に驚きました。
+          </p>
+        </div>
+
+        <!-- 04 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">50代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            まなみさんの手が温かくて、触れるたびに体がほどけていく感じがしました。施術後は体が羽のように軽くなって、帰り道がとても清々しかったです。
+          </p>
+        </div>
+
+        <!-- 05 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">30代・男性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            デスクワークで毎日頭が重かったのですが、施術後は視界まで明るくなったような感覚がありました。頭のこりってこんなに影響していたんですね。
+          </p>
+        </div>
+
+        <!-- 06 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">40代・男性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            施術中は半分眠っているような、でも何かに包まれているような不思議な感覚でした。終わった瞬間、肩の力がすっと抜けていて、自分でも驚くほど楽になっていました。
+          </p>
+        </div>
+
+        <!-- 07 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">20代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            カウンセリングからとても丁寧で、話を聞いてもらえるだけで気持ちが楽になりました。施術は想像以上に深くて、終わった後は頭痛が嘘のように消えていました。
+          </p>
+        </div>
+
+        <!-- 08 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">60代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            静かな空間で、ただただ自分の体に向き合う時間でした。日常のざわめきから離れて、こんなに深く休んだのは久しぶりです。また必ず来ます。
+          </p>
+        </div>
+
+        <!-- 09 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">30代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            毎回、施術が終わると体がぽかぽかして、じんわりと血の巡りを感じます。「疲れを溜めない体」に少しずつ近づいている気がして、月一のお楽しみになっています。
+          </p>
+        </div>
+
+        <!-- 10 -->
+        <div class="reveal lg-card rounded-[18px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-hand text-[12px] tracking-wide text-rust">40代・女性</span>
+          </div>
+          <p class="font-hand font-light text-ink-soft text-sm leading-loose">
+            アーユルヴェーダのことを全く知らずに来たのですが、施術を受けてから体と心のつながりを初めて意識しました。自分の内側に静けさがあることを、ここで気づかせてもらいました。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ アクセス + フッター ============ -->
+  <footer id="access" class="relative pt-20 sm:pt-28 pb-10 scroll-mt-24">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8">
+      <div class="reveal lg-card rounded-[24px] px-7 sm:px-12 py-12 sm:py-14 text-center">
+
+        <p class="font-script text-rust text-3xl mb-10">Access &amp; Reservation</p>
+
+        <dl class="font-hand text-sm max-w-md mx-auto mb-12">
+          <div class="flex justify-between gap-6 py-4 border-t border-tan">
+            <dt class="font-semibold text-rust tracking-wide shrink-0">Salon</dt>
+            <dd class="text-ink/85 text-right">lembrasser_nakatsu</dd>
+          </div>
+          <div class="flex justify-between gap-6 py-4 border-t border-tan">
+            <dt class="font-semibold text-rust tracking-wide shrink-0">Area</dt>
+            <dd class="text-ink/85 text-right">大分県中津市<br /><span class="text-ink-soft/70 text-xs">＊ 詳しい所在地はご予約時にお伝えします</span></dd>
+          </div>
+          <div class="flex justify-between gap-6 py-4 border-t border-tan">
+            <dt class="font-semibold text-rust tracking-wide shrink-0">Hours</dt>
+            <dd class="text-ink/85 text-right">10:00 – 19:00（最終受付 17:30）<br /><span class="text-ink-soft/70 text-xs">不定休</span></dd>
+          </div>
+          <div class="flex justify-between gap-6 py-4 border-t border-tan">
+            <dt class="font-semibold text-rust tracking-wide shrink-0">Access</dt>
+            <dd class="text-ink/85 text-right">JR中津駅より車で約10分</dd>
+          </div>
+          <div class="flex justify-between gap-6 py-4 border-t border-tan">
+            <dt class="font-semibold text-rust tracking-wide shrink-0">Parking</dt>
+            <dd class="text-ink/85 text-right">専用駐車場あり（1台）</dd>
+          </div>
+          <div class="flex justify-between gap-6 py-4 border-t border-b border-tan">
+            <dt class="font-semibold text-rust tracking-wide shrink-0">Reserve</dt>
+            <dd class="text-ink/85 text-right">完全予約制 ・ Instagram の DM より</dd>
+          </div>
+        </dl>
+
+        <!-- 地図 -->
+        <div class="max-w-md mx-auto mb-12">
+          <div class="rounded-[14px] overflow-hidden border-2 border-cream/70 shadow-lg">
+            <iframe
+              title="大分県中津市の地図"
+              src="https://maps.google.com/maps?q=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%B8%AD%E6%B4%A5%E5%B8%82&z=13&output=embed"
+              width="100%" height="220" style="border:0; display:block; filter:saturate(.9) hue-rotate(8deg) brightness(1.02);"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <p class="font-hand font-light text-ink-soft/70 text-[11px] tracking-wide mt-3 text-center">＊ エリアの目安です。正確な所在地はご予約時にお知らせします。</p>
+        </div>
+
+        <!-- ご予約の流れ -->
+        <div class="max-w-md mx-auto mb-14 text-left">
+          <div class="flex items-center justify-center gap-3 mb-7">
+            <svg class="w-4 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <h3 class="font-hand font-semibold text-base text-ink tracking-wide text-center">ご予約の流れ</h3>
+          </div>
+          <ol class="space-y-5">
+            <li class="flex gap-4">
+              <span class="font-script font-bold text-rust text-3xl leading-none shrink-0">1</span>
+              <div>
+                <p class="font-hand font-semibold text-ink text-sm mb-0.5">Instagram の DM でご連絡</p>
+                <p class="font-hand font-light text-ink-soft text-xs leading-relaxed">ご希望の日時とお悩みを、お気軽にメッセージください。</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="font-script font-bold text-rust text-3xl leading-none shrink-0">2</span>
+              <div>
+                <p class="font-hand font-semibold text-ink text-sm mb-0.5">日時の調整・ご案内</p>
+                <p class="font-hand font-light text-ink-soft text-xs leading-relaxed">体の状態をうかがいながら、日時と所在地をご案内します。</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="font-script font-bold text-rust text-3xl leading-none shrink-0">3</span>
+              <div>
+                <p class="font-hand font-semibold text-ink text-sm mb-0.5">ご来店・施術</p>
+                <p class="font-hand font-light text-ink-soft text-xs leading-relaxed">静かなプライベート空間で、内なる静けさへと還る時間を。</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <p class="font-hand text-ink leading-loose text-base mb-8">
+          ご予約・ご相談は、<br class="sm:hidden" />Instagram のメッセージから。<br />
+          <span class="text-ink-soft text-sm font-light">「こんな状態でも大丈夫？」というご相談だけでも歓迎です。</span>
+        </p>
+
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+           class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-hand text-base tracking-wide shadow-[0_8px_30px_rgba(213,111,149,.35)] hover:bg-rust-d transition-colors duration-500">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @lembrasser_nakatsu
+        </a>
+      </div>
+
+      <div class="text-center mt-12">
+        <p class="font-script font-bold text-3xl tracking-wide text-cream drop-shadow">lembrasser</p>
+        <p class="font-hand text-[11px] tracking-luxe text-cream/90 mt-1 mb-3 drop-shadow">NAKATSU ・ AYURVEDA</p>
+        <p class="font-hand text-[11px] tracking-wide text-cream/75 drop-shadow">© <span id="year"></span> lembrasser_nakatsu</p>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+
+  <!-- ============ 共通スクリプト ============ -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const bar = document.querySelector('[data-bar]');
+    function onScroll(){
+      if (window.scrollY > 40){ bar.style.boxShadow = '0 12px 44px rgba(16,70,62,.28), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(255,255,255,.2)'; }
+      else { bar.style.boxShadow = ''; }
+    }
+    addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    let open = false;
+    toggle.addEventListener('click', () => { open = !open; menu.style.maxHeight = open ? menu.scrollHeight + 'px' : '0px'; });
+    document.querySelectorAll('[data-mlink]').forEach(a => a.addEventListener('click', () => { open=false; menu.style.maxHeight='0px'; }));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .thread, .squiggle').forEach(el => io.observe(el));
+  </script>
+
+  <!-- ============ 水面の波紋（純WebGL／実写テクスチャを波打たせる） ============ -->
+  <script>
+  (function(){
+    const canvas = document.getElementById('ripple-bg');
+    if (!canvas) return;
+
+    let gl;
+    try {
+      gl = canvas.getContext('webgl', { alpha:true, antialias:false, premultipliedAlpha:false })
+         || canvas.getContext('experimental-webgl');
+    } catch(e) { gl = null; }
+    if (!gl) { canvas.style.background = 'center/cover url(assets/water_lilies.jpg)'; return; }
+
+    const reduceMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const MAX_RIPPLES = 12;
+
+    const VERT = `
+      attribute vec2 aPos;
+      void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }
+    `;
+
+    const FRAG = `
+      #ifdef GL_FRAGMENT_PRECISION_HIGH
+      precision highp float;
+      #else
+      precision mediump float;
+      #endif
+      uniform vec2  uRes;
+      uniform vec2  uTexRes;
+      uniform float uTime;
+      uniform sampler2D uTex;
+      uniform vec4  uRipples[${MAX_RIPPLES}]; // xy=中心(uv), z=開始時刻, w=強さ
+
+      void main(){
+        vec2 uv = gl_FragCoord.xy / uRes;
+        float aspect = uRes.x / uRes.y;
+
+        // --- 波紋：変位とハイライト ---
+        vec2 disp = vec2(0.0);
+        float hi = 0.0;
+        for(int i=0;i<${MAX_RIPPLES};i++){
+          vec4 rp = uRipples[i];
+          if(rp.z < -0.5) continue;
+          float age = uTime - rp.z;
+          if(age < 0.0 || age > 4.0) continue;
+          vec2 cc = vec2(rp.x*aspect, rp.y);
+          vec2 d  = vec2(uv.x*aspect, uv.y) - cc;
+          float dist = length(d);
+          float radius = age * 0.42;
+          float ring = dist - radius;
+          float env   = exp(-ring*ring*150.0);
+          float decay = exp(-age*1.35) * rp.w;
+          float wave  = sin(ring*52.0) * env * decay;
+          vec2 dir = dist > 1e-4 ? d/dist : vec2(0.0);
+          disp += dir * wave;
+          hi   += wave;
+        }
+        vec2 duv = uv + disp * 0.04;
+
+        // --- cover-fit で実写を全面に ---
+        float screenA = uRes.x / uRes.y;
+        float texA    = uTexRes.x / uTexRes.y;
+        vec2 scale = (screenA > texA) ? vec2(1.0, texA/screenA) : vec2(screenA/texA, 1.0);
+        vec2 cuv = (duv - 0.5) * scale + 0.5;
+
+        vec3 col = texture2D(uTex, cuv).rgb;
+        // 波紋の稜線に陽光のようなハイライト
+        col += vec3(0.85,1.0,0.96) * max(hi, 0.0) * 0.55;
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    function compile(type, src){
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src); gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)){
+        console.warn('ripple shader:', gl.getShaderInfoLog(sh));
+        gl.deleteShader(sh); return null;
+      }
+      return sh;
+    }
+    const vs = compile(gl.VERTEX_SHADER, VERT);
+    const fs = compile(gl.FRAGMENT_SHADER, FRAG);
+    if (!vs || !fs) return;
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)){
+      console.warn('ripple link:', gl.getProgramInfoLog(prog)); return;
+    }
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes     = gl.getUniformLocation(prog, 'uRes');
+    const uTexRes  = gl.getUniformLocation(prog, 'uTexRes');
+    const uTime    = gl.getUniformLocation(prog, 'uTime');
+    const uTex     = gl.getUniformLocation(prog, 'uTex');
+    const uRipples = gl.getUniformLocation(prog, 'uRipples[0]');
+
+    // --- テクスチャ（実写・同一オリジン） ---
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    // 読み込み前の 1px プレースホルダ
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([160,214,200,255]));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+    let texW = 992, texH = 616, texReady = false;
+    const img = new Image();
+    img.onload = function(){
+      texW = img.naturalWidth; texH = img.naturalHeight;
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      texReady = true;
+    };
+    img.src = 'assets/water_lilies.jpg';
+
+    const ripples = new Float32Array(MAX_RIPPLES * 4);
+    for (let i=0;i<MAX_RIPPLES;i++) ripples[i*4+2] = -1.0;
+    let rIndex = 0;
+    function spawn(x, y, strength, t){
+      const o = rIndex * 4;
+      ripples[o]=x; ripples[o+1]=y; ripples[o+2]=t; ripples[o+3]=strength;
+      rIndex = (rIndex + 1) % MAX_RIPPLES;
+    }
+
+    function resize(){
+      const w = window.innerWidth, h = window.innerHeight;
+      const scale = Math.min(1, 1400 / Math.max(w, 1));
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const pw = Math.max(1, Math.round(w * scale * dpr));
+      const ph = Math.max(1, Math.round(h * scale * dpr));
+      if (canvas.width !== pw || canvas.height !== ph){ canvas.width = pw; canvas.height = ph; }
+      gl.viewport(0, 0, pw, ph);
+      gl.uniform2f(uRes, pw, ph);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive:true });
+
+    const start = performance.now();
+    const nowSec = () => (performance.now() - start) / 1000;
+
+    let lastX=0, lastY=0, lastT=0, primed=false;
+    function onMove(e){
+      const t = nowSec();
+      const x = e.clientX / window.innerWidth;
+      const y = 1.0 - e.clientY / window.innerHeight;
+      if (!primed){ lastX=x; lastY=y; lastT=t; primed=true; return; }
+      const dt = Math.max(t - lastT, 1e-3);
+      if (dt < 0.028) return;
+      const dx = x - lastX, dy = y - lastY;
+      const speed = Math.sqrt(dx*dx + dy*dy) / dt;
+      spawn(x, y, Math.min(0.35 + speed * 0.9, 1.0), t);
+      lastX=x; lastY=y; lastT=t;
+    }
+    if (!reduceMotion){
+      window.addEventListener('pointermove', onMove, { passive:true });
+      window.addEventListener('pointerdown', (e)=>{
+        spawn(e.clientX/window.innerWidth, 1.0 - e.clientY/window.innerHeight, 1.0, nowSec());
+      }, { passive:true });
+    }
+
+    let running = true, idleAccum = 0, prevFrame = 0;
+    function frame(){
+      if (!running) return;
+      const t = nowSec();
+      const dt = Math.min(t - prevFrame, 0.05); prevFrame = t;
+
+      if (!reduceMotion){
+        idleAccum += dt;
+        if (idleAccum > 1.4){ idleAccum = 0; spawn(0.15 + Math.random()*0.7, 0.12 + Math.random()*0.6, 0.45, t); }
+      }
+
+      gl.uniform2f(uTexRes, texW, texH);
+      gl.uniform1f(uTime, t);
+      gl.uniform1i(uTex, 0);
+      gl.uniform4fv(uRipples, ripples);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      requestAnimationFrame(frame);
+    }
+
+    if (reduceMotion){
+      // 一度だけ静止描画（画像ロード後）
+      const drawOnce = ()=>{
+        gl.uniform2f(uTexRes, texW, texH); gl.uniform1f(uTime, 0.0); gl.uniform1i(uTex, 0);
+        gl.uniform4fv(uRipples, ripples);
+        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      };
+      drawOnce(); img.addEventListener('load', drawOnce);
+    } else {
+      prevFrame = nowSec();
+      requestAnimationFrame(frame);
+      document.addEventListener('visibilitychange', ()=>{
+        if (document.hidden){ running = false; }
+        else if (!running){ running = true; prevFrame = nowSec(); requestAnimationFrame(frame); }
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

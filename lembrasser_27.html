@@ -112,8 +112,14 @@
   }
 
   /* ===== 渚テーマ 上書き ===== */
-  /* 全テキストを2倍（ルートを200%に） */
+  /* 全テキストを2倍（ルートを200%に）。スマホは可読性優先で170% */
   html{ font-size:200%; }
+  @media (max-width: 640px){
+    html{ font-size:170%; }
+    .px-9{ padding-left:1.2rem !important; padding-right:1.2rem !important; }
+  }
+  /* rem固定幅の装飾が画面からはみ出すのを防ぐ */
+  .w-52, .arch{ max-width:86vw; }
 
   /* 背景＝ビーチ写真（固定）＋ 白文字の可読性スクリム */
   body{

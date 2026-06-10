@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>リラクゼーション制作 — 再利用テクニック集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#071520; --bg2:#0D2233; --ink:#D6EEF2; --soft:#7DB5C8;
+    --accent:#4EC4D4; --gold:#E3BE83; --line:rgba(255,255,255,.10);
+  }
+  body{
+    background:
+      radial-gradient(60vw 60vw at 50% -8%, rgba(30,100,130,.22), transparent 70%),
+      var(--bg);
+    color:var(--ink); font-family:'Zen Maru Gothic',sans-serif; line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 22px 100px}
+
+  /* ヘッダー＋ライブ波紋デモ */
+  .hero{position:relative;height:340px;margin:0 -22px 40px;overflow:hidden;border-bottom:1px solid var(--line)}
+  #demo{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-cap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;pointer-events:none;padding:0 20px}
+  .hero-cap h1{font-family:'Caveat',cursive;font-size:3.4rem;font-weight:700;color:#fff;text-shadow:0 2px 20px rgba(0,20,30,.6);line-height:1.1}
+  .hero-cap .ja{font-family:'Klee One',cursive;font-size:1rem;color:#eafcff;letter-spacing:.16em;margin-top:6px;text-shadow:0 2px 14px rgba(0,20,30,.7)}
+  .hero-cap .hint{margin-top:14px;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.7)}
+
+  h2{font-family:'Caveat',cursive;font-size:2.2rem;color:var(--gold);margin:54px 0 6px;font-weight:700}
+  h2 .num{color:var(--accent);font-size:1.6rem;margin-right:.4em}
+  h3{font-family:'Klee One',cursive;font-size:1.05rem;color:var(--accent);margin:26px 0 8px}
+  p{margin:10px 0;color:var(--ink)}
+  .lead{color:var(--soft);font-weight:300}
+  a{color:var(--accent)}
+  ul,ol{margin:10px 0 10px 1.3em;color:var(--ink)}
+  li{margin:5px 0}
+  strong{color:#fff}
+  hr{border:none;border-top:1px solid var(--line);margin:30px 0}
+  .note{background:rgba(227,190,131,.08);border-left:3px solid var(--gold);padding:10px 16px;border-radius:6px;margin:14px 0;color:#f2e6cf;font-size:.95em}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92em}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--gold);font-weight:500;font-size:.85em;letter-spacing:.04em}
+
+  pre{background:#04101a;border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;margin:14px 0}
+  code{font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#cfeaf2}
+  p code,li code,td code{background:rgba(78,196,212,.12);padding:1px 6px;border-radius:5px;color:#bfeef5;font-size:.86em}
+  pre code{background:none;padding:0}
+  .tag{display:inline-block;font-size:10px;letter-spacing:.12em;padding:2px 9px;border-radius:20px;background:rgba(78,196,212,.12);color:var(--accent);border:1px solid rgba(78,196,212,.3);margin-left:6px;vertical-align:middle}
+  .src{font-size:.8em;color:var(--soft)}
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-size:.85em;color:var(--soft);text-align:center}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="demo" aria-hidden="true"></canvas>
+  <div class="hero-cap">
+    <h1>Reusable Techniques</h1>
+    <div class="ja">リラクゼーション制作 — 再利用テクニック集</div>
+    <div class="hint">↑ マウスを動かすと波紋が広がります（このデモが §2 のWebGL波紋）</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <p class="lead">lembrasser_nakatsu（アーユルヴェーダ・サロン）のデザインギャラリー制作で採用した、<strong>後日いつでも使い回せる</strong>テクニックのまとめ。各項目のフル実装はソースHTMLが真実。ここには要点と核スニペットを置く。</p>
+  <p class="src">元ファイル: <code>lembrasser_01.html</code>（水の森＝波紋）, <code>lembrasser_25.html</code>（古薬草＝Liquid Glass）, <code>lembrasser_26.html</code>（睡蓮＝実写波紋＋手書き）, <code>lembrasser_27.html</code>（渚）</p>
+
+  <h2><span class="num">1</span>フォント</h2>
+  <table>
+    <tr><th>用途</th><th>フォント</th><th>備考</th></tr>
+    <tr><td>欧文 手書き</td><td><strong>Caveat</strong></td><td>⚠️ <strong>欧文専用</strong>。日本語グリフ無し → 和文は必ず別フォントにフォールバック</td></tr>
+    <tr><td>和文 手書き（万年筆風）</td><td><strong>Klee One</strong></td><td>上品なペン字。kanji対応</td></tr>
+    <tr><td>和文 手書き（やわらか）</td><td>Zen Kurenaido</td><td></td></tr>
+    <tr><td>欧文 セリフ装飾</td><td>EB Garamond / DM Serif Display</td><td>イタリック見出し</td></tr>
+    <tr><td>和文 明朝 / 丸ゴシック</td><td>Shippori Mincho / Zen Maru Gothic</td><td>本文系</td></tr>
+  </table>
+  <h3>「全文字を手書きに」する黄金パターン</h3>
+  <p>Caveat は欧文しか持たないので、<strong>和文手書きフォントとペアにする</strong>。先頭に Caveat、次に Klee One を置けば、欧文＝Caveat・和文＝Klee One が自動で使い分けられる。</p>
+  <pre><code>/* 全テキストを手書きに（欧文Caveat＋和文Klee One） */
+body, body * {
+  font-family: 'Caveat', 'Klee One', cursive !important;
+}</code></pre>
+  <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&amp;family=Klee+One:wght@400;600&amp;family=Zen+Kurenaido&amp;display=swap" rel="stylesheet" /&gt;</code></pre>
+
+  <h2><span class="num">2</span>水の波紋（純WebGL・外部依存なし）<span class="tag">demo above</span></h2>
+  <p>カーソル/タッチで波紋が広がり水面を屈折させる。<strong>WebGL拡張機能・外部ライブラリ不要</strong>で1ファイル完結。Mac Safari/Chrome 両対応。</p>
+  <ul>
+    <li><strong>A. 手続き生成版</strong>（背景画像なし）— <code>lembrasser_01.html</code>。ダークティールの水面＋睡蓮＋コースティクスをGLSL生成。</li>
+    <li><strong>B. 実写テクスチャ版</strong>（写真を波打たせる）— <code>lembrasser_26.html</code>。写真を <code>sampler2D</code> に読み、波紋でUVを歪ます。<strong>画像は同一オリジンに置く</strong>（CORS対策）。</li>
+  </ul>
+  <h3>波紋の核 — 着水 → 因果的な波面 → 同心円が伝播</h3>
+  <pre><code>// uRipples[i] = vec4(中心x, 中心y, 開始時刻, 強さ)  ※xyはuv(0..1)
+float rage = uTime - rp.z;
+if (rage &lt; 0.0 || rage &gt; 6.43) continue;
+float age = rage * 0.7;                 // ← 速度係数。0.7で「0.7倍速」スロー
+float front  = age * 0.40;              // 因果的な波面（ここまで波が到達）
+float behind = front - dist;            // &gt;0 なら到達済み
+float reach  = smoothstep(0.0, 0.04, behind);
+float fb     = exp(-behind*behind*38.0);                 // 波面付近を強調
+float wave   = sin(dist*46.0 - age*22.0)                 // 進行波
+             + 0.4*sin(dist*92.0 - age*40.0);            // ＋毛細波（先端ほど細かい）
+float amp    = exp(-dist*2.1) * exp(-age*1.1) * rp.w;    // 距離と時間で自然減衰
+float w      = wave * amp * reach * (0.65 + 0.6*fb);
+disp += dir * w;     // 変位（屈折）
+hi   += max(w,0.0);  // 稜線ハイライト
+act  += abs(w) + 0.22*amp*reach;                         // 波紋が広がった範囲
+splash += exp(-dist*dist*950.0) * exp(-age*9.0) * rp.w;  // 着水点のきらめき</code></pre>
+  <h3>「波紋が広がった所をキラキラ明るい水色に」</h3>
+  <pre><code>vec3 sparkleAqua = vec3(0.32, 0.80, 0.88);
+water = mix(water, sparkleAqua, clamp(act*0.55, 0.0, 0.52));     // 活性域を明色へ
+water += vec3(0.45,0.90,0.98) * ca * act * 0.7;                  // コースティクス増幅
+water += vec3(0.90,1.00,1.00) * pow(max(hi,0.0), 2.2) * 0.9;     // 稜線の白いきらめき
+water += vec3(0.85,1.00,1.00) * splash * 1.1;                    // 着水点のきらめき</code></pre>
+  <h3>JS側の要点</h3>
+  <ul>
+    <li>フルスクリーン三角形 <code>[-1,-1, 3,-1, -1,3]</code> を1枚描く。</li>
+    <li><code>uRipples</code> は長さ12のリングバッファ（未使用は z=-1）。</li>
+    <li><code>pointermove</code> を ~28ms スロットリングし、速度から強さを決め <code>spawn()</code>。</li>
+    <li><strong>Idle Ripples</strong>: 無操作でも1〜1.8秒ごとに水滴を落とす（水面が呼吸）。</li>
+    <li>大画面対策: 内部解像度を <code>min(1, 1280/innerWidth)</code> で抑えCSSで拡大。</li>
+    <li><code>visibilitychange</code> で停止、<code>prefers-reduced-motion</code> で静止。</li>
+  </ul>
+  <h3>実写版だけの追加（cover-fit）</h3>
+  <pre><code>float screenA = uRes.x/uRes.y, texA = uTexRes.x/uTexRes.y;
+vec2 scale = (screenA &gt; texA) ? vec2(1.0, texA/screenA) : vec2(screenA/texA, 1.0);
+vec2 cuv = (uv + disp*0.04 - 0.5) * scale + 0.5;   // 画像を画面いっぱいにcover
+vec3 col = texture2D(uTex, cuv).rgb;</code></pre>
+  <p class="src">テクスチャ読込時: <code>UNPACK_FLIP_Y_WEBGL=true</code>、<code>CLAMP_TO_EDGE</code> + <code>LINEAR</code>（NPOT対応）。フル実装は <code>lembrasser_01.html</code> / <code>lembrasser_26.html</code>。</p>
+
+  <h2><span class="num">3</span>Liquid Glass（フロストガラス）</h2>
+  <p><code>backdrop-filter</code> のぼかし＋彩度、ふちのハイライト、液体的な光沢の擬似要素。背景が動く（波紋など）と「液体ガラス」感が出る。</p>
+  <pre><code>.lg{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, rgba(255,255,255,.30), rgba(255,255,255,.10));
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 10px 38px rgba(16,70,62,.20),
+             inset 0 1px 0 rgba(255,255,255,.85),
+             inset 0 -1px 0 rgba(255,255,255,.18);
+}
+.lg::after{                     /* 液体のような光沢 */
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(120deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 36%,
+            rgba(255,255,255,0) 64%, rgba(255,255,255,.30) 100%);
+  mix-blend-mode:screen;
+}
+/* 本文カード（読みやすさ優先・ガラス感は維持） */
+.lg-card{
+  background:linear-gradient(135deg, rgba(255,255,255,.52), rgba(247,253,251,.34));
+  backdrop-filter:blur(18px) saturate(165%);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 12px 40px rgba(16,70,62,.16), inset 0 1px 0 rgba(255,255,255,.8);
+}</code></pre>
+
+  <h2><span class="num">4</span>万年筆で一文字ずつ書く演出</h2>
+  <p>各文字を <code>&lt;span&gt;</code> に分割し、<code>clip-path</code> で左→右にインクを引き、<code>blur</code> でにじみ→定着。1文字ずつ遅延。</p>
+  <pre><code>.ink-char{
+  display:inline-block; opacity:0;
+  clip-path:inset(0 100% 0 0);   /* 左→右に出現 */
+  filter:blur(3px);              /* にじみ → 定着 */
+  animation:penWrite .52s cubic-bezier(.5,.15,.25,1) forwards;
+}
+@keyframes penWrite{
+  0%  { opacity:0; clip-path:inset(0 100% 0 0); filter:blur(3px); }
+  55% { opacity:1; }
+  100%{ opacity:1; clip-path:inset(0 0 0 0);   filter:blur(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .ink-char{ animation:none; opacity:1; clip-path:none; filter:none; }
+}</code></pre>
+  <p class="src">各 <code>span</code> に <code>animation-delay</code> を 0.2〜0.3秒刻みで。<code>aria-label</code> で読み上げ対応。手書きフォント（Klee One）と合わせると万年筆らしさUP。</p>
+
+  <h2><span class="num">5</span>古い図鑑風の背景（Köhler 1887・PD）</h2>
+  <p>100年以上前の薬用植物図譜 <strong>Köhler's Medizinal-Pflanzen (1887)</strong> はパブリックドメイン。アーユルヴェーダの薬草（ウコン/生姜/カルダモン/胡椒/シナモン/サフラン等）が実在し合法に使える。</p>
+  <pre><code># 1) ファイル名を検索（例: ウコン）
+curl -s "https://commons.wikimedia.org/w/api.php?action=query&amp;list=search&amp;srsearch=Curcuma%20longa%20Medizinal-Pflanzen&amp;srnamespace=6&amp;format=json"
+
+# 2) 安定した直URL（CDN・ホットリンク可）を取得
+curl -s "https://commons.wikimedia.org/w/api.php?action=query&amp;titles=File:&lt;filename&gt;&amp;prop=imageinfo&amp;iiprop=url&amp;iiurlwidth=1000&amp;format=json"
+#    → thumburl が upload.wikimedia.org/.../thumb/... で返る</code></pre>
+  <pre><code>/* 古紙に溶け込ませる */
+#botanical-bg img{
+  mix-blend-mode:multiply;       /* 古紙の白を地に溶かし、図のインクだけ残す */
+  filter:saturate(.66) contrast(.92) brightness(1.06) hue-rotate(-6deg);
+  opacity:.42;
+}</code></pre>
+  <p class="src">実証済みURL6種は <code>lembrasser_25.html</code> の <code>#botanical-bg</code> 内。暖色の図版を青へ寄せるには上に半透明グラデーション（cool wash）を重ねる。</p>
+
+  <h2><span class="num">6</span>その他の小技</h2>
+  <ul>
+    <li><strong>スクロール出現</strong>: <code>.reveal{opacity:0; transform:translateY(26px); transition:…}</code> ＋ <code>IntersectionObserver</code> で <code>.in</code> 付与。</li>
+    <li><strong>グレイン</strong>: インラインSVG <code>feTurbulence</code> を <code>mix-blend-mode</code> multiply(紙)/screen(暗背景) で薄く。</li>
+    <li><strong>白文字を画像の上で読ませる</strong>: 暗いスクリム <code>linear-gradient(rgba(...,.55), rgba(...,.62))</code> ＋ <code>text-shadow</code>。明るい写真＋白文字は必須。</li>
+    <li><strong>全テキスト2倍</strong>: <code>html{ font-size:200% }</code>（rem基準のTailwind text-* が一括2倍。※spacingも2倍になる）。</li>
+    <li><strong>アクセシビリティ</strong>: 動く演出は必ず <code>@media (prefers-reduced-motion: reduce)</code> で静止/簡略化。</li>
+  </ul>
+
+  <hr/>
+  <h3>設計原則（効いたもの）</h3>
+  <ol>
+    <li><strong>外部依存ゼロ</strong>を優先（WebGLは生・画像はPDか自前・1ファイル完結）。</li>
+    <li><strong>AIは判断に、決定論はコードで</strong>（波紋の物理・スロットリング等）。</li>
+    <li>派手な演出ほど<strong>可読性とのトレードオフを明示</strong>し、スクリム等で担保。</li>
+    <li>破壊的変更の前にプレビュー→適用→検証（grep残存0など）。</li>
+  </ol>
+
+  <footer>リラクゼーション制作 再利用テクニック集 ・ 2026-06-10 ・ source: ~/リラクゼーション</footer>
+</div>
+
+<!-- ===== ライブ波紋デモ（§2の手続き生成版・縮約） ===== -->
+<script>
+(function(){
+  const c=document.getElementById('demo'); if(!c) return;
+  let gl; try{ gl=c.getContext('webgl')||c.getContext('experimental-webgl'); }catch(e){ gl=null; }
+  if(!gl){ c.style.background='linear-gradient(160deg,#0b2a36,#04131a)'; return; }
+  const N=12;
+  const V=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+  const F=`
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+  uniform vec2 R; uniform float T; uniform vec4 rip[${N}];
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);float a=h(i),b=h(i+vec2(1,0)),c=h(i+vec2(0,1)),d=h(i+vec2(1,1));vec2 u=f*f*(3.-2.*f);return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.;a*=.5;}return v;}
+  void main(){
+    vec2 uv=gl_FragCoord.xy/R; float asp=R.x/R.y;
+    vec2 disp=vec2(0.); float hi=0.,act=0.,spl=0.;
+    for(int i=0;i<${N};i++){
+      vec4 r=rip[i]; if(r.z<-.5)continue;
+      float rage=T-r.z; if(rage<0.||rage>6.43)continue;
+      float age=rage*.7;
+      vec2 d=vec2(uv.x*asp,uv.y)-vec2(r.x*asp,r.y); float dist=length(d);
+      float fr=age*.40, be=fr-dist; float re=smoothstep(0.,.04,be); float fb=exp(-be*be*38.);
+      float w=(sin(dist*46.-age*22.)+.4*sin(dist*92.-age*40.))*exp(-dist*2.1)*exp(-age*1.1)*r.w*re*(.65+.6*fb);
+      vec2 dir=dist>1e-4?d/dist:vec2(0.);
+      disp+=dir*w; hi+=max(w,0.); act+=abs(w)+.22*exp(-dist*2.1)*exp(-age*1.1)*r.w*re;
+      spl+=exp(-dist*dist*950.)*exp(-age*9.)*r.w;
+    }
+    vec2 s=uv+disp*.05; vec2 cu=vec2(s.x*asp,s.y);
+    float ca=fbm(cu*3.+vec2(T*.028,T*.018))+.5*fbm(cu*6.-vec2(T*.02,0.)); ca=pow(max(ca*.6,0.),2.);
+    vec3 col=mix(vec3(.013,.072,.103),vec3(.04,.165,.215),clamp(s.y*.55+ca*.5,0.,1.));
+    col+=vec3(.10,.33,.38)*ca*.32;
+    col=mix(col,vec3(.32,.80,.88),clamp(act*.55,0.,.52));
+    col+=vec3(.45,.90,.98)*ca*act*.7;
+    col+=vec3(.90,1.,1.)*pow(max(hi,0.),2.2)*.9;
+    col+=vec3(.85,1.,1.)*spl*1.1;
+    gl_FragColor=vec4(col,1.);
+  }`;
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,V));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,F));gl.linkProgram(pr);gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const lp=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(lp);gl.vertexAttribPointer(lp,2,gl.FLOAT,false,0,0);
+  const uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uRip=gl.getUniformLocation(pr,'rip[0]');
+  const rip=new Float32Array(N*4); for(let i=0;i<N;i++)rip[i*4+2]=-1; let idx=0;
+  function spawn(x,y,s,t){const o=idx*4;rip[o]=x;rip[o+1]=y;rip[o+2]=t;rip[o+3]=s;idx=(idx+1)%N;}
+  function size(){const w=c.clientWidth,h=c.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);gl.viewport(0,0,c.width,c.height);gl.uniform2f(uR,c.width,c.height);}
+  size(); addEventListener('resize',size);
+  const t0=performance.now(); const sec=()=>(performance.now()-t0)/1000;
+  let lx=0,ly=0,lt=0,pr0=false;
+  c.parentElement.addEventListener('pointermove',e=>{
+    const rect=c.getBoundingClientRect(); const t=sec();
+    const x=(e.clientX-rect.left)/rect.width, y=1-(e.clientY-rect.top)/rect.height;
+    if(!pr0){lx=x;ly=y;lt=t;pr0=true;return;}
+    const dt=Math.max(t-lt,1e-3); if(dt<.028)return;
+    const sp=Math.hypot(x-lx,y-ly)/dt; spawn(x,y,Math.min(.35+sp*.9,1),t); lx=x;ly=y;lt=t;
+  },{passive:true});
+  let acc=0,pf=sec();
+  (function loop(){
+    const t=sec(); const dt=Math.min(t-pf,.05); pf=t;
+    acc+=dt; if(acc>1.0+Math.random()*.8){acc=0;spawn(.12+Math.random()*.76,.1+Math.random()*.64,.7+Math.random()*.3,t);}
+    gl.uniform1f(uT,t); gl.uniform4fv(uRip,rip); gl.drawArrays(gl.TRIANGLES,0,3);
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>

@@ -52,6 +52,8 @@
   pre code{background:none;padding:0}
   .tag{display:inline-block;font-size:10px;letter-spacing:.12em;padding:2px 9px;border-radius:20px;background:rgba(78,196,212,.12);color:var(--accent);border:1px solid rgba(78,196,212,.3);margin-left:6px;vertical-align:middle}
   .src{font-size:.8em;color:var(--soft)}
+  .thumb{display:block;width:100%;max-width:560px;border-radius:10px;border:1px solid var(--line);margin:16px 0 4px;box-shadow:0 12px 34px rgba(0,0,0,.45)}
+  .cap{font-size:.8em;color:var(--soft);margin:0 0 10px;font-style:italic}
   footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-size:.85em;color:var(--soft);text-align:center}
 </style>
 </head>
@@ -72,6 +74,8 @@
   <p class="src">元ファイル: <code>lembrasser_01.html</code>（水の森＝波紋）, <code>lembrasser_25.html</code>（古薬草＝Liquid Glass）, <code>lembrasser_26.html</code>（睡蓮＝実写波紋＋手書き）, <code>lembrasser_27.html</code>（渚）</p>
 
   <h2><span class="num">1</span>フォント</h2>
+  <img class="thumb" src="リラクゼーション_thumbs/thumb_1_font.jpg" alt="全文字手書きの例（テーマ26）" loading="lazy"/>
+  <p class="cap">▲ 全文字手書き — 欧文Caveat＋和文Klee One（lembrasser_26）</p>
   <table>
     <tr><th>用途</th><th>フォント</th><th>備考</th></tr>
     <tr><td>欧文 手書き</td><td><strong>Caveat</strong></td><td>⚠️ <strong>欧文専用</strong>。日本語グリフ無し → 和文は必ず別フォントにフォールバック</td></tr>
@@ -89,6 +93,8 @@ body, body * {
   <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&amp;family=Klee+One:wght@400;600&amp;family=Zen+Kurenaido&amp;display=swap" rel="stylesheet" /&gt;</code></pre>
 
   <h2><span class="num">2</span>水の波紋（純WebGL・外部依存なし）<span class="tag">demo above</span></h2>
+  <img class="thumb" src="リラクゼーション_thumbs/thumb_2_ripple.jpg" alt="水の波紋（テーマ01）" loading="lazy"/>
+  <p class="cap">▲ 着水→同心円がリアルに伝播（lembrasser_01）／上部のデモも同じ仕組み</p>
   <p>カーソル/タッチで波紋が広がり水面を屈折させる。<strong>WebGL拡張機能・外部ライブラリ不要</strong>で1ファイル完結。Mac Safari/Chrome 両対応。</p>
   <ul>
     <li><strong>A. 手続き生成版</strong>（背景画像なし）— <code>lembrasser_01.html</code>。ダークティールの水面＋睡蓮＋コースティクスをGLSL生成。</li>
@@ -134,6 +140,8 @@ vec3 col = texture2D(uTex, cuv).rgb;</code></pre>
   <p class="src">テクスチャ読込時: <code>UNPACK_FLIP_Y_WEBGL=true</code>、<code>CLAMP_TO_EDGE</code> + <code>LINEAR</code>（NPOT対応）。フル実装は <code>lembrasser_01.html</code> / <code>lembrasser_26.html</code>。</p>
 
   <h2><span class="num">3</span>Liquid Glass（フロストガラス）</h2>
+  <img class="thumb" src="リラクゼーション_thumbs/thumb_3_glass.jpg" alt="Liquid Glass の料金カード（テーマ25）" loading="lazy"/>
+  <p class="cap">▲ ガラス越しに背景が透ける料金カード（lembrasser_25）</p>
   <p><code>backdrop-filter</code> のぼかし＋彩度、ふちのハイライト、液体的な光沢の擬似要素。背景が動く（波紋など）と「液体ガラス」感が出る。</p>
   <pre><code>.lg{
   position:relative; overflow:hidden;
@@ -160,6 +168,8 @@ vec3 col = texture2D(uTex, cuv).rgb;</code></pre>
 }</code></pre>
 
   <h2><span class="num">4</span>万年筆で一文字ずつ書く演出</h2>
+  <img class="thumb" src="リラクゼーション_thumbs/thumb_4_pen.jpg" alt="万年筆の筆記演出（テーマ01）" loading="lazy"/>
+  <p class="cap">▲ 「本来の私へ」を一文字ずつインクで書く（lembrasser_01）</p>
   <p>各文字を <code>&lt;span&gt;</code> に分割し、<code>clip-path</code> で左→右にインクを引き、<code>blur</code> でにじみ→定着。1文字ずつ遅延。</p>
   <pre><code>.ink-char{
   display:inline-block; opacity:0;
@@ -178,6 +188,8 @@ vec3 col = texture2D(uTex, cuv).rgb;</code></pre>
   <p class="src">各 <code>span</code> に <code>animation-delay</code> を 0.2〜0.3秒刻みで。<code>aria-label</code> で読み上げ対応。手書きフォント（Klee One）と合わせると万年筆らしさUP。</p>
 
   <h2><span class="num">5</span>古い図鑑風の背景（Köhler 1887・PD）</h2>
+  <img class="thumb" src="リラクゼーション_thumbs/thumb_5_kohler.jpg" alt="Köhler薬草図版の背景（テーマ25）" loading="lazy"/>
+  <p class="cap">▲ パブリックドメインの薬草図版を散らした背景（lembrasser_25）</p>
   <p>100年以上前の薬用植物図譜 <strong>Köhler's Medizinal-Pflanzen (1887)</strong> はパブリックドメイン。アーユルヴェーダの薬草（ウコン/生姜/カルダモン/胡椒/シナモン/サフラン等）が実在し合法に使える。</p>
   <pre><code># 1) ファイル名を検索（例: ウコン）
 curl -s "https://commons.wikimedia.org/w/api.php?action=query&amp;list=search&amp;srsearch=Curcuma%20longa%20Medizinal-Pflanzen&amp;srnamespace=6&amp;format=json"
@@ -194,6 +206,8 @@ curl -s "https://commons.wikimedia.org/w/api.php?action=query&amp;titles=File:&l
   <p class="src">実証済みURL6種は <code>lembrasser_25.html</code> の <code>#botanical-bg</code> 内。暖色の図版を青へ寄せるには上に半透明グラデーション（cool wash）を重ねる。</p>
 
   <h2><span class="num">6</span>その他の小技</h2>
+  <img class="thumb" src="リラクゼーション_thumbs/thumb_6_scrim.jpg" alt="白文字＋スクリム（テーマ27）" loading="lazy"/>
+  <p class="cap">▲ 明るい写真に暗スクリム＋白文字＋全文字2倍（lembrasser_27）</p>
   <ul>
     <li><strong>スクロール出現</strong>: <code>.reveal{opacity:0; transform:translateY(26px); transition:…}</code> ＋ <code>IntersectionObserver</code> で <code>.in</code> 付与。</li>
     <li><strong>グレイン</strong>: インラインSVG <code>feTurbulence</code> を <code>mix-blend-mode</code> multiply(紙)/screen(暗背景) で薄く。</li>

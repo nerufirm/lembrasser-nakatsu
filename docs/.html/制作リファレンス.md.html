@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制作リファレンス</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; line-height: 1.6; color: #333; }
+  pre { background: #f4f4f4; padding: 1em; overflow-x: auto; border-radius: 4px; }
+  code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #ddd; padding: 0.5em; text-align: left; }
+  th { background: #f4f4f4; }
+  blockquote { border-left: 4px solid #ddd; margin: 0; padding-left: 1em; color: #666; }
+  h1, h2, h3 { border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+</style>
+</head>
+<body>
+<hr />
+<p>title: リラクゼーション制作 — 再利用テクニック集<br />
+tags: [reference, webgl, css, font, obsidian]<br />
+created: 2026-06-10<br />
+source: /Users/nerufirm/リラクゼーション</p>
+<hr />
+<h1 id="_1">リラクゼーション制作 — 再利用テクニック集</h1>
+<p>lembrasser_nakatsu（アーユルヴェーダ・サロン）のデザインギャラリー制作で採用した、<strong>後日いつでも使い回せる</strong>テクニックのまとめ。<br />
+各項目の「フル実装」はソースHTMLが真実。ここには要点と核スニペットを置く。</p>
+<blockquote>
+<p>元ファイル: <code>lembrasser_01.html</code>（水の森＝波紋）, <code>lembrasser_25.html</code>（古薬草＝Liquid Glass）, <code>lembrasser_26.html</code>（睡蓮＝実写波紋＋手書き）, <code>lembrasser_27.html</code>（渚）</p>
+</blockquote>
+<hr />
+<h2 id="1">1. フォント</h2>
+<p><img alt="フォント例: テーマ26ヒーロー（欧文Caveat＋和文Klee One）" src="リラクゼーション_thumbs/thumb_1_font.jpg" /><br />
+<em>▲ 全文字手書き（lembrasser_26）</em></p>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>フォント</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欧文 手書き</td>
+<td><strong>Caveat</strong></td>
+<td>⚠️ <strong>欧文専用</strong>。日本語グリフ無し → 和文は必ず別フォントにフォールバックする</td>
+</tr>
+<tr>
+<td>和文 手書き（万年筆風）</td>
+<td><strong>Klee One</strong></td>
+<td>上品なペン字。kanji対応</td>
+</tr>
+<tr>
+<td>和文 手書き（やわらかめ）</td>
+<td><strong>Zen Kurenaido</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>欧文 セリフ装飾</td>
+<td><strong>EB Garamond</strong> / <strong>DM Serif Display</strong></td>
+<td>イタリック見出しに</td>
+</tr>
+<tr>
+<td>和文 明朝</td>
+<td><strong>Shippori Mincho</strong> / <strong>Zen Old Mincho</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>和文 丸ゴシック</td>
+<td><strong>Zen Maru Gothic</strong></td>
+<td>本文の標準</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">「全文字を手書きに」する黄金パターン</h3>
+<p>Caveat は欧文しか持たないので、<strong>和文手書きフォントとペアにする</strong>。フォントスタックの先頭に Caveat、次に Klee One を置くと、欧文＝Caveat・和文＝Klee One が自動で使い分けられる。</p>
+<pre><code class="language-css">/* 全テキストを手書きに（欧文Caveat＋和文Klee One） */
+body, body * {
+  font-family: 'Caveat', 'Klee One', cursive !important;
+}
+</code></pre>
+<h3 id="google-fonts">Google Fonts 読み込み</h3>
+<pre><code class="language-html">&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&amp;family=Klee+One:wght@400;600&amp;family=Zen+Kurenaido&amp;display=swap&quot; rel=&quot;stylesheet&quot; /&gt;
+</code></pre>
+<hr />
+<h2 id="2-webgl">2. 水の波紋（純WebGL・外部依存なし）</h2>
+<p><img alt="水の波紋: テーマ01ヒーロー（着水→同心円が広がる）" src="リラクゼーション_thumbs/thumb_2_ripple.jpg" /><br />
+<em>▲ 手続き生成の水面に波紋（lembrasser_01）</em></p>
+<p>カーソル/タッチで波紋が広がり、水面を屈折させる演出。<strong>WebGL拡張機能・外部ライブラリ不要</strong>で1ファイル完結。Mac Safari/Chrome 両対応。<br />
+2種類ある。</p>
+<h3 id="a-lembrasser_01html">A. 手続き生成版（背景画像なし）— <code>lembrasser_01.html</code></h3>
+<p>ダークティールの水面＋睡蓮＋コースティクスをGLSLで生成し、その上に波紋を重ねる。</p>
+<h3 id="b-lembrasser_26html">B. 実写テクスチャ版（写真を波打たせる）— <code>lembrasser_26.html</code></h3>
+<p>任意の写真を <code>sampler2D</code> に読み込み、波紋でUVを歪ませる。<strong>画像は同一オリジンに置く</strong>（CORSでテクスチャが汚染されないため）。</p>
+<h3 id="_3">波紋の核（フラグメントシェーダーのループ）</h3>
+<p>リアルさのキモは「<strong>着水 → 因果的な波面 → 同心円が伝播</strong>」。波面より外は静止させる（causality）。</p>
+<pre><code class="language-glsl">// uRipples[i] = vec4(中心x, 中心y, 開始時刻, 強さ)   ※xyはuv(0..1)
+float rage = uTime - rp.z;
+if (rage &lt; 0.0 || rage &gt; 6.43) continue;
+float age = rage * 0.7;                 // ← 速度係数。0.7で「0.7倍速」スロー
+float front  = age * 0.40;              // 因果的な波面（ここまで波が到達）
+float behind = front - dist;            // &gt;0 なら到達済み
+float reach  = smoothstep(0.0, 0.04, behind);
+float fb     = exp(-behind*behind*38.0);                 // 波面付近を強調
+float wave   = sin(dist*46.0 - age*22.0)                 // 進行波
+             + 0.4*sin(dist*92.0 - age*40.0);            // ＋毛細波（先端ほど細かい）
+float amp    = exp(-dist*2.1) * exp(-age*1.1) * rp.w;    // 距離と時間で自然減衰
+float w      = wave * amp * reach * (0.65 + 0.6*fb);
+disp += dir * w;     // 変位（屈折）
+hi   += max(w,0.0);  // 稜線ハイライト
+act  += abs(w) + 0.22*amp*reach;                         // 波紋が広がった範囲
+splash += exp(-dist*dist*950.0) * exp(-age*9.0) * rp.w;  // 着水点のきらめき
+</code></pre>
+<h3 id="_4">「波紋が広がった所をキラキラ明るい水色に」する仕上げ</h3>
+<pre><code class="language-glsl">vec3 sparkleAqua = vec3(0.32, 0.80, 0.88);
+water = mix(water, sparkleAqua, clamp(act*0.55, 0.0, 0.52));     // 活性域を明色へ
+water += vec3(0.45,0.90,0.98) * ca * act * 0.7;                  // コースティクス増幅
+water += vec3(0.90,1.00,1.00) * pow(max(hi,0.0), 2.2) * 0.9;     // 稜線の白いきらめき
+water += vec3(0.85,1.00,1.00) * splash * 1.1;                    // 着水点のきらめき
+</code></pre>
+<h3 id="js">JS側の要点</h3>
+<ul>
+<li>フルスクリーン三角形 <code>[-1,-1, 3,-1, -1,3]</code> を1枚描く。</li>
+<li><code>uRipples</code> は長さ12のリングバッファ（<code>Float32Array(12*4)</code>、未使用は z=-1）。</li>
+<li><code>pointermove</code> を ~28ms スロットリングし、速度から強さを決めて <code>spawn()</code>。</li>
+<li><strong>Idle Ripples</strong>: 無操作でも1〜1.8秒ごとに水滴を落とす（水面が呼吸する）。</li>
+<li>大画面対策: 内部解像度を <code>min(1, 1280/innerWidth)</code> で抑え、CSSで引き伸ばす。</li>
+<li><code>visibilitychange</code> で非表示時に停止。<code>prefers-reduced-motion</code> で静止。</li>
+<li>WebGL不可時は <code>canvas</code> を消すかCSS背景画像にフォールバック。</li>
+</ul>
+<blockquote>
+<p>フル実装（VERT/FRAG/ループ全部）は <code>lembrasser_01.html</code>（688〜910行付近）と <code>lembrasser_26.html</code>（実写テクスチャ版）を参照。</p>
+</blockquote>
+<h3 id="cover-fit">実写版だけの追加点（cover-fit）</h3>
+<pre><code class="language-glsl">float screenA = uRes.x/uRes.y, texA = uTexRes.x/uTexRes.y;
+vec2 scale = (screenA &gt; texA) ? vec2(1.0, texA/screenA) : vec2(screenA/texA, 1.0);
+vec2 cuv = (uv + disp*0.04 - 0.5) * scale + 0.5;   // 画像を画面いっぱいにcover
+vec3 col = texture2D(uTex, cuv).rgb;
+</code></pre>
+<p>テクスチャ読込時は <code>gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true)</code>、<code>CLAMP_TO_EDGE</code> + <code>LINEAR</code>（NPOT対応）。</p>
+<hr />
+<h2 id="3-liquid-glassapple">3. Liquid Glass（フロストガラス／Apple風）</h2>
+<p><img alt="Liquid Glass: テーマ25の料金カード（フロストガラス）" src="リラクゼーション_thumbs/thumb_3_glass.jpg" /><br />
+<em>▲ ガラスのカード越しに背景が透ける（lembrasser_25）</em></p>
+<p><code>backdrop-filter</code> のぼかし＋彩度、ふちのハイライト、液体的な光沢の擬似要素。<code>.lg</code>=透け強め（ナビ向き）、<code>.lg-card</code>=やや白め（本文の可読性確保）。</p>
+<pre><code class="language-css">.lg{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, rgba(255,255,255,.30), rgba(255,255,255,.10));
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 10px 38px rgba(16,70,62,.20),
+             inset 0 1px 0 rgba(255,255,255,.85),
+             inset 0 -1px 0 rgba(255,255,255,.18);
+}
+.lg::after{                     /* 液体のような光沢 */
+  content:&quot;&quot;; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(120deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 36%,
+            rgba(255,255,255,0) 64%, rgba(255,255,255,.30) 100%);
+  mix-blend-mode:screen;
+}
+/* 本文カード（読みやすさ優先・ガラス感は維持） */
+.lg-card{
+  background:linear-gradient(135deg, rgba(255,255,255,.52), rgba(247,253,251,.34));
+  backdrop-filter:blur(18px) saturate(165%);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 12px 40px rgba(16,70,62,.16), inset 0 1px 0 rgba(255,255,255,.8);
+}
+</code></pre>
+<p>透明度・ぼくし量（<code>rgba</code>の0.30/0.10 と <code>blur()</code>）で印象が変わる。背景が動く（波紋など）と「液体ガラス」感が出る。</p>
+<hr />
+<h2 id="4-lembrasser_01html">4. 万年筆で一文字ずつ書く演出 — <code>lembrasser_01.html</code></h2>
+<p><img alt="万年筆の筆記: 「本来の私へ」を一文字ずつ書く" src="リラクゼーション_thumbs/thumb_4_pen.jpg" /><br />
+<em>▲ clip-pathでインクを引く手書き演出（lembrasser_01）</em></p>
+<p>各文字を <code>&lt;span&gt;</code> に分割し、<code>clip-path</code> で左→右にインクを引き、<code>blur</code> でにじみ→定着。1文字ずつ遅延。</p>
+<pre><code class="language-css">.ink-char{
+  display:inline-block; opacity:0;
+  clip-path:inset(0 100% 0 0);   /* 左→右に出現 */
+  filter:blur(3px);              /* にじみ → 定着 */
+  animation:penWrite .52s cubic-bezier(.5,.15,.25,1) forwards;
+}
+@keyframes penWrite{
+  0%  { opacity:0; clip-path:inset(0 100% 0 0); filter:blur(3px); }
+  55% { opacity:1; }
+  100%{ opacity:1; clip-path:inset(0 0 0 0);   filter:blur(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .ink-char{ animation:none; opacity:1; clip-path:none; filter:none; }
+}
+</code></pre>
+<pre><code class="language-html">&lt;h1 class=&quot;handwrite&quot; aria-label=&quot;本来の私へ&quot;
+&gt;&lt;span class=&quot;ink-char&quot; style=&quot;animation-delay:.55s&quot;&gt;本&lt;/span
+&gt;&lt;span class=&quot;ink-char&quot; style=&quot;animation-delay:.83s&quot;&gt;来&lt;/span
+&gt;&lt;span class=&quot;ink-char&quot; style=&quot;animation-delay:1.11s&quot;&gt;の&lt;/span
+&gt;&lt;span class=&quot;ink-char&quot; style=&quot;animation-delay:1.39s&quot;&gt;私&lt;/span
+&gt;&lt;span class=&quot;ink-char&quot; style=&quot;animation-delay:1.67s&quot;&gt;へ&lt;/span&gt;&lt;/h1&gt;
+</code></pre>
+<p>※ <code>aria-label</code> で読み上げ対応。手書きフォント（Klee One）と合わせると万年筆らしさが増す。</p>
+<hr />
+<h2 id="5-kohler-1887-lembrasser_25html">5. 古い図鑑風の背景（Köhler 1887・パブリックドメイン） — <code>lembrasser_25.html</code></h2>
+<p><img alt="古図鑑背景: テーマ25（Köhler薬草図版＋淡青クリーム）" src="リラクゼーション_thumbs/thumb_5_kohler.jpg" /><br />
+<em>▲ パブリックドメインの薬草図版を散らした背景（lembrasser_25）</em></p>
+<p>100年以上前の薬用植物図譜 <strong>Köhler's Medizinal-Pflanzen (1887)</strong> はパブリックドメイン。アーユルヴェーダの薬草（ウコン/生姜/カルダモン/胡椒/シナモン/サフラン等）が実在し、合法に使える。</p>
+<h3 id="wikimedia-commons">Wikimedia Commons から確実に取得する手順</h3>
+<pre><code class="language-bash"># 1) ファイル名を検索（例: ウコン）
+curl -s &quot;https://commons.wikimedia.org/w/api.php?action=query&amp;list=search&amp;srsearch=Curcuma%20longa%20Medizinal-Pflanzen&amp;srnamespace=6&amp;format=json&quot;
+
+# 2) 安定した直URL（CDN）を取得
+curl -s &quot;https://commons.wikimedia.org/w/api.php?action=query&amp;titles=File:&lt;filename&gt;&amp;prop=imageinfo&amp;iiprop=url&amp;iiurlwidth=1000&amp;format=json&quot;
+#    → thumburl が upload.wikimedia.org/.../thumb/... で返る（ホットリンク可）
+
+# 簡易版: Special:FilePath（リダイレクト・レート制限あり。本番はupload直URL推奨）
+# https://commons.wikimedia.org/wiki/Special:FilePath/&lt;filename&gt;?width=900
+</code></pre>
+<p>実証済みURL（6種）は <code>lembrasser_25.html</code> の <code>#botanical-bg</code> 内に記載。</p>
+<h3 id="_5">古紙に溶け込ませる表示</h3>
+<pre><code class="language-css">#botanical-bg img{
+  mix-blend-mode:multiply;       /* 古紙の白を地に溶かし、図のインクだけ残す */
+  filter:saturate(.66) contrast(.92) brightness(1.06) hue-rotate(-6deg);
+  opacity:.42;
+}
+</code></pre>
+<p>暖色の図版を<strong>青へ寄せて統一</strong>したい時は、上に半透明グラデーション（cool wash）を重ねる。</p>
+<hr />
+<h2 id="6">6. その他の小技</h2>
+<p><img alt="白文字＋スクリム: テーマ27（明るいビーチに白文字2倍）" src="リラクゼーション_thumbs/thumb_6_scrim.jpg" /><br />
+<em>▲ 明るい写真に暗スクリム＋白文字＋全文字2倍（lembrasser_27）</em></p>
+<ul>
+<li><strong>スクロール出現</strong>: <code>.reveal{opacity:0; transform:translateY(26px); transition:…}</code> ＋ <code>IntersectionObserver</code> で <code>.in</code> 付与。</li>
+<li><strong>グレイン（紙/宇宙の塵）</strong>: インラインSVGの <code>feTurbulence</code> を <code>mix-blend-mode:multiply</code>(紙) / <code>screen</code>(暗背景) で薄く敷く。</li>
+<li><strong>白文字を画像の上で読ませる</strong>: 背景に暗いスクリム（<code>linear-gradient(rgba(...,.55), rgba(...,.62))</code>）＋ <code>text-shadow</code> を重ねる。明るい写真＋白文字は必須。</li>
+<li><strong>全テキスト2倍</strong>: <code>html{ font-size:200% }</code>（rem基準のTailwind text-*が一括で2倍。※spacingも2倍になる点に注意）。</li>
+<li><strong>アクセシビリティ</strong>: 動きのある演出は必ず <code>@media (prefers-reduced-motion: reduce)</code> で静止/簡略化。</li>
+</ul>
+<hr />
+<h2 id="_6">設計原則（このプロジェクトで効いたもの）</h2>
+<ol>
+<li><strong>外部依存ゼロ</strong>を優先（WebGLは生で書く・画像はPDか自前・1ファイル完結）。</li>
+<li><strong>AIは判断に、決定論はコードで</strong>（波紋の物理・スロットリング等はコード）。</li>
+<li>派手な演出ほど<strong>可読性とのトレードオフを明示</strong>し、スクリム等で担保する。</li>
+<li>破壊的変更の前にプレビュー→適用→検証（grep残存0など）。</li>
+</ol>
+</body>
+</html>

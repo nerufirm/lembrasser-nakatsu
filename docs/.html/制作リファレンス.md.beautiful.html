@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>リラクゼーション制作 — 再利用テクニック集</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic Pro',sans-serif;
+      background:linear-gradient(135deg,#f5f7f4 0%,#eff3f0 50%,#e8f1ed 100%);
+      color:#1a1a1a;line-height:1.7;
+    }
+    ::selection{background:#4a9d8f;color:#fff}
+    
+    /* ヘッダー */
+    .header{
+      padding:4rem 2rem;text-align:center;
+      background:linear-gradient(135deg,rgba(13,74,69,.95),rgba(74,157,143,.9));
+      color:#fff;position:relative;overflow:hidden;
+    }
+    .header::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(circle at 20% 50%,rgba(233,196,106,.15),transparent),
+                 radial-gradient(circle at 80% 80%,rgba(255,255,255,.08),transparent);
+      pointer-events:none;
+    }
+    .header-content{position:relative;z-index:1;max-width:900px;margin:0 auto}
+    .header h1{font-size:clamp(2rem,8vw,3.5rem);margin-bottom:1rem;font-weight:700;letter-spacing:-0.02em}
+    .header p{font-size:1.2rem;opacity:.95;margin-bottom:0.5rem}
+    .header small{opacity:.75;font-size:0.95rem;display:block;margin-top:1rem}
+    
+    /* レイアウト */
+    .container{max-width:1200px;margin:0 auto;padding:3rem 2rem}
+    
+    /* セクション */
+    .section{
+      margin-bottom:3rem;animation:fadeInUp 0.8s ease-out forwards;opacity:0;
+    }
+    @keyframes fadeInUp{
+      from{opacity:0;transform:translateY(30px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .section:nth-child(1){animation-delay:0.1s}
+    .section:nth-child(2){animation-delay:0.2s}
+    .section:nth-child(3){animation-delay:0.3s}
+    .section:nth-child(4){animation-delay:0.4s}
+    .section:nth-child(5){animation-delay:0.5s}
+    .section:nth-child(6){animation-delay:0.6s}
+    
+    .section-title{
+      font-size:2rem;color:#0d4a45;margin-bottom:1.5rem;
+      padding-bottom:0.75rem;border-bottom:3px solid #4a9d8f;
+      display:flex;align-items:center;gap:1rem;
+    }
+    .section-title::before{
+      content:'';width:8px;height:8px;border-radius:50%;
+      background:linear-gradient(135deg,#e9c46a,#f5b04a)
+    }
+    
+    /* カード */
+    .card{
+      background:#fff;border-radius:12px;padding:2rem;margin-bottom:1.5rem;
+      box-shadow:0 4px 12px rgba(13,74,69,0.08);
+      border-left:4px solid #4a9d8f;
+      transition:transform 0.3s ease,box-shadow 0.3s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(13,74,69,0.12)}
+    
+    /* テーブル */
+    .card table{width:100%;border-collapse:collapse;margin-top:1rem}
+    .card table th{
+      background:linear-gradient(135deg,#0d4a45,#145349);
+      color:#fff;padding:0.75rem;text-align:left;font-weight:600;
+    }
+    .card table td{padding:0.75rem;border-bottom:1px solid #e0e0e0}
+    .card table tr:nth-child(even){background:#f9faf8}
+    
+    /* コードブロック */
+    .code-block{
+      background:#1a1a1a;color:#e0e0e0;padding:1.5rem;
+      border-radius:8px;overflow-x:auto;margin:1rem 0;
+      font-family:'Monaco','Courier New',monospace;font-size:0.9rem;
+      line-height:1.6;border:1px solid #333;
+    }
+    .code-block code{color:#a8d5d0}
+    .code-comment{color:#64996e}
+    
+    /* 画像プレースホルダー */
+    .img-placeholder{
+      background:linear-gradient(135deg,rgba(74,157,143,0.1),rgba(233,196,106,0.1));
+      border:2px dashed #4a9d8f;border-radius:8px;padding:2rem;
+      text-align:center;color:#0d4a45;margin:1.5rem 0;
+      font-size:0.95rem;font-style:italic;
+    }
+    
+    /* 強調 */
+    em{color:#0d4a45;font-style:italic;font-weight:600}
+    strong{color:#0d4a45;font-weight:700}
+    
+    /* リスト */
+    ul,ol{margin:1rem 0 1rem 2rem}
+    li{margin-bottom:0.5rem}
+    
+    /* 参考ボックス */
+    .note{
+      background:linear-gradient(135deg,rgba(74,157,143,0.08),rgba(233,196,106,0.05));
+      border-left:4px solid #e9c46a;padding:1.5rem;border-radius:8px;
+      margin:1.5rem 0;font-size:0.95rem;
+    }
+    .note strong{color:#d4a74a}
+    
+    /* グリッド（カラムレイアウト） */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:1.5rem 0}
+    @media(max-width:768px){
+      .two-col{grid-template-columns:1fr}
+      .section-title{font-size:1.5rem}
+      .header h1{font-size:2rem}
+    }
+    
+    /* ハイライト */
+    .highlight{background:linear-gradient(120deg,rgba(233,196,106,0.3),rgba(233,196,106,0.1));padding:0.2em 0.4em;border-radius:3px}
+    
+    /* フッター */
+    .footer{
+      text-align:center;padding:3rem 2rem;color:#666;border-top:1px solid #ddd;
+      margin-top:3rem;background:rgba(255,255,255,0.5);
+    }
+    .footer p{margin:0.5rem 0;font-size:0.9rem}
+    
+    /* タグ */
+    .tag{
+      display:inline-block;background:#0d4a45;color:#fff;
+      padding:0.3rem 0.8rem;border-radius:16px;font-size:0.8rem;
+      margin-right:0.5rem;margin-bottom:0.5rem;font-weight:600;
+    }
+    
+    /* スクロール出現アニメーション */
+    @media(prefers-reduced-motion:no-preference){
+      .section{animation:fadeInUp 0.8s ease-out forwards}
+    }
+    
+    /* プリント対応 */
+    @media print{
+      body{background:#fff}
+      .card{box-shadow:none;border:1px solid #ddd}
+      .section{page-break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-content">
+    <h1>🎨 リラクゼーション制作</h1>
+    <p style="font-size:1.5rem;margin-bottom:0.3rem">再利用テクニック集</p>
+    <p>lembrasser_nakatsu（アーユルヴェーダ・サロン）のデザインギャラリー制作で採用した、後日いつでも使い回せるテクニックのまとめ</p>
+    <small>📁 元ファイル: lembrasser_01.html（水の森＝波紋） | lembrasser_25.html（古薬草＝Liquid Glass） | lembrasser_26.html（睡蓮） | lembrasser_27.html（渚）</small>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- セクション 1: フォント -->
+  <section class="section">
+    <h2 class="section-title">1. フォント</h2>
+    
+    <div class="card">
+      <div class="img-placeholder">
+        🔤 フォント例: テーマ26ヒーロー（欧文Caveat＋和文Klee One）<br>
+        <em>全文字手書き（lembrasser_26）</em>
+      </div>
+      
+      <p style="margin:1.5rem 0 1rem">フォント選定表</p>
+      <table>
+        <tr>
+          <th>用途</th>
+          <th>フォント</th>
+          <th>備考</th>
+        </tr>
+        <tr>
+          <td>欧文 手書き</td>
+          <td><strong>Caveat</strong></td>
+          <td>⚠️ 欧文専用。日本語グリフ無し → 和文は必ず別フォントにフォールバック</td>
+        </tr>
+        <tr>
+          <td>和文 手書き（万年筆風）</td>
+          <td><strong>Klee One</strong></td>
+          <td>上品なペン字。kanji対応</td>
+        </tr>
+        <tr>
+          <td>和文 手書き（やわらかめ）</td>
+          <td><strong>Zen Kurenaido</strong></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>欧文 セリフ装飾</td>
+          <td><strong>EB Garamond</strong> / <strong>DM Serif Display</strong></td>
+          <td>イタリック見出しに</td>
+        </tr>
+        <tr>
+          <td>和文 明朝</td>
+          <td><strong>Shippori Mincho</strong> / <strong>Zen Old Mincho</strong></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>和文 丸ゴシック</td>
+          <td><strong>Zen Maru Gothic</strong></td>
+          <td>本文の標準</td>
+        </tr>
+      </table>
+      
+      <h3 style="margin-top:2rem;color:#0d4a45;font-size:1.1rem">「全文字を手書きに」する黄金パターン</h3>
+      <p>Caveat は欧文しか持たないので、<strong>和文手書きフォントとペアにする</strong>。フォントスタックの先頭に Caveat、次に Klee One を置くと、欧文＝Caveat・和文＝Klee One が自動で使い分けられる。</p>
+      
+      <div class="code-block">
+/* 全テキストを手書きに（欧文Caveat＋和文Klee One） */
+body, body * {
+  font-family: 'Caveat', 'Klee One', cursive !important;
+}
+      </div>
+      
+      <h3 style="margin-top:1.5rem;color:#0d4a45;font-size:1.1rem">Google Fonts 読み込み</h3>
+      <div class="code-block">
+&lt;link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Klee+One:wght@400;600&family=Zen+Kurenaido&display=swap" rel="stylesheet" /&gt;
+      </div>
+    </div>
+  </section>
+
+  <!-- セクション 2: 水の波紋 -->
+  <section class="section">
+    <h2 class="section-title">2. 水の波紋（純WebGL・外部依存なし）</h2>
+    
+    <div class="card">
+      <div class="img-placeholder">
+        💧 水の波紋: テーマ01ヒーロー（着水→同心円が広がる）<br>
+        <em>手続き生成の水面に波紋（lembrasser_01）</em>
+      </div>
+      
+      <p style="margin:1.5rem 0">カーソル/タッチで波紋が広がり、水面を屈折させる演出。<span class="highlight">WebGL拡張機能・外部ライブラリ不要で1ファイル完結</span>。Mac Safari/Chrome 両対応。</p>
+      
+      <h3 style="color:#0d4a45;font-size:1.1rem;margin-top:1.5rem">2つのバージョン</h3>
+      <ul>
+        <li><strong>A. 手続き生成版</strong>（背景画像なし）— lembrasser_01.html<br>ダークティールの水面＋睡蓮＋コースティクスをGLSLで生成し、その上に波紋を重ねる。</li>
+        <li><strong>B. 実写テクスチャ版</strong>（写真を波打たせる）— lembrasser_26.html<br>任意の写真を sampler2D に読み込み、波紋でUVを歪ませる。<strong>画像は同一オリジンに置く</strong>（CORSでテクスチャが汚染されないため）。</li>
+      </ul>
+      
+      <h3 style="color:#0d4a45;font-size:1.1rem;margin-top:1.5rem">波紋の核（フラグメントシェーダーのループ）</h3>
+      <p>リアルさのキモは「<strong>着水 → 因果的な波面 → 同心円が伝播</strong>」。波面より外は静止させる（causality）。</p>
+      
+      <div class="code-block">
+<span class="code-comment">// uRipples[i] = vec4(中心x, 中心y, 開始時刻, 強さ)</span>
+float rage = uTime - rp.z;
+if (rage &lt; 0.0 || rage &gt; 6.43) continue;
+float age = rage * 0.7;  <span class="code-comment">// ← 速度係数。0.7で「0.7倍速」スロー</span>
+float front  = age * 0.40;     <span class="code-comment">// 因果的な波面（ここまで波が到達）</span>
+float behind = front - dist;   <span class="code-comment">// >0 なら到達済み</span>
+float reach  = smoothstep(0.0, 0.04, behind);
+float fb     = exp(-behind*behind*38.0);    <span class="code-comment">// 波面付近を強調</span>
+float wave   = sin(dist*46.0 - age*22.0)
+             + 0.4*sin(dist*92.0 - age*40.0);
+float amp    = exp(-dist*2.1) * exp(-age*1.1) * rp.w;
+float w      = wave * amp * reach * (0.65 + 0.6*fb);
+disp += dir * w;
+      </div>
+      
+      <h3 style="color:#0d4a45;font-size:1.1rem;margin-top:1.5rem">「波紋が広がった所をキラキラ明るい水色に」する仕上げ</h3>
+      <div class="code-block">
+vec3 sparkleAqua = vec3(0.32, 0.80, 0.88);
+water = mix(water, sparkleAqua, clamp(act*0.55, 0.0, 0.52));
+water += vec3(0.45,0.90,0.98) * ca * act * 0.7;
+water += vec3(0.90,1.00,1.00) * pow(max(hi,0.0), 2.2) * 0.9;
+      </div>
+      
+      <h3 style="color:#0d4a45;font-size:1.1rem;margin-top:1.5rem">JS側の要点</h3>
+      <ul>
+        <li>フルスクリーン三角形 <code>[-1,-1, 3,-1, -1,3]</code> を1枚描く。</li>
+        <li><code>uRipples</code> は長さ12のリングバッファ（未使用は z=-1）。</li>
+        <li><code>pointermove</code> を ~28ms スロットリングし、速度から強さを決めて <code>spawn()</code>。</li>
+        <li><span class="highlight">Idle Ripples</span>: 無操作でも1〜1.8秒ごとに水滴を落とす（水面が呼吸する）。</li>
+        <li>大画面対策: 内部解像度を <code>min(1, 1280/innerWidth)</code> で抑える。</li>
+        <li><code>visibilitychange</code> で非表示時に停止。<code>prefers-reduced-motion</code> で静止。</li>
+      </ul>
+      
+      <div class="note">
+        <strong>フル実装</strong> (VERT/FRAG/ループ全部) は <strong>lembrasser_01.html</strong>（688〜910行付近）と <strong>lembrasser_26.html</strong>（実写テクスチャ版）を参照。
+      </div>
+    </div>
+  </section>
+
+  <!-- セクション 3: Liquid Glass -->
+  <section class="section">
+    <h2 class="section-title">3. Liquid Glass（フロストガラス／Apple風）</h2>
+    
+    <div class="card">
+      <div class="img-placeholder">
+        🌫️ Liquid Glass: テーマ25の料金カード（フロストガラス）<br>
+        <em>ガラスのカード越しに背景が透ける（lembrasser_25）</em>
+      </div>
+      
+      <p style="margin:1.5rem 0"><code>backdrop-filter</code> のぼかし＋彩度、ふちのハイライト、液体的な光沢の擬似要素。<code>.lg</code>=透け強め（ナビ向き）、<code>.lg-card</code>=やや白め（本文の可読性確保）。</p>
+      
+      <div class="code-block">
+.lg{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, rgba(255,255,255,.30), rgba(255,255,255,.10));
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 10px 38px rgba(16,70,62,.20),
+             inset 0 1px 0 rgba(255,255,255,.85);
+}
+.lg::after{                     <span class="code-comment">/* 液体のような光沢 */</span>
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(120deg, rgba(255,255,255,.55) 0%,
+            rgba(255,255,255,0) 64%, rgba(255,255,255,.30) 100%);
+  mix-blend-mode:screen;
+}
+      </div>
+      
+      <p style="margin-top:1.5rem">透明度・ぼくし量（<code>rgba</code>の0.30/0.10 と <code>blur()</code>）で印象が変わる。背景が動く（波紋など）と「液体ガラス」感が出る。</p>
+    </div>
+  </section>
+
+  <!-- セクション 4: 万年筆演出 -->
+  <section class="section">
+    <h2 class="section-title">4. 万年筆で一文字ずつ書く演出</h2>
+    
+    <div class="card">
+      <div class="img-placeholder">
+        ✒️ 万年筆の筆記: 「本来の私へ」を一文字ずつ書く<br>
+        <em>clip-pathでインクを引く手書き演出（lembrasser_01）</em>
+      </div>
+      
+      <p style="margin:1.5rem 0">各文字を <code>&lt;span&gt;</code> に分割し、<code>clip-path</code> で左→右にインクを引き、<code>blur</code> でにじみ→定着。1文字ずつ遅延。</p>
+      
+      <div class="code-block">
+.ink-char{
+  display:inline-block; opacity:0;
+  clip-path:inset(0 100% 0 0);   <span class="code-comment">/* 左→右に出現 */</span>
+  filter:blur(3px);              <span class="code-comment">/* にじみ → 定着 */</span>
+  animation:penWrite .52s cubic-bezier(.5,.15,.25,1) forwards;
+}
+@keyframes penWrite{
+  0%  { opacity:0; clip-path:inset(0 100% 0 0); filter:blur(3px); }
+  55% { opacity:1; }
+  100%{ opacity:1; clip-path:inset(0 0 0 0);   filter:blur(0); }
+}
+      </div>
+      
+      <div class="code-block" style="background:#f9faf8;color:#1a1a1a;border:1px solid #ddd;">
+&lt;h1 class="handwrite"&gt;
+  &lt;span class="ink-char" style="animation-delay:.55s"&gt;本&lt;/span&gt;
+  &lt;span class="ink-char" style="animation-delay:.83s"&gt;来&lt;/span&gt;
+  &lt;span class="ink-char" style="animation-delay:1.11s"&gt;の&lt;/span&gt;
+  &lt;span class="ink-char" style="animation-delay:1.39s"&gt;私&lt;/span&gt;
+  &lt;span class="ink-char" style="animation-delay:1.67s"&gt;へ&lt;/span&gt;
+&lt;/h1&gt;
+      </div>
+      
+      <div class="note">
+        <strong>aria-label</strong> で読み上げ対応。手書きフォント（Klee One）と合わせると万年筆らしさが増す。
+      </div>
+    </div>
+  </section>
+
+  <!-- セクション 5: 古い図鑑 -->
+  <section class="section">
+    <h2 class="section-title">5. 古い図鑑風の背景（Köhler 1887・パブリックドメイン）</h2>
+    
+    <div class="card">
+      <div class="img-placeholder">
+        📚 古図鑑背景: テーマ25（Köhler薬草図版＋淡青クリーム）<br>
+        <em>パブリックドメインの薬草図版を散らした背景（lembrasser_25）</em>
+      </div>
+      
+      <p style="margin:1.5rem 0">100年以上前の薬用植物図譜 <strong>Köhler's Medizinal-Pflanzen (1887)</strong> はパブリックドメイン。アーユルヴェーダの薬草（ウコン/生姜/カルダモン/胡椒/シナモン/サフラン等）が実在し、合法に使える。</p>
+      
+      <h3 style="color:#0d4a45;font-size:1.1rem;margin-top:1.5rem">Wikimedia Commons から確実に取得する手順</h3>
+      
+      <div class="code-block">
+<span class="code-comment"># 1) ファイル名を検索（例: ウコン）</span>
+curl -s "https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=Curcuma%20longa..."
+
+<span class="code-comment"># 2) 安定した直URL（CDN）を取得</span>
+curl -s "https://commons.wikimedia.org/w/api.php?action=query&titles=File:&lt;filename&gt;..."
+
+<span class="code-comment"># 簡易版: Special:FilePath（リダイレクト・レート制限あり）</span>
+https://commons.wikimedia.org/wiki/Special:FilePath/&lt;filename&gt;?width=900
+      </div>
+      
+      <p style="margin-top:1.5rem">実証済みURL（6種）は <code>lembrasser_25.html</code> の <code>#botanical-bg</code> 内に記載。</p>
+      
+      <h3 style="color:#0d4a45;font-size:1.1rem;margin-top:1.5rem">古紙に溶け込ませる表示</h3>
+      <div class="code-block">
+#botanical-bg img{
+  mix-blend-mode:multiply;       <span class="code-comment">/* 古紙の白を地に溶かし、図のインクだけ残す */</span>
+  filter:saturate(.66) contrast(.92) brightness(1.06) hue-rotate(-6deg);
+  opacity:.42;
+}
+      </div>
+      
+      <p style="margin-top:1rem">暖色の図版を<strong>青へ寄せて統一</strong>したい時は、上に半透明グラデーション（cool wash）を重ねる。</p>
+    </div>
+  </section>
+
+  <!-- セクション 6: その他の小技 -->
+  <section class="section">
+    <h2 class="section-title">6. その他の小技</h2>
+    
+    <div class="card">
+      <div class="img-placeholder">
+        ✨ 白文字＋スクリム: テーマ27（明るいビーチに白文字2倍）<br>
+        <em>明るい写真に暗スクリム＋白文字＋全文字2倍（lembrasser_27）</em>
+      </div>
+      
+      <ul style="margin-top:1.5rem">
+        <li>
+          <strong>スクロール出現</strong>: <code>.reveal{opacity:0; transform:translateY(26px); transition:…}</code> ＋ <code>IntersectionObserver</code> で <code>.in</code> 付与。
+        </li>
+        <li>
+          <strong>グレイン（紙/宇宙の塵）</strong>: インラインSVGの <code>feTurbulence</code> を <code>mix-blend-mode:multiply</code>(紙) / <code>screen</code>(暗背景) で薄く敷く。
+        </li>
+        <li>
+          <strong>白文字を画像の上で読ませる</strong>: 背景に暗いスクリム（<code>linear-gradient(rgba(...,.55), rgba(...,.62))</code>）＋ <code>text-shadow</code> を重ねる。明るい写真＋白文字は必須。
+        </li>
+        <li>
+          <strong>全テキスト2倍</strong>: <code>html{ font-size:200% }</code>（rem基準のTailwind text-*が一括で2倍。※spacingも2倍になる点に注意）。
+        </li>
+        <li>
+          <strong>アクセシビリティ</strong>: 動きのある演出は必ず <code>@media (prefers-reduced-motion: reduce)</code> で静止/簡略化。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- セクション: 設計原則 -->
+  <section class="section">
+    <h2 class="section-title">設計原則</h2>
+    
+    <div class="card">
+      <p style="margin-bottom:1.5rem">このプロジェクトで効いたもの：</p>
+      
+      <ol style="margin:1rem 0 1rem 2rem">
+        <li style="margin-bottom:1rem">
+          <strong>外部依存ゼロを優先</strong><br>
+          WebGLは生で書く・画像はPDか自前・1ファイル完結
+        </li>
+        <li style="margin-bottom:1rem">
+          <strong>AIは判断に、決定論はコードで</strong><br>
+          波紋の物理・スロットリング等はコード
+        </li>
+        <li style="margin-bottom:1rem">
+          <strong>派手な演出ほど可読性とのトレードオフを明示</strong><br>
+          スクリム等で担保する
+        </li>
+        <li>
+          <strong>破壊的変更の前にプレビュー→適用→検証</strong><br>
+          grep残存0など
+        </li>
+      </ol>
+      
+      <div class="note" style="margin-top:2rem;background:linear-gradient(135deg,rgba(13,74,69,0.08),rgba(74,157,143,0.08));border-left-color:#0d4a45;">
+        <strong>💡 ポイント</strong><br>
+        各項目の「フル実装」はソースHTMLが真実。ここには要点と核スニペットを置いています。詳細は原ファイルを参照してください。
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <p><strong>リラクゼーション制作 — 再利用テクニック集</strong></p>
+  <p>lembrasser_nakatsu（アーユルヴェーダ・サロン）のデザインギャラリー制作から抽出</p>
+  <p style="margin-top:1.5rem;font-size:0.85rem;opacity:0.7">作成日: 2026-06-10 | タグ: reference, webgl, css, font, obsidian</p>
+</footer>
+
+</body>
+</html>

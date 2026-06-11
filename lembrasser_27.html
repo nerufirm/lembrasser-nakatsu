@@ -122,13 +122,17 @@
   .w-52, .arch{ max-width:86vw; }
 
   /* 背景＝ビーチ写真（固定）＋ 白文字の可読性スクリム */
+  /* iOS/iPadOS Safari は background-attachment:fixed 非対応（coverと併用で背景が消える）
+     ため、position:fixed の擬似要素で固定背景を実装する */
   body{
+    text-shadow:0 1px 10px rgba(0,20,35,.55) !important;
+    color:#ffffff !important;
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
     background:
       linear-gradient(rgba(6,24,40,.55), rgba(6,24,40,.62)),
-      url('assets/beach.jpg') center center / cover no-repeat fixed !important;
-    text-shadow:0 1px 10px rgba(0,20,35,.55) !important;
-    background-attachment: fixed !important;
-    color:#ffffff !important;
+      url('assets/beach.jpg') center center / cover no-repeat;
   }
   #ripple-bg{ display:none !important; }   /* 波紋キャンバスは不使用 */
 

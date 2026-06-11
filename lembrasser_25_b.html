@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>lembrasser_nakatsu｜古薬草図譜テーマ — 大分・中津 アーユルヴェーダ</title>
+<meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。二千年の薬草の知恵とともに、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital@0;1&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Old+Mincho:wght@400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper:      '#EAF1F6',   /* 澄んだ空の白 */
+          'paper-2':  '#F7F0E2',   /* 古紙のクリーム */
+          sand:       '#EFE6D5',   /* 温かなクリーム */
+          tan:        '#C7D6E1',   /* 霞のブルーグレー（罫線） */
+          ink:        '#27404F',   /* 深いスレート（本文） */
+          'ink-soft': '#5E7889',   /* 霞んだスレート */
+          rust:       '#B5894E',   /* 古図譜のオークル（主アクセント） */
+          'rust-d':   '#9C7138',   /* 濃いオークル */
+          ochre:      '#C7A368',   /* 淡い金（小装飾） */
+          olive:      '#6C8DA2',   /* くすんだ青（副アクセント） */
+          cream:      '#FBF6EC',   /* ほぼ白の温色 */
+        },
+        fontFamily: {
+          serif:  ['"DM Serif Display"', 'serif'],
+          garam:  ['"EB Garamond"', 'serif'],
+          mincho: ['"Shippori Mincho"', '"Zen Old Mincho"', 'serif'],
+          maru:   ['"Zen Maru Gothic"', 'sans-serif'],
+        },
+        letterSpacing: { luxe: '0.26em', wide2: '0.45em' },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background:#C2D9E8;
+    color:#27404F;
+  }
+  /* iOS/iPadOS Safari は background-attachment:fixed 非対応のため
+     position:fixed の擬似要素で固定背景を実装する */
+  body::after{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(48vw 32vw at 50% -8%, rgba(244,228,205,.95), transparent 60%),
+      linear-gradient(180deg, #E7EFF5 0%, #C2D9E8 28%, #9CBFD9 58%, #74A0C3 100%);
+  }
+
+  /* ── 古薬草図版（Köhler 1887・PD）を全面に散らす ── */
+  #botanical-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  #botanical-bg img{
+    position:absolute;
+    mix-blend-mode:multiply;        /* 古紙の白を地に溶かし、図のインクだけを残す */
+    filter:saturate(.66) contrast(.92) brightness(1.06) hue-rotate(-6deg);
+    opacity:.42;
+    will-change:transform;
+    animation:floatY 16s ease-in-out infinite;
+  }
+  /* 図版の上に重ねる、青へ寄せるクール・ウォッシュ（参考画像の色味へ統一） */
+  #bg-wash{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(240,226,206,.20) 0%, rgba(150,188,216,.34) 46%, rgba(88,140,182,.46) 100%);
+  }
+  @keyframes floatY{
+    0%,100%{ transform:translateY(0) rotate(var(--r,0deg)); }
+    50%    { transform:translateY(-16px) rotate(var(--r,0deg)); }
+  }
+
+  /* 古紙のグレイン */
+  .grain::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:55; opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Liquid Glass（フロストガラス） ── */
+  .lg{
+    position:relative; overflow:hidden;
+    background:linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.18));
+    backdrop-filter:blur(18px) saturate(185%);
+    -webkit-backdrop-filter:blur(18px) saturate(185%);
+    border:1px solid rgba(255,255,255,.6);
+    box-shadow:
+      0 8px 34px rgba(40,72,100,.18),
+      inset 0 1px 0 rgba(255,255,255,.85),
+      inset 0 -1px 0 rgba(255,255,255,.18);
+  }
+  .lg::after{   /* 液体のような光沢 */
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:linear-gradient(120deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 34%, rgba(255,255,255,0) 66%, rgba(255,255,255,.30) 100%);
+    mix-blend-mode:screen;
+  }
+  .lg-soft{
+    background:linear-gradient(135deg, rgba(251,246,236,.78), rgba(247,240,226,.55));
+    backdrop-filter:blur(10px) saturate(160%);
+    -webkit-backdrop-filter:blur(10px) saturate(160%);
+    border:1px solid rgba(255,255,255,.55);
+    box-shadow:0 10px 36px rgba(40,72,100,.12), inset 0 1px 0 rgba(255,255,255,.7);
+  }
+
+  .v-rl{ writing-mode:vertical-rl; text-orientation:upright; }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity 1.2s cubic-bezier(.16,.84,.34,1), transform 1.2s cubic-bezier(.16,.84,.34,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  @keyframes riseIn{ from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:none;} }
+  .rise{ opacity:0; animation:riseIn 1.4s cubic-bezier(.16,.84,.34,1) forwards; }
+
+  /* 図譜の額装（古い標本ページ風） */
+  .plate-frame{
+    background:linear-gradient(160deg, #FBF7EF, #F1E7D4);
+    border:1px solid rgba(181,137,78,.45);
+    box-shadow:0 18px 48px rgba(40,72,100,.20), inset 0 0 0 6px rgba(255,255,255,.6), inset 0 0 0 7px rgba(181,137,78,.25);
+  }
+
+  /* 植物のつる（ディバイダー描画） */
+  .vine path, .vine line{ stroke-dasharray:1; stroke-dashoffset:1; }
+  .vine.in path, .vine.in line{ animation:drawStroke 2.4s ease forwards; }
+  .vine.in line.l2{ animation-delay:.2s; } .vine.in path.p2{ animation-delay:.45s; }
+  @keyframes drawStroke{ to{ stroke-dashoffset:0; } }
+
+  @keyframes drawLine{ from{ transform:scaleY(0);} to{ transform:scaleY(1);} }
+  .thread.in .thread-line{ animation:drawLine 2.2s cubic-bezier(.16,.84,.34,1) forwards; transform-origin:top; }
+  .thread-line{ transform:scaleY(0); }
+
+  .arch{ border-radius:48% 48% 8px 8px / 34% 34% 8px 8px; }
+  .rule-double{ border-top:1px solid rgba(108,141,162,.30); box-shadow:0 3px 0 -2px rgba(108,141,162,.28); }
+
+  @media (prefers-reduced-motion: reduce){
+    #botanical-bg img{ animation:none; }
+  }
+</style>
+</head>
+
+<body class="grain font-maru antialiased overflow-x-hidden selection:bg-rust selection:text-cream">
+
+  <!-- ════ 古薬草図版の背景（Elizabeth Blackwell, A Curious Herbal, 1737 / Public Domain） ════ -->
+  <div id="botanical-bg" aria-hidden="true">
+    <!-- ウコン（左上・大） -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/A_curious_herbal_%28Plate_1%29_BHL296127.jpg/1280px-A_curious_herbal_%28Plate_1%29_BHL296127.jpg"
+         alt="" loading="lazy" style="--r:-5deg; top:-3%; left:-4%; width:30vw; min-width:300px; animation-delay:0s;" />
+    <!-- 生姜（右下・大） -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/A_curious_herbal_%28Plate_101%29_BHL296373.jpg/1280px-A_curious_herbal_%28Plate_101%29_BHL296373.jpg"
+         alt="" loading="lazy" style="--r:6deg; bottom:-4%; right:-3%; width:28vw; min-width:280px; animation-delay:2s;" />
+    <!-- 黒胡椒（左下） -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/A_curious_herbal_%28Plate_67%29_BHL296285.jpg"
+         alt="" loading="lazy" style="--r:-7deg; bottom:6%; left:-2%; width:20vw; min-width:200px; opacity:.4; animation-delay:4s;" />
+    <!-- シナモン（右上） -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/A_curious_herbal_%28Plate_103%29_BHL296377.jpg/960px-A_curious_herbal_%28Plate_103%29_BHL296377.jpg"
+         alt="" loading="lazy" style="--r:5deg; top:8%; right:-3%; width:19vw; min-width:200px; opacity:.4; animation-delay:6s;" />
+    <!-- サフラン（中央やや下・淡） -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Elizabeth_Blackwell_-_Pastinaca_%28Parsnip%29%2C_Plate_379_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.9_-_Yale_Center_for_British_Art.jpg"
+         alt="" loading="lazy" style="--r:-3deg; top:46%; left:40%; width:18vw; min-width:190px; opacity:.28; animation-delay:3s;" />
+  </div>
+  <!-- 青へ寄せるクール・ウォッシュ -->
+  <div id="bg-wash" aria-hidden="true"></div>
+
+  <div class="relative z-10">
+
+  <!-- ギャラリーへ戻る（Liquid Glass） -->
+  <a href="/gallery" class="lg" style="
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 24px; border-radius:50px;
+    color:#27404F; font-family:'Shippori Mincho',serif; font-size:12px; letter-spacing:.14em;
+    text-decoration:none; white-space:nowrap;">
+    ← ギャラリーへ戻る
+  </a>
+
+  <!-- ============ ヘッダー（Liquid Glass フローティング） ============ -->
+  <header class="fixed top-3 sm:top-4 inset-x-0 z-50 px-4" data-header>
+    <div class="lg mx-auto max-w-4xl rounded-full transition-all duration-500" data-bar>
+      <div class="flex items-center justify-between h-13 sm:h-14 pl-6 pr-3 sm:pl-8 sm:pr-3">
+        <a href="#top" class="font-serif text-xl sm:text-[1.5rem] tracking-wide text-ink leading-none">lembrasser</a>
+
+        <nav class="hidden md:flex items-center gap-8 font-mincho text-[13px] tracking-[0.18em] text-ink/85">
+          <a href="#concept" class="hover:text-rust transition-colors duration-300">Concept</a>
+          <a href="#menu" class="hover:text-rust transition-colors duration-300">Menu</a>
+          <a href="#access" class="hover:text-rust transition-colors duration-300">Access</a>
+          <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 rounded-full bg-rust/90 px-5 py-2 text-xs tracking-luxe text-cream hover:bg-rust-d transition-all duration-400">予約・相談</a>
+        </nav>
+
+        <button id="navToggle" class="md:hidden flex flex-col gap-1.5 p-2.5" aria-label="メニュー">
+          <span class="block h-px w-6 bg-ink"></span>
+          <span class="block h-px w-6 bg-ink"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="md:hidden overflow-hidden max-h-0 transition-all duration-500">
+      <nav class="lg-soft mx-auto max-w-4xl mt-2 rounded-2xl flex flex-col px-8 py-6 gap-5 font-mincho tracking-[0.18em] text-ink">
+        <a href="#concept" data-mlink>Concept</a>
+        <a href="#menu" data-mlink>Menu</a>
+        <a href="#access" data-mlink>Access</a>
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener" class="text-rust" data-mlink>Instagram DMで予約</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ============ ヒーロー ============ -->
+  <section id="top" class="relative min-h-[100svh] flex items-center overflow-hidden">
+
+    <!-- 上下の柔らかなフェード -->
+    <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-paper/80 to-transparent z-0" aria-hidden="true"></div>
+
+    <div class="relative z-10 mx-auto max-w-5xl w-full px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-14 py-36 sm:py-40">
+
+      <!-- テキスト（左） -->
+      <div class="flex-1 max-w-lg text-center md:text-left">
+        <p class="rise font-garam italic text-rust text-xl sm:text-2xl mb-6" style="animation-delay:.2s">Ayurveda &amp; the Herbal Wisdom</p>
+        <p class="rise font-mincho text-ink-soft text-xs sm:text-sm tracking-[0.3em] mb-7" style="animation-delay:.4s">二千年の薬草が、夜のこわばりをほどいてゆく</p>
+        <h1 class="rise font-mincho text-ink leading-[1.7] text-[2rem] sm:text-5xl lg:text-[3.3rem] mb-8" style="animation-delay:.6s">
+          本来の私へ。
+        </h1>
+        <div class="rise flex flex-col items-center md:items-start gap-5" style="animation-delay:1s">
+          <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+             class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-mincho text-sm tracking-[0.16em] shadow-[0_8px_30px_rgba(181,137,78,.30)] hover:bg-rust-d transition-all duration-500">
+            Instagram DMで予約・相談
+            <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+          </a>
+          <span class="font-maru text-[11px] tracking-luxe text-ink-soft">完全予約制 ・ 大分県中津市</span>
+        </div>
+      </div>
+
+      <!-- 図譜の額装（右・リシマキア） -->
+      <div class="rise flex-1 max-w-xs sm:max-w-sm w-full" style="animation-delay:.7s">
+        <figure class="plate-frame rounded-[8px] p-3 sm:p-4 rotate-1">
+          <div class="overflow-hidden rounded-[4px] bg-cream">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Elizabeth_Blackwell_-_Lysimachia_%28Loosestrife%29%2C_Plate_278_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.10_-_Yale_Center_for_British_Art.jpg"
+                 alt="リシマキア（Lysimachia）の古植物図版" class="w-full object-cover" loading="lazy" />
+          </div>
+          <figcaption class="flex items-baseline justify-between gap-2 px-1 pt-3">
+            <span class="font-garam italic text-rust text-sm">Lysimachia</span>
+            <span class="font-mincho text-ink-soft text-[10px] tracking-wide">リシマキア — 〈争いを鎮める草〉</span>
+          </figcaption>
+        </figure>
+        <p class="font-mincho text-ink-soft/80 text-[10px] tracking-[0.2em] text-center mt-3">Elizabeth Blackwell, A Curious Herbal, 1737</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============ コンセプト ============ -->
+  <section id="concept" class="relative py-28 sm:py-40 scroll-mt-24">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+
+      <!-- アーチ額装の図版（ウコン） -->
+      <div class="reveal mx-auto w-52 sm:w-60 mb-14">
+        <div class="arch overflow-hidden plate-frame p-2">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/A_curious_herbal_%28Plate_1%29_BHL296127.jpg/1280px-A_curious_herbal_%28Plate_1%29_BHL296127.jpg"
+               alt="ウコン（Curcuma longa）の古植物図版" class="w-full aspect-[3/4] object-cover arch bg-cream" loading="lazy" />
+        </div>
+      </div>
+
+      <p class="reveal font-garam italic text-rust text-xl mb-8">Concept</p>
+
+      <h2 class="reveal font-mincho text-xl sm:text-2xl leading-[2] text-ink mb-14">
+        頭痛、不眠、慢性肩こり……<br />
+        休んでも疲れが取れない、<br class="sm:hidden" />あなたへ。
+      </h2>
+
+      <!-- 薬草とあなたをつなぐ一本の茎 -->
+      <div class="thread reveal flex flex-col items-center mb-14">
+        <svg class="w-6 text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+          <path d="M12 3 C9 6 9 9 12 11 C15 9 15 6 12 3Z" fill="currentColor" fill-opacity=".15"/>
+        </svg>
+        <span class="font-garam italic text-rust/80 text-sm mt-2 mb-2">herba</span>
+        <span class="thread-line block w-px h-20 sm:h-24 bg-gradient-to-b from-olive/70 to-tan"></span>
+        <span class="font-garam italic text-rust/80 text-sm mt-2 mb-2">you</span>
+        <span class="block h-2 w-2 rounded-full border border-rust"></span>
+      </div>
+
+      <p class="reveal font-mincho text-base sm:text-lg leading-loose text-ink mb-8">
+        わたしたちの体には、<br class="sm:hidden" />ひとつの小さな自然が宿っています。
+      </p>
+
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-6">
+        日々の緊張で、肩・首・頭はいつの間にかこわばり、巡りが滞っていきます。
+        表面をなでるだけでは届かない奥のこりは、頭痛や不眠、抜けない疲労感となって積み重なります。
+      </p>
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
+        当サロンの<span class="text-rust font-normal">「ヘッドマルマケア ＋ 深部ケア」</span>は、
+        アーユルヴェーダで体の要所とされる頭部のマルマを、二千年受け継がれた手わざでひとつずつ整えながら、
+        深部のこりまで静かにアプローチ。呼吸が深まり、内なる静けさへと還っていきます。
+      </p>
+
+      <div class="reveal mt-14 flex flex-wrap justify-center items-center gap-x-5 gap-y-3 font-mincho text-sm text-ink">
+        <span>めぐりをひらく</span>
+        <svg class="w-3 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+        <span>深部に届く</span>
+        <svg class="w-3 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+        <span>内側へ還る</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 植物ディバイダー ============ -->
+  <div class="relative flex justify-center py-4">
+    <svg class="vine w-56 sm:w-72 text-olive" viewBox="0 0 280 50" fill="none" stroke="currentColor" stroke-width="1">
+      <path class="p1" d="M14,25 C60,10 90,40 140,25 C190,10 220,40 266,25" />
+      <path class="p2" d="M70,21 C66,12 72,10 76,16" stroke-width=".8"/>
+      <path class="p2" d="M140,25 C136,15 144,13 148,20" stroke-width=".8"/>
+      <path class="p2" d="M210,21 C206,12 212,10 216,16" stroke-width=".8"/>
+      <line class="l2" x1="140" y1="25" x2="140" y2="14"/>
+    </svg>
+  </div>
+
+
+  <!-- ============ メニュー / 料金 ============ -->
+  <section id="menu" class="relative py-24 sm:py-36 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+      <div class="reveal text-center mb-16">
+        <p class="font-garam italic text-rust text-xl mb-3">Menu &amp; Price</p>
+        <p class="font-maru font-light text-ink-soft text-xs tracking-luxe">税込価格 ・ 完全予約制</p>
+      </div>
+
+      <div class="lg-soft rounded-[10px] px-6 sm:px-10 py-4">
+
+        <!-- モニター様プラン -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8">
+          <div>
+            <div class="flex items-center gap-3 mb-1.5">
+              <h3 class="font-mincho text-lg text-ink">モニター様プラン</h3>
+              <span class="font-maru text-[10px] tracking-luxe text-cream bg-rust rounded-full px-3 py-0.5">限定</span>
+            </div>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">ヘッドマルマケア＋深部ケア体験（約90分）・ 丁寧なカウンセリング込み</p>
+          </div>
+          <span class="font-serif text-3xl sm:text-4xl text-rust leading-none shrink-0">¥5,000</span>
+        </div>
+
+        <!-- 通常プラン① -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
+          <div>
+            <h3 class="font-mincho text-lg text-ink mb-1.5">ヘッドマルマケア＋深部コリケアコース</h3>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">90 min ・ 頭部マルマポイントを整え、肩・首・背中の深部コリにじっくりアプローチ</p>
+          </div>
+          <span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥12,000</span>
+        </div>
+
+        <!-- 通常プラン② -->
+        <div class="reveal flex items-baseline justify-between gap-6 py-8 rule-double">
+          <div>
+            <h3 class="font-mincho text-lg text-ink mb-1.5">全身ほぐし ディープリセットコース</h3>
+            <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">120 min ・ ヘッドマルマケア＋全身の深部をくまなくほぐすフルケア。疲れが溜まり切った方に</p>
+          </div>
+          <span class="font-serif text-3xl sm:text-4xl text-ink leading-none shrink-0">¥16,000</span>
+        </div>
+      </div>
+
+      <!-- オプションメニュー -->
+      <div class="reveal mt-8 grid sm:grid-cols-2 gap-4">
+        <div class="lg-soft rounded-[10px] px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
+          <div>
+            <h4 class="font-mincho text-base text-ink mb-1">ヘッドケア延長</h4>
+            <p class="font-maru font-light text-ink-soft text-xs">＋30 min ・ さらに深く、じっくりと</p>
+          </div>
+          <span class="font-serif text-2xl text-ink shrink-0">＋¥3,000</span>
+        </div>
+        <div class="lg-soft rounded-[10px] px-6 sm:px-8 py-6 flex items-baseline justify-between gap-4">
+          <div>
+            <h4 class="font-mincho text-base text-ink mb-1">ドライヘッドスパ単品</h4>
+            <p class="font-maru font-light text-ink-soft text-xs">45 min ・ 頭のコリだけをほぐしたい方に</p>
+          </div>
+          <span class="font-serif text-2xl text-ink shrink-0">¥6,000</span>
+        </div>
+      </div>
+
+      <!-- ご利用にあたって -->
+      <div class="reveal mt-10 lg-soft rounded-[10px] px-6 sm:px-10 py-8">
+        <div class="flex items-center gap-3 mb-5">
+          <svg class="w-4 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+          <h3 class="font-mincho text-base text-ink tracking-wide">ご利用にあたって</h3>
+        </div>
+        <ul class="font-maru font-light text-ink-soft text-sm space-y-2.5">
+          <li class="flex gap-2"><span class="text-rust">・</span>完全予約制です。空き状況の確認・ご予約は Instagram の DM から承ります。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>はじめに丁寧なカウンセリングを行い、お悩みに合わせて施術を進めます。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>動きやすい服装でお越しください（お着替えのご用意もあります）。</li>
+          <li class="flex gap-2"><span class="text-rust">・</span>キャンセル・日時の変更は、前日19:00までにご連絡をお願いします。</li>
+        </ul>
+      </div>
+
+      <div class="reveal text-center mt-14">
+        <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+           class="group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-mincho text-sm tracking-[0.16em] shadow-[0_8px_30px_rgba(181,137,78,.30)] hover:bg-rust-d transition-all duration-500">
+          Instagram DMで予約する
+          <span class="transition-transform duration-500 group-hover:translate-x-1">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ 植物ディバイダー ============ -->
+  <div class="relative flex justify-center py-4">
+    <svg class="vine w-56 sm:w-72 text-olive" viewBox="0 0 280 50" fill="none" stroke="currentColor" stroke-width="1">
+      <path class="p1" d="M14,25 C60,40 90,10 140,25 C190,40 220,10 266,25" />
+      <path class="p2" d="M70,29 C66,38 72,40 76,34" stroke-width=".8"/>
+      <path class="p2" d="M210,29 C206,38 212,40 216,34" stroke-width=".8"/>
+      <line class="l2" x1="140" y1="25" x2="140" y2="36"/>
+    </svg>
+  </div>
+
+
+  <!-- ============ セラピスト ============ -->
+  <section class="relative py-24 sm:py-36 scroll-mt-24">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+      <svg class="reveal w-7 mx-auto mb-8 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+      <p class="reveal font-garam italic text-rust text-xl mb-4">Therapist</p>
+      <h2 class="reveal font-serif text-3xl sm:text-4xl text-ink tracking-wide mb-2">MANAMI KINOSHITA</h2>
+      <p class="reveal font-maru text-[11px] tracking-luxe text-rust mb-10">木下 まなみ ・ セラピスト</p>
+
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px] mb-5">
+        「休んでも、なんだか疲れが取れない」——そんな声に寄り添いたくて、このサロンをはじめました。
+        アーユルヴェーダを学ぶ中で出会ったマルマポイントへのアプローチが、自分自身の慢性的な肩こりと頭痛を変えた体験から、もっと多くの方にこの感覚を届けたいと思いました。
+      </p>
+      <p class="reveal font-maru font-light leading-loose text-ink-soft text-sm sm:text-[15px]">
+        完全予約制・お一人おひとりに丁寧に向き合う、静かなプライベート空間です。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============ 植物ディバイダー ============ -->
+  <div class="relative flex justify-center py-4">
+    <svg class="vine w-56 sm:w-72 text-olive" viewBox="0 0 280 50" fill="none" stroke="currentColor" stroke-width="1">
+      <path class="p1" d="M14,25 C60,10 90,40 140,25 C190,10 220,40 266,25" />
+      <path class="p2" d="M105,21 C101,12 107,10 111,16" stroke-width=".8"/>
+      <path class="p2" d="M175,29 C171,38 177,40 181,34" stroke-width=".8"/>
+      <line class="l2" x1="140" y1="25" x2="140" y2="14"/>
+    </svg>
+  </div>
+
+
+  <!-- ============ お客様の声 ============ -->
+  <section class="relative py-24 sm:py-36 scroll-mt-24">
+    <div class="mx-auto max-w-4xl px-6 sm:px-8">
+      <div class="reveal text-center mb-16">
+        <p class="font-garam italic text-rust text-xl mb-3">Voice</p>
+        <h2 class="font-mincho text-xl sm:text-2xl text-ink leading-[2] mb-3">お客様の声</h2>
+        <p class="font-maru font-light text-ink-soft text-xs tracking-luxe">ご来店いただいた方からの言葉</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+
+        <!-- 01 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            施術中、気づいたら涙が出ていました。何かが溶けていくような感覚で、終わった後は頭がふわっと軽くなって。「癒される」ってこういうことなんだと、初めて実感しました。
+          </p>
+        </div>
+
+        <!-- 02 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            長年の肩こりで何軒もサロンをまわりましたが、ここほど深部まで届いた感覚は初めてです。翌朝、首が全然違う。ずっと通い続けたいと思います。
+          </p>
+        </div>
+
+        <!-- 03 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            不眠が続いていたのですが、施術の翌晩から眠れるようになりました。夢を見るほど深く眠れたのは久しぶりで、本当に驚きました。
+          </p>
+        </div>
+
+        <!-- 04 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">50代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            まなみさんの手が温かくて、触れるたびに体がほどけていく感じがしました。施術後は体が羽のように軽くなって、帰り道がとても清々しかったです。
+          </p>
+        </div>
+
+        <!-- 05 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・男性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            デスクワークで毎日頭が重かったのですが、施術後は視界まで明るくなったような感覚がありました。頭のこりってこんなに影響していたんですね。
+          </p>
+        </div>
+
+        <!-- 06 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・男性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            施術中は半分眠っているような、でも何かに包まれているような不思議な感覚でした。終わった瞬間、肩の力がすっと抜けていて、自分でも驚くほど楽になっていました。
+          </p>
+        </div>
+
+        <!-- 07 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">20代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            カウンセリングからとても丁寧で、話を聞いてもらえるだけで気持ちが楽になりました。施術は想像以上に深くて、終わった後は頭痛が嘘のように消えていました。
+          </p>
+        </div>
+
+        <!-- 08 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">60代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            静かな空間で、ただただ自分の体に向き合う時間でした。日常のざわめきから離れて、こんなに深く休んだのは久しぶりです。また必ず来ます。
+          </p>
+        </div>
+
+        <!-- 09 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">30代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            毎回、施術が終わると体がぽかぽかして、じんわりと血の巡りを感じます。「疲れを溜めない体」に少しずつ近づいている気がして、月一のお楽しみになっています。
+          </p>
+        </div>
+
+        <!-- 10 -->
+        <div class="reveal lg-soft rounded-[10px] px-7 py-7">
+          <div class="flex items-center gap-2 mb-4">
+            <svg class="w-3 text-olive shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+            <span class="font-mincho text-[11px] tracking-luxe text-rust">40代・女性</span>
+          </div>
+          <p class="font-maru font-light text-ink-soft text-sm leading-loose">
+            アーユルヴェーダのことを全く知らずに来たのですが、施術を受けてから体と心のつながりを初めて意識しました。自分の内側に静けさがあることを、ここで気づかせてもらいました。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ アクセス + フッター ============ -->
+  <footer id="access" class="relative pt-24 sm:pt-32 scroll-mt-24">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+
+      <p class="reveal font-garam italic text-rust text-xl mb-12">Access &amp; Reservation</p>
+
+      <dl class="reveal font-maru text-sm max-w-md mx-auto mb-12">
+        <div class="flex justify-between gap-6 py-4 border-t border-tan">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Salon</dt>
+          <dd class="text-ink/85 text-right">lembrasser_nakatsu</dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-tan">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Area</dt>
+          <dd class="text-ink/85 text-right">大分県中津市<br /><span class="text-ink-soft/70 text-xs">＊ 詳しい所在地はご予約時にお伝えします</span></dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-tan">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Hours</dt>
+          <dd class="text-ink/85 text-right">10:00 – 19:00（最終受付 17:30）<br /><span class="text-ink-soft/70 text-xs">不定休</span></dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-tan">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Access</dt>
+          <dd class="text-ink/85 text-right">JR中津駅より車で約10分</dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-tan">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Parking</dt>
+          <dd class="text-ink/85 text-right">専用駐車場あり（1台）</dd>
+        </div>
+        <div class="flex justify-between gap-6 py-4 border-t border-b border-tan">
+          <dt class="font-mincho text-rust tracking-wide shrink-0">Reserve</dt>
+          <dd class="text-ink/85 text-right">完全予約制 ・ Instagram の DM より</dd>
+        </div>
+      </dl>
+
+      <!-- 地図 -->
+      <div class="reveal max-w-md mx-auto mb-14">
+        <div class="rounded-[8px] overflow-hidden plate-frame p-1.5">
+          <iframe
+            title="大分県中津市の地図"
+            src="https://maps.google.com/maps?q=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%B8%AD%E6%B4%A5%E5%B8%82&z=13&output=embed"
+            width="100%" height="240" style="border:0; display:block; border-radius:4px; filter:sepia(.18) saturate(.92) contrast(.96);"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p class="font-maru font-light text-ink-soft/70 text-[11px] tracking-wide mt-3 text-center">＊ エリアの目安です。正確な所在地はご予約時にお知らせします。</p>
+      </div>
+
+      <!-- ご予約の流れ -->
+      <div class="reveal max-w-md mx-auto mb-16 text-left">
+        <div class="flex items-center justify-center gap-3 mb-7">
+          <svg class="w-4 text-olive" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C9 6 9 10 12 13 C15 10 15 6 12 2Z"/></svg>
+          <h3 class="font-mincho text-base text-ink tracking-wide text-center">ご予約の流れ</h3>
+        </div>
+        <ol class="space-y-5">
+          <li class="flex gap-4">
+            <span class="font-serif text-rust text-2xl leading-none shrink-0">01</span>
+            <div>
+              <p class="font-mincho text-ink text-sm mb-0.5">Instagram の DM でご連絡</p>
+              <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">ご希望の日時とお悩みを、お気軽にメッセージください。</p>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <span class="font-serif text-rust text-2xl leading-none shrink-0">02</span>
+            <div>
+              <p class="font-mincho text-ink text-sm mb-0.5">日時の調整・ご案内</p>
+              <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">体の状態をうかがいながら、日時と所在地をご案内します。</p>
+            </div>
+          </li>
+          <li class="flex gap-4">
+            <span class="font-serif text-rust text-2xl leading-none shrink-0">03</span>
+            <div>
+              <p class="font-mincho text-ink text-sm mb-0.5">ご来店・施術</p>
+              <p class="font-maru font-light text-ink-soft text-xs leading-relaxed">静かなプライベート空間で、内なる静けさへと還る時間を。</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <p class="reveal font-mincho text-ink leading-loose text-base mb-8">
+        ご予約・ご相談は、<br class="sm:hidden" />Instagram のメッセージから。<br />
+        <span class="text-ink-soft text-sm font-maru font-light">「こんな状態でも大丈夫？」というご相談だけでも歓迎です。</span>
+      </p>
+
+      <a href="https://www.instagram.com/lembrasser_nakatsu/" target="_blank" rel="noopener"
+         class="reveal group inline-flex items-center gap-3 rounded-full bg-rust px-9 py-4 text-cream font-mincho text-sm tracking-[0.16em] shadow-[0_8px_30px_rgba(181,137,78,.30)] hover:bg-rust-d transition-colors duration-500">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @lembrasser_nakatsu
+      </a>
+
+      <div class="mt-24 py-10 border-t border-tan">
+        <p class="font-serif text-2xl tracking-wide text-ink">lembrasser</p>
+        <p class="font-maru text-[10px] tracking-luxe text-rust mt-1 mb-4">NAKATSU ・ AYURVEDA</p>
+        <p class="font-maru text-[11px] tracking-wide text-ink-soft/70">© <span id="year"></span> lembrasser_nakatsu</p>
+        <p class="font-garam italic text-ink-soft/50 text-[10px] mt-3">Botanical plates: Köhler&rsquo;s Medizinal-Pflanzen (1887), public domain</p>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ヘッダーのガラスをスクロールで少し強める
+    const bar = document.querySelector('[data-bar]');
+    function onScroll(){
+      if (window.scrollY > 40){ bar.style.boxShadow = '0 10px 40px rgba(40,72,100,.26), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(255,255,255,.2)'; }
+      else { bar.style.boxShadow = ''; }
+    }
+    addEventListener('scroll', onScroll, { passive:true }); onScroll();
+
+    // モバイルメニュー
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    let open = false;
+    toggle.addEventListener('click', () => { open = !open; menu.style.maxHeight = open ? menu.scrollHeight + 'px' : '0px'; });
+    document.querySelectorAll('[data-mlink]').forEach(a => a.addEventListener('click', () => { open=false; menu.style.maxHeight='0px'; }));
+
+    // スクロール出現
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal, .thread, .vine').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

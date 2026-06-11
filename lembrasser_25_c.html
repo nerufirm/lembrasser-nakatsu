@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>lembrasser_nakatsu｜古薬草図譜テーマ — 大分・中津 アーユルヴェーダ</title>
+<title>lembrasser_nakatsu｜青写真標本テーマ — 大分・中津 アーユルヴェーダ</title>
 <meta name="description" content="大分初。ヘッドマルマケア＋深部ケアのアーユルヴェーダ・リラクゼーションサロン。二千年の薬草の知恵とともに、内なる静けさへ。肩や首のこり、頭痛、不眠、慢性肩こりに。大分県中津市・完全予約制。" />
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -56,7 +56,7 @@
       linear-gradient(180deg, #E7EFF5 0%, #C2D9E8 28%, #9CBFD9 58%, #74A0C3 100%);
   }
 
-  /* ── 古薬草図版（Köhler 1887・PD）を全面に散らす ── */
+  /* ── シアノタイプ標本（Atkins 1843・PD）を全面に散らす ── */
   #botanical-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
   #botanical-bg img{
     position:absolute;
@@ -144,19 +144,19 @@
 
   <!-- ════ 古薬草図版の背景（Anna Atkins, Photographs of British Algae (cyanotype), 1843 / Public Domain） ════ -->
   <div id="botanical-bg" aria-hidden="true">
-    <!-- ウコン（左上・大） -->
+    <!-- 表紙ページ（左上・大） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Photographs_of_British_Algae._Cyanotype_Impressions%2C_RP-F-2016-133.jpg/1280px-Photographs_of_British_Algae._Cyanotype_Impressions%2C_RP-F-2016-133.jpg"
          alt="" loading="lazy" style="--r:-5deg; top:-3%; left:-4%; width:30vw; min-width:300px; animation-delay:0s;" />
-    <!-- 生姜（右下・大） -->
+    <!-- 標本ページ（右下・大） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Photographs_of_British_Algae.jpg"
          alt="" loading="lazy" style="--r:6deg; bottom:-4%; right:-3%; width:28vw; min-width:280px; animation-delay:2s;" />
-    <!-- 黒胡椒（左下） -->
+    <!-- Cystoseira ericoides（左下） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Anna_Atkins_Cystoseira_ericoides.jpg"
          alt="" loading="lazy" style="--r:-7deg; bottom:6%; left:-2%; width:20vw; min-width:200px; opacity:.4; animation-delay:4s;" />
-    <!-- シナモン（右上） -->
+    <!-- Saccharina latissima（右上） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Anna_Atkins_Saccharina_latissima.jpg"
          alt="" loading="lazy" style="--r:5deg; top:8%; right:-3%; width:19vw; min-width:200px; opacity:.4; animation-delay:6s;" />
-    <!-- サフラン（中央やや下・淡） -->
+    <!-- 藻類標本（中央やや下・淡） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Anna_Atkins_algae_cyanotype.jpg"
          alt="" loading="lazy" style="--r:-3deg; top:46%; left:40%; width:18vw; min-width:190px; opacity:.28; animation-delay:3s;" />
   </div>
@@ -255,11 +255,11 @@
   <section id="concept" class="relative py-28 sm:py-40 scroll-mt-24">
     <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
 
-      <!-- アーチ額装の図版（ウコン） -->
+      <!-- アーチ額装の標本（イトグサ） -->
       <div class="reveal mx-auto w-52 sm:w-60 mb-14">
         <div class="arch overflow-hidden plate-frame p-2">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Photographs_of_British_Algae._Cyanotype_Impressions%2C_RP-F-2016-133.jpg/1280px-Photographs_of_British_Algae._Cyanotype_Impressions%2C_RP-F-2016-133.jpg"
-               alt="ウコン（Curcuma longa）の古植物図版" class="w-full aspect-[3/4] object-cover arch bg-cream" loading="lazy" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Polysiphonia_byssoides%2C_RP-F-2016-133-221.jpg/1280px-Polysiphonia_byssoides%2C_RP-F-2016-133-221.jpg"
+               alt="イトグサ（Polysiphonia byssoides）のシアノタイプ標本" class="w-full aspect-[3/4] object-cover arch bg-cream" loading="lazy" />
         </div>
       </div>
 
@@ -660,7 +660,7 @@
         <p class="font-serif text-2xl tracking-wide text-ink">lembrasser</p>
         <p class="font-maru text-[10px] tracking-luxe text-rust mt-1 mb-4">NAKATSU ・ AYURVEDA</p>
         <p class="font-maru text-[11px] tracking-wide text-ink-soft/70">© <span id="year"></span> lembrasser_nakatsu</p>
-        <p class="font-garam italic text-ink-soft/50 text-[10px] mt-3">Botanical plates: Köhler&rsquo;s Medizinal-Pflanzen (1887), public domain</p>
+        <p class="font-garam italic text-ink-soft/50 text-[10px] mt-3">Cyanotype specimens: Anna Atkins, Photographs of British Algae (1843), public domain</p>
       </div>
     </div>
   </footer>

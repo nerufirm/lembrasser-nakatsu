@@ -56,7 +56,7 @@
       linear-gradient(180deg, #E7EFF5 0%, #C2D9E8 28%, #9CBFD9 58%, #74A0C3 100%);
   }
 
-  /* ── 古薬草図版（Köhler 1887・PD）を全面に散らす ── */
+  /* ── 古薬草図版（Blackwell 1737・PD）を全面に散らす ── */
   #botanical-bg{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
   #botanical-bg img{
     position:absolute;
@@ -144,20 +144,20 @@
 
   <!-- ════ 古薬草図版の背景（Elizabeth Blackwell, A Curious Herbal, 1737 / Public Domain） ════ -->
   <div id="botanical-bg" aria-hidden="true">
-    <!-- ウコン（左上・大） -->
+    <!-- Plate 1（左上・大） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/A_curious_herbal_%28Plate_1%29_BHL296127.jpg/1280px-A_curious_herbal_%28Plate_1%29_BHL296127.jpg"
          alt="" loading="lazy" style="--r:-5deg; top:-3%; left:-4%; width:30vw; min-width:300px; animation-delay:0s;" />
-    <!-- 生姜（右下・大） -->
+    <!-- Plate 101（右下・大） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/A_curious_herbal_%28Plate_101%29_BHL296373.jpg/1280px-A_curious_herbal_%28Plate_101%29_BHL296373.jpg"
          alt="" loading="lazy" style="--r:6deg; bottom:-4%; right:-3%; width:28vw; min-width:280px; animation-delay:2s;" />
-    <!-- 黒胡椒（左下） -->
+    <!-- Plate 67（左下） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/A_curious_herbal_%28Plate_67%29_BHL296285.jpg"
          alt="" loading="lazy" style="--r:-7deg; bottom:6%; left:-2%; width:20vw; min-width:200px; opacity:.4; animation-delay:4s;" />
-    <!-- シナモン（右上） -->
+    <!-- Plate 103（右上） -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/A_curious_herbal_%28Plate_103%29_BHL296377.jpg/960px-A_curious_herbal_%28Plate_103%29_BHL296377.jpg"
          alt="" loading="lazy" style="--r:5deg; top:8%; right:-3%; width:19vw; min-width:200px; opacity:.4; animation-delay:6s;" />
-    <!-- サフラン（中央やや下・淡） -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Elizabeth_Blackwell_-_Pastinaca_%28Parsnip%29%2C_Plate_379_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.9_-_Yale_Center_for_British_Art.jpg"
+    <!-- Plate 124（中央やや下・淡） -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/A_curious_herbal_%28Plate_124%29_BHL296429.jpg/960px-A_curious_herbal_%28Plate_124%29_BHL296429.jpg"
          alt="" loading="lazy" style="--r:-3deg; top:46%; left:40%; width:18vw; min-width:190px; opacity:.28; animation-delay:3s;" />
   </div>
   <!-- 青へ寄せるクール・ウォッシュ -->
@@ -255,11 +255,11 @@
   <section id="concept" class="relative py-28 sm:py-40 scroll-mt-24">
     <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
 
-      <!-- アーチ額装の図版（ウコン） -->
+      <!-- アーチ額装の図版（パースニップ） -->
       <div class="reveal mx-auto w-52 sm:w-60 mb-14">
         <div class="arch overflow-hidden plate-frame p-2">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/A_curious_herbal_%28Plate_1%29_BHL296127.jpg/1280px-A_curious_herbal_%28Plate_1%29_BHL296127.jpg"
-               alt="ウコン（Curcuma longa）の古植物図版" class="w-full aspect-[3/4] object-cover arch bg-cream" loading="lazy" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Elizabeth_Blackwell_-_Pastinaca_%28Parsnip%29%2C_Plate_379_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.9_-_Yale_Center_for_British_Art.jpg"
+               alt="パースニップ（Pastinaca sativa）の古植物図版" class="w-full aspect-[3/4] object-cover arch bg-cream" loading="lazy" />
         </div>
       </div>
 
@@ -660,7 +660,7 @@
         <p class="font-serif text-2xl tracking-wide text-ink">lembrasser</p>
         <p class="font-maru text-[10px] tracking-luxe text-rust mt-1 mb-4">NAKATSU ・ AYURVEDA</p>
         <p class="font-maru text-[11px] tracking-wide text-ink-soft/70">© <span id="year"></span> lembrasser_nakatsu</p>
-        <p class="font-garam italic text-ink-soft/50 text-[10px] mt-3">Botanical plates: Köhler&rsquo;s Medizinal-Pflanzen (1887), public domain</p>
+        <p class="font-garam italic text-ink-soft/50 text-[10px] mt-3">Botanical plates: Elizabeth Blackwell, A Curious Herbal (1737), public domain</p>
       </div>
     </div>
   </footer>

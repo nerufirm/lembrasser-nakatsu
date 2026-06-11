@@ -44,11 +44,16 @@
 <style>
   html { scroll-behavior: smooth; }
   body {
+    background:#C2D9E8;
+    color:#27404F;
+  }
+  /* iOS/iPadOS Safari は background-attachment:fixed 非対応のため
+     position:fixed の擬似要素で固定背景を実装する */
+  body::after{
+    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
     background:
       radial-gradient(48vw 32vw at 50% -8%, rgba(244,228,205,.95), transparent 60%),
       linear-gradient(180deg, #E7EFF5 0%, #C2D9E8 28%, #9CBFD9 58%, #74A0C3 100%);
-    background-attachment: fixed;
-    color:#27404F;
   }
 
   /* ── 古薬草図版（Köhler 1887・PD）を全面に散らす ── */

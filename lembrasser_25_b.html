@@ -236,15 +236,41 @@
       <div class="rise flex-1 max-w-xs sm:max-w-sm w-full" style="animation-delay:.7s">
         <figure class="plate-frame rounded-[8px] p-3 sm:p-4 rotate-1">
           <div class="overflow-hidden rounded-[4px] bg-cream">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Elizabeth_Blackwell_-_Lysimachia_%28Loosestrife%29%2C_Plate_278_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.10_-_Yale_Center_for_British_Art.jpg"
-                 alt="リシマキア（Lysimachia）の古植物図版" class="w-full object-cover" loading="lazy" />
+            <img id="heroPlateImg" src="https://upload.wikimedia.org/wikipedia/commons/0/03/Elizabeth_Blackwell_-_Lysimachia_%28Loosestrife%29%2C_Plate_278_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.10_-_Yale_Center_for_British_Art.jpg"
+                 alt="リシマキア（Lysimachia）の古植物図版" class="w-full object-cover" />
           </div>
           <figcaption class="flex items-baseline justify-between gap-2 px-1 pt-3">
-            <span class="font-garam italic text-rust text-sm">Lysimachia</span>
-            <span class="font-mincho text-ink-soft text-[10px] tracking-wide">リシマキア — 〈争いを鎮める草〉</span>
+            <span id="heroPlateLatin" class="font-garam italic text-rust text-sm">Lysimachia</span>
+            <span id="heroPlateJp" class="font-mincho text-ink-soft text-[10px] tracking-wide">リシマキア — 〈争いを鎮める草〉</span>
           </figcaption>
         </figure>
         <p class="font-mincho text-ink-soft/80 text-[10px] tracking-[0.2em] text-center mt-3">Elizabeth Blackwell, A Curious Herbal, 1737</p>
+        <script>
+        // 読み込みごとにヒーローの図版をランダムに表示（cropは本の縁の写り込みをトリミング）
+        (function(){
+          const plates = [
+            { src: "https://upload.wikimedia.org/wikipedia/commons/0/03/Elizabeth_Blackwell_-_Lysimachia_%28Loosestrife%29%2C_Plate_278_from_%5EA_Curious_Herbal%5E%2C_volume_II%2C_London%2C_1737_-_B2011.20.10_-_Yale_Center_for_British_Art.jpg",
+              latin: "Lysimachia", jp: "リシマキア — 〈争いを鎮める草〉", crop: false },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/A_curious_herbal_%28Plate_106%29_BHL296385.jpg/960px-A_curious_herbal_%28Plate_106%29_BHL296385.jpg",
+              latin: "Calendula", jp: "キンセンカ（カレンデュラ）", crop: true },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/A_curious_herbal_%28Plate_115%29_BHL296407.jpg/960px-A_curious_herbal_%28Plate_115%29_BHL296407.jpg",
+              latin: "Linaria", jp: "リナリア（ウンラン）", crop: true },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/A_curious_herbal_%28Plate_141%29_BHL296473.jpg/960px-A_curious_herbal_%28Plate_141%29_BHL296473.jpg",
+              latin: "Malus sativa", jp: "リンゴの木", crop: true },
+          ];
+          const p = plates[Math.floor(Math.random() * plates.length)];
+          const img = document.getElementById('heroPlateImg');
+          img.src = p.src;
+          img.alt = p.jp + 'の古植物図版';
+          if (p.crop) {
+            img.parentElement.style.aspectRatio = '3 / 4';
+            img.style.height = '100%';
+            img.style.transform = 'scale(1.25) translateX(4%)';
+          }
+          document.getElementById('heroPlateLatin').textContent = p.latin;
+          document.getElementById('heroPlateJp').textContent = p.jp;
+        })();
+        </script>
       </div>
 
     </div>

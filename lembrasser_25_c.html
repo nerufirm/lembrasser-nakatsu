@@ -236,15 +236,38 @@
       <div class="rise flex-1 max-w-xs sm:max-w-sm w-full" style="animation-delay:.7s">
         <figure class="plate-frame rounded-[8px] p-3 sm:p-4 rotate-1">
           <div class="overflow-hidden rounded-[4px] bg-cream">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dictyota_dichotoma_in_the_young_state%2C_%26_in_fruit%2C_RP-F-2016-133-144.jpg/1280px-Dictyota_dichotoma_in_the_young_state%2C_%26_in_fruit%2C_RP-F-2016-133-144.jpg"
-                 alt="アミジグサ（Dictyota dichotoma）のシアノタイプ標本" class="w-full object-cover" loading="lazy" />
+            <img id="heroPlateImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dictyota_dichotoma_in_the_young_state%2C_%26_in_fruit%2C_RP-F-2016-133-144.jpg/1280px-Dictyota_dichotoma_in_the_young_state%2C_%26_in_fruit%2C_RP-F-2016-133-144.jpg"
+                 alt="アミジグサ（Dictyota dichotoma）のシアノタイプ標本" class="w-full object-cover" />
           </div>
           <figcaption class="flex items-baseline justify-between gap-2 px-1 pt-3">
-            <span class="font-garam italic text-rust text-sm">Dictyota dichotoma</span>
-            <span class="font-mincho text-ink-soft text-[10px] tracking-wide">アミジグサ — 青写真標本</span>
+            <span id="heroPlateLatin" class="font-garam italic text-rust text-sm">Dictyota dichotoma</span>
+            <span id="heroPlateJp" class="font-mincho text-ink-soft text-[10px] tracking-wide">アミジグサ — 青写真標本</span>
           </figcaption>
         </figure>
         <p class="font-mincho text-ink-soft/80 text-[10px] tracking-[0.2em] text-center mt-3">Anna Atkins, Photographs of British Algae, 1843</p>
+        <script>
+        // 読み込みごとにヒーローの標本をランダムに表示（Rijksmuseum蔵・すべて切り抜き済）
+        (function(){
+          const plates = [
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dictyota_dichotoma_in_the_young_state%2C_%26_in_fruit%2C_RP-F-2016-133-144.jpg/1280px-Dictyota_dichotoma_in_the_young_state%2C_%26_in_fruit%2C_RP-F-2016-133-144.jpg",
+              latin: "Dictyota dichotoma", jp: "アミジグサ — 青写真標本" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Enteromorpha_compressa%2C_RP-F-2016-133-154.jpg/1280px-Enteromorpha_compressa%2C_RP-F-2016-133-154.jpg",
+              latin: "Enteromorpha compressa", jp: "アオノリ属 — 青写真標本" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Hydrodictyon_utriculatum%2C_RP-F-2016-133-191.jpg/1280px-Hydrodictyon_utriculatum%2C_RP-F-2016-133-191.jpg",
+              latin: "Hydrodictyon utriculatum", jp: "アミミドロ属 — 青写真標本" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Nitophyllum_ulvoideum%2C_RP-F-2016-133-212.jpg/1280px-Nitophyllum_ulvoideum%2C_RP-F-2016-133-212.jpg",
+              latin: "Nitophyllum ulvoideum", jp: "紅藻 — 青写真標本" },
+            { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Polysiphonia_urceolata%2C_RP-F-2016-133-250.jpg/1280px-Polysiphonia_urceolata%2C_RP-F-2016-133-250.jpg",
+              latin: "Polysiphonia urceolata", jp: "イトグサ属 — 青写真標本" },
+          ];
+          const p = plates[Math.floor(Math.random() * plates.length)];
+          const img = document.getElementById('heroPlateImg');
+          img.src = p.src;
+          img.alt = p.latin + ' のシアノタイプ標本';
+          document.getElementById('heroPlateLatin').textContent = p.latin;
+          document.getElementById('heroPlateJp').textContent = p.jp;
+        })();
+        </script>
       </div>
 
     </div>

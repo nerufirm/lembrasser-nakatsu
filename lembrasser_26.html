@@ -120,6 +120,9 @@
   @media (prefers-reduced-motion: reduce){
     .ink-char{ animation:none; opacity:1; clip-path:none; filter:none; }
   }
+
+  /* ヒーローパネルを60%に縮小（riseのtransformと競合しないようscaleプロパティを使用） */
+  #top > .lg-card{ scale:.6; }
 </style>
 </head>
 

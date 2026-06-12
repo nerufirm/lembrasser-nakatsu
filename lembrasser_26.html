@@ -123,6 +123,11 @@
 
   /* ヒーローパネルを60%に縮小（riseのtransformと競合しないようscaleプロパティを使用） */
   #top > .lg-card{ scale:.6; }
+
+  /* スマホは全体のフォントを15%縮小 */
+  @media (max-width: 640px){
+    html{ font-size:85%; }
+  }
 </style>
 </head>
 

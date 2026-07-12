@@ -1,3 +1,7 @@
 .DS_Store
 .vercel
 .playwright-cli
+.playwright-mcp/
+
+# デバッグ用スクショ（ルート直下・作業残骸）は除外。成果物画像は flyers/ 等に置く
+/*.png

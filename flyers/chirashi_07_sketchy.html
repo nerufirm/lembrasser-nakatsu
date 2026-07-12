@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>チラシ07 スケッチ｜lembrasser_nakatsu 訪問フェイシャルケア</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:  #F7F4ED;
+    --ink:    #2C2416;
+    --pencil: #5A5040;
+    --rust:   #C85820;
+    --sage:   #5A7848;
+    --sky:    #4070A0;
+    --line:   rgba(44,36,22,.15);
+  }
+
+  html, body {
+    background: #DDD8CC;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: var(--ink);
+    display: flex; justify-content: center;
+    padding: 24px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #root {
+    width: 210mm;
+  }
+
+  .flyer {
+    position: relative;
+    width: 210mm; height: 297mm;
+    background: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.28);
+    display: flex; flex-direction: column;
+    padding: 13mm 14mm 11mm;
+  }
+
+  /* スケッチテクスチャ */
+  .flyer::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23n)' opacity='1'/></svg>");
+    opacity: 0.055; mix-blend-mode: multiply;
+  }
+
+  .flyer > * { position: relative; z-index: 1; }
+
+  /* ── ヘッダー ── */
+  .header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+  }
+  .header .logo {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 28px; letter-spacing: .05em;
+    line-height: 1;
+  }
+  .header .sub {
+    font-size: 9px; letter-spacing: .24em; color: var(--pencil);
+    text-align: right; line-height: 1.9;
+  }
+
+  /* ── スケッチSVGキャンバス ── */
+  .sketch-canvas {
+    flex: 0 0 94mm;
+    position: relative;
+    margin: 0 -4mm;
+  }
+  .sketch-canvas svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+
+  /* ── キャッチコピー ── */
+  .catch {
+    margin-top: 8px;
+    padding: 0 2mm;
+  }
+  .catch .label {
+    font-family: 'Klee One', cursive; font-size: 11px;
+    color: var(--pencil); letter-spacing: .14em; margin-bottom: 5px;
+  }
+  .catch h1 {
+    font-family: 'Shippori Mincho', serif; font-weight: 700;
+    font-size: 36px; line-height: 1.45; letter-spacing: .06em;
+    color: var(--ink);
+  }
+  .catch h1 .acc { color: var(--rust); }
+
+  /* ── ルーラー（手書き区切り線） ── */
+  .rule-canvas { width: 100%; height: 18px; margin: 8px 0 6px; display: block; }
+
+  /* ── メニュー ── */
+  .menu {
+    display: flex; align-items: stretch; gap: 0;
+    margin-bottom: 6px;
+  }
+  .price-block { flex: 1; text-align: center; padding: 10px 8px 8px; }
+  .price-block .badge {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    letter-spacing: .14em; padding: 1px 9px;
+    background: var(--ink); color: var(--paper);
+    border-radius: 2px; margin-bottom: 4px;
+  }
+  .price-block .course { font-size: 10px; letter-spacing: .1em; color: var(--pencil); }
+  .price-block .yen {
+    font-family: 'Shippori Mincho', serif; font-weight: 700;
+    font-size: 27px; display: block; margin-top: 3px; color: var(--ink);
+  }
+  .price-block .yen small { font-size: 13px; font-weight: 600; }
+  .price-block.trial .yen { color: var(--rust); }
+  .price-block .min { font-size: 9.5px; color: var(--pencil); margin-top: 2px; letter-spacing: .1em; }
+  .flow {
+    text-align: center; font-size: 11px; letter-spacing: .14em;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .flow .arr { color: var(--rust); margin: 0 8px; }
+
+  /* ── 3ポイント ── */
+  .points {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 8px; margin-bottom: 8px;
+  }
+  .pt {
+    padding: 10px 8px 8px; text-align: center;
+    position: relative;
+  }
+  .pt .n {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 20px; background: var(--ink); color: var(--paper);
+    border-radius: 50%; font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Klee One', cursive;
+  }
+  .pt .ic { width: 32px; height: 32px; margin: 2px auto 6px; color: var(--rust); }
+  .pt .t { font-weight: 700; font-size: 11.5px; letter-spacing: .04em; }
+  .pt .d { font-size: 9px; color: var(--pencil); line-height: 1.65; margin-top: 3px; }
+
+  /* ── 信頼 ── */
+  .trust {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5px 18px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: rgba(90,120,72,.08);
+  }
+  .trust .row { font-size: 9.5px; line-height: 1.65; }
+  .trust .row b {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    color: var(--sage); display: block; font-size: 10px; margin-bottom: 1px;
+  }
+
+  /* ── フッター ── */
+  .foot {
+    margin-top: auto;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-top: 8px;
+  }
+  .foot-l .res {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 12px; letter-spacing: .05em;
+  }
+  .foot-l .res .pin {
+    background: var(--ink); color: var(--paper);
+    font-size: 10px; padding: 1px 7px; border-radius: 2px; margin-right: 5px;
+  }
+  .foot-l .meta {
+    display: flex; gap: 10px; margin-top: 5px;
+    font-size: 8.5px; color: var(--pencil); letter-spacing: .06em; flex-wrap: wrap;
+  }
+  .foot-l .meta b { color: var(--ink); }
+  .foot-l .note { font-size: 8px; color: #888; margin-top: 4px; line-height: 1.65; }
+  .foot-r {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 13px; text-align: right;
+  }
+  .foot-r small {
+    display: block; font-family: 'Zen Maru Gothic';
+    font-size: 7.5px; letter-spacing: .28em; color: var(--pencil); margin-top: 2px;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; padding: 0; }
+    #root { width: 210mm; }
+    .flyer { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useEffect, useRef } = React;
+
+/* ── rough.js を使ったスケッチ SVG コンポーネント ── */
+
+// 手書き風の1本線
+function SketchLine({ x1, y1, x2, y2, color = '#2C2416', roughness = 1.4, strokeWidth = 2 }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.innerHTML = '';
+    const rc = rough.svg(ref.current);
+    ref.current.appendChild(
+      rc.line(x1, y1, x2, y2, {
+        stroke: color, strokeWidth,
+        roughness, bowing: 0.8,
+      })
+    );
+  }, []);
+  return <svg ref={ref} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }} />;
+}
+
+// 手書き風の矩形（塗り）
+function SketchRect({ x, y, w, h, fill = 'none', stroke = '#2C2416', roughness = 1.4, strokeWidth = 2, fillStyle = 'hachure', hachureAngle = -41, hachureGap = 7 }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.innerHTML = '';
+    const rc = rough.svg(ref.current);
+    ref.current.appendChild(
+      rc.rectangle(x, y, w, h, {
+        fill, stroke, strokeWidth, roughness,
+        fillStyle, hachureAngle, hachureGap,
+        bowing: 0.8,
+      })
+    );
+  }, []);
+  return <svg ref={ref} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }} />;
+}
+
+// 手書き風の楕円
+function SketchEllipse({ cx, cy, w, h, fill = 'none', stroke = '#2C2416', roughness = 1.6, strokeWidth = 2 }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.innerHTML = '';
+    const rc = rough.svg(ref.current);
+    ref.current.appendChild(
+      rc.ellipse(cx, cy, w, h, {
+        fill, stroke, strokeWidth, roughness, bowing: 1,
+      })
+    );
+  }, []);
+  return <svg ref={ref} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }} />;
+}
+
+// 手書き風の自由曲線
+function SketchPath({ d, fill = 'none', stroke = '#2C2416', roughness = 1.4, strokeWidth = 2 }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.innerHTML = '';
+    const rc = rough.svg(ref.current);
+    ref.current.appendChild(
+      rc.path(d, {
+        fill, stroke, strokeWidth, roughness, bowing: 1,
+      })
+    );
+  }, []);
+  return <svg ref={ref} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }} />;
+}
+
+/* ── メインのイラストSVGゾーン ── */
+function SketchCanvas() {
+  // 794px ≒ 210mm @96dpi; 高さ 355px ≒ 94mm
+  const W = 794, H = 355;
+  return (
+    <div className="sketch-canvas" style={{ height: '94mm' }}>
+      {/* 外枠 */}
+      <SketchRect x={4} y={4} w={W-8} h={H-8}
+        fill="none" stroke="#2C2416" roughness={1.8} strokeWidth={2.2} />
+
+      {/* 背景の面 (rust ハッチング) */}
+      <SketchRect x={16} y={16} w={340} h={H-32}
+        fill="#C85820" stroke="none" roughness={1.2}
+        fillStyle="hachure" hachureGap={9} hachureAngle={-38} strokeWidth={0} />
+
+      {/* 人物シルエット（顔・首・肩） */}
+      {/* 肩 */}
+      <SketchPath
+        d={`M ${W/2-120} ${H-30} Q ${W/2-60} ${H-80} ${W/2} ${H-90} Q ${W/2+60} ${H-80} ${W/2+120} ${H-30}`}
+        fill="#F7F4ED" stroke="#2C2416" roughness={2} strokeWidth={2.5} />
+      {/* 首 */}
+      <SketchRect x={W/2-22} y={H-140} w={44} h={55}
+        fill="#F5E8D8" stroke="#2C2416" roughness={1.8} strokeWidth={2} fillStyle="solid" />
+      {/* 頭 */}
+      <SketchEllipse cx={W/2} cy={H-210} w={145} h={148}
+        fill="#F5E8D8" stroke="#2C2416" roughness={2.2} strokeWidth={2.5} />
+      {/* 髪 */}
+      <SketchPath
+        d={`M ${W/2-72} ${H-270} Q ${W/2-68} ${H-310} ${W/2} ${H-318} Q ${W/2+68} ${H-310} ${W/2+72} ${H-270} Q ${W/2+60} ${H-245} ${W/2+72} ${H-235} Q ${W/2+50} ${H-290} ${W/2} ${H-300} Q ${W/2-50} ${H-290} ${W/2-72} ${H-235} Z`}
+        fill="#2C2416" stroke="#2C2416" roughness={2} strokeWidth={1.5} />
+      {/* 目（左） */}
+      <SketchEllipse cx={W/2-28} cy={H-215} w={28} h={22}
+        fill="#fff" stroke="#2C2416" roughness={1.5} strokeWidth={2} />
+      <SketchEllipse cx={W/2-28} cy={H-215} w={14} h={14}
+        fill="#2C2416" stroke="none" roughness={1} strokeWidth={0} />
+      {/* 目（右） */}
+      <SketchEllipse cx={W/2+28} cy={H-215} w={28} h={22}
+        fill="#fff" stroke="#2C2416" roughness={1.5} strokeWidth={2} />
+      <SketchEllipse cx={W/2+28} cy={H-215} w={14} h={14}
+        fill="#2C2416" stroke="none" roughness={1} strokeWidth={0} />
+      {/* 笑顔 */}
+      <SketchPath
+        d={`M ${W/2-22} ${H-185} Q ${W/2} ${H-172} ${W/2+22} ${H-185}`}
+        fill="none" stroke="#2C2416" roughness={1.8} strokeWidth={2.5} />
+      {/* ほっぺ */}
+      <SketchEllipse cx={W/2-48} cy={H-195} w={30} h={18}
+        fill="#C85820" stroke="none" roughness={1} strokeWidth={0} />
+      <SketchEllipse cx={W/2+48} cy={H-195} w={30} h={18}
+        fill="#C85820" stroke="none" roughness={1} strokeWidth={0} />
+
+      {/* 施術の手（左） */}
+      <SketchPath
+        d={`M ${W/2-100} ${H-200} Q ${W/2-85} ${H-220} ${W/2-70} ${H-210} Q ${W/2-60} ${H-205} ${W/2-72} ${H-190}`}
+        fill="#F5E8D8" stroke="#2C2416" roughness={2} strokeWidth={2} />
+      {/* 施術の手（右） */}
+      <SketchPath
+        d={`M ${W/2+100} ${H-200} Q ${W/2+85} ${H-220} ${W/2+70} ${H-210} Q ${W/2+60} ${H-205} ${W/2+72} ${H-190}`}
+        fill="#F5E8D8" stroke="#2C2416" roughness={2} strokeWidth={2} />
+
+      {/* 装飾テキスト（右側） */}
+      {/* SVG text は rough 対象外なので普通のtextとして重ねる */}
+      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+        <text x={W-30} y={80} fontFamily="'Klee One',cursive" fontSize="15"
+          fill="#5A5040" opacity="0.55" textAnchor="end" letterSpacing="6">
+          FACIAL CARE
+        </text>
+        <text x={W-30} y={108} fontFamily="'Klee One',cursive" fontSize="13"
+          fill="#5A5040" opacity="0.45" textAnchor="end" letterSpacing="5">
+          NAKATSU
+        </text>
+        {/* スター装飾 */}
+        <text x={W-68} y={155} fontSize="22" fill="#C85820" opacity="0.7" textAnchor="middle">✦</text>
+        <text x={W-38} y={185} fontSize="14" fill="#C85820" opacity="0.5" textAnchor="middle">✦</text>
+        <text x={W-90} y={200} fontSize="10" fill="#5A7848" opacity="0.5" textAnchor="middle">✦</text>
+      </svg>
+
+      {/* 左下 テキスト装飾 */}
+      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+        <text x="28" y="52" fontFamily="'Klee One',cursive" fontSize="13"
+          fill="#F7F4ED" opacity="0.85" letterSpacing="3">
+          訪問
+        </text>
+        <text x="28" y="72" fontFamily="'Klee One',cursive" fontSize="13"
+          fill="#F7F4ED" opacity="0.85" letterSpacing="3">
+          ケア
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+/* ── 手書き区切り線コンポーネント ── */
+function RuleLine() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const W = ref.current.clientWidth || 760;
+    ref.current.innerHTML = '';
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '18');
+    ref.current.appendChild(svg);
+    const rc = rough.svg(svg);
+    svg.appendChild(rc.line(0, 9, W, 9, {
+      stroke: '#2C2416', strokeWidth: 1.8,
+      roughness: 2.5, bowing: 0.8,
+    }));
+  }, []);
+  return <div ref={ref} className="rule-canvas" />;
+}
+
+/* ── 手書き風ポイントカード ── */
+function SketchPt({ n, icon, title, desc }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    try {
+      const el = ref.current;
+      const W = el.offsetWidth || 220;
+      const H = el.offsetHeight || 110;
+      const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgEl.setAttribute('class', 'sketch-bg');
+      svgEl.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;');
+      const rc = rough.svg(svgEl);
+      svgEl.appendChild(rc.rectangle(2, 2, W-4, H-4, {
+        fill: '#F7F4ED', stroke: '#2C2416', strokeWidth: 1.8,
+        roughness: 2, fillStyle: 'solid', bowing: 1,
+      }));
+      el.insertBefore(svgEl, el.firstChild);
+    } catch(e) { console.warn(e); }
+  }, []);
+  return (
+    <div className="pt" ref={ref} style={{ position: 'relative' }}>
+      <div className="n">{n}</div>
+      <svg style={{ width:32, height:32, display:'block', margin:'2px auto 6px', color:'var(--rust)' }}
+           viewBox="0 0 48 48" fill="none" stroke="currentColor"
+           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {icon}
+      </svg>
+      <div className="t">{title}</div>
+      <div className="d">{desc}</div>
+    </div>
+  );
+}
+
+/* ── メニューブロック（手書きボーダー） ── */
+function SketchMenuBlock({ children, isTrialBlock }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    try {
+      const el = ref.current;
+      const W = el.offsetWidth || 340;
+      const H = el.offsetHeight || 100;
+      const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svgEl.setAttribute('class', 'sketch-menu-bg');
+      svgEl.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;');
+      const rc = rough.svg(svgEl);
+      svgEl.appendChild(rc.rectangle(2, 2, W-4, H-4, {
+        fill: isTrialBlock ? '#C85820' : '#F7F4ED',
+        stroke: '#2C2416', strokeWidth: 2,
+        roughness: 2.2,
+        fillStyle: isTrialBlock ? 'hachure' : 'solid',
+        hachureGap: 8, hachureAngle: -40,
+        bowing: 0.8,
+      }));
+      el.insertBefore(svgEl, el.firstChild);
+    } catch(e) { console.warn(e); }
+  }, []);
+  return (
+    <div ref={ref} className={`price-block${isTrialBlock ? ' trial' : ''}`}
+         style={{ position: 'relative' }}>
+      {children}
+    </div>
+  );
+}
+
+/* ── メイン Chirashi コンポーネント ── */
+function Chirashi() {
+  return (
+    <div className="flyer">
+
+      {/* ヘッダー */}
+      <header className="header">
+        <div className="logo">lembrasser</div>
+        <div className="sub">訪問フェイシャルケア<br />NAKATSU · AYURVEDA</div>
+      </header>
+
+      {/* スケッチイラストゾーン */}
+      <SketchCanvas />
+
+      {/* キャッチコピー */}
+      <div className="catch">
+        <div className="label">そっと、やさしく。</div>
+        <h1>ご自分への<br /><span className="acc">ご褒美</span>の時間を、ぜひ。</h1>
+      </div>
+
+      {/* 手書き区切り線 */}
+      <RuleLine />
+
+      {/* メニュー */}
+      <div className="menu">
+        <SketchMenuBlock isTrialBlock={false}>
+          <div className="course">フェイシャルケア</div>
+          <span className="yen">2,000<small> 円</small></span>
+          <div className="min">約 15 分</div>
+        </SketchMenuBlock>
+        <SketchMenuBlock isTrialBlock={true}>
+          <div className="badge">体験コース</div>
+          <div className="course">はじめての方</div>
+          <span className="yen">1,000<small> 円</small></span>
+          <div className="min">20 分</div>
+        </SketchMenuBlock>
+      </div>
+      <div className="flow">
+        クレンジング <span className="arr">→</span> マッサージ <span className="arr">→</span> 保湿
+      </div>
+
+      {/* 3ポイント */}
+      <div className="points">
+        <SketchPt n="1"
+          icon={<><path d="M8 32 h32 M10 32 v-3 a14 6 0 0 1 28 0 v3"/><circle cx="24" cy="20" r="4"/></>}
+          title="横になったまま"
+          desc={"お部屋のベッドで\nそのまま OK"} />
+        <SketchPt n="2"
+          icon={<path d="M24 40 C8 30 8 16 18 14 C22 13 24 17 24 17 C24 17 26 13 30 14 C40 16 40 30 24 40Z"/>}
+          title="身体にやさしい"
+          desc={"負担の少ない\n安全でおだやかな施術"} />
+        <SketchPt n="3"
+          icon={<><circle cx="24" cy="24" r="14"/><path d="M24 16 v8 l6 4"/></>}
+          title="毎回カウンセリング"
+          desc={"お肌の状態を確認\nしながら丁寧に"} />
+      </div>
+
+      {/* 信頼 */}
+      <div className="trust">
+        <div className="row"><b>使用オイル</b>無添加ココナッツ／スリランカ産セサミ</div>
+        <div className="row"><b>セラピスト</b>介護福祉士・アーユルヴェーダ認定</div>
+        <div className="row"><b>アフターケア</b>セルフマッサージ方法もお伝えします</div>
+        <div className="row"><b>こんな方に</b>乾燥・たるみ・むくみ・顔コリが気になる方</div>
+      </div>
+
+      {/* フッター */}
+      <footer className="foot">
+        <div className="foot-l">
+          <div className="res">
+            <span className="pin">ご予約</span>施設のご担当者までお申し込みください
+          </div>
+          <div className="meta">
+            <span>お支払い <b>現金のみ</b></span>
+            <span>開催 <b>不定期</b></span>
+            <span>場所 <b>お部屋</b></span>
+          </div>
+          <div className="note">ヘッド・ハンドも組み合わせOK。次回以降の内容・時間・料金はご希望に合わせて調整します。</div>
+        </div>
+        <div className="foot-r">
+          lembrasser_nakatsu
+          <small>OITA · NAKATSU</small>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Chirashi />);
+</script>
+</body>
+</html>

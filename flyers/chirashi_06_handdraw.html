@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>チラシ06 手書きイラスト｜lembrasser_nakatsu 訪問フェイシャルケア</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #F0EDE6;
+    --ink:     #1A1814;
+    --orange:  #F07028;
+    --orange2: #F5A060;
+    --cream:   #FFF8F0;
+    --sage:    #6A8A5A;
+    --line:    rgba(26,24,20,.12);
+  }
+
+  html, body { background: #D8D4CC; }
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: var(--ink);
+    display: flex; justify-content: center;
+    padding: 24px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  .flyer {
+    position: relative;
+    width: 210mm; height: 297mm;
+    background: var(--bg);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.28);
+    display: flex; flex-direction: column;
+  }
+
+  /* ── トップバー ── */
+  .topbar {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 12px 18mm;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .topbar .logo {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 28px; letter-spacing: .06em;
+  }
+  .topbar .sub {
+    font-size: 9px; letter-spacing: .28em; color: var(--orange2);
+    text-align: right; line-height: 1.8;
+  }
+
+  /* ── イラストゾーン ── */
+  .illust-zone {
+    flex: 0 0 108mm;
+    position: relative;
+    overflow: hidden;
+    background: #EBEBEA;
+  }
+
+  /* ── メインイラスト（PNG） ── */
+  .main-illust {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  /* ── キャッチコピーバー ── */
+  .catch-bar {
+    flex-shrink: 0;
+    background: var(--orange);
+    padding: 14px 18mm;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .catch-bar .tag {
+    font-family: 'Klee One', cursive;
+    font-size: 10px; color: var(--cream); letter-spacing: .18em;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    border: 1.5px solid var(--cream);
+    padding: 4px 3px;
+  }
+  .catch-bar h1 {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 30px; line-height: 1.42; letter-spacing: .04em;
+    color: var(--cream);
+  }
+
+  /* ── コンテンツエリア ── */
+  .content {
+    flex: 1;
+    padding: 14px 18mm 12px;
+    display: flex; flex-direction: column; gap: 12px;
+    overflow: hidden;
+  }
+
+  /* メニュー */
+  .menu {
+    display: flex; gap: 0;
+    border: 2.5px solid var(--ink);
+  }
+  .price {
+    flex: 1; text-align: center;
+    padding: 12px 10px;
+    position: relative;
+  }
+  .price + .price {
+    border-left: 2.5px solid var(--ink);
+  }
+  .price.trial { background: var(--orange); color: var(--cream); }
+  .price .badge {
+    display: inline-block;
+    font-size: 9px; font-weight: 700; letter-spacing: .14em;
+    border: 1.5px solid var(--cream);
+    padding: 1px 8px; border-radius: 2px; margin-bottom: 4px;
+    background: var(--ink); color: var(--cream);
+  }
+  .price .name { font-size: 10px; letter-spacing: .12em; color: var(--ink-s, #666); }
+  .price.trial .name { color: rgba(255,255,255,.85); }
+  .price .yen {
+    font-family: 'Shippori Mincho', serif; font-weight: 700;
+    font-size: 26px; display: block; margin-top: 3px;
+  }
+  .price .yen small { font-size: 12px; font-weight: 600; }
+  .price .min { font-size: 9.5px; letter-spacing: .12em; margin-top: 2px; color: #888; }
+  .price.trial .min { color: rgba(255,255,255,.75); }
+  .flow {
+    text-align: center; font-size: 11px; letter-spacing: .16em;
+    padding: 8px 0 2px;
+    color: var(--ink);
+  }
+  .flow .arr { color: var(--orange); margin: 0 8px; font-weight: 700; }
+
+  /* 3ポイント */
+  .points {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 8px;
+  }
+  .pt {
+    background: var(--cream);
+    border: 2.5px solid var(--ink);
+    padding: 10px 8px 9px;
+    text-align: center;
+    position: relative;
+  }
+  .pt::before {
+    content: attr(data-n);
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 22px;
+    background: var(--ink); color: var(--cream);
+    font-family: 'Klee One', cursive; font-weight: 600; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+  .pt .ic { width: 32px; height: 32px; margin: 4px auto 6px; color: var(--orange); }
+  .pt .t { font-weight: 700; font-size: 11.5px; letter-spacing: .04em; }
+  .pt .d { font-size: 9px; color: #666; line-height: 1.65; margin-top: 3px; }
+
+  /* 信頼 */
+  .trust {
+    border: 2.5px solid var(--ink);
+    padding: 10px 14px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    background: var(--cream);
+  }
+  .trust .row { font-size: 10px; line-height: 1.65; color: var(--ink); }
+  .trust .row b {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    display: block; font-size: 10px; margin-bottom: 1px;
+    color: var(--orange);
+  }
+
+  /* フッター */
+  .foot {
+    margin-top: auto;
+    border-top: 2.5px solid var(--ink);
+    padding: 10px 18mm 10px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .foot-left .res {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 12.5px; letter-spacing: .05em;
+  }
+  .foot-left .res .pin {
+    display: inline-block;
+    background: var(--ink); color: var(--cream);
+    font-size: 10px; padding: 1px 8px; border-radius: 2px; margin-right: 6px;
+  }
+  .foot-left .meta {
+    display: flex; gap: 10px; margin-top: 5px;
+    font-size: 9px; color: #777; letter-spacing: .06em; flex-wrap: wrap;
+  }
+  .foot-left .meta b { color: var(--ink); }
+  .foot-left .note { font-size: 8.5px; color: #888; margin-top: 4px; line-height: 1.65; }
+  .foot-right {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 14px; text-align: right; letter-spacing: .04em;
+  }
+  .foot-right small {
+    display: block; font-family: 'Zen Maru Gothic';
+    font-size: 8px; letter-spacing: .28em; color: #888; margin-top: 2px;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; padding: 0; }
+    .flyer { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="flyer">
+
+  <!-- トップバー -->
+  <header class="topbar">
+    <div class="logo">lembrasser</div>
+    <div class="sub">訪問フェイシャルケア<br>NAKATSU · AYURVEDA</div>
+  </header>
+
+  <!-- イラストゾーン -->
+  <div class="illust-zone">
+    <img class="main-illust" src="illust_handdraw.png" alt="手書きイラスト">
+    <!-- (以下SVGは削除済み、PNG差し替え) -->
+    <svg style="display:none" viewBox="0 0 216 258" fill="none"
+         stroke="#1A1814" stroke-linecap="round" stroke-linejoin="round">
+
+      <!-- クッション/枕 -->
+      <path d="M18 230 Q108 210 198 230 Q196 252 108 256 Q20 252 18 230Z"
+            fill="#F07028" stroke-width="3"/>
+      <path d="M32 238 Q108 222 184 238" stroke="#1A1814" stroke-width="2" opacity=".5"/>
+
+      <!-- 首・肩 -->
+      <path d="M58 220 L40 258 M158 220 L176 258" stroke-width="3.5"/>
+      <path d="M40 258 Q108 250 176 258" stroke-width="3"/>
+      <path d="M55 222 Q108 218 161 222" stroke-width="3.5" fill="none"/>
+
+      <!-- 頭部（楕円、少し傾き）-->
+      <ellipse cx="108" cy="138" rx="75" ry="85"
+               fill="#F5E8D8" stroke-width="3"/>
+
+      <!-- 髪（上部） -->
+      <path d="M44 115 Q38 70 64 50 Q80 34 108 32 Q136 30 152 42 Q175 58 172 115"
+            fill="#1A1814" stroke-width="0"/>
+      <!-- 髪のアクセントライン -->
+      <path d="M52 80 Q70 52 108 44" stroke="#fff" stroke-width="2" opacity=".35"/>
+
+      <!-- 耳（左） -->
+      <ellipse cx="32" cy="148" rx="13" ry="18"
+               fill="#F5E8D8" stroke-width="2.5"/>
+      <ellipse cx="32" cy="148" rx="7" ry="11"
+               fill="#F2C8A0" stroke="none"/>
+      <!-- 耳（右） -->
+      <ellipse cx="184" cy="148" rx="13" ry="18"
+               fill="#F5E8D8" stroke-width="2.5"/>
+      <ellipse cx="184" cy="148" rx="7" ry="11"
+               fill="#F2C8A0" stroke="none"/>
+
+      <!-- 閉じた目（左） -->
+      <path d="M72 138 Q82 132 92 138" stroke-width="3" fill="none"/>
+      <!-- まつげ（左） -->
+      <path d="M73 135 L70 128" stroke-width="2"/>
+      <path d="M80 132 L79 125" stroke-width="2"/>
+      <path d="M88 134 L88 127" stroke-width="2"/>
+      <!-- 閉じた目（右） -->
+      <path d="M124 138 Q134 132 144 138" stroke-width="3" fill="none"/>
+      <!-- まつげ（右） -->
+      <path d="M125 135 L122 128" stroke-width="2"/>
+      <path d="M132 132 L131 125" stroke-width="2"/>
+      <path d="M140 134 L140 127" stroke-width="2"/>
+
+      <!-- 鼻 -->
+      <path d="M102 155 Q108 162 114 155" stroke-width="2.5" fill="none"/>
+
+      <!-- 笑顔 -->
+      <path d="M88 173 Q108 185 128 173" stroke-width="3" fill="none"/>
+
+      <!-- ほっぺ（オレンジ） -->
+      <ellipse cx="74" cy="168" rx="16" ry="11"
+               fill="#F07028" opacity=".35" stroke="none"/>
+      <ellipse cx="142" cy="168" rx="16" ry="11"
+               fill="#F07028" opacity=".35" stroke="none"/>
+
+      <!-- 施術する手（左） -->
+      <g stroke-width="3">
+        <!-- 左手・腕 -->
+        <path d="M-6 172 Q8 160 18 158 Q26 157 30 165 Q34 174 24 180 Q14 186 8 192"
+              fill="#F5D8B8" stroke-width="2.5"/>
+        <!-- 指 -->
+        <path d="M18 158 Q14 148 20 145 Q26 142 28 150" fill="#F5D8B8" stroke-width="2"/>
+        <path d="M24 156 Q22 146 28 144 Q34 142 34 152" fill="#F5D8B8" stroke-width="2"/>
+        <path d="M30 158 Q30 148 36 148 Q42 148 40 158" fill="#F5D8B8" stroke-width="2"/>
+      </g>
+
+      <!-- 施術する手（右） -->
+      <g stroke-width="3">
+        <!-- 右手・腕 -->
+        <path d="M222 172 Q208 160 198 158 Q190 157 186 165 Q182 174 192 180 Q202 186 208 192"
+              fill="#F5D8B8" stroke-width="2.5"/>
+        <!-- 指 -->
+        <path d="M198 158 Q202 148 196 145 Q190 142 188 150" fill="#F5D8B8" stroke-width="2"/>
+        <path d="M192 156 Q194 146 188 144 Q182 142 182 152" fill="#F5D8B8" stroke-width="2"/>
+        <path d="M186 158 Q186 148 180 148 Q174 148 176 158" fill="#F5D8B8" stroke-width="2"/>
+      </g>
+
+      <!-- キラキラ（スパ感） -->
+      <path d="M8 60 L10 52 L12 60 L20 62 L12 64 L10 72 L8 64 L0 62Z"
+            fill="#F07028" stroke="none"/>
+      <path d="M195 72 L197 66 L199 72 L205 74 L199 76 L197 82 L195 76 L189 74Z"
+            fill="#F07028" stroke="none" opacity=".8"/>
+      <path d="M165 22 L167 17 L169 22 L174 24 L169 26 L167 31 L165 26 L160 24Z"
+            fill="#1A1814" stroke="none" opacity=".3"/>
+
+    </svg>
+  </div>
+
+  <!-- キャッチコピーバー -->
+  <div class="catch-bar">
+    <div class="tag">そっと<br>やさしく</div>
+    <h1>ご自分への<br>ご褒美の時間を、ぜひ。</h1>
+  </div>
+
+  <!-- コンテンツ -->
+  <div class="content">
+
+    <!-- メニュー -->
+    <div class="menu">
+      <div class="price">
+        <div class="name">フェイシャルケア</div>
+        <span class="yen">2,000<small> 円</small></span>
+        <div class="min">約 15 分</div>
+      </div>
+      <div class="price trial">
+        <div class="badge">体験コース</div>
+        <div class="name">はじめての方</div>
+        <span class="yen">1,000<small> 円</small></span>
+        <div class="min">20 分</div>
+      </div>
+    </div>
+    <div class="flow">
+      クレンジング <span class="arr">→</span> マッサージ <span class="arr">→</span> 保湿
+    </div>
+
+    <!-- 3ポイント -->
+    <div class="points">
+      <div class="pt" data-n="1">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 32 h32 M10 32 v-3 a14 6 0 0 1 28 0 v3"/><circle cx="24" cy="20" r="4"/>
+        </svg>
+        <div class="t">横になったまま</div>
+        <div class="d">お部屋のベッドで<br>そのまま OK</div>
+      </div>
+      <div class="pt" data-n="2">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 40 C8 30 8 16 18 14 C22 13 24 17 24 17 C24 17 26 13 30 14 C40 16 40 30 24 40Z"/>
+        </svg>
+        <div class="t">身体にやさしい</div>
+        <div class="d">安全でおだやかな<br>施術内容</div>
+      </div>
+      <div class="pt" data-n="3">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="14"/><path d="M24 16 v8 l6 4"/>
+        </svg>
+        <div class="t">毎回カウンセリング</div>
+        <div class="d">お肌の状態を確認<br>しながら丁寧に</div>
+      </div>
+    </div>
+
+    <!-- 信頼 -->
+    <div class="trust">
+      <div class="row"><b>使用オイル</b>無添加ココナッツ／スリランカ産セサミ</div>
+      <div class="row"><b>セラピスト</b>介護福祉士・アーユルヴェーダ認定</div>
+      <div class="row"><b>アフターケア</b>セルフマッサージ方法もお伝えします</div>
+      <div class="row"><b>こんな方に</b>乾燥・たるみ・むくみ・顔コリが気になる方</div>
+    </div>
+
+  </div>
+
+  <!-- フッター -->
+  <footer class="foot">
+    <div class="foot-left">
+      <div class="res"><span class="pin">ご予約</span>施設のご担当者までお申し込みください</div>
+      <div class="meta">
+        <span>お支払い <b>現金のみ</b></span>
+        <span>開催 <b>不定期</b></span>
+        <span>場所 <b>お部屋</b></span>
+      </div>
+      <div class="note">ヘッド・ハンドマッサージとの組み合わせも相談OK。次回以降の内容・時間・料金はご希望に合わせて調整します。</div>
+    </div>
+    <div class="foot-right">
+      lembrasser_nakatsu
+      <small>OITA · NAKATSU</small>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

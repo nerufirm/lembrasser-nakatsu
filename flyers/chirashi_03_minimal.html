@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>チラシ03 ミニマル金｜lembrasser_nakatsu 訪問フェイシャルケア</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:   #FAF8F3;
+    --ink:     #3A352E;
+    --ink-soft:#8B8275;
+    --greige:  #B7AC9B;
+    --gold:    #B0904E;
+    --gold-lt: #CBB57E;
+    --line:    rgba(58,53,46,.14);
+  }
+
+  html, body { background: #E6E2D9; }
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif; font-weight: 400;
+    color: var(--ink);
+    display:flex; justify-content:center;
+    padding: 24px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  .flyer {
+    position: relative;
+    width: 210mm; height: 297mm;
+    background: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.22);
+    padding: 22mm 20mm 16mm;
+    display:flex; flex-direction:column;
+  }
+  /* 上下の金ライン */
+  .flyer::before, .flyer::after { content:''; position:absolute; left:20mm; right:20mm; height:1px; background:linear-gradient(90deg,transparent,var(--gold-lt),transparent); }
+  .flyer::before { top:14mm; } .flyer::after { bottom:11mm; }
+
+  /* ヘッダー */
+  .brand { text-align:center; }
+  .brand .logo { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:34px; letter-spacing:.06em; }
+  .brand .sub  { font-size:9px; letter-spacing:.5em; color:var(--gold); margin-top:6px; }
+  .brand .cat  { font-size:11.5px; letter-spacing:.3em; color:var(--ink-soft); margin-top:14px; font-weight:300; }
+
+  /* ヒーロー */
+  .hero { text-align:center; margin-top:12px; }
+  .ornament { display:block; margin:0 auto 10px; width:84px; height:36px; color:var(--gold); }
+  .hero .label { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--greige); letter-spacing:.08em; }
+  .hero h1 { font-family:'Shippori Mincho',serif; font-weight:500; font-size:50px; line-height:1.38; letter-spacing:.08em; margin-top:10px; }
+  .hero h1 .accent { color:var(--gold); }
+
+  /* 写真エリア */
+  .visual {
+    margin-top: 10px;
+    flex: 0 0 90mm;
+    overflow: hidden;
+    position: relative;
+  }
+  .visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+  }
+  .visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    background: linear-gradient(transparent, var(--paper));
+    pointer-events: none;
+  }
+
+  /* 和紙テクスチャ */
+  .washi-texture {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23n)' opacity='1'/></svg>");
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+  }
+
+  /* メニュー（罫線のみ・余白広め） */
+  .menu { margin-top:16px; text-align:center; }
+  .menu h2 { font-family:'Shippori Mincho',serif; font-size:15px; letter-spacing:.32em; color:var(--ink); }
+  .menu h2 .en { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12px; letter-spacing:.14em; color:var(--gold); margin-bottom:4px; }
+  .price-row { display:flex; justify-content:center; align-items:center; gap:0; margin-top:18px; }
+  .price { padding:0 34px; }
+  .price .name { font-size:10px; letter-spacing:.18em; color:var(--ink-soft); }
+  .price .yen { font-family:'Shippori Mincho',serif; font-weight:600; font-size:27px; letter-spacing:.04em; margin-top:5px; }
+  .price .yen small { font-size:13px; font-weight:400; }
+  .price .min { font-size:9.5px; color:var(--ink-soft); margin-top:3px; letter-spacing:.16em; }
+  .price.trial .yen { color:var(--gold); }
+  .price.trial .badge { display:inline-block; font-size:8.5px; letter-spacing:.18em; color:var(--gold); border:1px solid var(--gold-lt); border-radius:20px; padding:1px 10px; margin-bottom:5px; }
+  .price-div { width:1px; height:54px; background:var(--line); }
+  .flow { margin-top:22px; font-size:11px; letter-spacing:.16em; color:var(--ink); font-weight:300; }
+  .flow .step { font-family:'Shippori Mincho',serif; }
+  .flow .arr { color:var(--gold); margin:0 10px; }
+
+  /* 3ポイント（横一列・区切り線） */
+  .points { display:grid; grid-template-columns:repeat(3,1fr); margin-top:16px; }
+  .pt { text-align:center; padding:0 14px; position:relative; }
+  .pt + .pt::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:var(--line); }
+  .pt .ic { width:34px; height:34px; margin:0 auto 10px; color:var(--gold); }
+  .pt .t { font-family:'Shippori Mincho',serif; font-size:12.5px; letter-spacing:.08em; }
+  .pt .d { font-size:9.5px; color:var(--ink-soft); line-height:1.8; margin-top:7px; font-weight:300; }
+
+  /* 信頼 */
+  .trust { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:11px 30px; }
+  .trust .row { font-size:10px; line-height:1.7; color:var(--ink); font-weight:300; }
+  .trust .row b { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold); font-weight:500; display:block; font-size:11px; letter-spacing:.06em; margin-bottom:2px; }
+
+  /* フッター */
+  .foot { margin-top:auto; text-align:center; }
+  .foot .res { font-family:'Shippori Mincho',serif; font-size:12.5px; letter-spacing:.1em; }
+  .foot .res .pin { color:var(--gold); }
+  .foot .meta { display:flex; justify-content:center; gap:22px; margin-top:10px; font-size:9.5px; color:var(--ink-soft); letter-spacing:.06em; font-weight:300; }
+  .foot .meta span b { color:var(--ink); font-weight:500; }
+  .foot .note { font-size:9px; color:var(--ink-soft); margin-top:10px; line-height:1.8; font-weight:300; }
+  .foot .sign { margin-top:13px; font-family:'Cormorant Garamond',serif; font-size:17px; letter-spacing:.08em; }
+  .foot .sign small { display:block; font-family:'Zen Maru Gothic'; font-weight:300; font-size:8px; letter-spacing:.4em; color:var(--gold); margin-top:3px; }
+
+  @page { size:A4; margin:0; }
+  @media print { html,body{background:#fff;} body{padding:0;} .flyer{box-shadow:none;} }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="washi-texture"></div>
+
+  <!-- ヘッダー -->
+  <header class="brand">
+    <div class="logo">lembrasser</div>
+    <div class="sub">NAKATSU ・ AYURVEDA</div>
+    <div class="cat">お部屋で受けられる 訪問フェイシャルケア</div>
+  </header>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <!-- 一筆書きの装飾 -->
+    <svg class="ornament" viewBox="0 0 140 60" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+      <path d="M10 30 H56"/><path d="M84 30 H130"/>
+      <path d="M70 16 C62 22 62 34 70 44 C78 34 78 22 70 16Z" fill="rgba(176,144,78,.12)"/>
+      <circle cx="60" cy="30" r="2"/><circle cx="80" cy="30" r="2"/>
+    </svg>
+    <div class="label">A quiet moment for yourself</div>
+    <h1>ご自分への<br><span class="accent">ご褒美</span>の時間を、ぜひ。</h1>
+  </section>
+
+  <!-- 写真 -->
+  <section class="visual">
+    <img src="https://images.pexels.com/photos/5240733/pexels-photo-5240733.jpeg?auto=compress&cs=tinysrgb&w=800" alt="施術の様子">
+  </section>
+
+  <!-- メニュー -->
+  <section class="menu">
+    <h2><span class="en">Facial Care</span>フェイシャルケア</h2>
+    <div class="price-row">
+      <div class="price">
+        <div class="name">通常コース</div>
+        <div class="yen">2,000<small> 円</small></div>
+        <div class="min">約 15 分</div>
+      </div>
+      <div class="price-div"></div>
+      <div class="price trial">
+        <div class="badge">体験 / TRIAL</div>
+        <div class="name">はじめての方に</div>
+        <div class="yen">1,000<small> 円</small></div>
+        <div class="min">20 分</div>
+      </div>
+    </div>
+    <div class="flow">
+      <span class="step">クレンジング</span><span class="arr">—</span><span class="step">マッサージ</span><span class="arr">—</span><span class="step">保湿</span>
+    </div>
+  </section>
+
+  <!-- 3ポイント -->
+  <section class="points">
+    <div class="pt">
+      <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 32 h32 M10 32 v-3 a14 6 0 0 1 28 0 v3"/><circle cx="24" cy="20" r="4"/>
+      </svg>
+      <div class="t">横になったまま</div>
+      <div class="d">お部屋のベッドで、<br>そのまま受けられます</div>
+    </div>
+    <div class="pt">
+      <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 40 C8 30 8 16 18 14 C22 13 24 17 24 17 C24 17 26 13 30 14 C40 16 40 30 24 40Z"/>
+      </svg>
+      <div class="t">身体にやさしい</div>
+      <div class="d">負担の少ない、<br>安全でおだやかな施術</div>
+    </div>
+    <div class="pt">
+      <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="24" r="14"/><path d="M24 16 v8 l6 4"/>
+      </svg>
+      <div class="t">ゆっくり丁寧に</div>
+      <div class="d">毎回カウンセリングで<br>お肌の状態を確認</div>
+    </div>
+  </section>
+
+  <!-- 信頼 -->
+  <section class="trust">
+    <div class="row"><b>Oil</b>無添加ココナッツオイル／スリランカ産セサミオイル</div>
+    <div class="row"><b>Therapist</b>介護福祉士／アーユルヴェーダ式ヘッドマルマケア認定</div>
+    <div class="row"><b>After care</b>ご自身でできるお顔のマッサージもお伝えします</div>
+    <div class="row"><b>For</b>乾燥・かさつき／たるみ・ハリ不足／むくみ・顔のコリ</div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="foot">
+    <div class="res"><span class="pin">ご予約</span>　施設のご担当者を通じてお申し込みください</div>
+    <div class="meta">
+      <span>お支払い <b>現金のみ</b></span>
+      <span>開催 <b>不定期（都度ご案内）</b></span>
+      <span>場所 <b>入居者さまのお部屋</b></span>
+    </div>
+    <div class="note">フェイシャル以外に、ヘッド・ハンドマッサージなども組み合わせOK。次回からの内容・時間・料金はご希望に合わせて調整いたします。</div>
+    <div class="sign">lembrasser_nakatsu<small>OITA ・ NAKATSU</small></div>
+  </footer>
+</div>
+</body>
+</html>

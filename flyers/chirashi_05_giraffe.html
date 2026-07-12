@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>チラシ05 キリン｜lembrasser_nakatsu 訪問フェイシャルケア</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white:  #FAFAF6;
+    --ink:    #1C1C1A;
+    --ink-s:  #5A5550;
+    --yellow: #F5D98C;
+    --peach:  #F2C8A0;
+    --sage:   #C8DDB8;
+    --line:   rgba(28,28,26,.14);
+  }
+
+  html, body { background: #E0DACE; }
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: var(--ink);
+    display: flex; justify-content: center;
+    padding: 24px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  .flyer {
+    position: relative;
+    width: 210mm; height: 297mm;
+    background: var(--white);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.28);
+    display: flex; flex-direction: column;
+    padding: 12mm 14mm 12mm;
+  }
+
+  /* 和紙テクスチャ */
+  .flyer::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 30; pointer-events: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23n)' opacity='1'/></svg>");
+    opacity: 0.04; mix-blend-mode: multiply;
+  }
+
+  /* ── ヘッダー ── */
+  .brand {
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px; margin-bottom: 0;
+    position: relative; z-index: 2;
+  }
+  .brand .logo {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 26px; letter-spacing: .06em;
+  }
+  .brand .meta {
+    text-align: right;
+    font-size: 9px; letter-spacing: .18em; color: var(--ink-s);
+    line-height: 1.8;
+  }
+
+  /* ── マスコットゾーン ── */
+  .mascot-zone {
+    position: relative; z-index: 2;
+    flex: 0 0 106mm;
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 0;
+    margin-top: 4px;
+  }
+
+  /* ── キャッチコピー（吹き出し） ── */
+  .bubble-wrap {
+    position: absolute;
+    top: 6mm; right: 0;
+    width: 98mm;
+  }
+  .bubble {
+    background: var(--yellow);
+    border: 2.5px solid var(--ink);
+    border-radius: 18px;
+    padding: 14px 18px 12px;
+    position: relative;
+  }
+  .bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -16px; left: 28px;
+    border: 10px solid transparent;
+    border-top-color: var(--ink);
+  }
+  .bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -11px; left: 30px;
+    border: 8px solid transparent;
+    border-top-color: var(--yellow);
+    z-index: 1;
+  }
+  .bubble .label {
+    font-family: 'Klee One', cursive;
+    font-size: 11px; color: var(--ink-s); letter-spacing: .08em;
+    margin-bottom: 6px;
+  }
+  .bubble h1 {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 26px; line-height: 1.45; letter-spacing: .04em;
+    color: var(--ink);
+  }
+  .bubble h1 .accent { color: #B06020; }
+
+  /* ── メニューバー ── */
+  .menu-bar {
+    position: relative; z-index: 2;
+    background: var(--ink);
+    color: var(--white);
+    margin: 0 -14mm;
+    padding: 11px 14mm;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .menu-bar .service {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 17px; letter-spacing: .06em;
+  }
+  .menu-bar .prices {
+    display: flex; gap: 22px; align-items: center;
+  }
+  .menu-bar .price { text-align: center; }
+  .menu-bar .price .name { font-size: 9px; letter-spacing: .12em; opacity: .75; }
+  .menu-bar .price .yen {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px; font-weight: 700; letter-spacing: .02em;
+  }
+  .menu-bar .price .yen small { font-size: 11px; font-weight: 400; }
+  .menu-bar .price .min { font-size: 9px; opacity: .7; margin-top: 1px; }
+  .menu-bar .price.trial .yen { color: var(--yellow); }
+  .menu-bar .price.trial .badge {
+    display: inline-block; font-size: 9px; background: var(--yellow);
+    color: var(--ink); border-radius: 10px; padding: 1px 8px; margin-bottom: 2px;
+    font-weight: 700; letter-spacing: .06em;
+  }
+  .menu-bar .div { width: 1px; height: 44px; background: rgba(255,255,255,.25); }
+  .flow-bar {
+    position: relative; z-index: 2;
+    background: rgba(28,28,26,.06);
+    margin: 0 -14mm;
+    padding: 7px 14mm;
+    text-align: center;
+    font-size: 11px; letter-spacing: .16em; color: var(--ink-s);
+  }
+  .flow-bar .arr { color: var(--ink); margin: 0 10px; font-weight: 700; }
+
+  /* ── 3ポイント ── */
+  .points {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 10px; margin-top: 12px;
+  }
+  .pt {
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 12px 10px 10px;
+    text-align: center;
+    background: var(--white);
+    position: relative;
+  }
+  .pt .num {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 22px; background: var(--ink); color: var(--white);
+    border-radius: 50%; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Klee One', cursive;
+  }
+  .pt .ic { width: 34px; height: 34px; margin: 4px auto 7px; color: var(--ink); }
+  .pt .t { font-weight: 700; font-size: 12px; letter-spacing: .04em; }
+  .pt .d { font-size: 9.5px; color: var(--ink-s); line-height: 1.65; margin-top: 4px; }
+
+  /* ── 信頼 ── */
+  .trust {
+    position: relative; z-index: 2;
+    margin-top: 12px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    padding: 12px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--sage);
+  }
+  .trust .row { font-size: 10px; line-height: 1.65; }
+  .trust .row b {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    display: block; font-size: 10.5px; margin-bottom: 1px;
+    color: var(--ink);
+  }
+
+  /* ── フッター ── */
+  .foot {
+    position: relative; z-index: 2;
+    margin-top: auto; padding-top: 10px;
+    border-top: 2px dashed var(--line);
+    display: flex; justify-content: space-between; align-items: flex-end;
+    gap: 10px;
+  }
+  .foot-left { flex: 1; }
+  .foot .res {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 13px; letter-spacing: .06em; color: var(--ink);
+  }
+  .foot .res .pin {
+    background: var(--ink); color: var(--white);
+    padding: 1px 8px; border-radius: 4px; margin-right: 6px;
+    font-size: 11px;
+  }
+  .foot .meta {
+    display: flex; gap: 12px; margin-top: 6px;
+    font-size: 9px; color: var(--ink-s); letter-spacing: .06em;
+  }
+  .foot .meta span b { color: var(--ink); font-weight: 700; }
+  .foot .note { font-size: 8.5px; color: var(--ink-s); margin-top: 5px; line-height: 1.7; }
+  .foot-right { text-align: right; flex-shrink: 0; }
+  .foot .sign {
+    font-family: 'Klee One', cursive; font-weight: 600;
+    font-size: 15px; letter-spacing: .06em; color: var(--ink);
+  }
+  .foot .sign small {
+    display: block; font-family: 'Zen Maru Gothic';
+    font-size: 8.5px; letter-spacing: .28em; color: var(--ink-s); margin-top: 2px;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; padding: 0; }
+    .flyer { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="flyer">
+
+  <!-- ヘッダー -->
+  <header class="brand">
+    <div class="logo">lembrasser</div>
+    <div class="meta">
+      訪問フェイシャルケア<br>
+      NAKATSU · AYURVEDA
+    </div>
+  </header>
+
+  <!-- マスコット + 吹き出し -->
+  <div class="mascot-zone">
+
+    <!-- 吹き出し（右上） -->
+    <div class="bubble-wrap">
+      <div class="bubble">
+        <div class="label">そっと、やさしく。</div>
+        <h1>ご自分への<br><span class="accent">ご褒美</span>の<br>時間を、ぜひ。</h1>
+      </div>
+    </div>
+
+    <!-- ネコ SVG（左） -->
+    <svg viewBox="0 0 230 310" width="230" fill="none"
+         stroke="#1C1C1A" stroke-linecap="round" stroke-linejoin="round"
+         style="flex-shrink:0; margin-bottom:-2px;">
+
+      <!-- ── 胴体 ── -->
+      <path d="M45 310 Q55 228 115 222 Q175 228 185 310 Z"
+            fill="#FAFAF6" stroke-width="2.2"/>
+
+      <!-- しっぽ -->
+      <path d="M182 285 Q224 258 220 222 Q216 202 200 208"
+            stroke-width="3.5" fill="none"/>
+
+      <!-- ── 頭部 ── -->
+      <!-- 耳（左）三角 -->
+      <path d="M38 108 L78 36 L110 102 Z"
+            fill="#FAFAF6" stroke-width="2.2"/>
+      <path d="M54 102 L78 48 L106 96 Z"
+            fill="#F2C8A0" stroke="none"/>
+
+      <!-- 耳（右）三角 -->
+      <path d="M192 108 L152 36 L120 102 Z"
+            fill="#FAFAF6" stroke-width="2.2"/>
+      <path d="M176 102 L152 48 L124 96 Z"
+            fill="#F2C8A0" stroke="none"/>
+
+      <!-- 頭（丸い） -->
+      <ellipse cx="115" cy="155" rx="88" ry="84"
+               fill="#FAFAF6" stroke-width="2.5"/>
+
+      <!-- 額のしま模様 -->
+      <path d="M96 92 Q115 86 134 92" stroke-width="1.5" opacity="0.3"/>
+      <path d="M91 80 Q115 73 139 80"  stroke-width="1.5" opacity="0.22"/>
+      <path d="M97 68 Q115 62 133 68"  stroke-width="1.5" opacity="0.16"/>
+
+      <!-- 目（左） -->
+      <circle cx="85" cy="145" r="16" fill="#FAFAF6" stroke-width="2"/>
+      <circle cx="85" cy="145" r="9"  fill="#1C1C1A"/>
+      <circle cx="81" cy="141" r="3.5" fill="#fff"/>
+      <!-- 目（右） -->
+      <circle cx="145" cy="145" r="16" fill="#FAFAF6" stroke-width="2"/>
+      <circle cx="145" cy="145" r="9"  fill="#1C1C1A"/>
+      <circle cx="141" cy="141" r="3.5" fill="#fff"/>
+
+      <!-- まつげ（左） -->
+      <path d="M74 130 Q70 123 68 117" stroke-width="1.5"/>
+      <path d="M82 127 Q80 120 80 113" stroke-width="1.5"/>
+      <path d="M91 128 Q94 121 97 115" stroke-width="1.5"/>
+      <!-- まつげ（右） -->
+      <path d="M134 128 Q132 121 132 113" stroke-width="1.5"/>
+      <path d="M142 127 Q144 120 147 114" stroke-width="1.5"/>
+      <path d="M151 130 Q155 123 158 118" stroke-width="1.5"/>
+
+      <!-- 鼻（猫の逆三角形） -->
+      <path d="M108 170 L115 178 L122 170 Z"
+            fill="#F2A0A8" stroke-width="1.5" stroke-linejoin="round"/>
+
+      <!-- 口（Y字） -->
+      <path d="M115 178 L115 185"   stroke-width="2"/>
+      <path d="M115 185 Q104 194 97  190" stroke-width="2.2" fill="none"/>
+      <path d="M115 185 Q126 194 133 190" stroke-width="2.2" fill="none"/>
+
+      <!-- ひげ（左） -->
+      <line x1="18"  y1="172" x2="94"  y2="175" stroke-width="1.4"/>
+      <line x1="14"  y1="183" x2="92"  y2="182" stroke-width="1.4"/>
+      <line x1="20"  y1="193" x2="92"  y2="188" stroke-width="1.4"/>
+      <!-- ひげ（右） -->
+      <line x1="212" y1="172" x2="136" y2="175" stroke-width="1.4"/>
+      <line x1="216" y1="183" x2="138" y2="182" stroke-width="1.4"/>
+      <line x1="210" y1="193" x2="138" y2="188" stroke-width="1.4"/>
+
+      <!-- ほっぺ -->
+      <ellipse cx="72"  cy="170" rx="16" ry="11" fill="#F2C8A0" opacity="0.55" stroke="none"/>
+      <ellipse cx="158" cy="170" rx="16" ry="11" fill="#F2C8A0" opacity="0.55" stroke="none"/>
+
+    </svg>
+
+  </div><!-- /mascot-zone -->
+
+  <!-- メニューバー -->
+  <div class="menu-bar">
+    <div class="service">フェイシャルケア</div>
+    <div class="prices">
+      <div class="price">
+        <div class="name">通常コース</div>
+        <div class="yen">2,000<small> 円</small></div>
+        <div class="min">約 15 分</div>
+      </div>
+      <div class="div"></div>
+      <div class="price trial">
+        <div class="badge">体験</div>
+        <div class="name">はじめての方に</div>
+        <div class="yen">1,000<small> 円</small></div>
+        <div class="min">20 分</div>
+      </div>
+    </div>
+  </div>
+  <div class="flow-bar">
+    クレンジング<span class="arr">→</span>マッサージ<span class="arr">→</span>保湿
+  </div>
+
+  <!-- 3ポイント -->
+  <section class="points">
+    <div class="pt">
+      <div class="num">1</div>
+      <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 32 h32 M10 32 v-3 a14 6 0 0 1 28 0 v3"/><circle cx="24" cy="20" r="4"/>
+      </svg>
+      <div class="t">横になったまま</div>
+      <div class="d">お部屋のベッドで<br>そのまま受けられます</div>
+    </div>
+    <div class="pt">
+      <div class="num">2</div>
+      <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 40 C8 30 8 16 18 14 C22 13 24 17 24 17 C24 17 26 13 30 14 C40 16 40 30 24 40Z"/>
+      </svg>
+      <div class="t">身体にやさしい</div>
+      <div class="d">負担の少ない<br>安全でおだやかな施術</div>
+    </div>
+    <div class="pt">
+      <div class="num">3</div>
+      <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="24" r="14"/><path d="M24 16 v8 l6 4"/>
+      </svg>
+      <div class="t">ゆっくり丁寧に</div>
+      <div class="d">毎回カウンセリングで<br>お肌の状態を確認</div>
+    </div>
+  </section>
+
+  <!-- 信頼 -->
+  <section class="trust">
+    <div class="row"><b>使用オイル</b>無添加ココナッツオイル／スリランカ産セサミオイル</div>
+    <div class="row"><b>セラピスト</b>介護福祉士／アーユルヴェーダ式ヘッドマルマケア認定</div>
+    <div class="row"><b>アフターケア</b>ご自身でできるお顔のマッサージもお伝えします</div>
+    <div class="row"><b>こんなお悩みに</b>乾燥・かさつき／たるみ・ハリ不足／むくみ・顔のコリ</div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="foot">
+    <div class="foot-left">
+      <div class="res"><span class="pin">ご予約</span>施設のご担当者を通じてお申し込みください</div>
+      <div class="meta">
+        <span>お支払い <b>現金のみ</b></span>
+        <span>開催 <b>不定期（都度ご案内）</b></span>
+        <span>場所 <b>入居者さまのお部屋</b></span>
+      </div>
+      <div class="note">フェイシャル以外に、ヘッド・ハンドマッサージなども組み合わせOK。次回からの内容・時間・料金はご希望に合わせて調整いたします。</div>
+    </div>
+    <div class="foot-right">
+      <div class="sign">lembrasser_nakatsu<small>OITA ・ NAKATSU</small></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
